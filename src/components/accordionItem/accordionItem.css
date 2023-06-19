@@ -1,0 +1,42 @@
+/*GPT*/
+.accordion {
+    border: 1px solid #ccc;
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: height 0.3s ease;
+  }
+  
+  .accordion.open {
+    height: auto;
+  }
+  
+  .accordion-header {
+    background-color: #f1f1f1;
+    cursor: pointer;
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .arrow {
+    transition: transform 0.3s ease;
+  }
+  
+  .arrow.open {
+    transform: rotate(90deg);
+  }
+  
+  .accordion-content {
+    overflow: hidden;
+  }
+  
+  .content-inner {
+    padding: 10px;
+    transition: opacity 0.3s ease;
+    opacity: 0;
+  }
+  
+  .content-inner.open {
+    opacity: 1;
+  }
