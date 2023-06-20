@@ -1,0 +1,42 @@
+.FL--home--cont {
+  display: inline-block;
+
+  /* align-items: center; */
+  justify-content: center;
+  /* flex-direction: column; */
+  overflow-y: scroll;
+  overflow-x: hidden;
+  width: 100vw;
+  height: 4000px;
+}
+.FL--home--showcase--1 {
+  background-color: teal;
+  width: 100vw;
+  height: 600px;
+}
+.FL--home--showcase--header {
+  width: 100vw;
+  padding: 5px;
+  font-size: 25px;
+  /* background-color: tomato; */
+  position: absolute;
+  font-family: var(--font--fam);
+  margin: 0 25px;
+  top: 0;
+}
+.FL--home--showcase--header h3 {
+  margin: 0 25px;
+  text-transform: uppercase;
+}
+.FL--home--showcase--2 {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  flex-direction: row;
+  flex-wrap: wrap;
+  width: 100vw;
+  gap: 25px;
+  /* margin: 25px 0px; */
+  padding-top: 70px;
+}

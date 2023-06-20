@@ -33,9 +33,20 @@ function App () {
     <BrowserRouter>
       <div className='FL--App--Cont'>
         <HamburgerMenu />
-        <div className='FL--Search--Cont'>
+        {/* <div className='FL--Search--Cont'>
+          
+        </div> */}
+        <div className="gradient-cont header--height">
+          <div className='FL--Logo--Cont header--height '>
+          <FL_Logo />
+          </div>
+          
+           <div className='FL--Search--Cont header--height'>
           <SearchBar onSearch={handleSearch} />
         </div>
+
+        </div>
+        
         <Routes>
           <Route path='/' element={<Home />}></Route>
           <Route path='/about' element={<About />}></Route>
@@ -58,7 +69,7 @@ function App () {
           <Route path='/upload' element={<Upload />}></Route>
 
         </Routes>
-        <FL_Logo />
+        
       </div>
     </BrowserRouter>
   )

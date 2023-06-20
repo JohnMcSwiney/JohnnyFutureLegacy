@@ -6,7 +6,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    
+    height: 100%;
     flex-direction: column;
     max-height: 100vh;
     position: absolute;
@@ -16,7 +16,7 @@
     z-index: 4000;
     transform: translateX(200px);
     opacity: 0;
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+    transition: transform 0.5s ease-in-out, opacity 0.1s ease, height 0.3s ease-in-out;
     
   }
   
@@ -27,33 +27,44 @@
     height: 100%;
     opacity: 1;
     transform: translateX(0px);
-    transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+    transition: transform 0.5s ease-in-out, opacity 0.1s ease;
     
     
   }
-  
-  .menu-button {
-    padding: 10px 20px;
-    margin-top: 20px;
-    margin-right: 40px;
+  .menu-button--cont{
+    height: 125px;
+    width: fit-content;
     /* background-color: #ccc; */
-    color: var(--font);
-    border: none;
-    cursor: pointer;
     position: fixed;
     top: 0;
     right: 0;
+    z-index: 5000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 25px;
+  }
+  .menu-button {
+    padding: 15px 25px;
+    /* margin-top: 20px; */
+    /* margin-right: 25px; */
+    background-color: #ffffff;
+    color: var(--font);
+    border: none;
+    cursor: pointer;
+    border-radius: 8px;
     z-index: 5000;
     font-size: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
+    box-shadow: 0px 1px 2px rgba(0, 0, 0, 0);
 }
   
   .menu-items {
     list-style: none;
     padding: 0;
-    margin: 10px 0;
+    margin: 15px 0;
     position: relative;
     display: flex;
     align-items: center;

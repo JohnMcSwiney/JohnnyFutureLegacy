@@ -1,13 +1,16 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
 :root {
-  --bg: #ccdde2;
+  --bg: #ffffff;
   --font: #000000;
   --primary: #48acf0;
   --secondary: #594236;
   --tertiary: #cd1c10;
   --highlight--1: #93a3bc;
+  
+  --font--fam: 'Poppins', sans-serif;
 }
+/* --bg: #ccdde2; */
 h1 {
   position: relative;
   font-family: Arial, Helvetica, sans-serif;
@@ -59,6 +62,26 @@ p {
   height: 100vh;
   background-color: var(--bg);
 }
+.gradient-cont{
+  width: 100%;
+  /* background: rgb(193, 99, 99); */
+  background: linear-gradient(0deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0.508) 50%, rgb(255, 255, 255) 100%);
+  position: fixed;
+  top: 0;
+
+  z-index: 900;
+}
+.FL--Logo--Cont{
+  position: absolute;
+  top: 0%;
+  left: 0%;
+  width: fit-content;
+  /* background-color: tan; */
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  margin-left: 25px;
+}
 .FL--Menu--Cont {
 
 }
@@ -66,53 +89,26 @@ p {
   position: absolute;
   top: 0%;
   left: 0%;
-  width: 100%;
-  z-index: 4999;
-  background-color: #2163ce72;
-}
-.FL--Menu{
-  position: absolute;
-}
+  width: 100vw;
 
-.App {
-  text-align: center;
-}
-
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  max-height: 200px;
+  z-index: 899;
+  /* background-color: #2163ce72; */
   display: flex;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
-  position: absolute;
-  top: 0%;
-  left: 0%;
-  width: 100%;
-}
 
-.App-link {
-  color: #61dafb;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+  
+.mar--lr{
+  margin-left: 25px;
+  margin-right: 25px;
+}
+.mar--l{
+  margin-left: 25px;
+}
+.mar--r{
+  margin-right: 25px;
+}
+.header--height{
+  height: 125px;
 }

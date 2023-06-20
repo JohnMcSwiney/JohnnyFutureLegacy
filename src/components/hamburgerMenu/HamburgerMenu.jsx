@@ -19,9 +19,12 @@ export default function HamburgerMenu () {
   const userName = 'Garret Morrow'
   return (
     <>
-      <button className='menu-button' onClick={toggleMenu}>
-        {isOpen ? <RxCross2 /> : <RxHamburgerMenu />}
-      </button>
+      <div className='menu-button--cont'>
+        <button className='menu-button' onClick={toggleMenu}>
+          {isOpen ? <RxCross2 /> : <RxHamburgerMenu />}
+        </button>
+      </div>
+      
       <div className={`${isOpen ? 'menu open' : 'menu'}`}>
         {isOpen && (
           <div className='menu-items'>

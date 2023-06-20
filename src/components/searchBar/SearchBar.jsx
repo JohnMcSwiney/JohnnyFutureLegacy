@@ -16,18 +16,16 @@ const SearchBar = ({ onSearch }) => {
   }
 
   return (
-    <div className="search--cont">
-      <form className='search--input' onSubmit={handleSubmit}>
+      <form className="search--cont" onSubmit={handleSubmit}>
         <input
           type='text'
-          placeholder='Search...'
+          placeholder='What do you want to see today?'
           value={searchTerm}
           onChange={handleChange}
           className='search--input'
         />
         <button type='submit' className='search--button'><BiSearchAlt2/></button>
       </form>
-    </div>
   )
 }
 
