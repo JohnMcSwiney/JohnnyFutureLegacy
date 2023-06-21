@@ -17,7 +17,9 @@ export default function CollectionCard () {
       <div className='coll--card--text'>
         <p>{tempText}</p>
       </div>
-      <button className='coll--card--btn'>View Collections</button>
+      <button className='coll--card--btn'>
+        View Collections
+      </button>
     </div>
   )
 }
