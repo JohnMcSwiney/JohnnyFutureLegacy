@@ -5,7 +5,7 @@ import './style.css';
 export default function FL_footer() {
     const navigate = useNavigate();
     const redirectAbout = () => {navigate(`/about`);};
-
+    const redirectCollections = () => {navigate(`/browse`)};
     
     return (
     <div className='FL--footer--cont--cont'>
@@ -27,7 +27,7 @@ export default function FL_footer() {
                 
             </div>
             <div className='FL--footer--box--cont'>
-            <h3>Collections</h3>
+            <h3 onClick={redirectCollections}>Collections</h3>
                 <a>Favorite collections</a>
                 <a>Featured collections</a>
                 <a>Browse by Artist</a>

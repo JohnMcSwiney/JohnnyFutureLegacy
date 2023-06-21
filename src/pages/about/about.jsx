@@ -55,14 +55,14 @@ export default function About() {
       imgUrl="https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TeamPictures%2FRectangle%20215.png?alt=media&token=dba6a40b-f2ac-4525-8b07-b369a3957e12" 
       name="Karen Eng" 
       description="Innovation"/>
-      <TeamImg 
+      {/* <TeamImg 
       imgUrl="https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TeamPictures%2FRectangle%20216.png?alt=media&token=92e63586-69eb-4f13-91f2-5daf339822d3" 
       name="Meg Handler" 
       description="Curator"/>
       <TeamImg 
       imgUrl="https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TeamPictures%2FRectangle%20217.png?alt=media&token=98d74186-7f40-439d-b996-e58cf91fe7fc" 
       name="Yizhe Lin" 
-      description="Business Lead"/>
+      description="Business Lead"/> */}
     </div>
     <h2 className="about--h2 mar--2">THE ADVISORS</h2>
     <div className="about--horiz--img--cont">

@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from 'react'
-import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { BrowserRouter, Route, Routes, useLocation } from 'react-router-dom'
 import logo from './logo.svg'
 import './App.css'
 // pages
@@ -7,6 +7,7 @@ import {
   About,
   Apply,
   Artifact,
+  Browse,
   IndividualCollection,
   CreateIndividualCollection,
   InstituteCollection,
@@ -29,6 +30,8 @@ function App () {
     console.log('Searching for:', searchTerm)
   }
 
+
+  
   return (
     <BrowserRouter>
       <div className='FL--App--Cont'>
@@ -54,6 +57,8 @@ function App () {
 
           <Route path='/apply' element={<Apply />}></Route>
           <Route path='/artifact' element={<Artifact />}></Route>
+          
+          <Route path='/browse' element={<Browse />}></Route>
           <Route path='/indiv_collection' element={<IndividualCollection />}></Route>
           <Route path='/insti_collection' element={<InstituteCollection />}></Route>
           
