@@ -1,11 +1,23 @@
-import React from 'react'
 import './collectionStyle.css';
 import FL_splitter from '../../components/splitter/FL_splitter'
 import CollectionCard from '../../components/cards/home/CollectionCard'
 import CollectionCard2 from '../../components/cards/home/CollectionCard2'
+
+import FeaturedCollection from './featured/featuredCollection';
+import IndivCollection from './individual/indivCollection';
+import InstitCollection from './institute/institCollection';
 import FL_footer from '../../components/FL_Footer/FL_footer'
 
-export default function collectionsPage() {
+import React, { useState } from 'react';
+
+const CollectionsPage = () => {
+  const [selectedOption, setSelectedOption] = useState('Feature');
+
+  const handleButtonClick = (option) => {
+    setSelectedOption(option);
+  };
+
+  
   return (
     <div className='mar-lr FL--home--cont '>
       <div className='FL--home--showcase--1'>
@@ -21,21 +33,35 @@ export default function collectionsPage() {
         </div>
       </div>
       <FL_splitter />
-      <div className='FL--home--showcase--2'>
-        <div className='FL--home--showcase--header'>
-          <h3>Featured Collections</h3>
-        </div>
-        <CollectionCard2 />
-        <CollectionCard />
-        <CollectionCard />
-        <CollectionCard />
-        <CollectionCard />
-        <CollectionCard />
-        <CollectionCard />
-        <CollectionCard />
+
+      <button onClick={() => handleButtonClick('Feature')}>Featured</button>
+      <button onClick={() => handleButtonClick('Instit')}>Institute</button>
+      <button onClick={() => handleButtonClick('Indiv')}>Individial</button>
+
+      {selectedOption === 'Feature' && 
+      <div>
+        <FeaturedCollection/>
+
       </div>
+      }
+
+      {selectedOption === 'Instit' && 
+      <div>
+        <InstitCollection />
+
+      </div>
+      }
+
+      {selectedOption === 'Indiv' && 
+      
+      <div>
+        <IndivCollection />
+
+      </div>
+      }
       <FL_splitter />
       <FL_footer />
     </div>
   )
 }
+export default CollectionsPage;

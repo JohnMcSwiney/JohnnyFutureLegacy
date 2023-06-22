@@ -1,0 +1,24 @@
+.parent-container {
+    height: 200px; /* Initial height of the parent container */
+    overflow: hidden;
+    transition: height 0.3s ease; /* Add a smooth transition effect */
+  }
+  
+  .text-container {
+    position: relative;
+  }
+  
+  .full-text {
+    display: none;
+  }
+  
+  .show-more-button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f2f2f2;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
