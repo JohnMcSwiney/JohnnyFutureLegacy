@@ -35,10 +35,7 @@ export default function InstitCollection () {
             </div>
             <div className='browse--instit--title--cont--1'>
               <h2>{institution.name}</h2>
-                <p>
                 <TextContainer text={institution.description} />
-                
-                </p>
             </div>
           </div>
 
