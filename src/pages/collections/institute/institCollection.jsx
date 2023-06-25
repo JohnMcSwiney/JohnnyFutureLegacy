@@ -9,17 +9,6 @@ export default function InstitCollection () {
   const institutions = institutionsData.institutions
   
   return (
-    // <div className='browse--instit--showcase--1'>
-    //   {institData.map((institutions) => (
-    //     <div className='browse--instit--title--cont--1' key={institutions.id}>
-    //     <h1>name: {institutions.name}</h1>
-    //   </div>
-    //   ))}
-
-    // </div>
-
-
-
     
     <div className='browse--instit--cont'>
       {institutions.map(institution => (
@@ -35,7 +24,7 @@ export default function InstitCollection () {
             </div>
             <div className='browse--instit--title--cont--1'>
               <h2>{institution.name}</h2>
-                <TextContainer text={institution.description} />
+              <TextContainer text={institution.description} />
             </div>
           </div>
 

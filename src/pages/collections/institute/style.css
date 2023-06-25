@@ -22,7 +22,8 @@
     display: flex;
 }
 .browse--instit--title--cont--1{
-    max-width: 80vw;
+    width: 80vw;
+    height: 900px;
     overflow: hidden;
     background-color: plum;
     display: flex;

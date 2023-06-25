@@ -1,35 +1,33 @@
-import React, { useState } from 'react';
+import React, { useState } from 'react'
+import './TextContainer.css'
 
 const TextContainer = ({ text }) => {
-  const [expanded, setExpanded] = useState(false);
+  const [expanded, setExpanded] = useState(false)
 
   const toggleText = () => {
-    setExpanded(!expanded);
-  };
+    setExpanded(!expanded)
+  }
 
   return (
-    <div className={`parent-container ${expanded ? 'expanded' : ''}`}>
-      <div className="text-container">
-        <p className={`full-text ${expanded ? 'visible' : ''}`}>{text}</p>
-        {!expanded && (
-          <>
-            <p className="preview-text">{text.substring(0, 100)}...</p>
-            <button className="show-more-button" onClick={toggleText}>
-              Show More
-            </button>
-          </>
-        )}
-        {expanded && (
-        <>
-        <p className="preview-text">{text}</p>
-          <button className="show-less-button" onClick={toggleText}>
+    <div className={`parent-container ${expanded ? 'expanded' : 'unexpanded'}`}>
+      {!expanded && (
+        <div className='text'>
+          {text.substring(0, 100)}...
+          <button className='show-more-button' onClick={toggleText}>
+            Show More
+          </button>
+        </div>
+      )}
+      {expanded && (
+        <div className='text'>
+          {text}
+          <button className='show-less-button' onClick={toggleText}>
             Show Less
           </button>
-        </>
-        )}
-      </div>
+        </div>
+      )}
     </div>
-  );
-};
+  )
+}
 
-export default TextContainer;
+export default TextContainer
