@@ -4,53 +4,66 @@
     overflow-y: scroll;
     overflow-x: hidden;
     background-color: tan;
+    gap: 25px;
 }
 
 .browse--instit--showcase--1{
-    min-height: 500px;
+    height: 480px;
     overflow: hidden;
     margin: 0 25px;
-    padding: 10px;
-    background-color: teal;
+    /* padding: 10px; */
+    background-color: rgba(205, 210, 210, 0.693);
+    border-radius: 15px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    /* align-items: flex-start; */
+    justify-content: flex-start;
     flex-direction: column;
     position: relative;
 }
 .browse--instit--showcase--upper{
     display: flex;
+    padding: 15px 15px 0 15px ;
 }
 .browse--instit--title--cont--1{
     width: 80vw;
-    height: 900px;
+    /* height: 900px; */
     overflow: hidden;
-    background-color: plum;
+    /* background-color: plum; */
     display: flex;
     align-items: center;
     justify-content: center;
 
 }
-.browse--instit--title--img--cont{
-    width: 250px;
-    /* height: 500px; */
-    overflow: hidden;
+.browse--instit--title {
+    font-size: 60px !important;
+    /* background-color: tan; */
+    width: 80vw;
+    /* height: 100px; */
     display: flex;
     align-items: center;
-    justify-content: center;
+    font-weight: bold;
+    /* justify-content: ; */
+}
+.browse--instit--title--img--cont{
+    width: 250px;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    /* justify-content: flex-start; */
     position: relative;
 }
 .browse--instit--title--img--cont img{
     position: absolute;
     left: 0;
     width: 100%;
-    background-color: rgb(213, 129, 20);
+    /* background-color: rgb(213, 129, 20); */
 }
 .browse--instit--title--cont--1{
     display: flex;
     align-items: flex-start;
     flex-direction: column;
-    height: 250px;
+    height: 300px;
 }
 .browse--instit--title--cont--1 h2{
  font-size: 40px;
@@ -80,3 +93,93 @@
     padding: 10px 20px;
     cursor: pointer;
   }
+
+
+  .browse--instit--showcase--lower{
+    display: flex;
+    align-items: center;
+    /* background-color: orangered; */
+    width: 80%;
+    /* right: 0; */
+    /* width: 94vw; */
+    height: 200px;
+    /* position: absolute; */
+    /* bottom: 0; */
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 20%;
+    position: relative;
+  }
+  .browse--instit--coll--title--text{
+    position: absolute;
+    text-align: left;
+    left: 0;
+    font-size: 27px;
+    opacity: 0.5;
+    width: 100px;
+    margin-left: 50px;
+    z-index: 45;
+    font-weight: 900;
+  }
+  .instit--showcase--lower--gradient{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: thistle;
+    height: 100px;
+    transform: translateX(-10%);
+    z-index: 44;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5010796554950105) 70%, rgba(255,255,255,0) 100%);  
+
+  }
+  .instColl--img--cont--cont{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    flex-direction: column;
+  }
+  .instColl--name{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    width: 250px;
+    z-index: 45;
+    height: 100px;
+    transform: translateY(-60px);
+    opacity: 1;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5010796554950105) 50%, rgba(255,255,255,0) 100%);   */
+
+}
+
+  .instColl--image-container {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: yellow; */
+    transform: translateY(60px);
+    border-radius: 15px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 40;
+}
+  .instColl--img--cont--cont:hover .instColl--image-container{
+    transform: translateY(30px);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .instColl--image {
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    transform: scale(1.5);
+  }
+  

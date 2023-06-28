@@ -4,6 +4,7 @@ import './style.css'
 
 import ImageContainer from '../../../components/containers/ImageContainer'
 import TextContainer from '../../../components/containers/TextContainer'
+import InstColl_ImageContainer from './InstColl_ImageContainer'
 
 export default function InstitCollection () {
   const institutions = institutionsData.institutions
@@ -23,12 +24,27 @@ export default function InstitCollection () {
               />
             </div>
             <div className='browse--instit--title--cont--1'>
-              <h2>{institution.name}</h2>
-              <TextContainer text={institution.description} />
+              <h2 className='browse--instit--title' >{institution.name}</h2>
+              {/* <TextContainer text={institution.description} /> */}
             </div>
           </div>
-
-          <h3>Collections:</h3>
+          <div className='browse--instit--showcase--lower'>
+            <h4 className='browse--instit--coll--title--text'> FEATURED COLLECTIONS</h4>
+            {institution.collections.map(collection => (
+              <div
+                className='browse--instit--collection--card--1'
+                key={collection.id}
+              >
+                
+                <InstColl_ImageContainer 
+          imageUrl={collection.imgurl}
+          collName={collection.name}
+          />
+              </div>
+            ))}
+            <div className='instit--showcase--lower--gradient' ></div>
+          </div>
+          {/* <h3>Collections:</h3>
           <ul className='browse--instit--collection--cont--1'>
             {institution.collections.map(collection => (
               <li
@@ -36,10 +52,10 @@ export default function InstitCollection () {
                 key={collection.id}
               >
                 <h4>{collection.name}</h4>
-                {/* <img src={collection.imgurl} alt={collection.name} /> */}
+                <img src={collection.imgurl} alt={collection.name} />
               </li>
             ))}
-          </ul>
+          </ul> */}
         </div>
       ))}
     </div>

@@ -2,6 +2,7 @@
     overflow: hidden;
     transition: height 0.3s ease; /* Add a smooth transition effect */
     width: 80vw;
+    position: relative;
   }
   .expanded{
     /* height: 600px; */
@@ -11,13 +12,15 @@
   .unexpanded{
     /* height: 400px; */
     background-color: yellow;
+    overflow-y: scroll;
   }
   .text {
     position: relative;
     font-size: 22px;
     margin: 0;
     padding: 0;
-    height: fit-content;
+    /* height: fit-content; */
+    height: 200px;
     padding-bottom: 50px ;
   }
 
@@ -28,7 +31,7 @@
     
     height: fit-content;
   }
-  .show-more-button {
+  .show-button {
     position: absolute;
     bottom: 0;
     left: 50%;
@@ -37,14 +40,7 @@
     border: none;
     padding: 10px 20px;
     cursor: pointer;
+    z-index: 300;
+    margin-bottom: 10px;
   }
-  .show-less-button {
-    position: absolute;
-    bottom: 0;
-    left: 50%;
-    transform: translateX(-50%);
-    background-color: #f2f2f2;
-    border: none;
-    padding: 10px 20px;
-    cursor: pointer;
-  }
+ 

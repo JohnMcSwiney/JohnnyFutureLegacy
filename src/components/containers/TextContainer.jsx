@@ -11,21 +11,20 @@ const TextContainer = ({ text }) => {
   return (
     <div className={`parent-container ${expanded ? 'expanded' : 'unexpanded'}`}>
       {!expanded && (
-        <div className='text'>
-          {text.substring(0, 100)}...
-          <button className='show-more-button' onClick={toggleText}>
-            Show More
-          </button>
-        </div>
+
+          <div className='text'>{text.substring(0, 100)}...</div>
+
       )}
       {expanded && (
-        <div className='text'>
-          {text}
-          <button className='show-less-button' onClick={toggleText}>
-            Show Less
-          </button>
-        </div>
+
+          <div className='text'>{text}</div>
+          
+
       )}
+      <button className='show-button' onClick={toggleText}>
+            {expanded && ('show less')}
+            {!expanded && ('show more')}
+      </button>
     </div>
   )
 }
