@@ -59,8 +59,8 @@ function App () {
           <Route path='/artifact' element={<Artifact />}></Route>
           
           <Route path='/browse' element={<Browse />}></Route>
-          <Route path='/indiv_collection' element={<IndividualCollection />}></Route>
-          <Route path='/insti_collection' element={<InstituteCollection />}></Route>
+          <Route path='/indiv_collection/:id' element={<IndividualCollection />}></Route>
+          <Route path='/insti_collection/:id' element={<InstituteCollection />}></Route>
           
           <Route path='/create_indiv_collection' element={<CreateIndividualCollection />}></Route>
           <Route path='/create_insti_collection' element={<CreateInstituteCollection />}></Route>

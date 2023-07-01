@@ -1,20 +1,44 @@
-import React, { useState }  from 'react'
-import institutionsData from '../tempAssets/tempInstit.json'
+import React, { useState, useEffect }  from 'react'
+// import institutionsData from '../tempAssets/tempInstit.json'
 import './style.css'
 
 import ImageContainer from '../../../components/containers/ImageContainer'
 import TextContainer from '../../../components/containers/TextContainer'
 import InstColl_ImageContainer from './InstColl_ImageContainer'
-
+// import { useHistory } from 'react-router-dom';
+import { Navigate, useNavigate, Link } from "react-router-dom";
 export default function InstitCollection () {
-  const institutions = institutionsData.institutions
-  
+  const [institutions, setInstitutions] = useState([]);
+  const [fetchUrl, setFetchUrl] = useState('../tempAssets/tempInstit.json');
+
+const navigate = useNavigate();
+const redirectInstitCollPage = ({collId}) => {navigate(`/insti_collection/${collId}`)};
+  // const history = useHistory();
+
+  // const redirectInstitCollPage = () => {
+  //   // Redirect to the desired page
+  //   history.push('/page/123');
+  // };
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(fetchUrl);
+        const data = await response.json();
+        setInstitutions(data);
+      } catch (error) {
+        console.error('Error fetching institutions:', error);
+      }
+    };
+
+    fetchData();
+  }, [fetchUrl]);
+
   return (
     
     <div className='browse--instit--cont'>
       {institutions.map(institution => (
-        <div className='browse--instit--showcase--1' key={institution.id}>
-          <div className='browse--instit--showcase--upper'>
+        <div className='browse--instit--showcase--1' key={institution.id} >
+          <div className='browse--instit--showcase--upper' onClick={() => redirectInstitCollPage(institution.id)}>
             <div className='browse--instit--title--img--cont'>
               {/* <img src={institution.imgurl} alt={institution.name} />  */}
 

@@ -5,6 +5,7 @@ import './style.css';
 export default function FL_footer() {
     const navigate = useNavigate();
     const redirectAbout = () => {navigate(`/about`);};
+    const redirectApply = () => {navigate(`/apply`);};
     const redirectCollections = () => {navigate(`/browse`)};
     
     return (
@@ -21,7 +22,7 @@ export default function FL_footer() {
 
             <div className='FL--footer--box--cont'>
             <h3>Artists</h3>
-                <a>Become an artist</a>
+                <a onClick={redirectApply}>Become an artist</a>
                 <a>Create collection</a>
                 <a>Log in</a>
                 

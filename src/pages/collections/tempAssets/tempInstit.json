@@ -1,28 +1,29 @@
 {
-    "institutions":[
-        {
-            "id" : "1",
-            "name" : "Field Museum of Natural History",
-            "imgurl" : "https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_Assets%2FFL_Institutions%2FLogos%2Fimage%2012.png?alt=media&token=dca42b58-1e4f-4a4b-95d2-c14dfdbbc7d1",
-            "description" : "The Field Museum of Natural History is one of the largest such museums in the world. The museum is popular for the size and quality of its educational and scientific programs, and its extensive scientific specimen and artifact collections. The permanent exhibitions, which attract up to 2 million visitors annually, include fossils, current cultures from around the world, and interactive programming demonstrating today's urgent conservation needs. The museum is named in honor of its first major benefactor, Marshall Field, the department-store magnate. The museum and its collections originated from the 1893 World's Columbian Exposition and the artifacts displayed at the fair.",
-            "color": "#0846E6",
-            "collections" : [{
-                "id" : "1-01",
-                "name" : "Botany Collection",
-                "imgurl" : "https://www.samisachaflowers.com/media/Albastross-white-football-mums.jpeg" 
-            },
-            {
-                "id" : "1-02",
-                "name" : "Egyptian Collection",
-                "imgurl" : "https://www.datocms-assets.com/44232/1633378406-a110658c-photoarchivesbackground.jpg" 
-            },
-            {
-                "id" : "1-03",
-                "name" : "Anthropology Collection",
-                "imgurl" : "https://www.datocms-assets.com/44232/1632764073-a108351c634x235.jpg" 
-            }]
-        }
-
-
+    "institutions": [
+      {
+        "id": "1",
+        "name": "Field Museum of Natural History",
+        "imgurl": "https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_Assets%2FFL_Institutions%2FLogos%2Fimage%2012.png?alt=media&token=dca42b58-1e4f-4a4b-95d2-c14dfdbbc7d1",
+        "description": "The Field Museum of Natural History is one of the largest such museums in the world. The museum is popular for the size and quality of its educational and scientific programs, and its extensive scientific specimen and artifact collections. The permanent exhibitions, which attract up to 2 million visitors annually, include fossils, current cultures from around the world, and interactive programming demonstrating today's urgent conservation needs. The museum is named in honor of its first major benefactor, Marshall Field, the department-store magnate. The museum and its collections originated from the 1893 World's Columbian Exposition and the artifacts displayed at the fair.",
+        "color": "#0846E6",
+        "collections": [
+          {
+            "id": "1-01",
+            "name": "Botany Collection",
+            "imgurl": "https://www.samisachaflowers.com/media/Albastross-white-football-mums.jpeg"
+          },
+          {
+            "id": "1-02",
+            "name": "Egyptian Collection",
+            "imgurl": "https://www.datocms-assets.com/44232/1633378406-a110658c-photoarchivesbackground.jpg"
+          },
+          {
+            "id": "1-03",
+            "name": "Anthropology Collection",
+            "imgurl": "https://www.datocms-assets.com/44232/1632764073-a108351c634x235.jpg"
+          }
+        ]
+      }
     ]
-}
+  }
+  

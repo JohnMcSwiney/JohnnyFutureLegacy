@@ -8,7 +8,7 @@ export {default as Browse} from "./pages/collections/collectionsPage";
 export {default as IndividualCollection} from "./pages/collections/individual/indivCollection";
 export {default as CreateIndividualCollection} from "./pages/collections/individual/createIndivCollect";
 
-export {default as InstituteCollection} from "./pages/collections/institute/institCollection";
+export {default as InstituteCollection} from "./pages/collections/institute/InstitCollectionPage";
 export {default as CreateInstituteCollection} from "./pages/collections/institute/createInstitCollect";
 
 export {default as Home} from "./pages/home/home";
