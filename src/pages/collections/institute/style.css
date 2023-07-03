@@ -183,3 +183,74 @@
     transform: scale(1.5);
   }
   
+
+
+
+  .instit--collhomepage--main--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .instit--collhomepage--cont{
+    background-color: yellow;
+    width: 80vw;
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    flex-direction: column;
+
+  }
+  .instit--collhomepage--title--cont{
+
+  }
+  .instit--collhomepage--title--img{
+
+  }
+  .instit--collhomepage--content--cont{
+    display: flex;
+    flex-flow: row;
+    
+  }
+
+
+  .instHomeColl--name{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    width: 250px;
+    z-index: 45;
+    height: 100px;
+    /* transform: translateY(-60px); */
+    opacity: 1;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5010796554950105) 50%, rgba(255,255,255,0) 100%);   */
+
+}
+  /* for the home img cont */
+  .instHomeColl--image-cont {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: yellow; */
+    /* transform: translateY(60px); */
+    border-radius: 10px;
+    opacity: 0.5;
+    /* transition: opacity 0.3s ease, transform 0.3s ease; */
+    z-index: 40;
+}
+  .instHomeColl--img--cont--cont:hover .instHomeColl--image-cont{
+    /* transform: translateY(30px); */
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .instHomeColl--image {
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    transform: scale(1.5);
+  }

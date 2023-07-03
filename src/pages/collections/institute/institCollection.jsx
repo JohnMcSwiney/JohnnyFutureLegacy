@@ -1,87 +1,85 @@
-import React, { useState, useEffect }  from 'react'
-// import institutionsData from '../tempAssets/tempInstit.json'
+import React, { useState, useEffect } from 'react'
 import './style.css'
-
 import ImageContainer from '../../../components/containers/ImageContainer'
 import TextContainer from '../../../components/containers/TextContainer'
 import InstColl_ImageContainer from './InstColl_ImageContainer'
-// import { useHistory } from 'react-router-dom';
-import { Navigate, useNavigate, Link } from "react-router-dom";
+import { useNavigate, useParams } from 'react-router-dom'
+import institutionsData from '../tempAssets/tempInstit.json'
+
 export default function InstitCollection () {
-  const [institutions, setInstitutions] = useState([]);
-  const [fetchUrl, setFetchUrl] = useState('../tempAssets/tempInstit.json');
+  const [institutions, setInstitutions] = useState(
+    institutionsData.institutions
+  )
+  const navigate = useNavigate()
+  const { id: defaultId, collId: defaultCollId } = useParams()
+  const [id, setId] = useState(defaultId)
+  const [collId, setCollId] = useState(defaultCollId)
 
-const navigate = useNavigate();
-const redirectInstitCollPage = ({collId}) => {navigate(`/insti_collection/${collId}`)};
-  // const history = useHistory();
+  const redirectInstitCollPage = id_In => {
+    setId(id_In)
+    setCollId(null)
+  }
 
-  // const redirectInstitCollPage = () => {
-  //   // Redirect to the desired page
-  //   history.push('/page/123');
-  // };
+  const redirectInstitCollPage_Specific = (id_In, collId_In) => {
+    console.log('Specific collection:' + collId_In)
+    setCollId(collId_In)
+    setId(id_In)
+  }
+
   useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(fetchUrl);
-        const data = await response.json();
-        setInstitutions(data);
-      } catch (error) {
-        console.error('Error fetching institutions:', error);
-      }
-    };
-
-    fetchData();
-  }, [fetchUrl]);
+    console.log(collId)
+    if (collId && id) {
+      navigate(`/insti_collection/${id}/${collId}`)
+    } else if (id) {
+      navigate(`/insti_collection/${id}`)
+    }
+  }, [id, collId, navigate])
 
   return (
-    
     <div className='browse--instit--cont'>
-      {institutions.map(institution => (
-        <div className='browse--instit--showcase--1' key={institution.id} >
-          <div className='browse--instit--showcase--upper' onClick={() => redirectInstitCollPage(institution.id)}>
-            <div className='browse--instit--title--img--cont'>
-              {/* <img src={institution.imgurl} alt={institution.name} />  */}
-
-              <ImageContainer
-                imageUrl={institution.imgurl}
-                aspectRatio={3 / 3}
-              />
-            </div>
-            <div className='browse--instit--title--cont--1'>
-              <h2 className='browse--instit--title' >{institution.name}</h2>
-              {/* <TextContainer text={institution.description} /> */}
-            </div>
-          </div>
-          <div className='browse--instit--showcase--lower'>
-            <h4 className='browse--instit--coll--title--text'> FEATURED COLLECTIONS</h4>
-            {institution.collections.map(collection => (
+      {institutions.length > 0 ? (
+        institutions.map(institution => (
+          <div className='browse--instit--showcase--1' key={institution.id}>
+            <div className='browse--instit--showcase--1' key={institution.id}>
               <div
-                className='browse--instit--collection--card--1'
-                key={collection.id}
+                className='browse--instit--showcase--upper'
+                onClick={() => redirectInstitCollPage(institution.id)}
               >
-                
-                <InstColl_ImageContainer 
-          imageUrl={collection.imgurl}
-          collName={collection.name}
-          />
+                <div className='browse--instit--title--img--cont'>
+                  <ImageContainer
+                    imageUrl={institution.imgurl}
+                    aspectRatio={3 / 3}
+                  />
+                </div>
+                <div className='browse--instit--title--cont--1'>
+                  <h2 className='browse--instit--title'>{institution.name}</h2>
+                </div>
               </div>
-            ))}
-            <div className='instit--showcase--lower--gradient' ></div>
+              <div className='browse--instit--showcase--lower'>
+                <h4 className='browse--instit--coll--title--text'>
+                  FEATURED COLLECTIONS
+                </h4>
+                {institution.collections.map(collection => (
+                  <div
+                    className='browse--instit--collection--card--1'
+                    key={collection.id}
+                  >
+                    <InstColl_ImageContainer
+                      imageUrl={collection.imgurl}
+                      collName={collection.name}
+                      parentid={institution.id}
+                      collectionid={collection.id}
+                    />
+                  </div>
+                ))}
+                <div className='instit--showcase--lower--gradient'></div>
+              </div>
+            </div>
           </div>
-          {/* <h3>Collections:</h3>
-          <ul className='browse--instit--collection--cont--1'>
-            {institution.collections.map(collection => (
-              <li
-                className='browse--instit--collection--card--1'
-                key={collection.id}
-              >
-                <h4>{collection.name}</h4>
-                <img src={collection.imgurl} alt={collection.name} />
-              </li>
-            ))}
-          </ul> */}
-        </div>
-      ))}
+        ))
+      ) : (
+        <div>Loading...</div>
+      )}
     </div>
   )
 }
