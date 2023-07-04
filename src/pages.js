@@ -3,7 +3,7 @@ export {default as About} from "./pages/about/about";
 export {default as Apply} from "./pages/apply/applyPage";
 export {default as Artifact} from "./pages/artifact/artifactPage";
 
-export {default as Browse} from "./pages/collections/collectionsPage";
+export {default as Browse} from "./pages/collections/browseCollectionsPage";
 
 export {default as IndividualCollection} from "./pages/collections/individual/indivCollection";
 export {default as CreateIndividualCollection} from "./pages/collections/individual/createIndivCollect";

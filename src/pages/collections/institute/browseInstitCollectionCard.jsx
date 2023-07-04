@@ -6,7 +6,7 @@ import InstColl_ImageContainer from './InstColl_ImageContainer'
 import { useNavigate, useParams } from 'react-router-dom'
 import institutionsData from '../tempAssets/tempInstit.json'
 
-export default function InstitCollection () {
+export default function BrowseInstitCollectionCard () {
   const [institutions, setInstitutions] = useState(
     institutionsData.institutions
   )
@@ -27,10 +27,11 @@ export default function InstitCollection () {
   }
 
   useEffect(() => {
-    console.log(collId)
+    // console.log(collId)
     if (collId && id) {
       navigate(`/insti_collection/${id}/${collId}`)
-    } else if (id) {
+    } 
+    else if (id) {
       navigate(`/insti_collection/${id}`)
     }
   }, [id, collId, navigate])

@@ -9,7 +9,7 @@ const InstHomeColl_ImageContainer = ({collectionid, parentId, imageUrl, collName
   
   const handleClick = () => {
     console.log('i just got clicked, my id is: '+ collectionid +', my dads number is: ' + parentid);
-    navigate(`/insti_collection/${parentid}/${collectionid}`)
+    navigate(`/insti_collection/${parentId}/${collectionid}`)
   }
   
   return (

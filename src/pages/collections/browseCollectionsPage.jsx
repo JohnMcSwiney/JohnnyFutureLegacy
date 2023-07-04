@@ -5,12 +5,12 @@ import CollectionCard2 from '../../components/cards/home/CollectionCard2'
 
 import FeaturedCollection from './featured/featuredCollection';
 import IndivCollection from './individual/indivCollection';
-import InstitCollection from './institute/institCollection';
+import InstitCollection from './institute/browseInstitCollectionCard';
 import FL_footer from '../../components/FL_Footer/FL_footer'
 
 import React, { useState } from 'react';
 
-const CollectionsPage = () => {
+const BrowseCollectionsPage = () => {
   const [selectedOption, setSelectedOption] = useState('Feature');
 
   const handleButtonClick = (option) => {
@@ -64,4 +64,4 @@ const CollectionsPage = () => {
     </div>
   )
 }
-export default CollectionsPage;
+export default BrowseCollectionsPage;
