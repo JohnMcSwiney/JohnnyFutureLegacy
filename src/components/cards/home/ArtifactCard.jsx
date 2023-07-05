@@ -1,24 +1,44 @@
-import React from 'react'
+import React, { useState } from 'react';
 
 import './style.css'
 
-export default function CollectionCard () {
+export default function ArtifactCard ({imgUrl, artifactTitle}) {
+  const [isActive, setIsActive] = useState(false);
+  
   const tempImg =
     'https://media.cnn.com/api/v1/images/stellar/prod/210526205712-06-thai-lintels-san-francisco.jpg?q=w_1600,h_900,x_0,y_0,c_fill'
   const tempText =
     'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore'
 
+    const [isMouseDown, setIsMouseDown] = useState(false);
+
+  const handleMouseDown = () => {
+    setIsMouseDown(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+
+  const buttonStyle = {
+    transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
+  };
   return (
     <div className='home--coll--card--cont'>
       <div className='coll--card--img'>
-        <img src={tempImg} />
+        <img src={imgUrl} />
       </div>
-      <h2>Image title</h2>
+      <h2>{artifactTitle}</h2>
       <div className='coll--card--text'>
         <p>{tempText}</p>
       </div>
-      <button className='coll--card--btn'>
-        View Collections
+      <button 
+      className='coll--card--btn '
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+      style={buttonStyle}
+      >
+        License Image
       </button>
     </div>
   )

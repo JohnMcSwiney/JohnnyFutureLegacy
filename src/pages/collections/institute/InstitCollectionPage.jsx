@@ -3,6 +3,7 @@ import { useParams } from 'react-router-dom'
 import institutionsData from '../tempAssets/tempInstit.json'
 import artifactsData from '../tempAssets/tempArtifacts.json'
 import ImageContainer from '../../../components/containers/ImageContainer'
+import ArtifactCard from '../../../components/cards/home/ArtifactCard'
 import InstHomeColl_ImageContainer from './InstColl_ImageContainer'
 import './style.css'
 
@@ -28,19 +29,19 @@ function InstitCollectionPage() {
               {collection.name}
             </div>
             <div className='instit--collhomepage--content--cont'>
+              <div className='instit--collpage--content'>
               {collection.artifacts.map((artifact) => (
-                <div
-                  className='browse--instit--collection--card--1'
-                  key={artifact.id}
-                >
-                  <InstHomeColl_ImageContainer
-                    imageUrl={artifact.imgurl}
-                    collName={artifact.name}
-                    parentid={collection.id}
-                    collectionid={artifact.id}
-                  />
-                </div>
-              ))}
+                
+                <ArtifactCard
+                key={artifact.id}
+                  imgUrl={artifact.imgurl}
+                  artifactTitle={artifact.name}
+                  className='grid-item'
+                  
+                />
+              
+            ))}
+              </div>
             </div>
           </div>
         </div>

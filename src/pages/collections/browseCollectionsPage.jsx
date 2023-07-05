@@ -1,7 +1,7 @@
 import './collectionStyle.css';
 import FL_splitter from '../../components/splitter/FL_splitter'
 import CollectionCard from '../../components/cards/home/CollectionCard'
-import CollectionCard2 from '../../components/cards/home/CollectionCard2'
+import CollectionCard2 from '../../components/cards/home/ArtifactCard'
 
 import FeaturedCollection from './featured/featuredCollection';
 import IndivCollection from './individual/indivCollection';

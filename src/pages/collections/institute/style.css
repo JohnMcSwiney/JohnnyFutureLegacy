@@ -190,14 +190,17 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    width: 90vw;
+    overflow-y: scroll;
   }
   .instit--collhomepage--cont{
     background-color: yellow;
-    width: 80vw;
+    width: 90vw;
     display: flex;
     align-items: center;
     padding: 25px;
     flex-direction: column;
+    margin-top: 400px;
 
   }
   .instit--collhomepage--title--cont{
@@ -211,8 +214,16 @@
     flex-flow: row;
     
   }
+  .instit--collpage--content{
+    display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Specifies 3 columns with equal width */
+  grid-gap: 10px; /* Adjust the gap between items */
 
-
+  }
+  .grid-item {
+    flex: 0 0 calc(33.33% - 10px); /* Adjust the width based on your spacing requirements */
+    margin: 5px; /* Add margin to create spacing between items */
+  }
   .instHomeColl--name{
     font-size: 25px;
     text-align: center;
