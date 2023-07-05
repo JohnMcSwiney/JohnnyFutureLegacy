@@ -1,0 +1,95 @@
+import React, { useState } from 'react'
+import { useParams } from 'react-router-dom'
+import institutionsData from '../tempAssets/tempInstit.json'
+import artifactsData from '../tempAssets/tempArtifacts.json'
+import ImageContainer from '../../../components/containers/ImageContainer'
+import InstHomeColl_ImageContainer from './InstColl_ImageContainer'
+import './style.css'
+
+function InstitCollectionPage () {
+  const { param1, param2 } = useParams()
+  const [institutions, setInstitutions] = useState(
+    institutionsData.institutions
+)
+  const [artifacts, setArtifacts] = useState(
+    artifactsData.collections
+  )
+
+  if (param2) {
+    return (
+      <div className='instit--collhomepage--main--cont'>
+        {institutions.map(institution => {
+          if (institution.id === param1) {
+            return (
+              <div className='instit--collhomepage--cont' key={institution.id}>
+                <div className='instit--collhomepage--title--cont'>
+                  <div className='instit--collhomepage--title--img'>
+                    <ImageContainer
+                      imageUrl={institution.imgurl}
+                      aspectRatio={3 / 3}
+                    />
+                  </div>
+                  {institution.name}
+                </div>
+                <div className='instit--collhomepage--content--cont'>
+                {/* the artifact mapping happens here :) */}
+
+
+                </div>
+              </div>
+            ) // Added the missing 'return' statement and 'key' prop
+          }
+          return null // Added 'return null' to handle the case when the if condition is not met
+        })}
+      </div>
+    )
+  } else if (param1) {
+    return (
+      <div className='instit--collhomepage--main--cont'>
+        {institutions.map(institution => {
+          if (institution.id === param1) {
+            return (
+              <div className='instit--collhomepage--cont' key={institution.id}>
+                <div className='instit--collhomepage--title--cont'>
+                  <div className='instit--collhomepage--title--img'>
+                    <ImageContainer
+                      imageUrl={institution.imgurl}
+                      aspectRatio={3 / 3}
+                    />
+                  </div>
+                  {institution.name}
+                </div>
+                <div className='instit--collhomepage--content--cont'>
+                  {institution.description}
+                  {institution.collections.map(collection => (
+                    <div
+                      className='browse--instit--collection--card--1'
+                      key={collection.id}
+                    >
+                      <InstHomeColl_ImageContainer
+                        imageUrl={collection.imgurl}
+                        collName={collection.name}
+                        parentid={institution.id}
+                        collectionid={collection.id}
+                      />
+                    </div>
+                  ))}
+                </div>
+              </div>
+            ) // Added the missing 'return' statement and 'key' prop
+          }
+          return null // Added 'return null' to handle the case when the if condition is not met
+        })}
+        {/* {param2 ? (
+          <div>
+            {param2}
+          </div>
+        ) : (
+          <div>no param 2</div>
+        )} */}
+      </div>
+    )
+  }
+}
+
+export default InstitCollectionPage
