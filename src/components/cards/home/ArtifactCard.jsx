@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
-
+import {useNavigate} from 'react-router-dom';
 import './style.css'
 
-export default function ArtifactCard ({imgUrl, artifactTitle}) {
+export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifactTitle}) {
   const [isActive, setIsActive] = useState(false);
   
   const tempImg =
@@ -23,6 +23,10 @@ export default function ArtifactCard ({imgUrl, artifactTitle}) {
   const buttonStyle = {
     transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
   };
+  const navigate = useNavigate();
+  const handleRedirect = () => {
+    navigate(`/artifact/${artifactId}/${collectionId}`)
+  }
   return (
     <div className='home--coll--card--cont'>
       <div className='coll--card--img'>
@@ -37,6 +41,7 @@ export default function ArtifactCard ({imgUrl, artifactTitle}) {
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       style={buttonStyle}
+      onClick={handleRedirect}
       >
         License Image
       </button>

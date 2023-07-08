@@ -1,0 +1,78 @@
+[
+    {
+      "id": "1",
+      "name": "Nature",
+      "imgUrl": "https://example.com/nature.jpg"
+    },
+    {
+      "id": "2",
+      "name": "Cityscape",
+      "imgUrl": "https://example.com/cityscape.jpg"
+    },
+    {
+      "id": "3",
+      "name": "Animals",
+      "imgUrl": "https://example.com/animals.jpg"
+    },
+    {
+      "id": "4",
+      "name": "Abstract",
+      "imgUrl": "https://example.com/abstract.jpg"
+    },
+    {
+      "id": "5",
+      "name": "Beach",
+      "imgUrl": "https://example.com/beach.jpg"
+    },
+    {
+      "id": "6",
+      "name": "Mountains",
+      "imgUrl": "https://example.com/mountains.jpg"
+    },
+    {
+      "id": "7",
+      "name": "Food",
+      "imgUrl": "https://example.com/food.jpg"
+    },
+    {
+      "id": "8",
+      "name": "Architecture",
+      "imgUrl": "https://example.com/architecture.jpg"
+    },
+    {
+      "id": "9",
+      "name": "Wildlife",
+      "imgUrl": "https://example.com/wildlife.jpg"
+    },
+    {
+      "id": "10",
+      "name": "Sunset",
+      "imgUrl": "https://example.com/sunset.jpg"
+    },
+    {
+      "id": "11",
+      "name": "Travel",
+      "imgUrl": "https://example.com/travel.jpg"
+    },
+    {
+      "id": "12",
+      "name": "Art",
+      "imgUrl": "https://example.com/art.jpg"
+    },
+    {
+      "id": "13",
+      "name": "Sports",
+      "imgUrl": "https://example.com/sports.jpg"
+    },
+    {
+      "id": "14",
+      "name": "Music",
+      "imgUrl": "https://example.com/music.jpg"
+    },
+    {
+      "id": "15",
+      "name": "Vintage",
+      "imgUrl": "https://example.com/vintage.jpg"
+    }
+  ]
+  

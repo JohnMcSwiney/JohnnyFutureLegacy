@@ -34,6 +34,8 @@ function InstitCollectionPage() {
                 
                 <ArtifactCard
                 key={artifact.id}
+                  artifactId={artifact.id}
+                  collectionId={param1}
                   imgUrl={artifact.imgurl}
                   artifactTitle={artifact.name}
                   className='grid-item'

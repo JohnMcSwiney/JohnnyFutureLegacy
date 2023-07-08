@@ -28,6 +28,7 @@ background-color: white;
     font-family: var(--font--fam);
     margin: 0;
     text-transform: uppercase;
+    cursor: pointer;
 }
 .FL--footer--box--cont h3 strong{
     color: var(--tertiary);

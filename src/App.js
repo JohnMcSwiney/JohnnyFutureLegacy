@@ -56,7 +56,7 @@ function App () {
           <Route path='/search' element={<Search />}></Route>
 
           <Route path='/apply' element={<Apply />}></Route>
-          <Route path='/artifact' element={<Artifact />}></Route>
+          <Route path='/artifact/:id/:parentId' element={<Artifact />}></Route>
           
           <Route path='/browse' element={<Browse />}></Route>
 

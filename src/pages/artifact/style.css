@@ -1,0 +1,28 @@
+.artifact--page--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    background-color: yellow;
+}
+.artifact--img-n-tags{
+    display: flex;
+    flex-direction: column;
+}
+.artifact--img--cont{
+    width: 600px;
+    height: 500px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 25px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: red;
+}
+
+.artifact--img{
+    position: absolute;
+    width: 100%;
+    left: 0%;
+}
