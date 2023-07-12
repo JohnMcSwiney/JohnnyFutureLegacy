@@ -7,7 +7,7 @@ export default function FL_footer() {
     const redirectAbout = () => {navigate(`/about`);};
     const redirectApply = () => {navigate(`/apply`);};
     const redirectCollections = () => {navigate(`/browse`)};
-    
+    const redirectSignIn = () => {navigate(`/signIn`)};
     return (
     <div className='FL--footer--cont--cont'>
         <div className='FL--footer--content--cont'>
@@ -24,7 +24,7 @@ export default function FL_footer() {
             <h3>Artists</h3>
                 <a onClick={redirectApply}>Become an artist</a>
                 <a>Create collection</a>
-                <a>Log in</a>
+                <a onClick={redirectSignIn}>Log in</a>
                 
             </div>
             <div className='FL--footer--box--cont'>

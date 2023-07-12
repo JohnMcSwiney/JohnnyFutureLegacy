@@ -26,3 +26,13 @@
     width: 100%;
     left: 0%;
 }
+
+.artifact--tags--cont{
+
+}
+.artifact--details--cont{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    background-color: blue;
+}
