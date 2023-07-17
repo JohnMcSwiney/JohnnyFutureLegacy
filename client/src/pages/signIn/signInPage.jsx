@@ -71,37 +71,75 @@ export default function SignInPage() {
     return passwordRegex.test(password);
   };
 
+
+  const SignupForm = () => {
+    const [formData, setFormData] = useState({
+      username: '',
+      email: '',
+      password: '',
+    });
+  
+    const handleChange = (e) => {
+      setFormData({
+        ...formData,
+        [e.target.name]: e.target.value,
+      });
+    };
+  
+    const handleSubmit = (e) => {
+      e.preventDefault();
+  
+      // Convert form data to JSON string
+      const jsonData = JSON.stringify(formData, null, 2);
+  
+      // Create a Blob from the JSON string
+      const blob = new Blob([jsonData], { type: 'application/json' });
+  
+      // Generate a temporary URL for the blob
+      const url = URL.createObjectURL(blob);
+  
+      // Create a temporary <a> element and trigger the download
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = 'account.json';
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    };
+
   return (
     <div>
-      <h1>Sign In</h1>
-      <div>
-        <label>Email:</label>
+       <form onSubmit={handleSubmit}>
+      <label>
+        Username:
         <input
           type="text"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
+          name="username"
+          value={formData.username}
+          onChange={handleChange}
         />
-        {emailError && <div className="error">{emailError}</div>}
-      </div>
-      <div>
-        <label>Password:</label>
+      </label>
+      <label>
+        Email:
+        <input
+          type="email"
+          name="email"
+          value={formData.email}
+          onChange={handleChange}
+        />
+      </label>
+      <label>
+        Password:
         <input
           type="password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
+          name="password"
+          value={formData.password}
+          onChange={handleChange}
         />
-        {passwordError && <div className="error">{passwordError}</div>}
-      </div>
-      {error && <div className="error">{error}</div>}
-      <button onClick={handleSignIn}>Sign In</button>
-      <Link to="/signup">
-        <button>Sign Up</button>
-      </Link>
-      <button onClick={() => setShowPasswordRequirements(true)}>
-        Password Requirements
-      </button>
+      </label>
+      <button type="submit">Submit</button>
+    </form>
       {/* {showPasswordRequirements && (
         <div className="password-requirements">
           <p>Password Requirements:</p>
@@ -117,4 +155,5 @@ export default function SignInPage() {
       )} */}
     </div>
   );
+}
 }
