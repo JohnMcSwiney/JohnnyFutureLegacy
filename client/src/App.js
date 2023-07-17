@@ -14,10 +14,11 @@ import {
   CreateInstituteCollection,
   Home,
   Search,
-  SignIn,
+  Login,
   SignUp,
   Subscribe,
-  Upload
+  Upload,
+  Landing
 } from './pages'
 
 import SearchBar from './components/searchBar/SearchBar'
@@ -52,6 +53,7 @@ function App () {
         
         <Routes>
           <Route path='/' element={<Home />}></Route>
+          <Route path='/landing' element={<Landing />}></Route>
           <Route path='/about' element={<About />}></Route>
           <Route path='/search' element={<Search />}></Route>
 
@@ -69,7 +71,7 @@ function App () {
           <Route path='/create_insti_collection' element={<CreateInstituteCollection />}></Route>
 
 
-          <Route path='/signIn' element={<SignIn />}></Route>
+          <Route path='/login' element={<Login />}></Route>
           <Route path='/signUp' element={<SignUp />}></Route>
 
           <Route path='/subscribe' element={<Subscribe />}></Route>

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {useNavigate} from 'react-router-dom';
-import userData from '../signIn/users.json';
+import userData from '../login/users.json';
 import './style.css';
  
 

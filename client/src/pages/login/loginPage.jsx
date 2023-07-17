@@ -4,11 +4,11 @@ import './style.css';
 import usersData from './users.json';
 import * as Yup from 'yup';
 
-import {StyledContainer} from '../../components/Styles'
+import {StyledContainer, StyledTitle, StyledSubTitle, Avatar, StyledButton} from '../../components/Styles'
+// import
 
-
-export default function SignInPage() {
-  
+export default function LoginPage() {
+  const logoUrl = 'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_Assets%2FGroup%201253.png?alt=media&token=d96e2f7e-960b-457d-bb26-a92735380d4d';
     // backend testing
     const [backendData, setBackendData] = useState([{}])
     useEffect(() => {
@@ -25,7 +25,10 @@ export default function SignInPage() {
 
   return (
     <StyledContainer>
-      <p> hello world</p>
+      <StyledTitle size={95}>
+        Login
+      </StyledTitle>
+     
     </StyledContainer>
     // <div>
     //    Test

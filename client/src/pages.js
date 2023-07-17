@@ -1,5 +1,7 @@
 export {default as About} from "./pages/about/about";
 
+export {default as Landing} from "./pages/landing/landingPage";
+
 export {default as Apply} from "./pages/apply/applyPage";
 export {default as Artifact} from "./pages/artifact/artifactPage";
 
@@ -14,7 +16,7 @@ export {default as CreateInstituteCollection} from "./pages/collections/institut
 export {default as Home} from "./pages/home/home";
 export {default as Search} from './pages/search/search'
 
-export {default as SignIn} from "./pages/signIn/signInPage";
+export {default as Login} from "./pages/login/loginPage";
 export {default as SignUp} from "./pages/signUp/signUpPage";
 
 export {default as Subscribe} from "./pages/subscription/subscribe"
