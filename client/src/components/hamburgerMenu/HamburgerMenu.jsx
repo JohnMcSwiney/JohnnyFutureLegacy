@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx'
 import { AiFillInstagram } from 'react-icons/ai'
 import {FaFacebookF, FaTwitter,FaTelegramPlane} from 'react-icons/fa'
+import { Navigate, useNavigate, Link } from "react-router-dom";
 
 import './Hamburger.css'
 
@@ -11,12 +12,22 @@ import UserImgCont from '../EndUserImgCont/UserImgCont'
 export default function HamburgerMenu () {
   const [isOpen, setIsOpen] = useState(false)
 
+  const navigate = useNavigate();
+  const redirectCollections = () => {navigate(`/collections`); toggleMenu();};
+  const redirectAccount = () => {navigate(`/profile`); toggleMenu();};
+  const redirectAbout = () => {navigate(`/about`); toggleMenu();};
+  const redirectLogin = () => {navigate(`/login`); toggleMenu();};
+  const redirectLogout = () => {navigate(`/logout`); toggleMenu();};
+
+
   const toggleMenu = () => {
     setIsOpen(!isOpen)
   }
   const userImg =
-    'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FGroup%20981.png?alt=media&token=2f015450-3861-4fd8-ad03-53efc94fde68'
-  const userName = 'Garret Morrow'
+    'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b'
+  const userName = 'Username'
+  const is_Signedin = false;
+  const currentUser = false;
   return (
     <>
       <div className='menu-button--cont'>
@@ -37,9 +48,15 @@ export default function HamburgerMenu () {
             </div>
 
             <div className='FL--menu--content'>
-              <a>Subscribe</a>
-              <a>Connect</a>
-              <a>Browse</a>
+              <a onClick={redirectCollections}>Collections</a>
+              <a onClick={redirectAccount}>My Account</a>
+              <a onClick={redirectAbout}>About</a>
+              {is_Signedin ? 
+                <a onClick={redirectLogout}>
+                log out </a>
+                :
+                <a onClick={redirectLogin}>
+                  log in</a>}
             </div>
 
             <div className='FL--menu--bottom'>

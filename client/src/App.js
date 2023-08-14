@@ -7,7 +7,7 @@ import {
   About,
   Apply,
   Artifact,
-  Browse,
+  Collections,
   IndividualCollection,
   CreateIndividualCollection,
   InstituteCollection,
@@ -18,7 +18,9 @@ import {
   SignUp,
   Subscribe,
   Upload,
-  Landing
+  Landing,
+  Profile
+
 } from './pages'
 
 import SearchBar from './components/searchBar/SearchBar'
@@ -60,7 +62,10 @@ function App () {
           <Route path='/apply' element={<Apply />}></Route>
           <Route path='/artifact/:id/:parentId' element={<Artifact />}></Route>
           
-          <Route path='/browse' element={<Browse />}></Route>
+          <Route path='/Collections' element={<Collections />}></Route>
+
+          <Route path='/apply' element={<Apply />}></Route>
+
 
           <Route path='/indiv_collection/:individ/:id' element={<IndividualCollection />}></Route>
           
@@ -73,6 +78,8 @@ function App () {
 
           <Route path='/login' element={<Login />}></Route>
           <Route path='/signUp' element={<SignUp />}></Route>
+          <Route path='/Profile' element={<Profile />}></Route>
+          
 
           <Route path='/subscribe' element={<Subscribe />}></Route>
 
