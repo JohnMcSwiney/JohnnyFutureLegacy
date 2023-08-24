@@ -18,12 +18,16 @@ const SearchBar = ({ onSearch }) => {
 
   useEffect(() => {
     // our fetch codes
-    console.log(q);
   }, []);
   useEffect(() => {
-    // our fetch codes
+
     console.log(q);
+    const { pathname } = location;
+    console.log("Current location: " + pathname)
+    // Grabs Current page for page specific searching
   }, [q]);
+
+  // Used to enable the text & position on the home screen
   const getPageClass = () => {
     const { pathname } = location;
 
@@ -36,19 +40,7 @@ const SearchBar = ({ onSearch }) => {
     // Default class when no matching path is found
     return 'search--cont';
   };
-  const handleSearch = searchTerm => {
-    // Perform search logic with the searchTerm
-    console.log('Searching for : ' + searchTerm + " this is from the component")
-  }
-
   const divClass = getPageClass();
-
-  // const handleChange = event => {
-  //   setSearchTerm(event.target.value)
-  // }
-
-  // 65
-
   const isHomePage = location.pathname === '/'; // Check if it's the home page
 
 
