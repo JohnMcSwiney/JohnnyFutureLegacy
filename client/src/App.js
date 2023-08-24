@@ -28,10 +28,7 @@ import FL_Logo from './components/FL_Logo/FL_Logo'
 import HamburgerMenu from './components/hamburgerMenu/HamburgerMenu'
 
 function App () {
-  const handleSearch = searchTerm => {
-    // Perform search logic with the searchTerm
-    console.log('Searching for:', searchTerm)
-  }
+  
 
 
   
@@ -48,7 +45,7 @@ function App () {
           </div>
           
            <div className='FL--Search--Cont header--height'>
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar  />
         </div>
 
         </div>
