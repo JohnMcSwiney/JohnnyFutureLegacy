@@ -1,53 +1,78 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import './SearchBar.css'
 import { BiSearchAlt2 } from 'react-icons/bi';
-import { useLocation } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+// import FLContext from '../../context/FLContext'
+import {useMyContext} from "../../context/FLContext";
 
 const SearchBar = ({ onSearch }) => {
+  const navigate = useNavigate();
   const location = useLocation();
   const showtext = 'hidden';
 
   const [error, setError] = useState(null);
   const [isLoaded, setIsLoaded] = useState(false);
   const [items, setItems] = useState([]);
+  const [currentPage, setCurrentPage] = useState([]);
 
+  const { searchValue, setSearchValue} = useMyContext();
   //     set search query to empty string
   const [q, setQ] = useState("");
   //     set search parameters
   // const [searchParam] = useState(["AssetName", "AssetID", "UserID", "UserName"]);
-
+  //Param1 (optional): search item
+  const redirectSearch = () => {
+    if (currentPage){
+      
+      navigate(`/search/${q}`)
+      setSearchValue(q)
+    }
+  };
+  
+  // useEffect(() => {
+  //   // our fetch codes
+  // }, []);
   useEffect(() => {
-    // our fetch codes
-  }, []);
-  useEffect(() => {
 
-    console.log(q);
-    const { pathname } = location;
-    console.log("Current location: " + pathname)
+    // console.log(q);
+    
     // Grabs Current page for page specific searching
+    const { pathname } = location;
+    
+    // console.log("Current location: " + pathname)
+    
   }, [q]);
 
   // Used to enable the text & position on the home screen
   const getPageClass = () => {
     const { pathname } = location;
-
     // Add logic to determine the class based on the current pathname
+    if(currentPage !== pathname){
+      setCurrentPage(pathname);
+    }
+    
     if (pathname === '/') {
-
+      
       return 'search--home--cont';
     }
-
+    else if(pathname.includes('search')){
+      // console.log('Already on a search page')
+    }
+    
     // Default class when no matching path is found
     return 'search--cont';
   };
   const divClass = getPageClass();
   const isHomePage = location.pathname === '/'; // Check if it's the home page
 
+  const handleSubmit = () => {
+    redirectSearch();
+  }
 
   return (
     <form
       className={`search--cont ${isHomePage ? 'centered' : ''}`}
-    // onSubmit={handleSubmit}
+      onSubmit={handleSubmit}
     >
         <input
           type='search'
