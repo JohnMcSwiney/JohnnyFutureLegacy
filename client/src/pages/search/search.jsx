@@ -1,6 +1,7 @@
 import React from 'react'
 import './style.css'
 import {useMyContext} from "../../context/FLContext";
+import sanitizeHtml from 'sanitize-html';
 
 export default function Search() {
 
@@ -10,7 +11,7 @@ export default function Search() {
   return (
     <div>search
       { searchValue !== null ? 
-      <h2> Searching for: {searchValue}</h2>
+      <h2> Searching for: {sanitizeHtml(searchValue)}</h2>
         :
       <h2>Search Value Empty</h2>
       }
