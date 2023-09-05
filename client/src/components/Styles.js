@@ -19,7 +19,7 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: yellow;
+  // background: yellow;
   background-size: cover;
   background-attachment: fixed;
   width: 90%;
@@ -31,7 +31,7 @@ export const StyledTitleContainer = styled.div`
   // position: absolute;
   // top: 0;
   flex-direction: column;
-  background: red;
+  // background: red;
   max-height: 20%;
   width: 100%
 `
@@ -51,7 +51,7 @@ export const StyledTitle2 = styled.h2`
   font-weight: bold;
   margin:0;
   margin-top: 125px;
-  background-color: orange;
+  // background-color: orange;
   
 `
 export const StyledSubTitle = styled.p`
@@ -78,7 +78,7 @@ export const StyledContentContainer = styled.div`
   // position: absolute;
   // bottom: 0;
   flex-direction: column;
-  background: tan;
+  // background: tan;
   height: 80%;
   width: 100%;
   padding-bottom: 300px;

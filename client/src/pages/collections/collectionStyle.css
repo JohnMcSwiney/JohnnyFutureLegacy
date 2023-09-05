@@ -50,17 +50,32 @@
     display: flex;
     flex-flow: column;
     gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
 .grid{
     background-color: blueviolet;
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
+    align-items: center;
+    justify-content: center;
 }
-.content--cont div{
+.grid div{
     padding: 20px;
     background-color: aquamarine;
     width: 624px;
+    height: 367px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    border-radius: 20px;
+}
+.row div{
+    padding: 20px;
+    background-color: aquamarine;
+    width: 1318px;
     height: 367px;
     display: flex;
     align-items: center;
