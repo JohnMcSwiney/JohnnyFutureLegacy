@@ -1,0 +1,44 @@
+.remove--padmar{
+    margin: 0;
+    padding: 0;
+}
+.view--trigger--button{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+    padding: 10px;
+    /* right: 30px; */
+}
+.view--toggle--cont{
+    background-color: teal;
+    width: fit-content;
+    position: absolute;
+    right: 0;
+    margin-right: 20px;
+}
+.content--cont{
+    background-color: red;
+}
+.row{
+    background-color: green;
+    display: flex;
+    flex-flow: column;
+    gap: 30px;
+}
+.grid{
+    background-color: blueviolet;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 30px;
+}
+.content--cont div{
+    padding: 20px;
+    background-color: aquamarine;
+    width: 624px;
+    height: 367px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0;
+}

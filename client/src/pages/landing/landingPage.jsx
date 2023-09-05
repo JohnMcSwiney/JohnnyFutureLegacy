@@ -7,6 +7,7 @@ import * as Yup from 'yup'
 import {
   StyledContainer,
   StyledTitle,
+  StyledTitle2,
   StyledSubTitle,
   Avatar,
   StyledButton,

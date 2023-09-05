@@ -19,11 +19,22 @@ export const StyledContainer = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: #ffffff;
+  background: yellow;
   background-size: cover;
   background-attachment: fixed;
+  width: 90%;
+  position: relative;
 `
-
+export const StyledTitleContainer = styled.div`
+  margin: 0;
+  display: flex;
+  // position: absolute;
+  // top: 0;
+  flex-direction: column;
+  background: red;
+  max-height: 20%;
+  width: 100%
+`
 export const StyledTitle = styled.h2`
   font-size: ${props => props.size}px;
   text-align: center;
@@ -31,7 +42,18 @@ export const StyledTitle = styled.h2`
   padding: 5px;
   margin-bottom: 20px;
 `
-
+export const StyledTitle2 = styled.h2`
+  font-size: ${props => props.size}px;
+  text-align: left;
+  color: ${props => (props.color ? props.color : colors.font)};
+  padding: 5px;
+  display: flex;
+  font-weight: bold;
+  margin:0;
+  margin-top: 125px;
+  background-color: orange;
+  
+`
 export const StyledSubTitle = styled.p`
   font-size: ${props => props.size}px;
   text-align: center;
@@ -39,7 +61,29 @@ export const StyledSubTitle = styled.p`
   padding: 5px;
   margin-bottom: 25px;
 `
-
+export const StyledSubTitle2 = styled.p`
+font-size: ${props => props.size}px;
+text-align: left;
+color: ${props => (props.color ? props.color : colors.font)};
+margin: 0;
+margin-bottom: 20px;
+display: flex;
+width: fit-content;
+padding: 0 500px 0 20px ;
+border-bottom: black 2px solid;
+`
+export const StyledContentContainer = styled.div`
+  margin: 0;
+  display: flex;
+  // position: absolute;
+  // bottom: 0;
+  flex-direction: column;
+  background: tan;
+  height: 80%;
+  width: 100%;
+  padding-bottom: 300px;
+  overflow-y: scroll;
+`
 export const Avatar = styled.div`
 width: 85px;
 height: 85px;
