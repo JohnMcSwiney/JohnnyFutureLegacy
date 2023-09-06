@@ -10,6 +10,9 @@ const collectionSchema = new Schema({
         type: Date,
         required: true
     },
+    collectionDescription: {
+        type: String
+    },
     collectionImages: [{
         image: {
             type: Image,
