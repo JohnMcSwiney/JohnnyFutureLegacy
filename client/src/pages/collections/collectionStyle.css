@@ -43,10 +43,10 @@
     opacity: 0.5;
 }
 .content--cont{
-    background-color: red;
+    /* background-color: red; */
 }
 .row{
-    background-color: green;
+    /* background-color: green; */
     display: flex;
     flex-flow: column;
     gap: 30px;
@@ -54,14 +54,15 @@
     justify-content: center;
 }
 .grid{
-    background-color: blueviolet;
+    /* background-color: blueviolet; */
     display: flex;
     flex-wrap: wrap;
     gap: 30px;
     align-items: center;
     justify-content: center;
 }
-.grid div{
+
+/* .grid div{
     padding: 20px;
     background-color: aquamarine;
     width: 624px;
@@ -82,4 +83,4 @@
     justify-content: center;
     margin: 0;
     border-radius: 20px;
-}
+} */

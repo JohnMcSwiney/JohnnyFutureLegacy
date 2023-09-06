@@ -20,7 +20,7 @@ function Collections() {
 
   const [toggleView, setToggleView] = useState(false);
   useEffect(() => {
-    console.log('clicked');
+    // localStorage.setItem('collectionView', toggleView)
   }, [toggleView])
 
   return (
@@ -43,18 +43,17 @@ function Collections() {
           </button>
         </div>
         <div className={toggleView ? 'content--cont row' : 'content--cont grid'}>
-          <div>1</div>
-          <div>2</div>
-          <div>3</div>
-          <div>4</div>
-          <div>5</div>
-          <div>6</div>
-          <div>7</div>
-          <div>8</div>
-          <div>9</div>
-          <div>10</div>
-          <div>11</div>
-          <div>12</div>
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+              <CollectionCard toggleView={toggleView} />
+
         </div>
       </StyledContentContainer>
 

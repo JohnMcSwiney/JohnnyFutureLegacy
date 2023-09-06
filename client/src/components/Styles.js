@@ -81,7 +81,7 @@ export const StyledContentContainer = styled.div`
   // background: tan;
   height: 80%;
   width: 100%;
-  padding-bottom: 300px;
+  padding-bottom: 100px;
   overflow-y: scroll;
 `
 export const Avatar = styled.div`
