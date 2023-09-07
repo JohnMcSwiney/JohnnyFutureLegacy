@@ -165,4 +165,5 @@ margin-bottom: 5px;
     overflow-x: scroll ;
     width: 100%;
     gap: 20px;
+    align-items: center;
 }
