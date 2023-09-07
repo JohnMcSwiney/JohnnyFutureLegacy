@@ -9,9 +9,21 @@ export default function CollectionCard({ toggleView }) {
     // 'coll--card--2--cont'
     >
       {toggleView ? (
-        <div>
+        <div className='coll--card--row--cont'>
           {/* Row */}
-          Row
+          <div className='coll--card--title--cont'>
+            <div className={avatarShape ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
+            // 'coll--avatar--cont'
+            > 
+              {/* <img></img> */}
+            </div>
+            <h2>Name of User or Institute</h2>
+          </div>
+          <div className='coll--card--img--cont'>
+            <div className='coll--card--img--title--cont'>
+              <h2>COLLECTION TITLE</h2>
+            </div>
+          </div>
         </div>
       ) : (
         <div className='coll--card--grid--cont'>

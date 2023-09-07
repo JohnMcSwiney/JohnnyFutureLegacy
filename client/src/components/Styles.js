@@ -22,7 +22,7 @@ export const StyledContainer = styled.div`
   // background: yellow;
   background-size: cover;
   background-attachment: fixed;
-  width: 90%;
+  width: 100%;
   position: relative;
 `
 export const StyledTitleContainer = styled.div`
@@ -33,7 +33,8 @@ export const StyledTitleContainer = styled.div`
   flex-direction: column;
   // background: red;
   max-height: 20%;
-  width: 100%
+  width: 100%;
+  margin-left: 50px;
 `
 export const StyledTitle = styled.h2`
   font-size: ${props => props.size}px;
@@ -52,7 +53,7 @@ export const StyledTitle2 = styled.h2`
   margin:0;
   margin-top: 125px;
   // background-color: orange;
-  
+  margin-left: 50px;
 `
 export const StyledSubTitle = styled.p`
   font-size: ${props => props.size}px;
@@ -60,6 +61,7 @@ export const StyledSubTitle = styled.p`
   color: ${props => (props.color ? props.color : colors.secondary)};
   padding: 5px;
   margin-bottom: 25px;
+  
 `
 export const StyledSubTitle2 = styled.p`
 font-size: ${props => props.size}px;
@@ -71,6 +73,7 @@ display: flex;
 width: fit-content;
 padding: 0 500px 0 20px ;
 border-bottom: black 2px solid;
+margin-left: 100px;
 `
 export const StyledContentContainer = styled.div`
   margin: 0;
