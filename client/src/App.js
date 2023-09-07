@@ -93,6 +93,9 @@ function App() {
 
             <Route path="/upload" element={<Upload />}></Route>
           </Routes>
+          <div className="bottom--gradient-cont">
+              <h4>© Future Legacy 2023</h4>
+          </div>
           </ContextProvider>
         </div>
     </BrowserRouter>

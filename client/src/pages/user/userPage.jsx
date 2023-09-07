@@ -6,6 +6,7 @@ import { TiSocialFacebook } from 'react-icons/ti';
 import { FaTwitter, FaTelegramPlane } from 'react-icons/fa';
 import { AiFillInstagram } from 'react-icons/ai';
 
+import CollectionCardProfile from '../../components/cards/collection/CollectionCardProfile';
 import './style.css';
 
 function userPage() {
@@ -27,7 +28,6 @@ function userPage() {
               <button className='profile--wallet--btn'>Connect A Wallet</button>
             </div>
           </div>
-
           {/* container with social buttons */}
           <div className='profile--socials--cont'>
             <button className='profile--socials--btn'><TiSocialFacebook /> </button>
@@ -43,8 +43,25 @@ function userPage() {
         </div>
 
       </div>
+
+
+
       <div className='right--profile--cont'>
-        Bruh
+        <div className='right--profile--inner--box'>
+          <h3>My Collections:</h3>
+          <div className='right--profile--content--cont--row'>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+            <CollectionCardProfile/>
+          </div>
+          
+        </div>
+
       </div>
     </div>
 

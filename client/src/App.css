@@ -112,3 +112,22 @@ p {
 .header--height{
   height: 125px;
 }
+
+.bottom--gradient-cont{
+  width: 100%;
+  /* background: rgb(193, 99, 99); */
+  background: linear-gradient(180deg, rgba(255,255,255,0) 0%, rgba(255, 255, 255, 0.508) 50%, rgb(255, 255, 255) 100%);
+  position: fixed;
+  bottom: 0;
+  height: 50px;
+  z-index: 900;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+
+}
+.bottom--gradient-cont h4{
+  font-size: 10px;
+  transform: translateY(5px);
+  margin-right: 15px;
+}

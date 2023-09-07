@@ -1,0 +1,46 @@
+.profile--collection--card--cont{
+    height: 270px;
+    width: 370px;
+    border-radius: 20px;
+    box-sizing: border-box;
+    border: 2px solid rgba(0, 0, 0, 0.234);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    overflow: hidden;
+    background-color: white;
+    flex-basis: 370px;
+    flex-grow: 0;
+    flex-shrink: 0;
+}
+.profile--collection--card--title--cont{
+    height:100px;
+    width:370px;
+    position: absolute;
+    top: 0;
+    background: rgba( 255, 255, 255, 0.25 );
+    box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    backdrop-filter: blur( 4px );
+    -webkit-backdrop-filter: blur( 4px );
+    /* border-radius: 10px; */
+    border-bottom: 1px solid rgba( 255, 255, 255, 0.18 );
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 40;
+}
+.profile--collection--card--title--cont h1{
+    color: black;
+    font-size: 25px;
+    text-transform: uppercase;
+}
+.profile--collection--card--img--cont{
+    background-color: rgba(128, 128, 128, 0.186);
+    width: 350px;
+    height: 250px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
