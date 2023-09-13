@@ -7,6 +7,7 @@ import { FaTwitter, FaTelegramPlane } from 'react-icons/fa';
 import { AiFillInstagram } from 'react-icons/ai';
 
 import CollectionCardProfile from '../../components/cards/collection/CollectionCardProfile';
+import AssetCardProfile from '../../components/cards/asset/AssetCardProfile';
 import './style.css';
 
 function userPage() {
@@ -58,10 +59,15 @@ function userPage() {
             <CollectionCardProfile/>
             <CollectionCardProfile/>
             <CollectionCardProfile/>
-          </div>
-          
+          </div>  
         </div>
 
+        <div className='right--profile--inner--box'>
+          <h3>Licensed Assets:</h3>
+          <div className='right--profile--content--cont--row--2'>
+            <AssetCardProfile/>
+          </div>
+        </div>
       </div>
     </div>
 
