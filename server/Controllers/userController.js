@@ -53,12 +53,14 @@ class UserController {
   // Create a new user
   async createUser(req, res) {
     try {
-      const { username, password } = req.body;
+      const { username, password, firstName, lastName } = req.body;
 
       // Add to db
       const user = await Users.create({
         username,
         password,
+        firstName,
+        lastName
       });
       res.status(200).json(user);
     } catch (error) {
