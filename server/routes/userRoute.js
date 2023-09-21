@@ -5,18 +5,18 @@ const UserController = require('../controllers/userController');
 const userController = new UserController();
 
 // Get all users
-router.get('/users', userController.getUsers);
+router.get('/', userController.getUsers);
 
 // Get a single user by ID
-router.get('/users/:id', userController.getUserId);
+router.get('/:id', userController.getUserId);
 
 // Get user by username
 router.get('/users/username/:username', userController.getUserByUsername);
 
 // Create a new user
-router.post('/users', userController.createUser);
+router.post('/', userController.createUser);
 
 // Delete a user by ID
-router.delete('/users/:id', userController.deleteUser);
+router.delete('/:id', userController.deleteUser);
 
 module.exports = router;

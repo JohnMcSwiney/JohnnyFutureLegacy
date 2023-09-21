@@ -2,8 +2,8 @@ const express = require('express')
 const app = express()
 const port = 5000;
 const mongoose = require('mongoose');
-const userRoute= require('/routes/userRoute')
-const collectionRoute= require('/routes/collectionRoute')
+const userRoute= require('./routes/userRoute')
+const collectionRoute= require('./routes/collectionRoute')
 
 app.listen(port, () =>{console.log("Server started on port: " + port +"!")})
 

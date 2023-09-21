@@ -1,4 +1,4 @@
-import mongoose, { trusted } from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const userSchema = new Schema({
@@ -8,7 +8,7 @@ username: {
 },
 password: {
     type: String,
-    required
+    required: true
 },
 firstName: {
     type: String,
@@ -16,7 +16,7 @@ firstName: {
 },
 lastName: {
     type: String,
-    required: tre
+    required: true
 },
 userCollections: [{
     type: mongoose.Schema.Types.ObjectId, ref: 'Collection'

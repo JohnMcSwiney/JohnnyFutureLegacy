@@ -1,4 +1,4 @@
-import mongoose, { trusted } from 'mongoose';
+const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const collectionSchema = new Schema({
@@ -14,10 +14,10 @@ const collectionSchema = new Schema({
         type: String
     },
     collectionImages: [{
-        image: {
-            type: Image,
-            imgName: {type: String, required: true}
-        }
+        // image: {
+        //     type: Image,
+        //     imgName: {type: String, required: true}
+        // }
     }]
 });
 
