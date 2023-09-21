@@ -1,12 +1,12 @@
-const Users = require('../models/userModel');
+const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
 class UserController {
-  // Get all users
-  async getUsers(req, res) {
+  // Get all User
+  async getUser(req, res) {
     try {
-      const users = await Users.find({}).sort({ createdAt: 1 });
-      res.status(200).json(users);
+      const User = await User.find({}).sort({ createdAt: 1 });
+      res.status(200).json(User);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
@@ -21,7 +21,7 @@ class UserController {
         return res.status(404).json({ error: 'No such User' });
       }
 
-      const user = await Users.findById(id);
+      const user = await User.findById(id);
 
       if (!user) {
         return res.status(404).json({ error: 'No such User' });
@@ -38,7 +38,7 @@ class UserController {
     try {
       const { username } = req.params;
 
-      const user = await Users.findOne({ username });
+      const user = await User.findOne({ username });
 
       if (!user) {
         return res.status(404).json({ error: 'No such User' });
@@ -56,11 +56,11 @@ class UserController {
       const { username, password, firstName, lastName } = req.body;
 
       // Add to db
-      const user = await Users.create({
+      const user = await User.create({
         username,
         password,
         firstName,
-        lastName
+        lastName,
       });
       res.status(200).json(user);
     } catch (error) {
@@ -77,7 +77,7 @@ class UserController {
         return res.status(404).json({ error: 'No such User' });
       }
 
-      const user = await Users.findOneAndDelete({ _id: id });
+      const user = await User.findOneAndDelete({ _id: id });
 
       if (!user) {
         return res.status(400).json({ error: 'No such User' });
