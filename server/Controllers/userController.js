@@ -2,8 +2,8 @@ const User = require('../models/userModel');
 const mongoose = require('mongoose');
 
 class UserController {
-  // Get all User
-  async getUser(req, res) {
+  // Get all Users
+  async getUsers(req, res) {
     try {
       const User = await User.find({}).sort({ createdAt: 1 });
       res.status(200).json(User);
