@@ -4,7 +4,6 @@ const port = 5000;
 const mongoose = require('mongoose');
 const userRoute= require('./routes/userRoute')
 const collectionRoute= require('./routes/collectionRoute');
-const AssetController = require('./controllers/assetController');
 const assetRoute = require('./routes/assetRoute');
 
 app.listen(port, () =>{console.log("Server started on port: " + port +"!")})
@@ -24,4 +23,4 @@ db.once('open', () => {
 app.use(express.json())
 app.use('/api/user', userRoute);
 app.use('/api/collection', collectionRoute);
-app.use('api/asset')
+app.use('/api/asset', assetRoute)
