@@ -6,6 +6,9 @@ const collectionSchema = new Schema({
         type: String,
         required: true
     },
+    ownerName: {
+        type: String
+    },
     collectionDate: {
         type: Date,
         required: true
@@ -13,11 +16,8 @@ const collectionSchema = new Schema({
     collectionDescription: {
         type: String
     },
-    collectionImages: [{
-        // image: {
-        //     type: Image,
-        //     imgName: {type: String, required: true}
-        // }
+    collectionAssets: [{
+        type: mongoose.Schema.Types.ObjectId, ref: 'Asset'
     }]
 });
 

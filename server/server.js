@@ -20,4 +20,5 @@ db.once('open', () => {
   app.use(express.json())
   app.use('/api/user', userRoute);
   app.use('/api/collection', collectionRoute);
+  app.use('api/asset')
 });

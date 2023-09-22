@@ -1,5 +1,5 @@
-const Users = require('../models/userModel');
 const mongoose = require('mongoose');
+const Users = require('./models/userModel');
 
 class UserController {
   // Get all Users

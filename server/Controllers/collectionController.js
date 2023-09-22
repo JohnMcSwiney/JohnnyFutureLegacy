@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Collection = require('../Models/collectionModel');
+const Collection = require('./models/collectionModel');
 
 class CollectionController {
   // Get all collections
