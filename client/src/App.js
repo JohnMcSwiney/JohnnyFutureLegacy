@@ -21,6 +21,7 @@ import {
   Upload,
   Landing,
   Profile,
+  
 } from "./pages";
 import {ContextProvider,useMyContext} from "./context/FLContext";
 import SearchBar from "./components/searchBar/SearchBar";
