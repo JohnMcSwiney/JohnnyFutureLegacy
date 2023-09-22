@@ -3,27 +3,26 @@ import './style.css';
 
 function AssetCardProfile() {
   const [assetData, setAssetData] = useState(null);
-  useEffect(() => {
-    const backendUrl = 'http://localhost:5000';
 
-    fetch(`${backendUrl}/api/assets`, { 
-      method: 'GET',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-    })
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Failed to fetch asset');
-        }
-        return response.json();
+  useEffect(()=> {
+    // http://localhost:3000/profile
+    const fetchAsset = async () => {
+      const assetResponse = await fetch(`http://localhost:5000/api/asset`, {
+        method: 'GET',
+        headers: { 'Content-Type': 'application/json',
+                  'Access-Control-Allow-Origin': 'true' }
       })
-      .then(data => {
-        setAssetData(data);
-      })
-      .catch(error => {
-        console.error('Error fetching asset:', error);
-      });
+      const assetJson = await assetResponse.json()
+      if (assetResponse.ok) {
+        setAssetData(assetJson[0])
+        // console.log(assetData);
+      } else {
+        // setDone(false);
+      }
+    }
+
+    fetchAsset()
+   
   }, []); 
 
   return (

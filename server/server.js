@@ -5,7 +5,11 @@ const mongoose = require('mongoose');
 const userRoute= require('./routes/userRoute')
 const collectionRoute= require('./routes/collectionRoute');
 const assetRoute = require('./routes/assetRoute');
+const cors = require('cors');
 
+
+// Allow requests from all origins during development (be more restrictive in production)
+app.use(cors());
 app.listen(port, () =>{console.log("Server started on port: " + port +"!")})
 
 // Connection URL
