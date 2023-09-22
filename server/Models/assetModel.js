@@ -6,14 +6,14 @@ const assetSchema = new Schema({
         type: String,
         required: true
     },
-    createrName: [{
+    creatorName: [{
         type: String
     }],
     uploadDate: {
         type: Date,
         required: true
     },
-    assetDesciption: {
+    assetDescription: {
         type: String,
         default: "Description here",
     },
@@ -26,9 +26,11 @@ const assetSchema = new Schema({
     }],
     assetImage:
     {
-        type: URL,
+        type: String,
         required: true
     }
 });
 
-mongoose.model('Asset', assetSchema);
+const Asset = mongoose.model('Asset', assetSchema);
+
+module.exports = Asset;

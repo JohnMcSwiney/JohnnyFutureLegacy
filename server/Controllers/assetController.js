@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-const Asset = require('./models/assetModel'); // Assuming you've already defined the model
+const Asset = require('../models/assetModel');
 
 class AssetController {
   // Get all assets
@@ -38,7 +38,7 @@ class AssetController {
     try {
       const {
         assetName,
-        createrName,
+        creatorName,
         uploadDate,
         assetDescription,
         assetPriceUSD,
@@ -48,7 +48,7 @@ class AssetController {
 
       const newAsset = await Asset.create({
         assetName,
-        createrName,
+        creatorName,
         uploadDate,
         assetDescription: assetDescription || "Description here",
         assetPriceUSD,
