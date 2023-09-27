@@ -9,7 +9,9 @@ export default function Search() {
   const { searchValue, setSearchValue } = useMyContext();
   const { searchAssets, setSearchAssets} = useState(null);
   const { searchCollections, setSearchCollections} = useState(null);
-    useEffect(() => {
+  const { searchUsers, setSearchUsers} = useState(null);
+
+  useEffect(() => {
       if (searchValue) {
         const fetchAsset = async () => {
           const assetResponse = await fetch(`http://localhost:5000/api/asset/`, {
@@ -39,6 +41,22 @@ export default function Search() {
           if (collectionResponse.ok) {
             setSearchCollections(collectionJson)
             console.log(collectionJson);
+          } else {
+            // setDone(false);
+          }
+        }
+        const fetchUsers = async () => {
+          const userResponse = await fetch(`http://localhost:5000/api/user/`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'true'
+            }
+          })
+          const userJson = await userResponse.json()
+          if (userResponse.ok) {
+            setSearchUsers(userJson)
+            console.log(userJson);
           } else {
             // setDone(false);
           }
