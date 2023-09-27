@@ -73,17 +73,17 @@ function AssetPage() {
           <ul className="license--btns--cont">
             <li>
               <input type='radio' id='edu-use' name='license-type' value='edu-use' defaultChecked></input>
-              <label for='edu-use'>For Eduactional Use </label>
+              <label htmlFor='edu-use'>For Eduactional Use </label>
             </li>
 
             <li>
               <input type='radio' id='edit-use' name='license-type' value='edit-use' disabled></input>
-              <label for='edit-use'>For Editorial Use </label>
+              <label htmlFor='edit-use'>For Editorial Use </label>
             </li>
 
             <li>
               <input type='radio' id='comm-use' name='license-type' value='comm-use' disabled ></input>
-              <label for='comm-use'>For Commercial Use</label>
+              <label htmlFor='comm-use'>For Commercial Use</label>
             </li>
 
           </ul>

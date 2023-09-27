@@ -6,7 +6,9 @@ const ContextProvider = ({ children }) => {
 
     const [searchValue, setSearchValue] = useState('');
     const [searchPage, setSearchPage] = useState("Initial Empty Search Page")
+    const [searchData, setSearchData] = useState(null);
     const [userData, setUserData] = useState(null);
+    
     const hardcodedUser = '650ca3a3cf7964c5cb70782c';
     // Load the searchValue from localStorage on component mount
     useEffect(() => {
