@@ -25,3 +25,5 @@ userCollections: [{
 
 const User = mongoose.model('User', userSchema);
 module.exports = User;
+//Add emails
+//Add subTier (default 0,1,2,3)

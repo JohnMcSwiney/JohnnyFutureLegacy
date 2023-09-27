@@ -11,6 +11,29 @@ class AssetController {
       res.status(500).json({ error: error.message });
     }
   }
+  
+  // Search for assets by name, tag, creatorName, and description
+  async searchAssets(req, res) {
+    try {
+      const { query } = req.query;
+
+      // Define a search filter
+      const filter = {
+        $or: [
+          { assetName: { $regex: query, $options: 'i' } }, // Search by name (case-insensitive)
+          { informationTags: { $in: [query] } }, // Search by tag
+          { creatorName: { $in: [query] } }, // Search by creatorName
+          { assetDescription: { $regex: query, $options: 'i' } }, // Search by description (case-insensitive)
+        ],
+      };
+
+      const assets = await Asset.find(filter);
+
+      res.status(200).json(assets);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 
   // Get a single asset by ID
   async getAssetById(req, res) {

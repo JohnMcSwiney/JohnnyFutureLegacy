@@ -7,6 +7,8 @@ const assetController = new AssetController();
 // Get all collections
 router.get('/', assetController.getAllAssets);
 
+router.get('/search', assetController.searchAssets);
+
 // Get a single collection by ID
 router.get('/:id', assetController.getAssetById);
 
