@@ -7,6 +7,9 @@ const collectionController = new CollectionController();
 // Get all collections
 router.get('/', collectionController.getCollections);
 
+// Search for collections by name, ownerName, and description
+router.get('/search', collectionController.searchCollections);
+
 // Get a single collection by ID
 router.get('/:id', collectionController.getCollectionById);
 

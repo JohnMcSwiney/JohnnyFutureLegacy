@@ -12,6 +12,40 @@ class UserController {
     }
   }
 
+  // Search for users by username
+  async searchUsersByUsername(req, res) {
+    try {
+      const { username } = req.params;
+
+      const users = await User.find({ username });
+
+      if (!users || users.length === 0) {
+        return res.status(404).json({ error: 'No users found with the given username' });
+      }
+
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  // Search for users by last name
+  async searchUsersByLastName(req, res) {
+    try {
+      const { lastname } = req.params;
+
+      const users = await User.find({ lastName: lastname });
+
+      if (!users || users.length === 0) {
+        return res.status(404).json({ error: 'No users found with the given last name' });
+      }
+
+      res.status(200).json(users);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   // Get a single user by ID
   async getUserId(req, res) {
     try {

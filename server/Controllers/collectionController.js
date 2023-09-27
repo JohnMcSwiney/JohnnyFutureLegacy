@@ -12,6 +12,28 @@ class CollectionController {
     }
   }
 
+  // Search for collections by name, ownerName, and description
+  async searchCollections(req, res) {
+    try {
+      const { query } = req.query;
+
+      // Define a search filter
+      const filter = {
+        $or: [
+          { collectionName: { $regex: query, $options: 'i' } }, // Search by name (case-insensitive)
+          { ownerName: { $regex: query, $options: 'i' } }, // Search by ownerName (case-insensitive)
+          { collectionDescription: { $regex: query, $options: 'i' } }, // Search by description (case-insensitive)
+        ],
+      };
+
+      const collections = await Collection.find(filter);
+
+      res.status(200).json(collections);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
   // Get a single collection by ID
   async getCollectionById(req, res) {
     try {

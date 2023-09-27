@@ -7,6 +7,12 @@ const userController = new UserController();
 // Get all users
 router.get('/', userController.getUsers);
 
+// Search for users by username
+router.get('/username/:username', userController.searchUsersByUsername);
+
+// Search for users by last name
+router.get('/lastname/:lastname', userController.searchUsersByLastName);
+
 // Get a single user by ID
 router.get('/:id', userController.getUserId);
 
