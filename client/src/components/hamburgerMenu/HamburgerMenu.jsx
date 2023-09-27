@@ -8,11 +8,14 @@ import './Hamburger.css'
 
 import UserImgCont from '../EndUserImgCont/UserImgCont'
 
+import {useMyContext} from "../../context/FLContext";
 //RxHamburgerMenu
 export default function HamburgerMenu () {
   const [isOpen, setIsOpen] = useState(false)
 
   const navigate = useNavigate();
+  const {userData} = useMyContext();
+
   const redirectCollections = () => {navigate(`/collections`); toggleMenu();};
   const redirectAccount = () => {navigate(`/profile`); toggleMenu();};
   const redirectAbout = () => {navigate(`/about`); toggleMenu();};
@@ -43,7 +46,7 @@ export default function HamburgerMenu () {
               <UserImgCont imgUrl={userImg} />
               <div className='user--info'> 
                 <h3 className='user--type'>User</h3>
-                <h3 className='user--name'>{userName}</h3>
+                <h3 className='user--name'>{userData ? userData.firstName + " " + userData.lastName : 'Log in'}</h3>
               </div>
             </div>
 

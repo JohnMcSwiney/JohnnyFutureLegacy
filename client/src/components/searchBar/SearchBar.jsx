@@ -29,17 +29,10 @@ const SearchBar = ({ onSearch }) => {
       setSearchValue(q)
     }
   };
-  
-  // useEffect(() => {
-  //   // our fetch codes
-  // }, []);
   useEffect(() => {
 
-    // console.log(q);
-    
     // Grabs Current page for page specific searching
     const { pathname } = location;
-    
     // console.log("Current location: " + pathname)
     
   }, [q]);
@@ -51,15 +44,11 @@ const SearchBar = ({ onSearch }) => {
     if(currentPage !== pathname){
       setCurrentPage(pathname);
     }
-    
     if (pathname === '/') {
-      
       return 'search--home--cont';
     }
     else if(pathname.includes('search')){
-      // console.log('Already on a search page')
     }
-    
     // Default class when no matching path is found
     return 'search--cont';
   };

@@ -1,7 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
+import { redirect } from 'react-router';
+import {useNavigate} from 'react-router-dom';
 
 function AssetCardProfile() {
+  const navigate = useNavigate()
+  
   const [assetData, setAssetData] = useState(null);
 
   useEffect(()=> {
@@ -24,7 +28,11 @@ function AssetCardProfile() {
     fetchAsset()
    
   }, []); 
-
+  const redirectAsset =() =>{
+    {assetData ?
+    navigate(`/asset/${assetData._id}`) :
+    console.log('no asset data') }
+  }
   return (
     <div className='asset--profile--card--cont'>
       <div className='asset--profile--img--preview--cont'>
@@ -38,7 +46,7 @@ function AssetCardProfile() {
       <p className='asset--profile--description'>
         {assetData ? assetData.assetDescription : 'Loading...'}
       </p>
-      <button className='asset--profile--button'>
+      <button className='asset--profile--button' onClick={redirectAsset}>
         <p>Previously Downloaded</p>
       </button>
     </div>

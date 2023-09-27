@@ -7,7 +7,7 @@ import "./App.css";
 import {
   About,
   Apply,
-  Artifact,
+  Asset,
   Collections,
   IndividualCollection,
   CreateIndividualCollection,
@@ -21,6 +21,7 @@ import {
   Upload,
   Landing,
   Profile,
+  
 } from "./pages";
 import {ContextProvider,useMyContext} from "./context/FLContext";
 import SearchBar from "./components/searchBar/SearchBar";
@@ -57,8 +58,8 @@ function App() {
 
             <Route path="/apply" element={<Apply />}></Route>
             <Route
-              path="/artifact/:id/:parentId"
-              element={<Artifact />}
+              path="/asset/:id/:parentId?"
+              element={<Asset/>}
             ></Route>
 
             <Route path="/Collections" element={<Collections />}></Route>

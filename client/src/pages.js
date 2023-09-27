@@ -4,7 +4,7 @@ export {default as Landing} from "./pages/landing/landingPage";
 
 export {default as Apply} from "./pages/apply/applyPage";
 
-export {default as Artifact} from "./pages/artifact/artifactPage";
+export {default as Asset} from "./pages/asset/assetPage";
 
 export {default as Collections} from "./pages/collections/collections"
 // export {default as Browse} from "./pages/collections/browseCollectionsPage";
