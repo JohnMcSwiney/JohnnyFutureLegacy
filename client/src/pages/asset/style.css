@@ -1,0 +1,161 @@
+.asset--page--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    /* background-color: yellow; */
+}
+.asset--img-n-tags{
+    display: flex;
+    flex-direction: column;
+    width: 693px;
+    align-items: center;
+    justify-content: flex-end;
+}
+.asset--img--cont{
+    width: 693px;
+    height: 500px;
+    display: flex;
+    overflow: hidden;
+    border-radius: 20px;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    background-color: rgba(32, 32, 32, 0.341);
+   
+}
+
+.asset--img{
+    position: absolute;
+    width: 100%;
+    left: 0%;
+    transform: scale(1.11);
+}
+
+.asset--tags--cont{
+    margin-top: 10px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 10px;
+    width: 100%;
+}
+.asset--tags--cont span{
+    font-size: 14px;
+    border:1px solid black;
+    padding:  2px 15px;
+    padding-bottom: 2px ;
+    border-radius: 50px;
+}
+.asset--details--cont{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    /* background-color: blue; */
+    width: 526px;
+    height: 500px;
+    margin-left: 25px;
+}
+.asset--author{
+    margin: 0;
+    font-size: 16px;
+    color: #2081E2;
+    font-weight: 400;
+}
+.asset--name{
+    margin: 0;
+    font-size: 22px;
+    font-weight: 600;
+}
+.asset--description{
+    margin: 0;
+    font-size: 14px;
+    height: 125px;
+}
+.asset--price--cont{
+    margin: 0;
+}
+.asset--price--cont p{
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.5;
+    transform: none;
+}
+.asset--price--cont h4{
+    margin: 0;
+    transform: none;
+    opacity: 1;
+    font-size: 24px;
+}
+
+.asset--license--cont{
+    margin-top: 25px;
+    display: block;
+}
+.asset--license--cont p{
+    margin: 0;
+    font-weight: 600;
+    margin: 0;
+    font-size: 14px;
+    opacity: 0.5;
+    transform: none;
+
+}
+.license--btns--cont {
+    list-style-type: none;
+    margin:0;
+    margin-top: 10px;
+    padding: 0;
+    
+  }
+  
+  .license--btns--cont li {
+    float: left;
+    margin: 0 5px 0 0;
+    width: 159px;
+    height: 40px;
+    position: relative;
+    
+  }
+  
+  .license--btns--cont label,
+  .license--btns--cont input {
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    border-radius: 50px;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+  }
+  
+  .license--btns--cont input[type="radio"] {
+    opacity: 0.01;
+    z-index: 100;
+  }
+  
+  .license--btns--cont input[type="radio"]:checked+label,
+  .Checked+label {
+    background: rgb(0, 0, 0);
+    color: white;
+  }
+  .license--btns--cont input[type="radio"]:disabled+label,
+  .Checked+label {
+    background: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    opacity: 0.3;
+  }
+
+  .license--btns--cont label {
+    padding: 5px;
+    border: 1.5px solid #000000;
+    cursor: pointer;
+    z-index: 90;
+  }
+  
+  .license--btns--cont label:hover {
+    background: #DDD;
+  }
