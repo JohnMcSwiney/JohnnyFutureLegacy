@@ -1,6 +1,6 @@
 import React from 'react'
-import CollectionCard2 from '../../../components/cards/home/CollectionCard'
-import CollectionCard from '../../../components/cards/home/CollectionCard'
+import CollectionCard2 from '../../../../components/cards/home/CollectionCard'
+import CollectionCard from '../../../../components/cards/home/CollectionCard'
 
 export default function FeaturedCollection() {
   return (

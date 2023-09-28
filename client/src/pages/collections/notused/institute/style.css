@@ -1,0 +1,267 @@
+.browse--instit--cont{
+    width: 100vw;
+    height: fit-content;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: tan;
+    gap: 25px;
+}
+
+.browse--instit--showcase--1{
+    height: 480px;
+    overflow: hidden;
+    margin: 0 25px;
+    /* padding: 10px; */
+    background-color: rgba(205, 210, 210, 0.693);
+    border-radius: 15px;
+    display: flex;
+    /* align-items: flex-start; */
+    justify-content: flex-start;
+    flex-direction: column;
+    position: relative;
+}
+.browse--instit--showcase--upper{
+    display: flex;
+    padding: 15px 15px 0 15px ;
+}
+.browse--instit--title--cont--1{
+    width: 80vw;
+    /* height: 900px; */
+    overflow: hidden;
+    /* background-color: plum; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+}
+.browse--instit--title {
+    font-size: 60px !important;
+    /* background-color: tan; */
+    width: 80vw;
+    /* height: 100px; */
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    /* justify-content: ; */
+}
+.browse--instit--title--img--cont{
+    width: 250px;
+    height: 300px;
+    overflow: hidden;
+    display: flex;
+    align-items: flex-start;
+    /* justify-content: flex-start; */
+    position: relative;
+}
+.browse--instit--title--img--cont img{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    /* background-color: rgb(213, 129, 20); */
+}
+.browse--instit--title--cont--1{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    height: 300px;
+}
+.browse--instit--title--cont--1 h2{
+ font-size: 40px;
+ text-align: left;
+}
+.browse--instit--title--cont--1 p{
+    overflow: hidden;
+    text-overflow: ellipsis;
+    height: 130px;
+}
+
+.text-container {
+    position: relative;
+  }
+  
+  .full-text {
+    display: none;
+  }
+  
+  .show-more-button {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #f2f2f2;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+  }
+
+
+  .browse--instit--showcase--lower{
+    display: flex;
+    align-items: center;
+    /* background-color: orangered; */
+    width: 80%;
+    /* right: 0; */
+    /* width: 94vw; */
+    height: 200px;
+    /* position: absolute; */
+    /* bottom: 0; */
+    flex-direction: row;
+    justify-content: space-around;
+    padding-left: 20%;
+    position: relative;
+  }
+  .browse--instit--coll--title--text{
+    position: absolute;
+    text-align: left;
+    left: 0;
+    font-size: 27px;
+    opacity: 0.5;
+    width: 100px;
+    margin-left: 50px;
+    z-index: 45;
+    font-weight: 900;
+  }
+  .instit--showcase--lower--gradient{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    background-color: thistle;
+    height: 100px;
+    transform: translateX(-10%);
+    z-index: 44;
+    background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5010796554950105) 70%, rgba(255,255,255,0) 100%);  
+
+  }
+  .instColl--img--cont--cont{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: fit-content;
+    flex-direction: column;
+  }
+  .instColl--name{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    width: 250px;
+    z-index: 45;
+    height: 100px;
+    transform: translateY(-60px);
+    opacity: 1;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5010796554950105) 50%, rgba(255,255,255,0) 100%);   */
+
+}
+
+  .instColl--image-container {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: yellow; */
+    transform: translateY(60px);
+    border-radius: 15px;
+    opacity: 0.5;
+    transition: opacity 0.3s ease, transform 0.3s ease;
+    z-index: 40;
+}
+  .instColl--img--cont--cont:hover .instColl--image-container{
+    transform: translateY(30px);
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .instColl--image {
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    transform: scale(1.5);
+  }
+  
+
+
+
+  .instit--collhomepage--main--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 90vw;
+    overflow-y: scroll;
+  }
+  .instit--collhomepage--cont{
+    background-color: yellow;
+    width: 90vw;
+    display: flex;
+    align-items: center;
+    padding: 25px;
+    flex-direction: column;
+    margin-top: 400px;
+
+  }
+  .instit--collhomepage--title--cont{
+
+  }
+  .instit--collhomepage--title--img{
+
+  }
+  .instit--collhomepage--content--cont{
+    display: flex;
+    flex-flow: row;
+    
+  }
+  .instit--collpage--content{
+    display: grid;
+  grid-template-columns: repeat(4, 1fr); /* Specifies 3 columns with equal width */
+  grid-gap: 10px; /* Adjust the gap between items */
+
+  }
+  .grid-item {
+    flex: 0 0 calc(33.33% - 10px); /* Adjust the width based on your spacing requirements */
+    margin: 5px; /* Add margin to create spacing between items */
+  }
+  .instHomeColl--name{
+    font-size: 25px;
+    text-align: center;
+    font-weight: bold;
+    width: 250px;
+    z-index: 45;
+    height: 100px;
+    /* transform: translateY(-60px); */
+    opacity: 1;
+    /* background: rgb(255,255,255);
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(255,255,255,0.5010796554950105) 50%, rgba(255,255,255,0) 100%);   */
+
+}
+  /* for the home img cont */
+  .instHomeColl--image-cont {
+    width: 250px;
+    height: 200px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: yellow; */
+    /* transform: translateY(60px); */
+    border-radius: 10px;
+    opacity: 0.5;
+    /* transition: opacity 0.3s ease, transform 0.3s ease; */
+    z-index: 40;
+}
+  .instHomeColl--img--cont--cont:hover .instHomeColl--image-cont{
+    /* transform: translateY(30px); */
+    opacity: 0.8;
+    transition: opacity 0.3s;
+  }
+  .instHomeColl--image {
+    width: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    transform: scale(1.5);
+  }

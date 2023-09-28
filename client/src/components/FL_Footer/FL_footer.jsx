@@ -6,7 +6,7 @@ export default function FL_footer() {
     const navigate = useNavigate();
     const redirectAbout = () => {navigate(`/about`);};
     const redirectApply = () => {navigate(`/apply`);};
-    const redirectCollections = () => {navigate(`/browse`)};
+    const redirectCollections = () => {navigate(`/BrowseCollections`)};
     const redirectSignIn = () => {navigate(`/login`)};
     return (
     <div className='FL--footer--cont--cont'>

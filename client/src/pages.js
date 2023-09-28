@@ -9,11 +9,11 @@ export {default as Asset} from "./pages/asset/assetPage";
 export {default as Collections} from "./pages/collections/collections"
 // export {default as Browse} from "./pages/collections/browseCollectionsPage";
 
-export {default as IndividualCollection} from "./pages/collections/individual/indivCollection";
-export {default as CreateIndividualCollection} from "./pages/collections/individual/createIndivCollect";
+// export {default as IndividualCollection} from "./pages/collections/individual/indivCollection";
+// export {default as CreateIndividualCollection} from "./pages/collections/individual/createIndivCollect";
 
-export {default as InstituteCollection} from "./pages/collections/institute/InstitCollectionPage";
-export {default as CreateInstituteCollection} from "./pages/collections/institute/createInstitCollect";
+export {default as CollectionPage} from "./pages/collections/CollectionPage";
+// export {default as CreateInstituteCollection} from "./pages/collections/institute/createInstitCollect";
 
 export {default as Home} from "./pages/home/home";
 export {default as Search} from './pages/search/search'
