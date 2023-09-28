@@ -1,17 +1,17 @@
 import React, { useState } from 'react'
 import { useParams } from 'react-router-dom'
-import institutionsData from './tempAssets/tempInstit.json'
-import artifactsData from './tempAssets/tempArtifacts.json'
+// import institutionsData from './tempAssets/tempInstit.json'
+// import artifactsData from './tempAssets/tempArtifacts.json'
 import ImageContainer from '../../components/containers/ImageContainer'
 import ArtifactCard from '../../components/cards/home/ArtifactCard'
 import InstHomeColl_ImageContainer from './notused/institute/InstColl_ImageContainer'
 import './style.css'
 
-function CollectionPage() {
+function Single_collection() {
   const { param1 } = useParams() //collection id
 
-  const [institutions, setInstitutions] = useState(institutionsData.institutions)
-  const [artifacts, setArtifacts] = useState(artifactsData.collections)
+  // const [institutions, setInstitutions] = useState(institutionsData.institutions)
+  // const [artifacts, setArtifacts] = useState(artifactsData.collections)
   const hardcodedCollection = {
     "collectionName": "Test Collection",
             "ownerName": "John Doe",
@@ -70,4 +70,4 @@ function CollectionPage() {
   // ) // If neither param1 nor param2 is provided, return null or display an appropriate message
 }
 
-export default CollectionPage
+export default Single_collection

@@ -12,7 +12,7 @@ export {default as Collections} from "./pages/collections/collections"
 // export {default as IndividualCollection} from "./pages/collections/individual/indivCollection";
 // export {default as CreateIndividualCollection} from "./pages/collections/individual/createIndivCollect";
 
-export {default as CollectionPage} from "./pages/collections/CollectionPage";
+export {default as Single_collection} from "./pages/collections/single_collection";
 // export {default as CreateInstituteCollection} from "./pages/collections/institute/createInstitCollect";
 
 export {default as Home} from "./pages/home/home";
@@ -21,8 +21,10 @@ export {default as Search} from './pages/search/search'
 export {default as Login} from "./pages/login/loginPage";
 export {default as SignUp} from "./pages/signUp/signUpPage";
 
-export {default as Profile} from './pages/user/userPage';
+export {default as Profile} from './pages/user/profile';
 
-export {default as Subscribe} from "./pages/subscription/subscribe"
+export {default as User} from './pages/user/user';
 
-export {default as Upload} from "./pages/upload/uploadPage"
+export {default as Subscribe} from "./pages/subscription/subscribe";
+
+export {default as Upload} from "./pages/upload/uploadPage";

@@ -9,7 +9,7 @@ import {
   Apply,
   Asset,
   Collections,
-  CollectionPage,
+  Single_collection,
   // CreateIndividualCollection,
   InstituteCollection,
   // CreateInstituteCollection,
@@ -55,12 +55,9 @@ function App() {
             <Route path="/apply" element={<Apply />}></Route>
             <Route path="/asset/:id/:parentId?" element={<Asset />}></Route>
 
-            <Route path="/BrowseCollections" element={<Collections />}></Route>
+            <Route path="/browseCollections" element={<Collections />}></Route>
 
-            <Route
-              path="/collection/:param1"
-              element={<CollectionPage />}
-            ></Route>
+            <Route path="/collection/:param1" element={<Single_collection />}></Route>
 
             <Route path="/apply" element={<Apply />}></Route>
             <Route path="/login" element={<Login />}></Route>

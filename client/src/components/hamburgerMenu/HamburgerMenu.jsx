@@ -16,7 +16,7 @@ export default function HamburgerMenu () {
   const navigate = useNavigate();
   const {userData} = useMyContext();
 
-  const redirectCollections = () => {navigate(`/BrowseCollections`); toggleMenu();};
+  const redirectCollections = () => {navigate(`/U`); toggleMenu();};
   const redirectAccount = () => {navigate(`/profile`); toggleMenu();};
   const redirectAbout = () => {navigate(`/about`); toggleMenu();};
   const redirectLogin = () => {navigate(`/login`); toggleMenu();};
