@@ -7,7 +7,7 @@ const assetSchema = new Schema({
         required: true
     },
     creatorName: [{
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     }],
     uploadDate: {
         type: Date,

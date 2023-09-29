@@ -7,7 +7,7 @@ const collectionSchema = new Schema({
         required: true
     },
     ownerName: {
-        type: String
+        type: mongoose.Schema.Types.ObjectId
     },
     collectionDate: {
         type: Date,
