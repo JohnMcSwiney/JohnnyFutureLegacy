@@ -27,3 +27,10 @@ const User = mongoose.model('User', userSchema);
 module.exports = User;
 //Add emails
 //Add subTier (default 0,1,2,3)
+
+//More requests <3
+//Add purchases, an individual asset[]
+//Also add a variable to denote whether a user is a museum or not, 
+// -> a simple boolean will suffice. isInstit 
+//     (I want this for front end UI changes)
+// Thx ily <3

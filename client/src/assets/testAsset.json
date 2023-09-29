@@ -1,0 +1,62 @@
+{
+    "assets" : [{
+        "assetName": "Test Asset 1",
+        "creatorName": ["6515e9d1b1f8ade0cf63bf99"],
+        "uploadDate": "2023-09-28",
+        "assetDescription": "This is the description for Test Asset 1.",
+        "assetPriceUSD": 50.0,
+        "informationTags": ["tag1", "tag2"],
+        "assetImage": "image1.jpg"
+      },
+      {
+        "assetName": "Test Asset 2",
+        "creatorName": ["6515e9d1b1f8ade0cf63bf99"],
+        "uploadDate": "2023-09-28",
+        "assetDescription": "This is the description for Test Asset 2.",
+        "assetPriceUSD": 75.0,
+        "informationTags": ["tag3", "tag4"],
+        "assetImage": "image2.jpg"
+      },
+      {
+        "assetName": "Test Asset 4",
+        "creatorName": ["6515e9d1b1f8ade0cf63bf99"],
+        "uploadDate": "2023-09-28",
+        "assetDescription": "This is the description for Test Asset 4.",
+        "assetPriceUSD": 40.0,
+        "informationTags": ["tag7", "tag8"],
+        "assetImage": "image4.jpg"
+      },
+      {
+        "assetName": "Test Asset 5",
+        "creatorName": ["6515e9d1b1f8ade0cf63bf99"],
+        "uploadDate": "2023-09-28",
+        "assetDescription": "This is the description for Test Asset 5.",
+        "assetPriceUSD": 90.0,
+        "informationTags": ["tag9", "tag10"],
+        "assetImage": "image5.jpg"
+      },
+      {
+        "assetName": "Test Asset 6",
+        "creatorName": ["6515e9d1b1f8ade0cf63bf99"],
+        "uploadDate": "2023-09-28",
+        "assetDescription": "This is the description for Test Asset 6.",
+        "assetPriceUSD": 55.0,
+        "informationTags": ["tag11", "tag12"],
+        "assetImage": "image6.jpg"
+      }
+      
+      
+      
+    ],
+    "collections" : {
+            "collectionName": "Test Collection",
+            "ownerName": "John Doe",
+            "collectionDate": "2023-09-28",
+            "collectionDescription": "This is a test collection for testing purposes.",
+            "collectionAssets": [
+
+            ]
+    }
+
+      
+}

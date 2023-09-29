@@ -4,8 +4,8 @@ import { useParams } from 'react-router-dom'
 import './style.css'
 import React from 'react';
 import { useState, useEffect } from "react";
-import artifactsData from '../collections/tempAssets/tempArtifacts.json';
-import institutionsData from '../collections/tempAssets/tempInstit.json';
+// import artifactsData from '../collections/tempAssets/tempArtifacts.json';
+// import institutionsData from '../collections/tempAssets/tempInstit.json';
 // import tagList from '../collections/tempAssets/tempPhotoTags.json';
 
 function AssetPage() {

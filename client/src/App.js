@@ -9,10 +9,10 @@ import {
   Apply,
   Asset,
   Collections,
-  IndividualCollection,
-  CreateIndividualCollection,
+  Single_collection,
+  // CreateIndividualCollection,
   InstituteCollection,
-  CreateInstituteCollection,
+  // CreateInstituteCollection,
   Home,
   Search,
   Login,
@@ -21,9 +21,8 @@ import {
   Upload,
   Landing,
   Profile,
-  
 } from "./pages";
-import {ContextProvider,useMyContext} from "./context/FLContext";
+import { ContextProvider, useMyContext } from "./context/FLContext";
 import SearchBar from "./components/searchBar/SearchBar";
 import FL_Logo from "./components/FL_Logo/FL_Logo";
 import HamburgerMenu from "./components/hamburgerMenu/HamburgerMenu";
@@ -31,8 +30,8 @@ import HamburgerMenu from "./components/hamburgerMenu/HamburgerMenu";
 function App() {
   return (
     <BrowserRouter>
-        <div className="FL--App--Cont">
-          <ContextProvider>
+      <div className="FL--App--Cont">
+        <ContextProvider>
           <HamburgerMenu />
           {/* <div className='FL--Search--Cont'>
           
@@ -51,41 +50,16 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/landing" element={<Landing />}></Route>
             <Route path="/about" element={<About />}></Route>
-            <Route
-              path="/search/:param1?"
-              element={<Search />}
-            ></Route>
+            <Route path="/search/:param1?" element={<Search />}></Route>
 
             <Route path="/apply" element={<Apply />}></Route>
-            <Route
-              path="/asset/:id/:parentId?"
-              element={<Asset/>}
-            ></Route>
+            <Route path="/asset/:id/:parentId?" element={<Asset />}></Route>
 
-            <Route path="/Collections" element={<Collections />}></Route>
+            <Route path="/browseCollections" element={<Collections />}></Route>
+
+            <Route path="/collection/:param1" element={<Single_collection />}></Route>
 
             <Route path="/apply" element={<Apply />}></Route>
-
-            <Route
-              path="/indiv_collection/:individ/:id"
-              element={<IndividualCollection />}
-            ></Route>
-
-            {/* <Route path='/insti_collection/:id' element={<InstituteCollection />}></Route> */}
-            <Route
-              path="/insti_collection/:param1/:param2?"
-              element={<InstituteCollection />}
-            ></Route>
-
-            <Route
-              path="/create_indiv_collection"
-              element={<CreateIndividualCollection />}
-            ></Route>
-            <Route
-              path="/create_insti_collection"
-              element={<CreateInstituteCollection />}
-            ></Route>
-
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signUp" element={<SignUp />}></Route>
             <Route path="/Profile" element={<Profile />}></Route>
@@ -95,10 +69,10 @@ function App() {
             <Route path="/upload" element={<Upload />}></Route>
           </Routes>
           <div className="bottom--gradient-cont">
-              <h4>© Future Legacy 2023</h4>
+            <h4>© Future Legacy 2023</h4>
           </div>
-          </ContextProvider>
-        </div>
+        </ContextProvider>
+      </div>
     </BrowserRouter>
   );
 }

@@ -6,6 +6,8 @@ const assetSchema = new Schema({
         type: String,
         required: true
     },
+    //the first array item is always the uploader's id, 
+    // any other collaborators will be in other positions
     creatorName: [{
         type: mongoose.Schema.Types.ObjectId
     }],
