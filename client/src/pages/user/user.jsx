@@ -28,7 +28,7 @@ function User() {
           <div className='profile--avatar--name'>
             <div className='profile--avatar--cont'>
               {/* <img></img> */}
-              <button className='profile--edit--btn'>Edit Profile</button>
+              <button className='profile--edit--btn'>Edit Profile user</button>
             </div>
             <div className='left--profile--text--cont'>
               <h3>{userData ? userData.firstName + " " + userData.lastName : 'Loading...'}</h3>

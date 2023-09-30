@@ -1,25 +1,46 @@
-import React, { useState }  from 'react'
+import React, { useState, useEffect }  from 'react'
 import {useNavigate} from 'react-router-dom';
 import './style.css';
 
-export default function CollectionCard({ toggleView }) {
+export default function CollectionCard({ toggleView, collectionIn, collectionImg }) {
   const avatarShape = true;
-
-  const hardcodedCollection = {
-    "collectionName": "Test Collection",
-            "ownerName": "John Doe",
-            "collectionDate": "2023-09-28",
-            "collectionDescription": "This is a test collection for testing purposes.",
-            "collectionAssets": [
-              "650de5b29b24487493bc2218"
-            ]
-  }
+  // if(collectionIn){
+    // console.log(collectionIn);
+  // }
+  
   const navigate = useNavigate();
   const handleRedirect = () => {
     // navigate(`/collection/${artifactId}/${collectionId}`)
     // /collection/:param1/:param2?
   }
+  const [userName, setUserName] = useState("");
+  const [userIsInstit, setUserIsInstit] = useState(false);
+  useEffect(() => {
+    // http://localhost:3000/profile
+    const fetchUser = async () => {
+      const userResponse = await fetch(`http://localhost:5000/api/user/${collectionIn.ownerName}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'true'
+        }
+      })
+      const userJson = await userResponse.json()
+      if (userResponse.ok) {
+        let temp = userJson.firstName + " " + userJson.lastName;
+        // console.log(temp);
+        // console.log(userJson.isInstit);
+        setUserName(temp);
+        setUserIsInstit(userJson.isInstit);
+        // console.log(collectionsJson);
+      } else {
+        // setDone(false);
+      }
+    }
 
+    fetchUser()
+
+  }, []);
   return (
     <div className={toggleView ? 'coll--card--row' : 'coll--card--grid'}
     // 'coll--card--2--cont'
@@ -28,16 +49,19 @@ export default function CollectionCard({ toggleView }) {
         <div className='coll--card--row--cont'>
           {/* Row */}
           <div className='coll--card--title--cont'>
-            <div className={avatarShape ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
+            <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
             // 'coll--avatar--cont'
             > 
               {/* <img></img> */}
             </div>
-            <h2>Name of User or Institute</h2>
+            <h2>
+              {userName}
+              {/* {userName ? {userName} : "Loading..."} */}
+              </h2>
           </div>
           <div className='coll--card--img--cont'>
             <div className='coll--card--img--title--cont'>
-              <h2>COLLECTION TITLE</h2>
+              <h2>{collectionIn.collectionName}</h2>
             </div>
           </div>
         </div>
@@ -45,17 +69,20 @@ export default function CollectionCard({ toggleView }) {
         <div className='coll--card--grid--cont'>
           {/* Grid */}
           <div className='coll--card--title--cont'>
-            <div className={avatarShape ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
+            <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
             // 'coll--avatar--cont'
             > 
               {/* <img></img> */}
             </div>
-            <h2>Name of User or Institute</h2>
+            <h2>
+              {userName}
+              {/* {userName ? {userName} : "Loading..."} */}
+              </h2>
           </div>
           <div className='coll--card--img--cont'>
             
             <div className='coll--card--img--title--cont'>
-              <h2>COLLECTION TITLE</h2>
+              <h2>{collectionIn.collectionName}</h2>
             </div>
           </div>
         

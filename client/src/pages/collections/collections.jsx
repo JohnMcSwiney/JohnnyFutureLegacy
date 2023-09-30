@@ -24,6 +24,31 @@ function Collections() {
     // localStorage.setItem('collectionView', toggleView)
   }, [toggleView])
 
+  const [collectionsData, setCollectionsData] = useState(null);
+  useEffect(() => {
+    // http://localhost:3000/profile
+    const fetchCollections = async () => {
+      const collectionsResponse = await fetch(`http://localhost:5000/api/collection/`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Access-Control-Allow-Origin': 'true'
+        }
+      })
+      const collectionsJson = await collectionsResponse.json()
+      if (collectionsResponse.ok) {
+        setCollectionsData(collectionsJson);
+        // console.log(collectionsJson);
+      } else {
+        // setDone(false);
+      }
+    }
+
+    fetchCollections()
+
+  }, []);
+
+
   return (
     <StyledContainer>
 
@@ -43,19 +68,23 @@ function Collections() {
             {toggleView ? <BsViewStacked /> : <BsGrid />}
           </button>
         </div>
-        <div className={toggleView ? 'content--cont row' : 'content--cont grid'}>
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
-              <CollectionCard toggleView={toggleView} />
+        {collectionsData ? 
 
+        
+        <div className={toggleView ? 'content--cont row' : 'content--cont grid'}>
+          {collectionsData.map((collection) => (
+            <CollectionCard
+              key={collection.id} // Provide a unique key for each component
+              toggleView={toggleView}
+              collectionIn={collection} // Use the appropriate property from your data
+              // collectionImg={collection.imageUrl} // Use the appropriate property from your data
+            />
+          ))} 
+
+        </div>: <div>
+          No Collections Grabbed
         </div>
+        } 
       </StyledContentContainer>
 
     </StyledContainer>
