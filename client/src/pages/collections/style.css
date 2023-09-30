@@ -265,3 +265,19 @@
     left: 0;
     transform: scale(1.5);
   }
+
+
+
+  .coll--avatar--cont{
+    width: 84px;
+    height: 84px;
+    /* border-radius: 5px; */
+    border: 2px black solid;
+    
+  }
+  .instit--shape{
+    border-radius: 5px;
+  }
+  .indiv--shape{
+    border-radius: 50px;
+  }

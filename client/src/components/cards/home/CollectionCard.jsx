@@ -10,8 +10,9 @@ export default function CollectionCard({ toggleView, collectionIn, collectionImg
   
   const navigate = useNavigate();
   const handleRedirect = () => {
-    // navigate(`/collection/${artifactId}/${collectionId}`)
-    // /collection/:param1/:param2?
+    if (collectionIn) {
+      navigate(`/collection/${collectionIn._id}`);
+    }
   }
   const [userName, setUserName] = useState("");
   const [userIsInstit, setUserIsInstit] = useState(false);
@@ -44,6 +45,7 @@ export default function CollectionCard({ toggleView, collectionIn, collectionImg
   return (
     <div className={toggleView ? 'coll--card--row' : 'coll--card--grid'}
     // 'coll--card--2--cont'
+    onClick={handleRedirect}
     >
       {toggleView ? (
         <div className='coll--card--row--cont'>
