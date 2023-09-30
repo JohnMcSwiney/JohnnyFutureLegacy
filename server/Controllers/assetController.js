@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Asset = require('../models/assetModel');
+const mongoose = require("mongoose");
+const Asset = require("../models/assetModel");
 
 class AssetController {
   // Get all assets
@@ -11,7 +11,7 @@ class AssetController {
       res.status(500).json({ error: error.message });
     }
   }
-  
+
   // Search for assets by name, tag, creatorName, and description
   async searchAssets(req, res) {
     try {
@@ -20,10 +20,10 @@ class AssetController {
       // Define a search filter
       const filter = {
         $or: [
-          { assetName: { $regex: query, $options: 'i' } }, // Search by name (case-insensitive)
+          { assetName: { $regex: query, $options: "i" } }, // Search by name (case-insensitive)
           { informationTags: { $in: [query] } }, // Search by tag
           { creatorName: { $in: [query] } }, // Search by creatorName
-          { assetDescription: { $regex: query, $options: 'i' } }, // Search by description (case-insensitive)
+          { assetDescription: { $regex: query, $options: "i" } }, // Search by description (case-insensitive)
         ],
       };
 
@@ -41,13 +41,13 @@ class AssetController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'Asset not found' });
+        return res.status(404).json({ error: "Asset not found" });
       }
 
       const asset = await Asset.findById(id);
 
       if (!asset) {
-        return res.status(404).json({ error: 'Asset not found' });
+        return res.status(404).json({ error: "Asset not found" });
       }
 
       res.status(200).json(asset);
@@ -100,7 +100,7 @@ class AssetController {
       } = req.body;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'Asset not found' });
+        return res.status(404).json({ error: "Asset not found" });
       }
 
       const updatedAsset = await Asset.findByIdAndUpdate(
@@ -118,7 +118,7 @@ class AssetController {
       );
 
       if (!updatedAsset) {
-        return res.status(404).json({ error: 'Asset not found' });
+        return res.status(404).json({ error: "Asset not found" });
       }
 
       res.status(200).json(updatedAsset);
@@ -133,16 +133,63 @@ class AssetController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'Asset not found' });
+        return res.status(404).json({ error: "Asset not found" });
       }
 
       const deletedAsset = await Asset.findByIdAndRemove(id);
 
       if (!deletedAsset) {
-        return res.status(404).json({ error: 'Asset not found' });
+        return res.status(404).json({ error: "Asset not found" });
       }
 
-      res.status(200).json({ message: 'Asset deleted' });
+      res.status(200).json({ message: "Asset deleted" });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  // Create Exif data for an asset by ID
+  async createExifData(req, res) {
+    try {
+      const { id } = req.params;
+      const { exifData } = req.body;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "Asset not found" });
+      }
+
+      const asset = await Asset.findById(id);
+
+      if (!asset) {
+        return res.status(404).json({ error: "Asset not found" });
+      }
+
+      asset.exifData = exifData;
+      await asset.save();
+
+      res.status(200).json(asset);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  // Get Exif data for an asset by ID
+  async getExifDataById(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "Asset not found" });
+      }
+
+      const asset = await Asset.findById(id);
+
+      if (!asset) {
+        return res.status(404).json({ error: "Asset not found" });
+      }
+
+      const exifData = asset.exifData || []; // Ensure a default empty array if no exifData exists
+
+      res.status(200).json(exifData);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

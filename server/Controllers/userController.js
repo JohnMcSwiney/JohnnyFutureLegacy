@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Users = require('../Models/userModel');
+const mongoose = require("mongoose");
+const Users = require("../models/userModel");
 
 class UserController {
   // Get all Users
@@ -20,7 +20,9 @@ class UserController {
       const users = await User.find({ username });
 
       if (!users || users.length === 0) {
-        return res.status(404).json({ error: 'No users found with the given username' });
+        return res
+          .status(404)
+          .json({ error: "No users found with the given username" });
       }
 
       res.status(200).json(users);
@@ -37,7 +39,9 @@ class UserController {
       const users = await User.find({ lastName: lastname });
 
       if (!users || users.length === 0) {
-        return res.status(404).json({ error: 'No users found with the given last name' });
+        return res
+          .status(404)
+          .json({ error: "No users found with the given last name" });
       }
 
       res.status(200).json(users);
@@ -52,13 +56,13 @@ class UserController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such User' });
+        return res.status(404).json({ error: "No such User" });
       }
 
       const user = await Users.findById(id);
 
       if (!user) {
-        return res.status(404).json({ error: 'No such User' });
+        return res.status(404).json({ error: "No such User" });
       }
 
       res.status(200).json(user);
@@ -75,7 +79,7 @@ class UserController {
       const user = await Users.findOne({ username });
 
       if (!user) {
-        return res.status(404).json({ error: 'No such User' });
+        return res.status(404).json({ error: "No such User" });
       }
 
       res.status(200).json(user);
@@ -87,7 +91,15 @@ class UserController {
   // Create a new user
   async createUser(req, res) {
     try {
-      const { username, password, firstName, lastName } = req.body;
+      const {
+        username,
+        password,
+        firstName,
+        lastName,
+        email,
+        subTier,
+        isInstit,
+      } = req.body; // Add email, subTier, and isInstit fields to the request body
 
       // Add to db
       const user = await Users.create({
@@ -95,6 +107,9 @@ class UserController {
         password,
         firstName,
         lastName,
+        email, // Include email
+        subTier, // Include subTier
+        isInstit, // Include isInstit
       });
       res.status(200).json(user);
     } catch (error) {
@@ -108,13 +123,13 @@ class UserController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such User' });
+        return res.status(404).json({ error: "No such User" });
       }
 
       const user = await Users.findOneAndDelete({ _id: id });
 
       if (!user) {
-        return res.status(400).json({ error: 'No such User' });
+        return res.status(400).json({ error: "No such User" });
       }
 
       res.status(200).json(user);

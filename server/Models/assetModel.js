@@ -30,7 +30,10 @@ const assetSchema = new Schema({
     {
         type: String,
         required: true
-    }
+    },
+    exifData:[{
+        type: String
+    }]
 });
 
 const Asset = mongoose.model('Asset', assetSchema);
