@@ -5,8 +5,8 @@
         "uploadDate": "2023-09-28",
         "assetDescription": "This is the description for Test Asset 1.",
         "assetPriceUSD": 50.0,
-        "informationTags": ["tag1", "tag2"],
-        "assetImage": "image1.jpg"
+        "informationTags": ["Parrot", "tag2"],
+        "assetImage": "https://www.thesprucepets.com/thmb/wU8W9gXxsGb_kXEXJIxJ7Kah70A=/2121x0/filters:no_upscale():strip_icc()/green-orange-faced-lovebird-standing-on-the-tree-in-garden-503871724-5c45ad159f4046fda8936dc461f8a607.jpg"
       },
       {
         "assetName": "Test Asset 2",
@@ -14,8 +14,17 @@
         "uploadDate": "2023-09-28",
         "assetDescription": "This is the description for Test Asset 2.",
         "assetPriceUSD": 75.0,
-        "informationTags": ["tag3", "tag4"],
-        "assetImage": "image2.jpg"
+        "informationTags": ["Parrot", "tag4"],
+        "assetImage": "https://www.mpg.de/18490336/original-1656406663.jpg?t=eyJ3aWR0aCI6MTIwMCwiaGVpZ2h0IjpudWxsLCJmaXQiOm51bGwsIm9ial9pZCI6MTg0OTAzMzZ9--9fae20441fec6fc549b18c2df95372b99979a919"
+      },
+      {
+        "assetName": "Test Asset 3",
+        "creatorName": ["6515e9d1b1f8ade0cf63bf99"],
+        "uploadDate": "2023-09-28",
+        "assetDescription": "This is the description for Test Asset 3.",
+        "assetPriceUSD": 75.0,
+        "informationTags": ["Parrot", "tag3"],
+        "assetImage": "https://i.cbc.ca/1.6476843.1654279205!/fileImage/httpImage/image.jpg_gen/derivatives/16x9_780/parrotlets-in-tube.jpg"
       },
       {
         "assetName": "Test Asset 4",
@@ -23,8 +32,8 @@
         "uploadDate": "2023-09-28",
         "assetDescription": "This is the description for Test Asset 4.",
         "assetPriceUSD": 40.0,
-        "informationTags": ["tag7", "tag8"],
-        "assetImage": "image4.jpg"
+        "informationTags": ["Parrot", "tag2"],
+        "assetImage": "https://www.thesprucepets.com/thmb/S4yoOIUA552blb0v8YfInL5A7HI=/2450x0/filters:no_upscale():strip_icc()/monk-parakeet-in-barcelona-1283029076-245274da359546a6a9a726bdb23a2064.jpg"
       },
       {
         "assetName": "Test Asset 5",
@@ -32,8 +41,8 @@
         "uploadDate": "2023-09-28",
         "assetDescription": "This is the description for Test Asset 5.",
         "assetPriceUSD": 90.0,
-        "informationTags": ["tag9", "tag10"],
-        "assetImage": "image5.jpg"
+        "informationTags": ["Parrot", "tag3"],
+        "assetImage": "https://b1157417.smushcdn.com/1157417/wp-content/uploads/bird-parrot-sun-conures-grooming-on-branch-825x555.jpg?lossy=1&strip=1&webp=0"
       },
       {
         "assetName": "Test Asset 6",
@@ -41,8 +50,8 @@
         "uploadDate": "2023-09-28",
         "assetDescription": "This is the description for Test Asset 6.",
         "assetPriceUSD": 55.0,
-        "informationTags": ["tag11", "tag12"],
-        "assetImage": "image6.jpg"
+        "informationTags": ["Parrot", "tag4"],
+        "assetImage": "https://images.squarespace-cdn.com/content/v1/544591e6e4b0135285aeb5b6/1502831547283-XULPMMRFZXP3MKZNAORY/image-asset.jpeg"
       }
       
       
@@ -50,11 +59,16 @@
     ],
     "collections" : {
             "collectionName": "Test Collection",
-            "ownerName": "John Doe",
+            "ownerName": "6515e9d1b1f8ade0cf63bf99",
             "collectionDate": "2023-09-28",
             "collectionDescription": "This is a test collection for testing purposes.",
             "collectionAssets": [
-
+              "651769ee08ea244cb19ba17c",
+              "65176a0208ea244cb19ba17e",
+              "65176a0c08ea244cb19ba180",
+              "65176a1608ea244cb19ba182",
+              "65176a2208ea244cb19ba184",
+              "65176a2b08ea244cb19ba186"
             ]
     }
 

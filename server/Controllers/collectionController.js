@@ -1,5 +1,5 @@
-const mongoose = require('mongoose');
-const Collection = require('../models/collectionModel');
+const mongoose = require("mongoose");
+const Collection = require("../models/collectionModel");
 
 class CollectionController {
   // Get all collections
@@ -20,9 +20,9 @@ class CollectionController {
       // Define a search filter
       const filter = {
         $or: [
-          { collectionName: { $regex: query, $options: 'i' } }, // Search by name (case-insensitive)
-          { ownerName: { $regex: query, $options: 'i' } }, // Search by ownerName (case-insensitive)
-          { collectionDescription: { $regex: query, $options: 'i' } }, // Search by description (case-insensitive)
+          { collectionName: { $regex: query, $options: "i" } }, // Search by name (case-insensitive)
+          { ownerName: { $regex: query, $options: "i" } }, // Search by ownerName (case-insensitive)
+          { collectionDescription: { $regex: query, $options: "i" } }, // Search by description (case-insensitive)
         ],
       };
 
@@ -40,13 +40,13 @@ class CollectionController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such Collection' });
+        return res.status(404).json({ error: "No such Collection" });
       }
 
       const collection = await Collection.findById(id);
 
       if (!collection) {
-        return res.status(404).json({ error: 'No such Collection' });
+        return res.status(404).json({ error: "No such Collection" });
       }
 
       res.status(200).json(collection);
@@ -58,7 +58,12 @@ class CollectionController {
   // Create a new collection
   async createCollection(req, res) {
     try {
-      const collection = await Collection.create(req.body);
+      // Create a new collection instance based on the model and request body
+      const collection = new Collection(req.body);
+
+      // Save the collection to the database
+      await collection.save();
+
       res.status(201).json(collection);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -71,7 +76,7 @@ class CollectionController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such Collection' });
+        return res.status(404).json({ error: "No such Collection" });
       }
 
       const collection = await Collection.findByIdAndUpdate(id, req.body, {
@@ -80,7 +85,7 @@ class CollectionController {
       });
 
       if (!collection) {
-        return res.status(404).json({ error: 'No such Collection' });
+        return res.status(404).json({ error: "No such Collection" });
       }
 
       res.status(200).json(collection);
@@ -95,13 +100,13 @@ class CollectionController {
       const { id } = req.params;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such Collection' });
+        return res.status(404).json({ error: "No such Collection" });
       }
 
       const collection = await Collection.findByIdAndRemove(id);
 
       if (!collection) {
-        return res.status(404).json({ error: 'No such Collection' });
+        return res.status(404).json({ error: "No such Collection" });
       }
 
       res.status(204).json(); // No content
