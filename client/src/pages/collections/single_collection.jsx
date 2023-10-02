@@ -11,6 +11,8 @@ function Single_collection() {
   const { param1 } = useParams() //collection id
   const [collectionObject, setCollectionObject] = useState(null);
   const [collectionUser, setCollectionUser] = useState(null);
+  const [isObtained, setIsObtained] = useState(false);
+  
   useEffect(() => {
     if (param1) {
       const fetchCollections = async () => {
@@ -24,52 +26,80 @@ function Single_collection() {
         const collectionJson = await collectionResponse.json()
         if (collectionResponse.ok) {
           setCollectionObject(collectionJson);
-          // console.log(collectionJson);
+          console.log(collectionJson);
         } else { }
       }
-      if(collectionObject !== null){
-        const fetchCollectionUser = async () => {
-          
-          const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Access-Control-Allow-Origin': 'true'
-            }
-          })
-          const collectionUserJson = await collectionUserResponse.json()
-          if (collectionUserResponse.ok) {
-            setCollectionUser(collectionUserJson);
-            console.log(collectionUserJson)
-          } else { 
-            console.log('error')
-          }
-        }
-        fetchCollectionUser()
-      }
+
       
-      fetchCollections()
-      
-      
+      fetchCollections();
 
     }
-   
-
   }, []);
+  
+  // if (collectionObject !== null) {
+  //   const populateCollectionWithAssets = async (collectionId, assetIds) => {
+  //     console.log("populate")
+  //     try {
+  //       const url = `/api/collections/${collectionId}/populate-assets`;
+  //       const requestBody = JSON.stringify({ assetIds: assetIds });
 
+  //       const response = await fetch(url, {
+  //         method: 'POST',
+  //         headers: {
+  //           'Content-Type': 'application/json',
+  //         },
+  //         body: requestBody,
+  //       });
+
+  //       if (!response.ok) {
+  //         throw new Error(`HTTP error! Status: ${response.status}`);
+  //       }
+
+  //       const responseData = await response.json();
+
+  //       // Handle the response data if needed
+  //       console.log('Collection populated with assets:', responseData);
+  //     } catch (error) {
+  //       // Handle errors if the request fails
+  //       console.error('Error populating collection:', error);
+  //     }
+  //   }
+
+  //   const fetchCollectionUser = async () => {
+  //     console.log("user");
+  //     const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
+  //       method: 'GET',
+  //       headers: {
+  //         'Content-Type': 'application/json',
+  //         'Access-Control-Allow-Origin': 'true'
+  //       }
+  //     })
+  //     const collectionUserJson = await collectionUserResponse.json()
+  //     if (collectionUserResponse.ok) {
+  //       setCollectionUser(collectionUserJson);
+  //       console.log(collectionUserJson)
+  //     } else {
+  //       console.log('error')
+  //     }
+
+  //   }
+  //   populateCollectionWithAssets(collectionObject._id, collectionObject.collectionAssets);
+  //   fetchCollectionUser();
+  // }
 
   return (
     <div className='instit--collhomepage--main--cont'>
       <div className='instit--collhomepage--cont'>
         <div className='instit--collhomepage--title--cont'>
           <div className='instit--collhomepage--title--img'>
-          {/* <div className={collectionUser.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
+            {/* <div className={collectionUser.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
             // 'coll--avatar--cont'
             > 
               // <img></img> 
             </div>*/}
-          </div> 
-          {collectionObject? collectionObject.collectionName :"Loading..."}
+          </div>
+
+          {collectionObject ? collectionObject.collectionName : "Loading..."}
         </div>
         <div className='instit--collhomepage--content--cont'>
           {/* {institution.description} */}

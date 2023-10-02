@@ -8,7 +8,7 @@ import {
   About,
   Apply,
   Asset,
-  Collections,
+  Browse_Collections,
   Single_collection,
   // CreateIndividualCollection,
   InstituteCollection,
@@ -21,6 +21,7 @@ import {
   Upload,
   Landing,
   Profile,
+  User
 } from "./pages";
 import { ContextProvider, useMyContext } from "./context/FLContext";
 import SearchBar from "./components/searchBar/SearchBar";
@@ -50,22 +51,22 @@ function App() {
             <Route path="/" element={<Home />}></Route>
             <Route path="/landing" element={<Landing />}></Route>
             <Route path="/about" element={<About />}></Route>
+
             <Route path="/search/:param1?" element={<Search />}></Route>
-
+            
             <Route path="/apply" element={<Apply />}></Route>
+            
             <Route path="/asset/:id/:parentId?" element={<Asset />}></Route>
-
-            <Route path="/browseCollections" element={<Collections />}></Route>
-
+            <Route path="/browseCollections" element={<Browse_Collections />}></Route>
             <Route path="/collection/:param1" element={<Single_collection />}></Route>
+
+            <Route path="/user/:id" element={<User />}></Route>
+            <Route path="/profile" element={<Profile />}></Route>
 
             <Route path="/apply" element={<Apply />}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signUp" element={<SignUp />}></Route>
-            <Route path="/Profile" element={<Profile />}></Route>
-
             <Route path="/subscribe" element={<Subscribe />}></Route>
-
             <Route path="/upload" element={<Upload />}></Route>
           </Routes>
           <div className="bottom--gradient-cont">

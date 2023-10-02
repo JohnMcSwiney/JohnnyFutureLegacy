@@ -6,7 +6,7 @@ export {default as Apply} from "./pages/apply/applyPage";
 
 export {default as Asset} from "./pages/asset/assetPage";
 
-export {default as Collections} from "./pages/collections/collections"
+export {default as Browse_Collections} from "./pages/collections/browse_collections"
 // export {default as Browse} from "./pages/collections/browseCollectionsPage";
 
 // export {default as IndividualCollection} from "./pages/collections/individual/indivCollection";

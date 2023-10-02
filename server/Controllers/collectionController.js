@@ -5,7 +5,9 @@ class CollectionController {
   // Get all collections
   async getCollections(req, res) {
     try {
-      const collections = await Collection.find({}).sort({ collectionDate: 1 });
+      const collections = await Collection.find({})
+      .sort({ collectionDate: 1 })
+      .populate('collectionAssets'); // Populate the 'collectionAssets' field
       res.status(200).json(collections);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -43,7 +45,8 @@ class CollectionController {
         return res.status(404).json({ error: "No such Collection" });
       }
 
-      const collection = await Collection.findById(id);
+      const collection = await Collection.findById(id)
+      .populate('collectionAssets'); // Populate the 'collectionAssets' field;
 
       if (!collection) {
         return res.status(404).json({ error: "No such Collection" });
@@ -114,6 +117,7 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
+
 }
 
 module.exports = CollectionController;
