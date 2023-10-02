@@ -26,77 +26,54 @@ function Single_collection() {
         const collectionJson = await collectionResponse.json()
         if (collectionResponse.ok) {
           setCollectionObject(collectionJson);
-          console.log(collectionJson);
+          // console.log(collectionJson);
         } else { }
       }
-
-      
       fetchCollections();
-
     }
   }, []);
+  useEffect(() => {
+    if (collectionObject !== null) {
   
-  // if (collectionObject !== null) {
-  //   const populateCollectionWithAssets = async (collectionId, assetIds) => {
-  //     console.log("populate")
-  //     try {
-  //       const url = `/api/collections/${collectionId}/populate-assets`;
-  //       const requestBody = JSON.stringify({ assetIds: assetIds });
-
-  //       const response = await fetch(url, {
-  //         method: 'POST',
-  //         headers: {
-  //           'Content-Type': 'application/json',
-  //         },
-  //         body: requestBody,
-  //       });
-
-  //       if (!response.ok) {
-  //         throw new Error(`HTTP error! Status: ${response.status}`);
-  //       }
-
-  //       const responseData = await response.json();
-
-  //       // Handle the response data if needed
-  //       console.log('Collection populated with assets:', responseData);
-  //     } catch (error) {
-  //       // Handle errors if the request fails
-  //       console.error('Error populating collection:', error);
-  //     }
-  //   }
-
-  //   const fetchCollectionUser = async () => {
-  //     console.log("user");
-  //     const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
-  //       method: 'GET',
-  //       headers: {
-  //         'Content-Type': 'application/json',
-  //         'Access-Control-Allow-Origin': 'true'
-  //       }
-  //     })
-  //     const collectionUserJson = await collectionUserResponse.json()
-  //     if (collectionUserResponse.ok) {
-  //       setCollectionUser(collectionUserJson);
-  //       console.log(collectionUserJson)
-  //     } else {
-  //       console.log('error')
-  //     }
-
-  //   }
-  //   populateCollectionWithAssets(collectionObject._id, collectionObject.collectionAssets);
-  //   fetchCollectionUser();
-  // }
+      const fetchCollectionUser = async () => {
+        // console.log("user");
+        const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'true'
+          }
+        })
+        const collectionUserJson = await collectionUserResponse.json()
+        if (collectionUserResponse.ok) {
+          setCollectionUser(collectionUserJson);
+          // console.log(collectionUserJson)
+        } else {
+          console.log('error')
+        }
+      }
+      fetchCollectionUser();
+    }
+  },[collectionObject])
+  
 
   return (
     <div className='instit--collhomepage--main--cont'>
       <div className='instit--collhomepage--cont'>
         <div className='instit--collhomepage--title--cont'>
           <div className='instit--collhomepage--title--img'>
-            {/* <div className={collectionUser.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
-            // 'coll--avatar--cont'
+            {collectionUser ? 
+            <div className={collectionUser.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
             > 
-              // <img></img> 
-            </div>*/}
+            <img></img> 
+            </div>
+            :
+            <div className='coll--avatar--cont instit--shape'>
+              no user
+            </div>
+
+            }
+            
           </div>
 
           {collectionObject ? collectionObject.collectionName : "Loading..."}
