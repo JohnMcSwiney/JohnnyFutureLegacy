@@ -69,7 +69,8 @@ function AssetPage() {
                   : 'coll--avatar--cont indiv--shape'
               }
             >
-              <img className='coll--avatar' src={collectionUserPfp} />
+              {collectionUserPfp ? <img className='coll--avatar' src={collectionUserPfp} /> : "Img Broken"}
+              
             </div>
           )}
           {/* Additional content here */}

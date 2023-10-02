@@ -42,7 +42,39 @@ const ContextProvider = ({ children }) => {
 
     fetchUser();
   }, []);
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userResponse = await fetch(`http://localhost:5000/api/user/${currentCollection.ownerName}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'true',
+          },
+        });
 
+        if (userResponse.ok) {
+          const userJson = await userResponse.json();
+          setCollectionUserName(`${userJson.firstName} ${userJson.lastName}`);
+          setCollectionUserId(userJson._id);
+          setCollectionIsInstit(userJson.isInstit);
+          setCollectionUserPfp(userJson.profilePicture);
+        } else {
+          // Handle error
+        }
+      } catch (error) {
+        // Handle error
+      }
+    };
+
+    fetchUser();
+  }, [currentCollection]);
+
+
+  // setCollectionUserName(`${userJson.firstName} ${userJson.lastName}`);
+  //         setCollectionUserId(userJson._id);
+  //         setCollectionIsInstit(userJson.isInstit);
+  //         setCollectionUserPfp(userJson.profilePicture);
   const setFetchedCollection = (object) => {
     setCurrentCollection(object);
     localStorage.setItem('storedCollection', JSON.stringify(object));
