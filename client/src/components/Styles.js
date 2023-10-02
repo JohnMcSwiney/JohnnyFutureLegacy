@@ -25,6 +25,7 @@ export const StyledContainer = styled.div`
   width: 100%;
   position: relative;
 `
+
 export const StyledTitleContainer = styled.div`
   margin: 0;
   display: flex;
@@ -36,12 +37,27 @@ export const StyledTitleContainer = styled.div`
   width: 100%;
   margin-left: 50px;
 `
+export const StyledTitleContainer2 = styled.div`
+  margin: 0;
+  display: flex;
+  // position: absolute;
+  // top: 0;
+  flex-direction: column;
+  // background: red;
+  max-height: 20%;
+  width: 100%;
+  margin-left: 50px;
+  margin-top: 100px;
+  align-items: center;
+`
 export const StyledTitle = styled.h2`
   font-size: ${props => props.size}px;
   text-align: center;
-  color: ${props => (props.color ? props.color : colors.primary)};
+  color: ${props => (props.color ? props.color : colors.font)};
   padding: 5px;
-  margin-bottom: 20px;
+  margin: 0;
+  // margin-bottom: 20px;
+  font-weight: bold;
 `
 export const StyledTitle2 = styled.h2`
   font-size: ${props => props.size}px;

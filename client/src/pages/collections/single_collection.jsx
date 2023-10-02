@@ -7,12 +7,27 @@ import ArtifactCard from '../../components/cards/home/ArtifactCard'
 import InstHomeColl_ImageContainer from './notused/institute/InstColl_ImageContainer'
 import './style.css'
 
+import {
+  StyledContainer,
+  StyledTitleContainer,
+  StyledTitleContainer2,
+  StyledTitle,
+  StyledTitle2,
+  StyledSubTitle,
+  StyledSubTitle2,
+  StyledContentContainer,
+  Avatar,
+  StyledButton,
+  ButtonGroup
+} from '../../components/Styles'
+import AssetCardProfile from '../../components/cards/asset/AssetCardProfile'
+
 function Single_collection() {
   const { param1 } = useParams() //collection id
   const [collectionObject, setCollectionObject] = useState(null);
   const [collectionUser, setCollectionUser] = useState(null);
   const [isObtained, setIsObtained] = useState(false);
-  
+
   useEffect(() => {
     if (param1) {
       const fetchCollections = async () => {
@@ -34,7 +49,7 @@ function Single_collection() {
   }, []);
   useEffect(() => {
     if (collectionObject !== null) {
-  
+
       const fetchCollectionUser = async () => {
         // console.log("user");
         const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
@@ -54,60 +69,56 @@ function Single_collection() {
       }
       fetchCollectionUser();
     }
-  },[collectionObject])
-  
+  }, [collectionObject])
+
 
   return (
-    <div className='instit--collhomepage--main--cont'>
-      <div className='instit--collhomepage--cont'>
-        <div className='instit--collhomepage--title--cont'>
-          <div className='instit--collhomepage--title--img'>
-            {collectionUser ? 
+    <StyledContainer>
+      <StyledTitleContainer2>
+        <div className='instit--collhomepage--title--img'>
+          {collectionUser ?
             <div className={collectionUser.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
-            > 
-            <img></img> 
+            >
+              <img className='coll--avatar' src={collectionUser.profilePicture} />
             </div>
             :
             <div className='coll--avatar--cont instit--shape'>
               no user
             </div>
+          }
+        </div>
+        {collectionObject ?
+          <StyledTitle size={35}>
+            <div>{collectionObject.collectionName}</div>
+          </StyledTitle>
 
-            }
-            
+          :
+          "Loading..."}
+        {collectionObject ?
+          <h4>{collectionObject.collectionDescription}</h4>
+          :
+          "Loading..."}
+      </StyledTitleContainer2>
+
+      <StyledContentContainer>
+        {collectionObject ? 
+          <div className='content-cont grid'>
+            {collectionObject.collectionAssets.map((collectionAssets) => (
+              <ArtifactCard artifactId={collectionAssets.id} 
+              collectionId={collectionObject.id}
+              imgUrl={collectionAssets.assetImage}
+              artifactTitle={collectionAssets.assetName}
+              key={collectionAssets.id}
+              />
+            ))}
+          </div> : 
+          <div>
+            loading...
           </div>
-
-          {collectionObject ? collectionObject.collectionName : "Loading..."}
-        </div>
-        <div className='instit--collhomepage--content--cont'>
-          {/* {institution.description} */}
-          {/* {institution.collections.map((collection) => (
-                <div
-                  className='browse--instit--collection--card--1'
-                  key={collection.id}
-                >
-                  <InstHomeColl_ImageContainer
-                    imageUrl={collection.imgurl}
-                    collName={collection.name}
-                    parentid={institution.id}
-                    collectionid={collection.id}
-                  />
-                </div>
-              ))} */}
-        </div>
-      </div>
-    </div>
+          }
+      </StyledContentContainer>
+    </StyledContainer>
   )
-
-  // } else if (param1) {
-  // const institution = institutions.find((inst) => inst.id === param1)
-
-  // }
-
-  // return (
-  // <div>
-  // test
-  // </div>
-  // ) // If neither param1 nor param2 is provided, return null or display an appropriate message
 }
 
 export default Single_collection

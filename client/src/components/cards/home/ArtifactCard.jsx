@@ -25,7 +25,7 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
   };
   const navigate = useNavigate();
   const handleRedirect = () => {
-    navigate(`/artifact/${artifactId}/${collectionId}`)
+    navigate(`/asset/${artifactId}/${collectionId}`)
   }
   return (
     <div className='home--coll--card--cont'>
