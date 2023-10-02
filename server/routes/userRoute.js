@@ -22,6 +22,9 @@ router.get('/users/username/:username', userController.getUserByUsername);
 // Create a new user
 router.post('/', userController.createUser);
 
+// Route for updating a user's profile picture URL
+router.post('/:id/profile-picture', userController.updateProfilePicture);
+
 // Delete a user by ID
 router.delete('/:id', userController.deleteUser);
 

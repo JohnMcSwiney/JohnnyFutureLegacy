@@ -116,6 +116,31 @@ class UserController {
       res.status(400).json({ error: error.message });
     }
   }
+  // Update user's profile picture URL
+  async updateProfilePicture(req, res) {
+    try {
+      const { id } = req.params;
+      const { profilePictureUrl } = req.body;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such User' });
+      }
+
+      // Assuming you have a User model instance and "profilePicture" field in your schema
+      const user = await Users.findByIdAndUpdate(id, { profilePicture: profilePictureUrl }, {
+        new: true,
+        runValidators: true,
+      });
+
+      if (!user) {
+        return res.status(404).json({ error: 'No such User' });
+      }
+
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
 
   // Delete a user by ID
   async deleteUser(req, res) {
