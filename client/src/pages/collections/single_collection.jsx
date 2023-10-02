@@ -21,13 +21,15 @@ import {
   ButtonGroup
 } from '../../components/Styles'
 import AssetCardProfile from '../../components/cards/asset/AssetCardProfile'
+import {useMyContext} from "../../context/FLContext";
 
 function Single_collection() {
   const { param1 } = useParams() //collection id
+  const {currentCollection, setFetchedCollection} = useMyContext();
   const [collectionObject, setCollectionObject] = useState(null);
   const [collectionUser, setCollectionUser] = useState(null);
   const [isObtained, setIsObtained] = useState(false);
-
+  // currentCollection
   useEffect(() => {
     if (param1) {
       const fetchCollections = async () => {
@@ -40,7 +42,8 @@ function Single_collection() {
         })
         const collectionJson = await collectionResponse.json()
         if (collectionResponse.ok) {
-          setCollectionObject(collectionJson);
+          setCollectionObject(collectionJson);    
+          setFetchedCollection(collectionJson);
           // console.log(collectionJson);
         } else { }
       }
@@ -62,7 +65,8 @@ function Single_collection() {
         const collectionUserJson = await collectionUserResponse.json()
         if (collectionUserResponse.ok) {
           setCollectionUser(collectionUserJson);
-          // console.log(collectionUserJson)
+
+          console.log(collectionUserJson)
         } else {
           console.log('error')
         }
@@ -86,7 +90,11 @@ function Single_collection() {
               no user
             </div>
           }
+          <div>
+
+          </div>
         </div>
+
         {collectionObject ?
           <StyledTitle size={35}>
             <div>{collectionObject.collectionName}</div>
@@ -98,6 +106,7 @@ function Single_collection() {
           <h4>{collectionObject.collectionDescription}</h4>
           :
           "Loading..."}
+                  
       </StyledTitleContainer2>
 
       <StyledContentContainer>

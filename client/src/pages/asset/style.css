@@ -3,7 +3,17 @@
     align-items: center;
     justify-content: center;
     width: 100%;
+    flex-direction: column;
     /* background-color: yellow; */
+}
+.asset--page--cont StyledTitleContainer2{
+    margin-top: 50px;
+}
+.asset--content--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 .asset--img-n-tags{
     display: flex;

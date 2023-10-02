@@ -3,62 +3,81 @@ import React, { createContext, useState, useContext, useEffect } from 'react';
 const FLContext = createContext();
 
 const ContextProvider = ({ children }) => {
+  const hardcodedUser = '650ca3a3cf7964c5cb70782c';
 
-    const [searchValue, setSearchValue] = useState('');
-    const [searchPage, setSearchPage] = useState("Initial Empty Search Page")
-    const [searchData, setSearchData] = useState(null);
-    const [userData, setUserData] = useState(null);
-    
-    const hardcodedUser = '650ca3a3cf7964c5cb70782c';
-    // Load the searchValue from localStorage on component mount
-    useEffect(() => {
-        const savedValue = localStorage.getItem('searchValue');
-        if (savedValue) {
-            setSearchValue(savedValue);
+  const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') || '');
+  const [currentCollection, setCurrentCollection] = useState(
+    JSON.parse(localStorage.getItem('storedCollection')) || null
+  );
+  const [userData, setUserData] = useState(null);
+  const [collectionUserName, setCollectionUserName] = useState('');
+  const [collectionUserId, setCollectionUserId] = useState('');
+  const [collectionIsInstit, setCollectionIsInstit] = useState(false);
+  const [collectionUserPfp, setCollectionUserPfp] = useState('');
+  useEffect(() => {
+    const fetchUser = async () => {
+      try {
+        const userResponse = await fetch(`http://localhost:5000/api/user/${hardcodedUser}`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'true',
+          },
+        });
+
+        if (userResponse.ok) {
+          const userJson = await userResponse.json();
+          setUserData(userJson);
+          setCollectionUserName(`${userJson.firstName} ${userJson.lastName}`);
+          setCollectionUserId(userJson._id);
+          setCollectionIsInstit(userJson.isInstit);
+          setCollectionUserPfp(userJson.profilePicture);
+        } else {
+          // Handle error
         }
-    }, []);
+      } catch (error) {
+        // Handle error
+      }
+    };
 
-    useEffect(()=> {
-        // http://localhost:3000/profile
-        const fetchUser = async () => {
-          const userResponse = await fetch(`http://localhost:5000/api/user/${hardcodedUser}`, {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json',
-                      'Access-Control-Allow-Origin': 'true' }
-          })
-          const userJson = await userResponse.json()
-          if (userResponse.ok) {
-            setUserData(userJson)
-            // console.log(userJson);
-          } else {
-            // setDone(false);
-          }
-        }
-    
-        fetchUser()
-       
-      }, []); 
+    fetchUser();
+  }, []);
+
+  const setFetchedCollection = (object) => {
+    setCurrentCollection(object);
+    localStorage.setItem('storedCollection', JSON.stringify(object));
+  };
 
 
-    // Save the searchValue to localStorage whenever it changes
-    useEffect(() => {
-        localStorage.setItem('searchValue', searchValue);
-    }, [searchValue]);
+  useEffect(() => {
+    localStorage.setItem('searchValue', searchValue);
+  }, [searchValue]);
 
-    useEffect(() => {
-        localStorage.setItem('storedUser', userData);
-    }, [userData]);
-    
+  useEffect(() => {
+    localStorage.setItem('storedUser', JSON.stringify(userData));
+  }, [userData]);
 
-    return (
-        <FLContext.Provider value={{ searchValue, setSearchValue,userData }}>
-            {children}
-        </FLContext.Provider>
-    );
+  return (
+    <FLContext.Provider
+      value={{
+        searchValue,
+        setSearchValue,
+        userData,
+        currentCollection,
+        setFetchedCollection,
+        collectionUserName,
+        collectionUserId,
+        collectionIsInstit,
+        collectionUserPfp,
+      }}
+    >
+      {children}
+    </FLContext.Provider>
+  );
 };
 
 const useMyContext = () => {
-    return useContext(FLContext);
+  return useContext(FLContext);
 };
 
 export { ContextProvider, useMyContext };

@@ -39,6 +39,7 @@ export default function CollectionCard({ toggleView, collectionIn, collectionImg
 
   const handleRedirect = () => {
     if (collectionIn) {
+      
       navigate(`/collection/${collectionIn._id}`);
     }
   };
