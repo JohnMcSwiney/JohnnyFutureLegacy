@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import './style.css'
 
-export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifactTitle}) {
+export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDescrip}) {
   const [isActive, setIsActive] = useState(false);
   
   const tempImg =
@@ -27,6 +27,10 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
   const handleRedirect = () => {
     navigate(`/asset/${artifactId}/${collectionId}`)
   }
+  useEffect(()=> {
+  console.log("asset:" + artifactId);
+  console.log("collection:" + collectionId);
+  },[imgUrl])
   return (
     <div className='home--coll--card--cont'>
       <div className='coll--card--img'>
@@ -34,7 +38,7 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
       </div>
       <h2>{artifactTitle}</h2>
       <div className='coll--card--text'>
-        <p>{tempText}</p>
+        <p>{assetDescrip}</p>
       </div>
       <button 
       className='coll--card--btn '

@@ -74,7 +74,7 @@ function Browse_Collections() {
         <div className={toggleView ? 'content--cont row' : 'content--cont grid'}>
           {collectionsData.map((collection) => (
             <CollectionCard
-              key={collection.id} // Provide a unique key for each component
+              key={collection._id} // Provide a unique key for each component
               toggleView={toggleView}
               collectionIn={collection} // Use the appropriate property from your data
               // collectionImg={collection.imageUrl} // Use the appropriate property from your data

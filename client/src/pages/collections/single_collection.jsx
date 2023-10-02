@@ -104,11 +104,13 @@ function Single_collection() {
         {collectionObject ? 
           <div className='content-cont grid'>
             {collectionObject.collectionAssets.map((collectionAssets) => (
-              <ArtifactCard artifactId={collectionAssets.id} 
-              collectionId={collectionObject.id}
+              <ArtifactCard 
+              key={collectionAssets._id}
+              artifactId={collectionAssets._id} 
+              collectionId={collectionObject._id}
               imgUrl={collectionAssets.assetImage}
               artifactTitle={collectionAssets.assetName}
-              key={collectionAssets.id}
+              assetDescrip={collectionAssets.assetDescription}
               />
             ))}
           </div> : 
