@@ -141,7 +141,32 @@ class UserController {
       res.status(400).json({ error: error.message });
     }
   }
+ // Update the isInstit field for a user
+ async updateIsInstit(req, res) {
+  try {
+    const { id } = req.params;
+    const { isInstit } = req.body;
 
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    // Update the isInstit field for the user with the provided ID
+    const updatedUser = await Users.findByIdAndUpdate(
+      id,
+      { isInstit },
+      { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
   // Delete a user by ID
   async deleteUser(req, res) {
     try {

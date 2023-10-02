@@ -27,13 +27,13 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
   const handleRedirect = () => {
     navigate(`/asset/${artifactId}/${collectionId}`)
   }
-  useEffect(()=> {
-  console.log("asset:" + artifactId);
-  console.log("collection:" + collectionId);
-  },[imgUrl])
   return (
     <div className='home--coll--card--cont'>
-      <div className='coll--card--img'>
+      <div className='coll--card--img'
+      onMouseDown={handleMouseDown}
+      onMouseUp={handleMouseUp}
+onClick={handleRedirect}
+      >
         <img src={imgUrl} />
       </div>
       <h2>{artifactTitle}</h2>

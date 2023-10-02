@@ -25,6 +25,9 @@ router.post('/', userController.createUser);
 // Route for updating a user's profile picture URL
 router.post('/:id/profile-picture', userController.updateProfilePicture);
 
+// Route for updating the isInstit field
+router.put('/:id/isInstit', userController.updateIsInstit);
+
 // Delete a user by ID
 router.delete('/:id', userController.deleteUser);
 
