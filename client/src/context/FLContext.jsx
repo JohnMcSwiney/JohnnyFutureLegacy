@@ -79,7 +79,14 @@ const ContextProvider = ({ children }) => {
     setCurrentCollection(object);
     localStorage.setItem('storedCollection', JSON.stringify(object));
   };
-
+  const clearCachedCollectionData = () =>{
+    setCurrentCollection('');
+    localStorage.setItem('storedCollection', JSON.stringify(null));
+    setCollectionUserName('');
+    setCollectionUserId('');
+    setCollectionIsInstit('');
+    setCollectionUserPfp('');
+  }
 
   useEffect(() => {
     localStorage.setItem('searchValue', searchValue);
@@ -101,6 +108,7 @@ const ContextProvider = ({ children }) => {
         collectionUserId,
         collectionIsInstit,
         collectionUserPfp,
+        clearCachedCollectionData
       }}
     >
       {children}

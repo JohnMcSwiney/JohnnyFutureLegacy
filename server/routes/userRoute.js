@@ -28,6 +28,10 @@ router.post('/:id/profile-picture', userController.updateProfilePicture);
 // Route for updating the isInstit field
 router.put('/:id/isInstit', userController.updateIsInstit);
 
+// Route for adding a collection to userCollections
+router.post('/:id/user-collections', userController.addUserCollection);
+
+
 // Delete a user by ID
 router.delete('/:id', userController.deleteUser);
 

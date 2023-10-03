@@ -6,8 +6,8 @@ class CollectionController {
   async getCollections(req, res) {
     try {
       const collections = await Collection.find({})
-      .sort({ collectionDate: 1 })
-      .populate('collectionAssets'); // Populate the 'collectionAssets' field
+        .sort({ collectionDate: 1 })
+        .populate("collectionAssets"); // Populate the 'collectionAssets' field
       res.status(200).json(collections);
     } catch (error) {
       res.status(500).json({ error: error.message });
@@ -45,8 +45,9 @@ class CollectionController {
         return res.status(404).json({ error: "No such Collection" });
       }
 
-      const collection = await Collection.findById(id)
-      .populate('collectionAssets'); // Populate the 'collectionAssets' field;
+      const collection = await Collection.findById(id).populate(
+        "collectionAssets"
+      ); // Populate the 'collectionAssets' field;
 
       if (!collection) {
         return res.status(404).json({ error: "No such Collection" });
@@ -96,7 +97,38 @@ class CollectionController {
       res.status(400).json({ error: error.message });
     }
   }
+  // Set the default collection image
+  async setDefaultCollectionImage(req, res) {
+    try {
+      const { id } = req.params;
 
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such Collection" });
+      }
+
+      // Find the collection by ID
+      const collection = await Collection.findById(id);
+
+      if (!collection) {
+        return res.status(404).json({ error: "No such Collection" });
+      }
+
+      // Check if the collection has assets
+      if (collection.collectionAssets.length === 0) {
+        return res.status(400).json({ error: "Collection has no assets" });
+      }
+
+      // Set the default image to the first asset image
+      collection.collectionImage = collection.collectionAssets[0];
+
+      // Save the updated collection
+      await collection.save();
+
+      res.status(200).json(collection);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   // Delete a collection by ID
   async deleteCollection(req, res) {
     try {
@@ -117,7 +149,6 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
-
 }
 
 module.exports = CollectionController;

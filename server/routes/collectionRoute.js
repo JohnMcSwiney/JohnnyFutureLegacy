@@ -19,6 +19,9 @@ router.post('/', collectionController.createCollection);
 // Update a collection by ID
 router.put('/:id', collectionController.updateCollection);
 
+// Route to set the default collection image
+router.put('/:id/set-default-image', collectionController.setDefaultCollectionImage);
+
 // Delete a collection by ID
 router.delete('/:id', collectionController.deleteCollection);
 

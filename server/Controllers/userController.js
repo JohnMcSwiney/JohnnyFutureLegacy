@@ -59,7 +59,8 @@ class UserController {
         return res.status(404).json({ error: "No such User" });
       }
 
-      const user = await Users.findById(id);
+      const user = await Users.findById(id)
+      .populate('userCollections');
 
       if (!user) {
         return res.status(404).json({ error: "No such User" });
@@ -156,6 +157,32 @@ class UserController {
       id,
       { isInstit },
       { new: true, runValidators: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+// Add a collection to userCollections
+async addUserCollection(req, res) {
+  try {
+    const { id } = req.params;
+    const { collectionId } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(collectionId)) {
+      return res.status(404).json({ error: 'Invalid User or Collection ID' });
+    }
+
+    // Find the user by ID and update userCollections
+    const updatedUser = await Users.findByIdAndUpdate(
+      id,
+      { $push: { userCollections: collectionId } },
+      { new: true }
     );
 
     if (!updatedUser) {

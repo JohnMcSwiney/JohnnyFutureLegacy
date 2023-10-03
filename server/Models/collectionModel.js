@@ -18,7 +18,10 @@ const collectionSchema = new Schema({
     },
     collectionAssets: [{
         type: mongoose.Schema.Types.ObjectId, ref: 'Asset'
-    }]
+    }],
+    collectionImage: {
+        type: String, // Store the URL or reference to the collection image
+    }
 });
 
 const Collection = mongoose.model('Collection', collectionSchema);

@@ -58,7 +58,7 @@ function Profile() {
 
       <div className='right--profile--cont'>
         <div className='right--profile--inner--box'>
-          <h3>My Collections:</h3>
+          {/* <h3>My Collections:</h3>
           <div className='right--profile--content--cont--row'>
             <CollectionCardProfile/>
             <CollectionCardProfile/>
@@ -68,7 +68,7 @@ function Profile() {
             <CollectionCardProfile/>
             <CollectionCardProfile/>
             <CollectionCardProfile/>
-          </div>  
+          </div>   */}
         </div>
 
         <div className='right--profile--inner--box'>
