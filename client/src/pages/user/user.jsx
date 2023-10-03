@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {useMyContext} from "../../context/FLContext";
 import {
-  StyledContainer
+  StyledContainer,
+  StyledTitleContainer2,
+  StyledTitle
 } from '../../components/Styles';
 import { TiSocialFacebook } from 'react-icons/ti';
 import { FaTwitter, FaTelegramPlane } from 'react-icons/fa';
@@ -11,9 +13,7 @@ import CollectionCardProfile from '../../components/cards/collection/CollectionC
 // import AssetCardUser from '../../components/cards/asset/AssetCardUser';
 import './style.css';
 
-import { useParams } from 'react-router-dom'
-
-
+import { useParams } from 'react-router-dom';
 function User() {
 
   const bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Lorem ipsum dolor sit amet consectetur adipiscing. Consectetur libero id faucibus nisl tincidunt eget nullam. Cursus sit amet dictum sit amet justo donec enim. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Nunc non blandit massa enim. Non enim praesent elementum facilisis leo vel fringilla. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Nulla posuere sollicitudin aliquam ultrices sagittis. Elit sed vulputate mi sit amet mauris commodo. Eu tincidunt tortor aliquam nulla. Justo laoreet sit amet cursus sit amet. Augue neque gravida in fermentum et sollicitudin ac orci phasellus. Blandit aliquam etiam erat velit scelerisque in dictum non consectetur. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Ipsum dolor sit amet consectetur adipiscing elit.';
@@ -53,39 +53,73 @@ function User() {
 
   return (
     <div className='user--cont'>
-      <div className='top--user--cont'>
+      <StyledTitleContainer2>
         <div className='top--user--info--cont'>
-          {/* top container with User pic, edit, name, email & connect wallet btn */}
-          <div className='user--avatar--name'>
-            <div className='user--avatar--cont'>
-              {/* <img></img> */}
-              
-            <div className='top--user--text--cont'>
-              {/* <h3>{userData ? userData.firstName + " " + userData.lastName : 'Loading...'}</h3>
-              <h4>{userData ? userData.username: 'Loading...'}</h4> */}
+          {userObject ?
+            <div className={userObject.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
+            >
+              <img className='coll--avatar' src={userObject.profilePicture} />
             </div>
-          </div>
-          {/* container with social buttons */}
+            :
+            <div className='coll--avatar--cont instit--shape'>
+              no user
+            </div>
+          }
+          <div className='top--user--text--cont'>
+          {userObject ?
+          <StyledTitle size={35}>
+            <div>{userObject.firstName} {userObject.lastName}</div>
+          </StyledTitle>
+
+          :
+          "Loading..."}
+        {/* {userObject.bio !== null ?
+          <h4>{userObject.bio}</h4>
+          :
+          ""} */}
           <div className='user--socials--cont'>
             <button className='user--socials--btn'><TiSocialFacebook /> </button>
             <button className='user--socials--btn'><FaTwitter /> </button>
             <button className='user--socials--btn'><FaTelegramPlane /> </button>
             <button className='user--socials--btn'><AiFillInstagram /> </button>
           </div>
-          {/* bio container */}
+          </div>
+        </div>            
+      </StyledTitleContainer2>
+      
+        
+        {/* <div className='top--user--info--cont'>
+
+          <div className='user--avatar--name'>
+            <div className='user--avatar--cont'>
+           
+              
+            <div className='top--user--text--cont'>
+            
+            </div>
+          </div>
+          {/* container with social buttons *
+          <div className='user--socials--cont'>
+            <button className='user--socials--btn'><TiSocialFacebook /> </button>
+            <button className='user--socials--btn'><FaTwitter /> </button>
+            <button className='user--socials--btn'><FaTelegramPlane /> </button>
+            <button className='user--socials--btn'><AiFillInstagram /> </button>
+          </div>
+          {/* bio container 
           <div className='user--bio--cont'>
             <h3>Bio:</h3>
             <p>{bio}</p>
           </div>
         </div>
 
-      </div>
+      </div> 
+      */}
 
 
 
-      <div className='right--user--cont'>
-        <div className='right--user--inner--box'>
-          <h3>My Collections:</h3>
+      <div className='bottom--user--cont'>
+        <div className='bottom--user--inner--box'>
+          <h3>Collections:</h3>
           <div className='right--user--content--cont--row'>
             
           {userObject && userObject.userCollections ? (
@@ -93,7 +127,7 @@ function User() {
           <CollectionCardProfile
             key={collection.collectionId}
             collectionName={collection.collectionName}
-            collectionId={collection.collectionId}
+            collectionId={collection._id}
             collectionImg={collection.collectionImage}
           />
         ))
@@ -112,7 +146,7 @@ function User() {
       </div>
     </div>
 
-  </div>
+
   )
 }
 

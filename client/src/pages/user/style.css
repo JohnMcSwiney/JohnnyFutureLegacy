@@ -192,11 +192,11 @@ margin-bottom: 5px;
     display: flex;
     width: 98%;
     height: 100%;
-    flex-flow: row !important;
+    flex-flow: column !important;
     position: relative;
     margin-left:30px;
 }
-.left--user--cont{
+.top--user--cont{
     position: absolute;
     background-color: rgba(128, 128, 128, 0.2);
     height: 80%;
@@ -212,12 +212,13 @@ margin-bottom: 5px;
     box-sizing: border-box;
     width: 403px;
 }
-.left--user--info--cont{
+.top--user--info--cont{
     display: flex;
     /* background-color: teal; */
     flex-direction:column;
     width: 100%;
     align-items: center;
+    margin-top: 100px;
 }
 .user--avatar--name{
     width: 100%;
@@ -265,7 +266,7 @@ margin-bottom: 5px;
     padding: 2.5px 5px ;
     font-size: 12.5px;
 }
-.left--user--text--cont{
+.top--user--text--cont{
     margin-left: 20px;
     display: flex;
     flex-direction: column;
@@ -320,28 +321,28 @@ margin-bottom: 5px;
     margin-bottom: 5px;
     }
 
-.right--user--cont{
+.bottom--user--cont{
     /* background-color: red; */
-    height: 80%;
+    height: 60%;
     position: absolute;
     right: 0;
     bottom: 0;
-    width: 70%;
+    width: 100%;
     display: flex;
     flex-direction: column;
     box-sizing: border-box;
     padding-left: 25px;
     padding-top: 25px;  
     overflow-x: hidden;
-    overflow-y: scroll;  
+    /* overflow-y: scroll;   */
 }
-.right--user--inner--box{
+.bottom--user--inner--box{
     background-color: rgba(255, 255, 255, 0.194);
-    width: 100%;
+    /* width: 100%; */
     margin: 0;
 }
-.right--user--inner--box h3{
-    width: 95%;
+.bottom--user--inner--box h3{
+    /* width: 95%; */
     /* background-color: tan; */
     border-bottom: 1.5px solid grey;
     color: gray;
@@ -349,6 +350,9 @@ margin-bottom: 5px;
     font-weight: 400;
     margin:0;
     margin-bottom: 15px;
+    display: flex;
+    align-items: center;
+    text-align: center;
 }
 .right--user--content--cont--row{
     height: 300px;
