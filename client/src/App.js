@@ -19,6 +19,7 @@ import {
   SignUp,
   Subscribe,
   Upload,
+  AssetForm,
   Landing,
   Profile,
   User
@@ -67,7 +68,10 @@ function App() {
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signUp" element={<SignUp />}></Route>
             <Route path="/subscribe" element={<Subscribe />}></Route>
+
             <Route path="/upload" element={<Upload />}></Route>
+          
+            <Route path="/upload/asset" element={<AssetForm />}></Route>
           </Routes>
           <div className="bottom--gradient-cont">
             <h4>© Future Legacy 2023</h4>

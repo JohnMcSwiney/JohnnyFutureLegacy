@@ -27,4 +27,6 @@ export {default as User} from './pages/user/user';
 
 export {default as Subscribe} from "./pages/subscription/subscribe";
 
-export {default as Upload} from "./pages/upload/uploadPage";
+export {default as Upload} from "./pages/upload/UploadPage";
+
+export {default as AssetForm} from "./pages/upload/AssetForm";
