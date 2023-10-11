@@ -17,3 +17,8 @@
     font-weight: bold;
     cursor: pointer;
 }
+.image-preview {
+    max-width: 100%;
+    max-height: 300px;
+    margin: 10px 0;
+  }
