@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import './style.css'
 
 function AssetForm() {
+  const [successMessage, setSuccessMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
+  const [isSubmitted, setIsSubmitted] = useState(false);
+  const [isConfirmed, setIsConfirmed] = useState(false);
+
   const [formData, setFormData] = useState({
     assetName: '',
     creatorName: '',
@@ -13,25 +18,72 @@ function AssetForm() {
     assetImage: '',
     exifData: [],
   });
-
+  const resetForm = () => {
+    setFormData({
+      assetName: '',
+      creatorName: '',
+      uploadDate: '',
+      assetDescription: 'Description here',
+      assetPriceUSD: 0,
+      informationTags: [],
+      assetImage: '', // Clear the assetImage if you have it
+      exifData: [],
+    });
+  };
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
+  };
+  /*
+  * Talk to Dylano about file handling
+  */
+  const handleImageChange = (e) => {
+    const file = e.target.files[0];
+
+    if (file) {
+      const reader = new FileReader();
+
+      reader.onload = (e) => {
+        // e.target.result contains the base64-encoded image
+        const base64Image = e.target.result;
+        setFormData({ ...formData, assetImage: base64Image });
+      };
+
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    // Reset any previous messages
+    setSuccessMessage('');
+    setErrorMessage('');
+
+    if (!isConfirmed) {
+      // Display a message or take action to notify the user to confirm the submission
+      setErrorMessage('Please confirm the submission');
+      console.error('Please confirm the submission');
+      return;
+    }
     if (formData.assetName.trim() === '' || formData.assetName.length > 100) {
+      setErrorMessage('Invalid asset name. Please enter a valid name.');
       console.error('Invalid asset name. Please enter a valid name.');
       return;
     }
     if (formData.assetDescription.length > 500) {
+      setErrorMessage('Invalid asset description. Please keep it within 500 characters.');
       console.error('Invalid asset description. Please keep it within 500 characters.');
       return;
     }
     for (const tag of formData.informationTags) {
-      if (tag.trim() === '' || tag.length > 50) {
+      if (tag.trim() === ', ' || tag.length > 50) {
+        setErrorMessage('Invalid information tag. Please enter valid tags.');
         console.error('Invalid information tag. Please enter valid tags.');
         return;
       }
     }
     if (formData.assetImage.trim() === '') {
+      setErrorMessage('Invalid image URL. Please enter a valid URL.');
       console.error('Invalid image URL. Please enter a valid URL.');
       return;
     }
@@ -42,39 +94,10 @@ function AssetForm() {
     //   }
     // }
     if (isNaN(formData.assetPriceUSD) || formData.assetPriceUSD <= 0) {
+      setErrorMessage('Invalid price. Please enter a valid number greater than 0.');
       console.error('Invalid price. Please enter a valid number greater than 0.');
       return;
     }
-  };
-/*
-* Talk to Dylano about file handling
-*/
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-  
-    if (file) {
-      const reader = new FileReader();
-  
-      reader.onload = (e) => {
-        // e.target.result contains the base64-encoded image
-        const base64Image = e.target.result;
-        setFormData({ ...formData, assetImage: base64Image });
-      };
-  
-      reader.readAsDataURL(file);
-    }
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    // You can send formData to your API endpoint for asset creation
-    if (formData.assetPriceUSD <= 0) {
-      // Display a validation error message for invalid price
-      console.error('Invalid price. Price must be greater than 0.');
-      return;
-    }
-
-
 
     console.log(formData);
     const apiUrl = 'http://localhost:5000/api/asset/';
@@ -90,20 +113,32 @@ function AssetForm() {
       if (response.ok) {
         // Successful asset creation, you can handle the response here
         const data = await response.json();
+        setIsSubmitted(true);
+        setSuccessMessage('Asset created successfully.');
         console.log('Asset created:', data);
+        // Clear the form data
+        resetForm();
       } else {
         // Handle errors when the request is not successful
+        setErrorMessage('Asset creation failed. Please check your data.');
         console.error('Asset creation failed');
       }
     } catch (error) {
+      setErrorMessage('Error: ' + error.message);
       console.error('Error:', error);
     }
+
+
 
   };
 
   return (
     <div>
       <h2>Create Asset</h2>
+      <div className="form-feedback">
+        {successMessage && <div className="success-message">{successMessage}</div>}
+        {errorMessage && <div className="error-message">{errorMessage}</div>}
+      </div>
       <form onSubmit={handleSubmit}>
         <div>
           <label>Asset Name:</label>
@@ -181,11 +216,11 @@ function AssetForm() {
           disabled={true}
         />
         <div>
-        <img
-  src={formData.assetImage}
-  alt="Asset Preview"
-  className="image-preview"
-/>
+          <img
+            src={formData.assetImage}
+            alt="Asset Preview"
+            className="image-preview"
+          />
         </div>
         <div>
           <label>Exif Data (comma-separated):</label>
@@ -196,7 +231,20 @@ function AssetForm() {
             onChange={handleChange}
           />
         </div>
-        <button type="submit">Create Asset</button>
+        <div className="form-group">
+          <label htmlFor="confirmation">
+            <input
+              type="checkbox"
+              id="confirmation"
+              name="confirmation"
+              onChange={(e) => setIsConfirmed(e.target.checked)}
+            />
+            Is everything correct? Double check then click me.
+          </label>
+        </div>
+
+
+        <button type="submit" disabled={!isConfirmed}>Create Asset</button>
       </form>
     </div>
   );
