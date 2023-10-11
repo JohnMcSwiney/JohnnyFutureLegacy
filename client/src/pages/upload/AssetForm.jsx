@@ -3,16 +3,34 @@ import React, { useState } from 'react';
 import './style.css'
 
 function AssetForm() {
+  // unfinished
+  // should be using the logged in user's data\
+  // will be updated when that's implemented
+
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [isConfirmed, setIsConfirmed] = useState(false);
 
+  const hardcodedUser = '650ca3a3cf7964c5cb70782c';
+  const [isMouseDown, setIsMouseDown] = useState(false);
+
+  const handleMouseDown = () => {
+    setIsMouseDown(true);
+  };
+
+  const handleMouseUp = () => {
+    setIsMouseDown(false);
+  };
+  const buttonStyle = {
+    transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
+  };
+
   const [formData, setFormData] = useState({
     assetName: '',
-    creatorName: '',
+    creatorName: hardcodedUser,
     uploadDate: '',
-    assetDescription: 'Description here',
+    assetDescription: '',
     assetPriceUSD: 0,
     informationTags: [],
     assetImage: '',
@@ -21,9 +39,9 @@ function AssetForm() {
   const resetForm = () => {
     setFormData({
       assetName: '',
-      creatorName: '',
+      creatorName: hardcodedUser,
       uploadDate: '',
-      assetDescription: 'Description here',
+      assetDescription: '',
       assetPriceUSD: 0,
       informationTags: [],
       assetImage: '', // Clear the assetImage if you have it
@@ -139,112 +157,152 @@ function AssetForm() {
         {successMessage && <div className="success-message">{successMessage}</div>}
         {errorMessage && <div className="error-message">{errorMessage}</div>}
       </div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Asset Name:</label>
-          <input
-            type="text"
-            name="assetName"
-            value={formData.assetName}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Creator Name (Uploader's ID):</label>
-          <input
-            type="text"
-            name="creatorName"
-            value={formData.creatorName}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Upload Date:</label>
-          <input
-            type="date"
-            name="uploadDate"
-            value={formData.uploadDate}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Asset Description:</label>
-          <textarea
-            name="assetDescription"
-            value={formData.assetDescription}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Asset Price (USD):</label>
-          <input
-            type="number"
-            name="assetPriceUSD"
-            value={formData.assetPriceUSD}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Information Tags (comma-separated):</label>
-          <input
-            type="text"
-            name="informationTags"
-            value={formData.informationTags}
-            onChange={handleChange}
-          />
-        </div>
-        <div>
-          <label>Asset Image URL:</label>
-          <input
-            type="text"
-            name="assetImage"
-            value={formData.assetImage}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <label htmlFor="assetImage">Asset Image:</label>
-        <input
-          type="file"
-          id="assetImage"
-          name="assetImage"
-          accept="image/*"
-          onChange={handleImageChange}
-          disabled={true}
-        />
-        <div>
-          <img
-            src={formData.assetImage}
-            alt="Asset Preview"
-            className="image-preview"
-          />
-        </div>
-        <div>
-          <label>Exif Data (comma-separated):</label>
-          <input
-            type="text"
-            name="exifData"
-            value={formData.exifData}
-            onChange={handleChange}
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="confirmation">
-            <input
-              type="checkbox"
-              id="confirmation"
-              name="confirmation"
-              onChange={(e) => setIsConfirmed(e.target.checked)}
+      <form onSubmit={handleSubmit} className='asset--page--content--cont'>
+
+        <div className='asset--upload--left'>
+        <label htmlFor="assetImage" className='left--label'>Asset Image:</label>
+          <div className='image--preview--cont'>
+            <img
+              src={formData.assetImage}
+              alt="Asset Preview"
+              className="image-preview"
             />
-            Is everything correct? Double check then click me.
-          </label>
+          </div>
+          <div>
+            <label>Asset Image URL:</label>
+            <input
+              type="text"
+              name="assetImage"
+              value={formData.assetImage}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          
+          <input
+            type="file"
+            id="assetImage"
+            name="assetImage"
+            accept="image/*"
+            onChange={handleImageChange}
+            disabled={true}
+          />
         </div>
 
 
-        <button type="submit" disabled={!isConfirmed}>Create Asset</button>
+        <div className='asset--upload--right'>
+          <div className='FL_Input__text__1'>
+            <label>Name:</label>
+            <input
+              type="text"
+              name="assetName"
+              value={formData.assetName}
+              onChange={handleChange}
+              placeholder='Asset Name'
+              required
+            />
+            <h4>(Required, 100 characters max)</h4>
+          </div>
+
+          {/* <div>
+            <label>Creator Name (Uploader's ID):</label>
+            <input
+              type="text"
+              name="creatorName"
+              value={formData.creatorName}
+              onChange={handleChange}
+            />
+          </div> */}
+          <div className='FL_Input__text__1'>
+            <label>Description:</label>
+            <textarea
+              name="assetDescription"
+              value={formData.assetDescription}
+              onChange={handleChange}
+              placeholder='Description Here'
+            />
+            <h4>(Not required, 500 characters max)</h4>
+          </div>
+
+          <div className='FL_Input__text__1'>
+            <label>Tags:</label>
+            <input
+              type="text"
+              name="informationTags"
+              value={formData.informationTags}
+              onChange={handleChange}
+              placeholder='Tag, Tag2, Tag3...'
+            />
+            <h4>(comma-separated)</h4>
+          </div>
+
+          <div className='upload--right--price-n-date--cont'>
+            <div className='FL_Input__number__1'>
+              <label>Price:</label>
+              <div className='inner--cont'>
+                <div>
+                  <h3>$</h3>
+                  <h4>USD</h4>
+                </div>
+                <input
+                  type="number"
+                  name="assetPriceUSD"
+                  value={formData.assetPriceUSD}
+                  onChange={handleChange}
+                  min={0}
+                  required
+                />
+              </div>
+
+            </div>
+            <div className='FL_Input__date__1'>
+              <label>Upload Date:</label>
+              <input
+                type="date"
+                name="uploadDate"
+                value={formData.uploadDate}
+                onChange={handleChange}
+                required
+              />
+            </div>
+          </div>
+
+
+
+          {/* <div>
+            <label>Exif Data (comma-separated):</label>
+            <input
+              type="text"
+              name="exifData"
+              value={formData.exifData}
+              onChange={handleChange}
+            />
+          </div> */}
+
+          <div className="human--made--verification--cont">
+            <h5>Human Made Image Verification:</h5>
+            <p>Learn more: <a>Statement Regarding AI</a></p>
+            <label htmlFor="confirmation" className='checkbox--cont'>
+              <input
+                type="checkbox"
+                id="confirmation"
+                name="confirmation"
+                onChange={(e) => setIsConfirmed(e.target.checked)}
+              />
+              <p className='human--made--description'>
+                Future Legacy prides itself on hosting the highest quality authentically human made assets, by checking this box you understand that your image will be verified as human.</p>
+            </label>
+            <div>
+              <button type="submit"
+                disabled={!isConfirmed}
+                className='FL_btn__1 button--width--713'
+                onMouseDown={handleMouseDown}
+                onMouseUp={handleMouseUp}
+                style={buttonStyle}
+              >Create Asset</button>
+            </div>
+          </div>
+        </div>
       </form>
     </div>
   );
