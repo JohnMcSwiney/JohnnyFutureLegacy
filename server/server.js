@@ -13,6 +13,7 @@ app.use(cors());
 app.listen(port, () =>{console.log("Server started on port: " + port +"!")})
 
 // Connection URL
+// Title of db, pz: password 
 const url = 'mongodb+srv://FutureLegacyDB:PZj9BE7zbANQhXb@futurelegacy.yiwwjmj.mongodb.net/?retryWrites=true&w=majority';
 
 // Connect to the database

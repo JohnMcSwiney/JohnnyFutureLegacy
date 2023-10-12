@@ -1,0 +1,96 @@
+
+
+.instructions > svg {
+    margin-right: 0.25rem;
+}
+
+.offscreen {
+    position: absolute;
+    left: -9999px;
+}
+
+.hide {
+    display: none;
+}
+
+.valid {
+    color: limegreen;
+    margin-left: 0.25rem;
+}
+
+.invalid {
+    color: red;
+    margin-left: 0.25rem;
+}
+
+.errmsg {
+    background-color: lightpink;
+    color: firebrick;
+    font-weight: bold;
+    padding: 0.5rem;
+    margin-bottom: 0.5rem;
+}
+
+.line {
+    display: inline-block;
+}
+.input--cont{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: row;
+    /* width: 500px; */
+    /* background-color: rebeccapurple; */
+    margin-bottom: 15px;
+    
+}
+.input--cont section {
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    /* width: 500px; */
+    /* background-color: rebeccapurple; */
+    /* margin-bottom: 15px; */
+    position: relative;
+    height: 80px;
+    /* background-color: tan; */
+    justify-content: center;
+}
+.input--cont section input{
+    font-size: 20px;
+    padding: 10px 15px;
+    border-radius: 50px;
+    border: black 1px solid;
+   
+}
+.input--cont aside{
+    display: flex;
+    align-items: center;
+    justify-content:flex-start;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+
+.instructions {
+    font-size: 12.5px;
+    /* border-radius: 0.5rem; */
+    background: #00000082;
+    color: #fff;
+    padding: 5px;
+    position: absolute;
+    transform: translateX(-310px);
+    
+    max-width: 300px;
+    height: 70px;
+    margin: 5px;
+    /* border: red 1px solid; */
+    border-radius: 10px;
+    box-sizing: border-box;
+}
+
+.special--chars{
+    color: #cecece;
+}
+.special--chars span{
+    font-weight: bold;
+}

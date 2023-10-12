@@ -13,6 +13,7 @@ import {
   // CreateInstituteCollection,
   Home,
   Search,
+  Register,
   Login,
   SignUp,
   Subscribe,
@@ -63,6 +64,8 @@ function App() {
             <Route path="/profile" element={<Profile />}></Route>
 
             <Route path="/apply" element={<Apply />}></Route>
+
+            <Route path="/register" element={<Register/>}></Route>
             <Route path="/login" element={<Login />}></Route>
             <Route path="/signUp" element={<SignUp />}></Route>
             <Route path="/subscribe" element={<Subscribe />}></Route>
