@@ -4,7 +4,7 @@ import './style.css';
 import usersData from './users.json';
 import * as Yup from 'yup';
 
-import {StyledContainer, StyledTitle, StyledSubTitle, Avatar, StyledButton} from '../../components/Styles'
+import {StyledContainer, StyledTitle, StyledSubTitle, Avatar, StyledButton} from '../../../components/Styles'
 // import
 
 export default function LoginPage() {

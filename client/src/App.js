@@ -1,7 +1,5 @@
 import React, { useState, useRef, useEffect, Profiler } from "react";
 import { BrowserRouter, Route, Routes, useLocation } from "react-router-dom";
-
-import logo from "./logo.svg";
 import "./App.css";
 // pages
 import {

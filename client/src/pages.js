@@ -18,8 +18,8 @@ export {default as Single_collection} from "./pages/collections/single_collectio
 export {default as Home} from "./pages/home/home";
 export {default as Search} from './pages/search/search'
 
-export {default as Login} from "./pages/login/loginPage";
-export {default as SignUp} from "./pages/signUp/signUpPage";
+export {default as Login} from "./pages/register/login/loginPage";
+export {default as SignUp} from "./pages/register/signUp/signUpPage";
 
 export {default as Profile} from './pages/user/profile';
 
