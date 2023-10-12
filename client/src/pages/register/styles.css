@@ -94,3 +94,8 @@
 .special--chars span{
     font-weight: bold;
 }
+.register--link{
+    color: lightcoral;
+    text-decoration: underline;
+    cursor: pointer;
+}
