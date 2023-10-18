@@ -7,37 +7,19 @@ import {useMyContext} from "../../context/FLContext";
 import sanitizeHtml from 'sanitize-html';
 
 
-const SearchBar = ({ onSearch }) => {
-  const navigate = useNavigate();
-  const location = useLocation();
+const SearchBar = () => {
+ const navigate = useNavigate();
+const location = useLocation();
 
-  const [error, setError] = useState(null);
-  const [isLoaded, setIsLoaded] = useState(false);
-  const [items, setItems] = useState([]);
-  const [currentPage, setCurrentPage] = useState([]);
+const [error, setError] = useState(null);
+const [isLoaded, setIsLoaded] = useState(false);
+const [items, setItems] = useState([]);
+const [currentPage, setCurrentPage] = useState([]);
 
-  const { searchValue, setSearchValue} = useMyContext();
-  //     set search query to empty string
+const [modelName, setModelName] = useState('');
+  const [results, setResults] = useState([]);
   const [q, setQ] = useState("");
-  //     set search parameters
-  // const [searchParam] = useState(["AssetName", "AssetID", "UserID", "UserName"]);
-  //Param1 (optional): search item
-  const redirectSearch = () => {
-    if (currentPage){
-      
-      navigate(`/search/${q}`)
-      setSearchValue(q)
-    }
-  };
-  useEffect(() => {
 
-    // Grabs Current page for page specific searching
-    const { pathname } = location;
-    // console.log("Current location: " + pathname)
-    
-  }, [q]);
-
-  // Used to enable the text & position on the home screen
   const getPageClass = () => {
     const { pathname } = location;
     // Add logic to determine the class based on the current pathname
@@ -54,15 +36,31 @@ const SearchBar = ({ onSearch }) => {
   };
   const divClass = getPageClass();
   const isHomePage = location.pathname === '/'; // Check if it's the home page
+  
+  const handleSearch = async () => {
+    let searchURL = 'http://localhost:5000/api/search';
+    if (modelName) {
+      searchURL += `/${modelName}`;
+    }
 
-  const handleSubmit = () => {
-    redirectSearch();
-  }
+    try {
+      const response = await fetch(`${searchURL}?q=${q}`);
+      if (response.ok) {
+        const data = await response.json();
+        setResults(data);
+        console.log(data)
+      } else {
+        console.error('Search request failed.');
+      }
+    } catch (error) {
+      console.error('An error occurred:', error);
+    }
+  };
 
   return (
     <form
       className={`search--cont ${isHomePage ? 'centered' : ''}`}
-      onSubmit={handleSubmit}
+      onSubmit={handleSearch}
     >
         <input
           type='search'

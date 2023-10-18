@@ -5,7 +5,8 @@ const mongoose = require('mongoose');
 const userRoute= require('./routes/userRoute')
 const collectionRoute= require('./routes/collectionRoute');
 const assetRoute = require('./routes/assetRoute');
-const cors = require('cors');
+const searchRoute = require('./routes/searchRoute')
+;const cors = require('cors');
 
 
 // Allow requests from all origins during development (be more restrictive in production)
@@ -28,4 +29,5 @@ db.once('open', () => {
 app.use(express.json())
 app.use('/api/user', userRoute);
 app.use('/api/collection', collectionRoute);
-app.use('/api/asset', assetRoute)
+app.use('/api/asset', assetRoute);
+app.use('/api/search', searchRoute);
