@@ -2,54 +2,21 @@ import React from 'react'
 import { useEffect, useState } from 'react';
 import './style.css'
 import { useMyContext } from "../../context/FLContext";
+import { useSearchContext } from "../../context/SearchContext";
 import sanitizeHtml from 'sanitize-html';
 
-export default function Search() {
-  const { searchValue, setSearchValue } = useMyContext();
+export default function Search_Results() {
+  // const { searchValue, setSearchValue } = useMyContext();
   const [ searchAssets, setSearchAssets] = useState(null);
   const [ searchCollections, setSearchCollections] = useState(null);
   const [ searchUsers, setSearchUsers] = useState(null);
 
-  const [modelName, setModelName] = useState('');
-  // const [query, setQuery] = useState('');
-  const [results, setResults] = useState([]);
- 
-
-  useEffect(() => {
-      if (searchValue) {
-        const handleSearch = async () => {
-          let searchURL = 'http://localhost:5000/api/search';
-          if (modelName) {
-            searchURL += `/${modelName}`;
-          }
-      
-          try {
-            const response = await fetch(`${searchURL}?q=${searchValue}`);
-            if (response.ok) {
-              const data = await response.json();
-              setResults(data);
-              console.log(data);
-            } else {
-              console.error('Search request failed.');
-            }
-          } catch (error) {
-            console.error('An error occurred:', error);
-          }
-          handleSearch();
-        };
-        
-      } 
-    }, []);
-  
-
-  
-  
-
+  const { searchValue, setSearchValue } = useSearchContext();
 
 
   return (
     <div>search
-      {searchValue !== null ?
+      {searchValue !== '' ?
         <h2> Searching for: {sanitizeHtml(searchValue)}</h2>
         :
         <h2>Search Value Empty</h2>
