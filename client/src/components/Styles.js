@@ -21,8 +21,7 @@ export const StyledContainer = styled.div`
   // background: yellow;
   background-size: cover;
   background-attachment: fixed;
-  width: 100%;
-  position: relative;
+  width: 100vw;
 `;
 
 export const StyledTitleContainer = styled.div`

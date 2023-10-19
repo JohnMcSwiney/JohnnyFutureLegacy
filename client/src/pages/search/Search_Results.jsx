@@ -26,7 +26,7 @@ export default function Search_Results() {
 
   const { searchValue, setSearchValue, searchData } = useSearchContext();
 
-  console.log(searchData.assetResults)
+  // console.log(searchData.assetResults)
   return (
     <StyledContainer>
       <StyledTitleContainer2>
