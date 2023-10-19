@@ -9,6 +9,9 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    flex-basis: 335px;
+    flex-grow: 0;
+    flex-shrink: 0;
 }
 .home--coll--card--cont h2{
     padding: 0;

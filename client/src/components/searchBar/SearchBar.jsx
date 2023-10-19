@@ -15,7 +15,7 @@ const SearchBar = () => {
   const [error, setError] = useState(null);
   const [currentPage, setCurrentPage] = useState([]);
 
-  const [modelName, setModelName] = useState('');
+  const [modelName, setModelName] = useState('All');
   const [results, setResults] = useState([]);
   const [q, setQ] = useState("");
   const redirectResults = () => { navigate(`/search_results/${q}`) };
@@ -48,6 +48,7 @@ const SearchBar = () => {
     }
 
     try {
+      console.log(`${searchURL}?q=${q}`)
       const response = await fetch(`${searchURL}?q=${q}`);
       if (response.ok) {
         const data = await response.json();
