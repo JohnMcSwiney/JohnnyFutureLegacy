@@ -20,9 +20,9 @@ import {
 
 export default function Search_Results() {
   // const { searchValue, setSearchValue } = useMyContext();
-  const [ searchAssets, setSearchAssets] = useState(null);
-  const [ searchCollections, setSearchCollections] = useState(null);
-  const [ searchUsers, setSearchUsers] = useState(null);
+  const [searchAssets, setSearchAssets] = useState(null);
+  const [searchCollections, setSearchCollections] = useState(null);
+  const [searchUsers, setSearchUsers] = useState(null);
 
   const { searchValue, setSearchValue, searchData } = useSearchContext();
 
@@ -30,32 +30,32 @@ export default function Search_Results() {
   return (
     <StyledContainer>
       <StyledTitleContainer2>
-      search
-      {searchValue !== '' ?
-        <h2> Searching for: {sanitizeHtml(searchValue)}</h2>
-        :
-        <h2>Search Value Empty</h2>
-      }
+        search
+        {searchValue !== '' ?
+          <h2> Searching for: {sanitizeHtml(searchValue)}</h2>
+          :
+          <h2>Search Value Empty</h2>
+        }
       </StyledTitleContainer2>
       <StyledContentContainer>
-        <SearchTitle>Asset Results:</SearchTitle>
-      {searchData.assetResults ? 
-      <div className='search_results--container--row--scroll'>
-        {searchData.assetResults.map((asset) => (
-              <ArtifactCard 
-              key={asset._id}
-              artifactId={asset._id} 
-              collectionId={asset._id}
-              imgUrl={asset.assetImage}
-              artifactTitle={asset.assetName}
-              assetDescrip={asset.assetDescription}
+        {searchData.assetResults ? <SearchTitle>Asset Results:</SearchTitle> : <></>}
+        {searchData.assetResults ?
+          <div className='search_results--container--row--scroll'>
+            {searchData.assetResults.map((asset) => (
+              <ArtifactCard
+                key={asset._id}
+                artifactId={asset._id}
+                collectionId={asset._id}
+                imgUrl={asset.assetImage}
+                artifactTitle={asset.assetName}
+                assetDescrip={asset.assetDescription}
               />
             ))}
-        </div> 
-        :
-        <div>
-
-        </div>
+          </div>
+          :
+          <div>
+            none...
+          </div>
         }
       </StyledContentContainer>
     </StyledContainer>
@@ -64,5 +64,5 @@ export default function Search_Results() {
 }
 
 
-      
+
 
