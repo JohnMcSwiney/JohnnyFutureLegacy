@@ -49,8 +49,11 @@ const searchAssets = async (query) => {
     const filter = {
         $or: [
           { assetName: { $regex: query, $options: "i" } },
-          { informationTags: { $in: [query] } },
-        //   { creatorName: { $in: [query] } },
+          {
+            informationTags: {
+              $in: [new RegExp(query, 'i')],
+            },
+          },
           { assetDescription: { $regex: query, $options: "i" } },
         ],
       };
