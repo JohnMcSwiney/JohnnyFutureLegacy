@@ -27,15 +27,16 @@ export default function Home () {
       <div className='FL--home--showcase--2'>
         <div className='FL--home--showcase--header'>
           <h3>Featured Collections</h3>
+          <iframe width="560" height="315" src="https://www.youtube-nocookie.com/embed/fPXfFstDGjY?si=2TKJ3s-_mgggUF7v" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
         </div>
+        {/* <CollectionCard />
         <CollectionCard />
         <CollectionCard />
         <CollectionCard />
         <CollectionCard />
         <CollectionCard />
         <CollectionCard />
-        <CollectionCard />
-        <CollectionCard />
+        <CollectionCard /> */}
       </div>
       <FL_splitter />
       <FL_footer />

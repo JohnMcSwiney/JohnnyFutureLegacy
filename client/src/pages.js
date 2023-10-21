@@ -16,6 +16,7 @@ export {default as Single_collection} from "./pages/collections/single_collectio
 // export {default as CreateInstituteCollection} from "./pages/collections/institute/createInstitCollect";
 
 export {default as Home} from "./pages/home/home";
+export {default as Home_alt} from './pages/home/home_alt';
 export {default as Search_Results} from './pages/search/Search_Results'
 
 export {default as Register} from "./pages/register/register";

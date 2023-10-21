@@ -12,6 +12,7 @@ import {
   InstituteCollection,
   // CreateInstituteCollection,
   Home,
+  Home_alt,
   Search_Results,
   Register,
   Login,
@@ -57,6 +58,7 @@ function App() {
 
                 <Routes>
                   <Route path="/" element={<Home />}></Route>
+                  <Route path="/alt" element={<Home_alt />}></Route>
                   <Route path="/landing" element={<Landing />}></Route>
                   <Route path="/about" element={<About />}></Route>
 
