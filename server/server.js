@@ -5,8 +5,9 @@ const mongoose = require('mongoose');
 const userRoute= require('./routes/userRoute')
 const collectionRoute= require('./routes/collectionRoute');
 const assetRoute = require('./routes/assetRoute');
-const searchRoute = require('./routes/searchRoute')
-;const cors = require('cors');
+const searchRoute = require('./routes/searchRoute');
+const featuredRoute = require('./routes/featuredCollectionRoute');
+const cors = require('cors');
 
 
 // Allow requests from all origins during development (be more restrictive in production)
@@ -31,3 +32,4 @@ app.use('/api/user', userRoute);
 app.use('/api/collection', collectionRoute);
 app.use('/api/asset', assetRoute);
 app.use('/api/search', searchRoute);
+app.use('/api/featured', featuredRoute);
