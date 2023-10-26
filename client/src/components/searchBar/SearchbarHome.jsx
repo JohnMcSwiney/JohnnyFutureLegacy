@@ -7,7 +7,7 @@ import { useSearchContext } from "../../context/SearchContext";
 import sanitizeHtml from 'sanitize-html';
 import { useToastContext } from '../../context/ToastContext';
 
-const SearchBar = () => {
+const SearchBarHome = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const { addToast } = useToastContext();
@@ -69,7 +69,7 @@ const SearchBar = () => {
 
   return (
     <form
-      className={`search--cont ${isHomePage ? 'centered' : ''}`}
+      className={`search--cont `}
       onSubmit={handleSearch}
     >
       <input
@@ -84,9 +84,8 @@ const SearchBar = () => {
         onChange={(e) => setQ(sanitizeHtml(e.target.value))}
       />
       <button type='submit' className='search--button'><BiSearchAlt2 /></button>
-      <h2 className={`${isHomePage ? 'hidden' : 'hidden'}`} >WHAT DO YOU WANT TO SEE TODAY?</h2>
     </form>
   )
 }
 
-export default SearchBar
+export default SearchBarHome

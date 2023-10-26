@@ -90,11 +90,12 @@ input[type="search"]{
 
 .centered {
     position: fixed;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* top: 50%;
+    left: 50%; */
+    transform: translate(-300%, -300%);
     z-index: 999;
     transition: opacity 0.3s ease;
+    display: none;
   }
   .hidden{
     display: none;
