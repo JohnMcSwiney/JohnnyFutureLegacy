@@ -20,6 +20,7 @@ import {
   Subscribe,
   Upload,
   AssetForm,
+  CollectionForm,
   Landing,
   Profile,
   User,
@@ -96,6 +97,7 @@ function App() {
                   <Route path="/upload" element={<Upload />}></Route>
 
                   <Route path="/upload/asset" element={<AssetForm />}></Route>
+                  <Route path="/upload/collection" element={<CollectionForm />}></Route>
                 </Routes>
 
                 <div className="bottom--gradient-cont">

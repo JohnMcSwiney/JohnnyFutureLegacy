@@ -267,18 +267,6 @@ function AssetForm() {
             </div>
           </div>
 
-
-
-          {/* <div>
-            <label>Exif Data (comma-separated):</label>
-            <input
-              type="text"
-              name="exifData"
-              value={formData.exifData}
-              onChange={handleChange}
-            />
-          </div> */}
-
           <div className="human--made--verification--cont">
             <h5>Human Made Image Verification:</h5>
             <p>Learn more: <a>Statement Regarding AI</a></p>

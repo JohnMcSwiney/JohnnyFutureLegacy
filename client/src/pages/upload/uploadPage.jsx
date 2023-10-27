@@ -9,13 +9,17 @@ export default function UploadPage() {
 
         navigate(`/upload/asset`)
     }
+    const redirectCollection = () => {
 
+        navigate(`/upload/collection`)
+    }
     return (
         <div className='upload--landing--cont'>
             <h2>
             Upload Redirect Page
             </h2> 
             <button onClick={redirectSingleAsset} className='upload--landing--button'>Upload Single Asset</button>
+            <button onClick={redirectCollection} className='upload--landing--button'>Upload Collection</button>
         </div>
     )
 }
