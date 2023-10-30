@@ -34,40 +34,34 @@ app.post('/uploadimage', upload.single('file'), (req, res) => {
     return res.status(400).send('No file uploaded.');
   }
 
-  // Extract the userId from the query parameter
   const userId = req.query.userId;
+  const userDirectory = `uploaded_files/${userId}/`;
+  const originalFilename = req.file.originalname;
+  const splitName = originalFilename.split('.');
+  const fileExtension = splitName[1];
 
-  // Generate a new filename based on userId and original filename
-  // const newFilename = generateNewFilename(userId, req.file.originalname);
+  let version = 0;
+  let newFilename = generateNewFilename(userId, splitName[0], fileExtension, version);
 
-  // Create the user-specific directory
-const userDirectory = `uploaded_files/${userId}/`;
-if (!fs.existsSync(userDirectory)) {
-  fs.mkdirSync(userDirectory, { recursive: true });
-}
-
-const newFilename = generateNewFilename(userId, req.file.originalname);
-  const newPath = `${userDirectory}${newFilename}`;
-  let version = 2; // Start with version 2
-
-  while (fs.existsSync(newPath)) {
-    // A file with the same name exists, increment the version
-    newFilename = generateNewFilename(userId, `${req.file.originalname}_v${version}`);
-    newPath = `${userDirectory}${newFilename}`;
+  while (fs.existsSync(`${userDirectory}${newFilename}`)) {
     version++;
+    newFilename = generateNewFilename(userId, splitName[0], fileExtension, version);
   }
 
-  // Move the uploaded file to the user-specific directory and filename
+  const newPath = `${userDirectory}${newFilename}`;
   fs.renameSync(req.file.path, newPath);
 
-  res.send(`File uploaded as version ${version}: ${newFilename}`);
+  res.send(`File uploaded as: ${newFilename}`);
 });
 
-function generateNewFilename(userId, originalFilename, version = '') {
-  const timestamp = new Date().getTime();
-  return `${userId}_${timestamp}_${originalFilename}${version ? `_v${version}` : ''}`;
-  // return `${userId}_${originalFilename}${version ? `_v${version}` : ''}`;
+function generateNewFilename(userId, filename, fileExtension, version) {
+  if (version > 0) {
+    return `${userId}_${filename}(${version}).${fileExtension}`;
+  } else {
+    return `${userId}_${filename}.${fileExtension}`;
+  }
 }
+
 
 app.listen(port, () => {
   console.log('Server started on port: ' + port + '!');

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 
 function FL_DragDrop() {
 
@@ -43,7 +43,14 @@ function FL_DragDrop() {
       .then((responses) => {
         setUploadResponses(responses);
       });
+
+      
   };
+  useEffect(() => {
+    if(uploadResponses.length === files.length && uploadResponses.length !== 0 && files.length !== 0){
+      console.log("lists are the same length!")
+    }
+  },[uploadResponses,files]);
 
   return (
     <div>
