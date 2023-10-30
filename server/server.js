@@ -51,7 +51,7 @@ app.post('/uploadimage', upload.single('file'), (req, res) => {
   const newPath = `${userDirectory}${newFilename}`;
   fs.renameSync(req.file.path, newPath);
 
-  res.send(`File uploaded as: ${newFilename}`);
+  res.send(newFilename);
 });
 
 function generateNewFilename(userId, filename, fileExtension, version) {
@@ -61,6 +61,24 @@ function generateNewFilename(userId, filename, fileExtension, version) {
     return `${userId}_${filename}.${fileExtension}`;
   }
 }
+app.get('/getimage', (req, res) => {
+  const userId = req.query.userId;
+  const filename = req.query.filename;
+
+  if (!userId || !filename) {
+    return res.status(400).send('Invalid request. Provide both userId and filename.');
+  }
+
+  const userDirectory = `uploaded_files/${userId}/`;
+  const imagePath = path.join(__dirname, userDirectory, filename); // Construct an absolute path
+
+  if (fs.existsSync(imagePath)) {
+    res.sendFile(imagePath);
+  } else {
+    res.status(404).send('File not found.');
+  }
+});
+
 
 
 app.listen(port, () => {

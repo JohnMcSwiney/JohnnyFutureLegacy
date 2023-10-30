@@ -134,6 +134,55 @@
 .button--width--713 {
     width: 713px;
 }
+.FL_Drag_Drop{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    justify-content: space-around;
+    gap: 10px;
+}
+
+.choose__file__cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 600px;
+    background-color: #00000010;
+    border-radius: 10px;
+}
+
+.upload--coll--btn{
+    background-color: var(--tertiary);
+    border: none;
+    color: white;
+    width: 300px;
+    height: 50px;
+    border-radius: 50px;
+    font-family: var(--font--fam);
+    font-size: 20px;
+    font-weight: 500;
+    transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+  }
+  
+  .upload--coll--btn:hover{
+    transform: scale(1.01); /* Increase the scale on hover */
+    box-shadow: rgba(99, 99, 99, 0.427) 0px 1px 2px;
+    text-shadow: rgba(212, 210, 210, 0.533) 0px 1px 2px;
+  }
+  .response--scrollable{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 600px;
+    height: 60px;
+    overflow-y: scroll;
+    overflow-x: hidden
+  }
+  .response--item{
+    padding-left: 20px;
+  }
 
 .image-preview{
     display: flex;
@@ -174,11 +223,13 @@
     top: 0;
     left: 0;
     width: 100%;
-    filter:blur(2px);
-    transition: 0.7ms;
+    /* filter:blur(2px); */
+    transform: scale(1.0);
+    transition: transform ease 0.7ms;
   }
 
   .uploaded--image:hover img {
-    filter:blur(0px);
-    transition: 0.2ms;
+    /* filter:blur(0px); */
+    transform: scale(1.1);
+    transition: transform ease 0.2ms;
   }
