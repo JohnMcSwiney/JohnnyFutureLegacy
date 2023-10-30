@@ -18,30 +18,46 @@ app.use(cors());
 app.use(express.json());
 
 // Create a directory for storing uploaded files (if it doesn't exist)
-const storageDirectory = 'uploaded_files';
-if (!fs.existsSync(storageDirectory)) {
-  fs.mkdirSync(storageDirectory);
-}
-
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, storageDirectory); // Define the directory to store uploaded files
+    cb(null, 'uploaded_files/');
   },
   filename: function (req, file, cb) {
     cb(null, file.originalname);
   },
 });
 
-const upload = multer({ storage });
+const upload = multer({ storage: storage });
 
-app.post('/uploadimage', upload.single('image'), (req, res) => {
+app.post('/uploadimage', upload.single('file'), (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }
 
-  // You can now respond with a success message or do further processing if needed
-  res.send('File uploaded and saved successfully!');
+  // Extract the userId from the query parameter
+  const userId = req.query.userId;
+
+  // Generate a new filename based on userId and original filename
+  const newFilename = generateNewFilename(userId, req.file.originalname);
+
+  // Create the user-specific directory
+const userDirectory = `uploaded_files/${userId}/`;
+if (!fs.existsSync(userDirectory)) {
+  fs.mkdirSync(userDirectory, { recursive: true });
+}
+
+// Move the uploaded file to the user-specific directory and filename
+const newPath = `${userDirectory}${newFilename}`;
+fs.renameSync(req.file.path, newPath);
+
+  // File uploaded and renamed successfully
+  res.send('File uploaded and associated with the user.');
 });
+
+function generateNewFilename(userId, originalFilename) {
+  const timestamp = new Date().getTime();
+  return `${userId}_${timestamp}_${originalFilename}`;
+}
 
 app.listen(port, () => {
   console.log('Server started on port: ' + port + '!');

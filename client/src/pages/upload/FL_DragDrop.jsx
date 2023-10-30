@@ -21,9 +21,9 @@ function FL_DragDrop() {
 
     files.forEach((file) => {
       const formData = new FormData();
-      formData.append('image', file);
+      formData.append('file', file);
 
-      const promise = fetch('http://localhost:5000/uploadimage', {
+      const promise = fetch('http://localhost:5000/uploadimage?userId=650ca3a3cf7964c5cb70782c', {
         method: 'POST',
         body: formData,
       })
