@@ -141,6 +141,7 @@
     margin: 0;
     justify-content: space-around;
     gap: 10px;
+    /* background-color: yellow; */
 }
 
 .choose__file__cont{
@@ -246,3 +247,26 @@
     transform: scale(1.1);
     transition: transform ease 0.2ms;
   }
+.image--check--cont{
+    width: 50px; height: 50px;
+    position: absolute;
+    right:0;
+    top: 0;
+    margin-top:5px;
+}
+  .create--coll--page{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    height: 100vh;
+    width: 100vw;
+    margin-top: 100px;
+}
+.create--coll--page h2{
+    font-size: 50px;
+    margin-bottom: 30px;
+}
+.create--coll--page h4{
+    margin: 0;
+    transform: none;
+}

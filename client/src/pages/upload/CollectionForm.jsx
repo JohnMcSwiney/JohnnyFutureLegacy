@@ -12,7 +12,8 @@ function CollectionForm() {
 
 
     return (
-        <div>CollectionForm
+        <div className='create--coll--page'>
+            <h2>Create a collection</h2>
             <section>
             <FL_DragDrop/>
             </section>
