@@ -188,7 +188,7 @@
     display: flex;
     width: 100VW;
     background-color: grey;
-    height: 300px;
+    height: 250px;
     overflow: hidden;
     align-items: center;
     justify-content: center;
@@ -197,10 +197,10 @@
     display: flex;
     overflow-x: scroll;
     gap:5px;
-    /* flex-wrap: wrap; */
     width: fit-content;
-    /* background-color: red ; */
     align-items: center;
+    
+
 }
   .uploaded--image{
     display: flex;
@@ -213,11 +213,24 @@
     position: relative;
     border: #000000 solid 2px;
     transition: 0.7ms;
+    flex-basis: 300px;
+    margin-top: 15px;
+    margin-bottom: 15px;
   }
   .uploaded--image:hover{
     border: var(--tertiary) solid 2px;
     transition: 0.2ms;
-  }
+  } 
+/* target first element with class ".circle" */
+:nth-child(1 of .uploaded--image) {
+   margin-left: 10px;
+}
+
+/* target last element with class ".circle" */
+:nth-last-child(1 of .uploaded--image) {
+    margin-right: 10px;
+}
+
   .uploaded--image img{
     position: absolute;
     top: 0;

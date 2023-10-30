@@ -6,7 +6,6 @@ function FL_DragDrop() {
 
   const [files, setFiles] = useState([]);
   const [uploadResponses, setUploadResponses] = useState([]); // Store responses for each file
-  const [imageFilenames, setImageFilenames] = useState([]);
   const [isFilled,updateIsFilled] = useState(false);
 const hardcodedUser = '650ca3a3cf7964c5cb70782c';
 
@@ -53,7 +52,8 @@ const hardcodedUser = '650ca3a3cf7964c5cb70782c';
         && uploadResponses.length !== 0 
         && files.length !== 0
         ) {
-        console.log("lists are the same length!")
+        console.log("lists are the same length!");
+        setFiles([])
         updateIsFilled(true);
       }
     }
