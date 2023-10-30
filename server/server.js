@@ -38,7 +38,7 @@ app.post('/uploadimage', upload.single('file'), (req, res) => {
   const userId = req.query.userId;
 
   // Generate a new filename based on userId and original filename
-  const newFilename = generateNewFilename(userId, req.file.originalname);
+  // const newFilename = generateNewFilename(userId, req.file.originalname);
 
   // Create the user-specific directory
 const userDirectory = `uploaded_files/${userId}/`;
@@ -46,17 +46,27 @@ if (!fs.existsSync(userDirectory)) {
   fs.mkdirSync(userDirectory, { recursive: true });
 }
 
-// Move the uploaded file to the user-specific directory and filename
-const newPath = `${userDirectory}${newFilename}`;
-fs.renameSync(req.file.path, newPath);
+const newFilename = generateNewFilename(userId, req.file.originalname);
+  const newPath = `${userDirectory}${newFilename}`;
+  let version = 2; // Start with version 2
 
-  // File uploaded and renamed successfully
-  res.send('File uploaded and associated with the user.');
+  while (fs.existsSync(newPath)) {
+    // A file with the same name exists, increment the version
+    newFilename = generateNewFilename(userId, `${req.file.originalname}_v${version}`);
+    newPath = `${userDirectory}${newFilename}`;
+    version++;
+  }
+
+  // Move the uploaded file to the user-specific directory and filename
+  fs.renameSync(req.file.path, newPath);
+
+  res.send(`File uploaded as version ${version}: ${newFilename}`);
 });
 
-function generateNewFilename(userId, originalFilename) {
+function generateNewFilename(userId, originalFilename, version = '') {
   const timestamp = new Date().getTime();
-  return `${userId}_${timestamp}_${originalFilename}`;
+  return `${userId}_${timestamp}_${originalFilename}${version ? `_v${version}` : ''}`;
+  // return `${userId}_${originalFilename}${version ? `_v${version}` : ''}`;
 }
 
 app.listen(port, () => {
