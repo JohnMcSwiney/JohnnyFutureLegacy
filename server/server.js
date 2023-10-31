@@ -12,6 +12,8 @@ const multer = require("multer");
 const path = require('path'); 
 const fs = require('fs');
 
+const sharp = require('sharp');   // For image processing
+
 // Allow requests from all origins during development (be more restrictive in production)
 app.use(cors());
 
@@ -29,7 +31,7 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
-app.post('/uploadimage', upload.single('file'), (req, res) => {
+app.post('/uploadimage', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file uploaded.');
   }

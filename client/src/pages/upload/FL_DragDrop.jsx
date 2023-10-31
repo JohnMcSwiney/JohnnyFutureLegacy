@@ -63,9 +63,10 @@ function FL_DragDrop({ onSubmit }) {
         && files.length !== 0
       ) {
         console.log("lists are the same length!");
-        const modifiedFiles = files.map((file) => ({
+        const modifiedFiles = files.map((file, index) => ({
           file,
           selected: true, // Initialize all files as selected by default
+          fileName: uploadResponses[index]
         }));
         setModifiedFiles(modifiedFiles);
         updateIsFilled(true);
@@ -93,9 +94,13 @@ function FL_DragDrop({ onSubmit }) {
     setFilteredItems(completedFilteredItems);
     console.log(completedFilteredItems);
   };
+ 
 
   const handleSubmit = (e) => {
     setDisableAll(true);
+    if(uploadResponses === null){
+      return;
+    }
     if (filteredItems === null) {
       console.log("using modified list")
       onSubmit(modifiedFiles);
@@ -107,7 +112,18 @@ function FL_DragDrop({ onSubmit }) {
     }
 
   }
-
+  function joinArraysByIndex(arr1, arr2) {
+    const result = [];
+    // Check that both arrays have the same length
+    if (arr1.length !== arr2.length) {
+      throw new Error('Arrays must have the same length to be joined by index.');
+    }
+    // Iterate through the arrays and pair elements at the same index
+    for (let i = 0; i < arr1.length; i++) {
+      result.push([arr1[i], arr2[i]]);
+    }
+    return result;
+  }
 
   return (
     <div className="FL_Drag_Drop" style={{ display: isFormVisible ? 'flex' : 'none' }}>
