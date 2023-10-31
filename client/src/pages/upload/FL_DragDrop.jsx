@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 
-function FL_DragDrop() {
+function FL_DragDrop({ onSubmit }) {
 
 
 
@@ -12,6 +12,8 @@ function FL_DragDrop() {
   const [modifiedFiles, setModifiedFiles] = useState(null);
   const [filteredItems, setFilteredItems] = useState(null);
   const [disableAll, setDisableAll] = useState(false);
+  const [isFormVisible, setIsFormVisible] = useState(true);
+
 
   const handleFileChange = (e) => {
     updateDisableUpload(false);
@@ -72,7 +74,7 @@ function FL_DragDrop() {
   }, [uploadResponses, files]);
 
   const handleToggleSelect = (index) => {
-    if (disableAll == true){
+    if (disableAll == true) {
       return;
     }
     if (modifiedFiles !== null) {
@@ -85,28 +87,37 @@ function FL_DragDrop() {
   };
 
   const filterList = (e) => {
-   
+
     console.log("filtering...");
     const completedFilteredItems = modifiedFiles.filter(item => item.selected);
     setFilteredItems(completedFilteredItems);
     console.log(completedFilteredItems);
   };
 
-  const handleSubmit= (e) =>{
-    e.preventDefault();
+  const handleSubmit = (e) => {
     setDisableAll(true);
+    if (filteredItems === null) {
+      console.log("using modified list")
+      onSubmit(modifiedFiles);
+      setIsFormVisible(false);
+    } else {
+      console.log("using filtered list")
+      onSubmit(filteredItems);
+      setIsFormVisible(false); // Close the component
+    }
+
   }
 
-  
+
   return (
-    <div className="FL_Drag_Drop">
+    <div className="FL_Drag_Drop" style={{ display: isFormVisible ? 'flex' : 'none' }}>
       <span className="image-preview--title--1">
         <h4 className="upload--title">1: Choose files from system then press upload</h4>
         <p className="upload--subtitle">If another upload happens previous images will be discarded</p>
       </span>
       <section className="choose__file__cont">
 
-        <input type="file" accept="image/*" onChange={handleFileChange} multiple disabled ={ disableAll } />
+        <input type="file" accept="image/*" onChange={handleFileChange} multiple disabled={disableAll} />
         <button className='upload--coll--btn' onClick={handleUpload} disabled={isFilled || disableUpload || disableAll}>Upload</button>
       </section>
       <section className="response--scrollable">
@@ -136,7 +147,7 @@ function FL_DragDrop() {
                     <input type="checkbox"
                       checked={modifiedFiles[index].selected}
                       onChange={() => handleToggleSelect(index)}
-                      disabled ={ disableAll }
+                      disabled={disableAll}
                     />
                   </span>
 
@@ -173,7 +184,7 @@ function FL_DragDrop() {
                 :
                 <div>...</div>
               }
-              <button onClick={handleSubmit}  disabled ={ disableAll } type="submit">submit</button>
+              <button onClick={handleSubmit} disabled={disableAll} type="submit">submit</button>
 
 
             </div>

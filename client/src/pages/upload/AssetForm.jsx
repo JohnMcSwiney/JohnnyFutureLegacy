@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import './style.css'
-
+import { useToastContext } from '../../context/ToastContext';
+  import { useUploadContext } from '../../context/UploadContext';
+  
 function AssetForm() {
   // unfinished
   // should be using the logged in user's data\
@@ -149,9 +151,20 @@ function AssetForm() {
 
 
   };
-
+  
+  const { clearUploadData,setUploadValue } = useUploadContext();
+      const [tempCountVar, setTempCountVar] = useState(0)
+      useEffect(() =>{
+          clearUploadData()
+          setUploadValue("SINGLE ASSET")
+      },[tempCountVar])
+  
+      const incrementCount = () =>{
+          setTempCountVar(tempCountVar+1)
+      }
+  
   return (
-    <div>
+    <div onClick={incrementCount} >
       <h2>Create Asset</h2>
       <div className="form-feedback">
         {successMessage && <div className="success-message">{successMessage}</div>}
