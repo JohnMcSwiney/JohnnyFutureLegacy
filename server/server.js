@@ -13,7 +13,16 @@ const path = require('path');
 const fs = require('fs');
 
 const sharp = require('sharp');   // For image processing
+const ExifParser = require('exif-parser');
+const piexif = require('piexifjs');
 
+const exifReader = require('exif-js');
+
+const exif = require('exiftool-vendored').exiftool;
+
+exif.version().then((version) => {
+  console.log(`We're running ExifTool v${version}`);
+});
 // Allow requests from all origins during development (be more restrictive in production)
 app.use(cors());
 
@@ -38,9 +47,69 @@ app.post('/uploadimage', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file was uploaded.');
   }
+  
+
   const userId = req.query.userId;
   const userDirectory = `uploaded_files/${userId}/`;
   const file = req.file;
+
+  //exif parser
+  // sharp(file.path)
+  // .toBuffer()
+  // .then((data) => {
+  //   // Parse Exif data using exif-parser
+  //   const exifParser = ExifParser.create(data);
+  //   const exifData = exifParser.parse();
+
+  //   // Exif data will be available in the exifData object
+  //   console.log('exifparser')
+  //   console.log('Exif Data :', exifData);
+  // })
+  // .catch((err) => {
+  //   console.error('Error reading image or Exif data:', err);
+  // });
+
+  //piexif
+  // const imageBuffer = fs.readFileSync(file.path);
+  // // Extract EXIF data
+  // try {
+  //   const exifData = piexif.load(imageBuffer.toString('binary'));
+  //   console.log('piexif')
+  //   console.log('EXIF Data:', exifData);
+  // } catch (error) {
+  //   console.error('Error reading EXIF data:', error.message);
+  // }
+
+// exif-js
+
+// Read image file (replace with your image path)
+const imagePath = file.path;
+const imageBuffer2 = fs.readFileSync(imagePath);
+try {
+  const exifData =exifReader.getData(imageBuffer2);
+  console.log('exif-js')
+  console.log('EXIF Data:', exifData);
+} catch (error) {
+  console.error('Error reading EXIF data:', error.message);
+}
+
+
+// exif--tool
+fs.readFile(imagePath, function (err, data) {
+  if (err)
+    throw err;
+  else {
+    exif.metadata(data, function (err, metadata) {
+      if (err)
+        throw err;
+      else
+        console.log(metadata);
+    });
+  }
+});
+
+
+
   const splitName = file.originalname.split('.');
   // console.log(path)
   const fullResPath = path.join(userDirectory, splitName[0] + '_full.'+splitName[1]);
@@ -49,21 +118,19 @@ app.post('/uploadimage', upload.single('file'), async (req, res) => {
   // const fullResPath = path.join('uploaded_files', splitName[0] + '_full.'+splitName[1]);
   // const lowResPath = path.join('uploaded_files', splitName[0] + '_low.'+splitName[1]);
   
-  // const image = sharp(req.file.buffer)
-  // const metadata = await image.metadata()
-  // console.log(metadata.width, metadata.height)
-  // Process and save the full-resolution image
   await sharp(file.path).toFile(fullResPath);
-// obtain the size of an image
 
   // Process and save the low-resolution image
   await sharp(file.path)
     .resize(800) // Adjust the size as needed
     .toFile(lowResPath);
+  
+    
 
   // Delete the original uploaded file
   fs.unlinkSync(file.path);
 
+  //send low res version to front
   res.send(splitName[0] + '_low.'+splitName[1]);
 });
 
