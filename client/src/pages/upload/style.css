@@ -142,6 +142,8 @@
     justify-content: space-around;
     gap: 10px;
     /* background-color: yellow; */
+    position: relative;
+    /* margin-top: 50px; */
 }
 
 .choose__file__cont{
@@ -152,6 +154,8 @@
     width: 600px;
     background-color: #00000010;
     border-radius: 10px;
+    position: relative;
+    margin-top: 50px;
 }
 
 .upload--coll--btn{
@@ -184,16 +188,48 @@
   .response--item{
     padding-left: 20px;
   }
-
 .image-preview{
     display: flex;
     width: 100VW;
-    background-color: grey;
+    background-color: rgba(128, 128, 128, 0.294);
     height: 250px;
     overflow: hidden;
     align-items: center;
     justify-content: center;
+    position: relative;
+    padding-top: 50px;
 }
+.image-preview--title--1{
+    position: absolute;
+    top: 0;
+    text-align: center;
+    gap: 0px;
+    width: 100vw;
+    transform: translateY(-20px);
+}
+.image-preview--title--2{
+    position: absolute;
+    top: 0;
+    text-align: center;
+    gap: 0px;
+}
+.image-preview--title--2{
+    position: absolute;
+    top: 0;
+    text-align: center;
+    gap: 0px;
+}
+.upload--title{
+    font-size: 23px;
+    color: var(--tertiary);
+    opacity: 1;
+    margin: 0;
+}
+.upload--subtitle{
+    font-size: 15px;
+    margin: 0;
+}
+
 .uploaded--image--scrollable{
     display: flex;
     overflow-x: scroll;
@@ -270,3 +306,24 @@
     margin: 0;
     transform: none;
 }
+.upload--coll--p1--submit{
+    display: flex;
+    width: 100VW;
+    /* background-color: rgba(128, 128, 128, 0.294); */
+    height: 250px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    /* padding-top: 30px; */
+}
+.image-preview--title--3{
+    position: absolute;
+    top: 0;
+    text-align: center;
+    gap: 0px;
+}
+/* input:disabled{
+    opacity: 0.3;
+     cursor:not-allowed;
+   } */

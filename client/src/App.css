@@ -52,6 +52,7 @@ p {
   margin: 0;
   /* padding: 0; */
  }
+ 
  button:disabled,
  button[disabled]{
    border: 1px solid #999999;
@@ -60,6 +61,7 @@ p {
    opacity: 0.3;
    cursor:not-allowed;
  }
+ 
 
 .centered {
   display: flex;
@@ -334,7 +336,7 @@ input[type="checkbox"]:focus {
 }
 input[type="checkbox"]:disabled {
   --form-control-color: grey ;
-
+opacity: 0.3;
   color: grey ;
   cursor: not-allowed;
 }
