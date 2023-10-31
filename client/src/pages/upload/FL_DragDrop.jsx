@@ -135,6 +135,7 @@ function FL_DragDrop({ onSubmit }) {
 
         <input type="file" accept="image/*" onChange={handleFileChange} multiple disabled={disableAll} />
         <button className='upload--coll--btn' onClick={handleUpload} disabled={isFilled || disableUpload || disableAll}>Upload</button>
+      
       </section>
       <section className="response--scrollable">
         {uploadResponses.map((response, index) => (

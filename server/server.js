@@ -19,42 +19,61 @@ app.use(cors());
 
 app.use(express.json());
 
-// Create a directory for storing uploaded files (if it doesn't exist)
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploaded_files/');
   },
   filename: function (req, file, cb) {
+    // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+    // const splitName = file.originalname.split('.');
     cb(null, file.originalname);
-  },
+  }
+  
 });
 
 const upload = multer({ storage: storage });
 
+
 app.post('/uploadimage', upload.single('file'), async (req, res) => {
   if (!req.file) {
-    return res.status(400).send('No file uploaded.');
+    return res.status(400).send('No file was uploaded.');
   }
-
   const userId = req.query.userId;
   const userDirectory = `uploaded_files/${userId}/`;
-  const originalFilename = req.file.originalname;
-  const splitName = originalFilename.split('.');
-  const fileExtension = splitName[1];
+  const file = req.file;
+  const splitName = file.originalname.split('.');
+  // console.log(path)
+  const fullResPath = path.join(userDirectory, splitName[0] + '_full.'+splitName[1]);
+  const lowResPath = path.join(userDirectory, splitName[0] + '_low.'+splitName[1]);
+  
+  // const fullResPath = path.join('uploaded_files', splitName[0] + '_full.'+splitName[1]);
+  // const lowResPath = path.join('uploaded_files', splitName[0] + '_low.'+splitName[1]);
+  
+  // const image = sharp(req.file.buffer)
+  // const metadata = await image.metadata()
+  // console.log(metadata.width, metadata.height)
+  // Process and save the full-resolution image
+  await sharp(file.path).toFile(fullResPath);
+// obtain the size of an image
 
-  let version = 0;
-  let newFilename = generateNewFilename(userId, splitName[0], fileExtension, version);
+  // Process and save the low-resolution image
+  await sharp(file.path)
+    .resize(800) // Adjust the size as needed
+    .toFile(lowResPath);
 
-  while (fs.existsSync(`${userDirectory}${newFilename}`)) {
-    version++;
-    newFilename = generateNewFilename(userId, splitName[0], fileExtension, version);
-  }
+  // Delete the original uploaded file
+  fs.unlinkSync(file.path);
 
-  const newPath = `${userDirectory}${newFilename}`;
-  fs.renameSync(req.file.path, newPath);
-
-  res.send(newFilename);
+  res.send(splitName[0] + '_low.'+splitName[1]);
 });
+
+
+// Function to check if a file is an image (you can expand this function to include more checks)
+function isImageFile(file) {
+  const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
+  const fileExtension = file.originalname.split('.').pop().toLowerCase();
+  return allowedExtensions.includes(fileExtension);
+}
 
 function generateNewFilename(userId, filename, fileExtension, version) {
   if (version > 0) {
