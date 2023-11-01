@@ -357,3 +357,57 @@
     justify-content: center;
     transition: all 1s;
 }
+.create--coll--reset--btn{
+    position: absolute;
+    top: 0;
+    left: 0;
+    margin-left: 100px;
+    margin-top: 115px;
+    background-color:  black;
+    border: none;
+    color: white;
+    width: 200px;
+    height: 50px;
+    border-radius: 50px;
+    font-family: var(--font--fam);
+    font-size: 15px;
+    font-weight: 500;
+    transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+  }
+  
+  .create--coll--reset--btn:hover{
+    transform: scale(1.01); /* Increase the scale on hover */
+    box-shadow: rgba(255, 0, 0, 0.893) 0px 1px 6px;
+    text-shadow: rgba(2, 2, 2, 0.533) 0px 1px 2px;
+    color: rgba(255, 0, 0, 0.893)
+  
+}
+
+.collection--form--container{
+    background-color: yellow;
+    width: 100vw;
+    min-height:400px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+}
+.collection--form--title{
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+    position: relative;
+    
+    width: 600px;
+    background-color: tan;
+    height: 60px;
+}
+.collection--form--title h3{
+    position: absolute;
+    top: 0;
+    margin: 0;
+}
+.collection--form--title button{
+    margin-top: 20px;
+}
