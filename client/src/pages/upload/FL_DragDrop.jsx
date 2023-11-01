@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import ProgressBar from "../../components/progressbar/progressbar";
 
 function FL_DragDrop({ onSubmit }) {
 
@@ -13,7 +14,7 @@ function FL_DragDrop({ onSubmit }) {
   const [filteredItems, setFilteredItems] = useState(null);
   const [disableAll, setDisableAll] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(true);
-
+  const [progress, setProgress] = useState(0);
 
   const handleFileChange = (e) => {
     updateDisableUpload(false);
@@ -27,35 +28,41 @@ function FL_DragDrop({ onSubmit }) {
   const handleUpload = () => {
     updateDisableUpload(true);
     const promises = [];
-
+    let completedResponses = 0;
+  
     files.forEach((file) => {
       const formData = new FormData();
       formData.append('file', file);
-
+  
       const promise = fetch('http://localhost:5000/uploadimage?userId=650ca3a3cf7964c5cb70782c', {
         method: 'POST',
         body: formData,
       })
         .then((response) => response.text())
         .then((data) => {
+          // Increment the progress every time a response is received
+          completedResponses += 1;
+          const progress = (completedResponses / files.length) * 100;
+          setProgress(progress);
           return data;
         })
         .catch((error) => {
           return `Error: ${error}`;
         });
-
       promises.push(promise);
     });
-
+  
     // Wait for all requests to finish
     Promise.all(promises)
       .then((responses) => {
         setUploadResponses(responses);
       });
-
-
   };
-
+  
+  const incrementProgress = () =>{
+    let temp = progress + 10;
+    setProgress(temp);
+  }
   useEffect(() => {
     if (isFilled === false) {
       if (uploadResponses.length === files.length
@@ -73,6 +80,10 @@ function FL_DragDrop({ onSubmit }) {
       }
     }
   }, [uploadResponses, files]);
+
+  useEffect(()=>{
+    console.log('upload progress: ' + progress);
+  },[progress])
 
   const handleToggleSelect = (index) => {
     if (disableAll == true) {
@@ -137,10 +148,8 @@ function FL_DragDrop({ onSubmit }) {
         <button className='upload--coll--btn' onClick={handleUpload} disabled={isFilled || disableUpload || disableAll}>Upload</button>
       
       </section>
-      <section className="response--scrollable">
-        {uploadResponses.map((response, index) => (
-          <div className="response--item" key={index}>Response {index + 1}: {response}</div>
-        ))}
+      <section className="response--progress--cont">
+        <ProgressBar progress={progress} />
       </section>
 
       <section >
@@ -151,7 +160,7 @@ function FL_DragDrop({ onSubmit }) {
           <div className="image-preview">
             <span className="image-preview--title--2">
               <h4 className="upload--title">2: Choose images to add to this new Collection:</h4>
-              <p className="upload--subtitle">Checked photos will be used, unchecked items will be discarded (might be slow...)</p>
+              <p className="upload--subtitle">Checked photos will be used, unchecked items will be discarded</p>
             </span>
 
             <div className="uploaded--image--scrollable">
@@ -190,18 +199,18 @@ function FL_DragDrop({ onSubmit }) {
               <h4 className="upload--title">3: Happy with your choices</h4>
               <p className="upload--subtitle">Press submit to go to the next step</p>
             </span>
-            <div>
+            <div className="upload--coll--image--names--submit">
               {filteredItems !== null ?
                 <section className="response--scrollable">
                   {filteredItems.map((item, index) => (
-                    <div className="response--item" key={index}>{item.file.name}</div>
+                    <div className="response--item" key={index}>Item {index+1}: {item.file.name}</div>
                   ))}
                 </section>
 
                 :
                 <div>...</div>
               }
-              <button onClick={handleSubmit} disabled={disableAll} type="submit">submit</button>
+              <button className='upload--coll--btn' onClick={handleSubmit} disabled={disableAll} type="submit">Submit Pictures</button>
 
 
             </div>

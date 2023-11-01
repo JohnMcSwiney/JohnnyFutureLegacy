@@ -1,0 +1,43 @@
+.progress-container {
+    width: 300px;
+    height: 20px;
+    box-sizing: border-box;
+    border-radius: 10px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    background-color: #ddd;
+    border: 1px solid rgba(255, 255, 255, 0.308);
+  }
+  
+  .progress-bar {
+    width: 0;
+    box-sizing: border-box;
+    moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    height: 30px;
+    text-align: center;
+    line-height: 30px;
+    color: rgba(255, 255, 255, 0.052);
+    /* background-color: var(--primary); */
+    transition: all 0.5s;
+    border-right: 1px solid rgba(255, 255, 255, 0.308); ;
+    background: linear-gradient(107deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 5%, rgba(248,0,0,1) 29%, rgba(255,255,255,1) 31%, rgba(247,0,0,1) 33%, rgba(246,0,0,1) 44%, rgba(242,242,242,1) 47%, rgba(252,131,131,1) 50%, rgba(255,255,255,1) 53%, rgba(255,0,0,1) 56%, rgba(255,0,0,1) 70%, rgba(255,255,255,1) 71%, rgba(255,0,0,1) 73%, rgba(255,0,0,1) 95%, rgba(255,0,0,1) 100%);
+    background-size: 400% 400%;
+    animation: gradient 10s ease infinite;
+}
+@keyframes gradient {
+    0% {
+        background-position: 100% 50%;
+    }
+
+    50% {
+        background-position: 50% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+  

@@ -312,7 +312,7 @@
 }
 .create--coll--page h2{
     font-size: 50px;
-    margin-bottom: 30px;
+    margin-bottom: 35px;
 }
 .create--coll--page h4{
     margin: 0;
@@ -328,6 +328,7 @@
     justify-content: center;
     position: relative;
     /* padding-top: 30px; */
+    /* background-color: teal; */
 }
 .image-preview--title--3{
     position: absolute;
@@ -335,7 +336,23 @@
     text-align: center;
     gap: 0px;
 }
-/* input:disabled{
-    opacity: 0.3;
-     cursor:not-allowed;
-   } */
+.upload--coll--image--names--submit{
+    align-items: center;
+    display: flex;
+    width: 100%;
+    /* background-color: tan; */
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.upload--coll--image--names--submit .response--scrollable{
+    margin-top: 15px;
+    height: 105px !important;
+    
+}
+.response--progress--cont{
+    display: flex;
+    align-items: center;
+    width: 600px;
+    justify-content: center;
+}
