@@ -1,8 +1,8 @@
 .progress-container {
     width: 300px;
-    height: 20px;
+    height: 10px;
     box-sizing: border-box;
-    border-radius: 10px;
+    border-radius: 5px;
     overflow: hidden;
     align-items: center;
     justify-content: center;
@@ -16,14 +16,14 @@
     box-sizing: border-box;
     moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
-    height: 30px;
+    height: 20px;
     text-align: center;
-    line-height: 30px;
+    line-height: 20px;
     color: rgba(255, 255, 255, 0.052);
     /* background-color: var(--primary); */
     transition: all 0.5s;
     border-right: 1px solid rgba(255, 255, 255, 0.308); ;
-    background: linear-gradient(107deg, rgba(255,0,0,1) 0%, rgba(255,0,0,1) 5%, rgba(248,0,0,1) 29%, rgba(255,255,255,1) 31%, rgba(247,0,0,1) 33%, rgba(246,0,0,1) 44%, rgba(242,242,242,1) 47%, rgba(252,131,131,1) 50%, rgba(255,255,255,1) 53%, rgba(255,0,0,1) 56%, rgba(255,0,0,1) 70%, rgba(255,255,255,1) 71%, rgba(255,0,0,1) 73%, rgba(255,0,0,1) 95%, rgba(255,0,0,1) 100%);
+    background: linear-gradient(107deg, var(--primary) 0%, var(--primary) 44%, rgba(242,242,242,1) 47%, var(--primary) 50%, rgba(255,255,255,1) 53%, var(--primary) 56%, var(--primary) 100%);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }

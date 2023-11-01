@@ -81,9 +81,9 @@ function FL_DragDrop({ onSubmit }) {
     }
   }, [uploadResponses, files]);
 
-  useEffect(()=>{
-    console.log('upload progress: ' + progress);
-  },[progress])
+  // useEffect(()=>{
+  //   console.log('upload progress: ' + progress);
+  // },[progress])
 
   const handleToggleSelect = (index) => {
     if (disableAll == true) {
