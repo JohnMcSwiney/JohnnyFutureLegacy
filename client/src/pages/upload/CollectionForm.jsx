@@ -53,21 +53,21 @@ function CollectionForm() {
         });
     };
 
-    const [assetsFormData, setAssetsFormData] = useState([{
+    const [assetsFormData, setAssetsFormData] = useState([
+        {
         assetName: '',
         creatorName: hardcodedUser,
-        uploadDate: '',
         assetDescription: '',
         assetPriceUSD: 0,
         informationTags: [],
         assetImage: '',
         exifData: [],
-    }]);
+    }
+]);
     const resetAssetFormData = () => {
         setAssetsFormData({
             assetName: '',
             creatorName: hardcodedUser,
-            uploadDate: '',
             assetDescription: '',
             assetPriceUSD: 0,
             informationTags: [],
@@ -130,6 +130,7 @@ function CollectionForm() {
     const setCurrentAsset = (entry, index) => {
         console.log('entry: ', entry)
         console.log('index: ', index)
+        switchContentVal('ASSET_ARRAY');
     }
     const switchContentVal = (input) => {
         // console.log('input val: ', input )
@@ -171,6 +172,10 @@ function CollectionForm() {
         setFormDataCollection({ ...formDataCollection, [name]: value });
     };
 
+    useEffect(() => {
+        // console.log(assetsFormData);
+      }, [assetsFormData]);
+
     const handleInfoSubmit = async (e) => {
         e.preventDefault();
         //remove later!!
@@ -178,8 +183,48 @@ function CollectionForm() {
 
         setIsCollInfoFormComplete(true);
         switchContentVal('ASSET_ARRAY');
-        console.log(formDataCollection)
+        console.log(formDataCollection);
+        console.log(parentPictureData);
+        // console.log(assetsFormData[0]);
+        console.log(parentPictureData[0].file.name);
+
+        // setAssetsFormData({ ...assetsFormData[0], [name]: parentPictureData[0].file.name })
+        // setAssetsFormData({ ...assetsFormData[1], [name]: parentPictureData[1].file.name })
+        // setAssetsFormData({ ...assetsFormData[2], [name]: parentPictureData[2].file.name })
+        // setAssetsFormData({ ...assetsFormData[3], [name]: parentPictureData[3].file.name })
+        // setAssetsFormData({ ...assetsFormData[4], [name]: parentPictureData[4].file.name })
+        let tempAssetArray = [{}];
+
+        // parentPictureData.map((asset, index) =>(
+            for (let index = 0; index < parentPictureData.length; index++){
+                const tempAsset = {
+                    assetName: parentPictureData[index].file.name,
+                    creatorName: hardcodedUser,
+                    assetDescription: '',
+                    assetPriceUSD: 0,
+                    informationTags: [],
+                    assetImage: `http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${parentPictureData[index].fileName}`,
+                    exifData: [],
+                }
+                tempAssetArray.push(tempAsset);
+                // console.log('index', index, 'file', parentPictureData[index].file.name)
+            }
+            // console.log(tempAssetArray)
+            if(tempAssetArray.length === parentPictureData.length+1){
+                // console.log()
+                tempAssetArray.shift()
+                console.log('lists are same length')
+                console.log(tempAssetArray)
+            }
+            //  tempAssetObject = 
+        // )
+        // )
+        
+        
+        // setTimeout(console.log(assetsFormData[0]), 10000);
     }
+    //*
+    // asset info
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
