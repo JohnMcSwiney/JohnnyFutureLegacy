@@ -148,9 +148,17 @@ function FL_DragDrop({ onSubmit }) {
         <button className='upload--coll--btn' onClick={handleUpload} disabled={isFilled || disableUpload || disableAll}>Upload</button>
       
       </section>
+      {files.length !== 0 
+      && files.length !==uploadResponses.length
+      && progress < 100 ? 
       <section className="response--progress--cont">
-        <ProgressBar progress={progress} />
+      <ProgressBar progress={progress} />
+    </section>
+    :
+    <section className="response--progress--cont">
       </section>
+    }
+      
 
       <section >
 
