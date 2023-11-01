@@ -47,67 +47,22 @@ app.post('/uploadimage', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file was uploaded.');
   }
-  
-
   const userId = req.query.userId;
   const userDirectory = `uploaded_files/${userId}/`;
   const file = req.file;
+  let fileExifData = [{}];
 
-  //exif parser
-  // sharp(file.path)
-  // .toBuffer()
-  // .then((data) => {
-  //   // Parse Exif data using exif-parser
-  //   const exifParser = ExifParser.create(data);
-  //   const exifData = exifParser.parse();
-
-  //   // Exif data will be available in the exifData object
-  //   console.log('exifparser')
-  //   console.log('Exif Data :', exifData);
-  // })
-  // .catch((err) => {
-  //   console.error('Error reading image or Exif data:', err);
-  // });
-
-  //piexif
-  // const imageBuffer = fs.readFileSync(file.path);
-  // // Extract EXIF data
-  // try {
-  //   const exifData = piexif.load(imageBuffer.toString('binary'));
-  //   console.log('piexif')
-  //   console.log('EXIF Data:', exifData);
-  // } catch (error) {
-  //   console.error('Error reading EXIF data:', error.message);
-  // }
-
-// exif-js
-
-// Read image file (replace with your image path)
-const imagePath = file.path;
-const imageBuffer2 = fs.readFileSync(imagePath);
-try {
-  const exifData =exifReader.getData(imageBuffer2);
-  console.log('exif-js')
-  console.log('EXIF Data:', exifData);
-} catch (error) {
-  console.error('Error reading EXIF data:', error.message);
-}
-
-
-// exif--tool
-fs.readFile(imagePath, function (err, data) {
-  if (err)
-    throw err;
-  else {
-    exif.metadata(data, function (err, metadata) {
-      if (err)
-        throw err;
-      else
-        console.log(metadata);
-    });
+  //Exif parser
+  const imageBuffer = fs.readFileSync(file.path);
+  // Extract EXIF data
+  try {
+    const exifData = piexif.load(imageBuffer.toString('binary'));
+    // console.log('piexif')
+    // console.log('EXIF Data:', exifData);
+    fileExifData = exifData;
+  } catch (error) {
+    console.error('Error reading EXIF data:', error.message);
   }
-});
-
 
 
   const splitName = file.originalname.split('.');
@@ -124,15 +79,28 @@ fs.readFile(imagePath, function (err, data) {
   await sharp(file.path)
     .resize(800) // Adjust the size as needed
     .toFile(lowResPath);
-  
-    
-
   // Delete the original uploaded file
   fs.unlinkSync(file.path);
 
+  
   //send low res version to front
   res.send(splitName[0] + '_low.'+splitName[1]);
+
+  const jsonFilePath = userDirectory + splitName[0] + '_' + splitName[1] + '_data.json'
+
+  const jsonData = {content:fileExifData}
+
+  const jsonString = JSON.stringify(jsonData);
+
+  fs.writeFile(jsonFilePath, jsonString, 'utf-8', (err) => {
+    if (err) {
+      console.error('Error writing JSON file:', err);
+    } else {
+      console.log('JSON file: ' + splitName[0] + '_' + splitName[1] + '_data.json' +' has been saved.' );
+    }
+  });
 });
+
 
 
 // Function to check if a file is an image (you can expand this function to include more checks)
