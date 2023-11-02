@@ -120,7 +120,7 @@ function AssetForm_v2({ asset, onSubmit }) {
       <form onSubmit={handleSubmit} className="asset--page--content--cont">
       <div className='asset--upload--left'>
         {/* <label htmlFor="assetImage" className='left--label'>Asset Image:</label> */}
-          <div className='collection--form--asset--imgcont'>
+          <div className='collection--form--asset--imgcont pulsate-fwd'>
             <img
               src={formData.assetImage}
               alt="Asset Preview"

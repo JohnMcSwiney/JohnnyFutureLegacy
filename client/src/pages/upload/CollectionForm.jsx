@@ -187,10 +187,10 @@ function CollectionForm() {
         //remove later!!
         setIsCollInfoFormComplete(true);//for testing only!!
         switchContentVal('ASSET_ARRAY');
-        console.log(formDataCollection);
-        console.log(parentPictureData);
+        // console.log(formDataCollection);
+        // console.log(parentPictureData);
         // console.log(assetsFormData[0]);
-        console.log(parentPictureData[0].file.name);
+        // console.log(parentPictureData[0].file.name);
 
         // setAssetsFormData({ ...assetsFormData[0], [name]: parentPictureData[0].file.name })
         // setAssetsFormData({ ...assetsFormData[1], [name]: parentPictureData[1].file.name })
@@ -214,8 +214,8 @@ function CollectionForm() {
                 assetImage: `http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${parentPictureData[index].fileName}`,
                 exifData: [],
             }
-            console.log(tempAsset.exifData);
-            tempAsset.exifData = "test";
+            // console.log(tempAsset.exifData);
+            // tempAsset.exifData = "test";
 
             // const promises = [];
             // let completedResponses = 0;
@@ -226,15 +226,18 @@ function CollectionForm() {
                 .then((data) =>{
                     // completedResponses += 1;
                     tempAsset.exifData = data.content;
+                    // tempAssetArray.push(tempAsset) 
+                    // console.log
                 })
                 .catch((error) => {
                     tempAsset.exifData = 'none';
+                    // tempAssetArray.push(tempAsset) 
                   });   
                 //   promises.push(promise);
-                tempAssetArray.push(tempAsset) 
+                
             // // console.log(exifDataObj)
             // Promise.all(promises).then((tempAsset) => {
-            //     tempAssetArray.push(tempAsset)
+                tempAssetArray.push(tempAsset)
             // }
                 
             // )
