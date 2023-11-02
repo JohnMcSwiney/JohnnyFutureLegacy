@@ -20,6 +20,7 @@ function CollectionForm() {
     } = useUploadContext();
     const [tempCountVar, setTempCountVar] = useState(0)
     const [parentPictureData, setParentPictureData] = useState(null);
+    const [assetArray, setAssetArray] = useState(null);
     const hardcodedUser = '650ca3a3cf7964c5cb70782c';
     const navigate = useNavigate();
 
@@ -53,6 +54,7 @@ function CollectionForm() {
         });
     };
 
+    const [currentAssetIndex, setCurrentAssetIndex] = useState(0);
     const [assetsFormData, setAssetsFormData] = useState([
         {
         assetName: '',
@@ -128,14 +130,15 @@ function CollectionForm() {
     }
 
     const setCurrentAsset = (entry, index) => {
-        console.log('entry: ', entry)
-        console.log('index: ', index)
+        // console.log('entry: ', entry)
+        if(currentAssetIndex !== index){
+           console.log('setting asset index: ', index) 
+            setCurrentAssetIndex(index);
+        }
+        
         switchContentVal('ASSET_ARRAY');
     }
     const switchContentVal = (input) => {
-        // console.log('input val: ', input )
-        //     setIsCollInfoFormComplete(input);
-
         if (isCollInfoFormComplete == false) {
             return;
             // show some toast here!
@@ -175,13 +178,12 @@ function CollectionForm() {
     useEffect(() => {
         // console.log(assetsFormData);
       }, [assetsFormData]);
-
+    // const [exifDataObj, setExifDataObj] = useState([{}]);
     const handleInfoSubmit = async (e) => {
         e.preventDefault();
+        
         //remove later!!
-        //for testing only!!
-
-        setIsCollInfoFormComplete(true);
+        setIsCollInfoFormComplete(true);//for testing only!!
         switchContentVal('ASSET_ARRAY');
         console.log(formDataCollection);
         console.log(parentPictureData);
@@ -194,9 +196,13 @@ function CollectionForm() {
         // setAssetsFormData({ ...assetsFormData[3], [name]: parentPictureData[3].file.name })
         // setAssetsFormData({ ...assetsFormData[4], [name]: parentPictureData[4].file.name })
         let tempAssetArray = [{}];
-
+        
         // parentPictureData.map((asset, index) =>(
             for (let index = 0; index < parentPictureData.length; index++){
+                // console.log(parentPictureData[index].file.name)
+                let jsonExifData = `http://localhost:5000/getimageData?userId=${hardcodedUser}&filename=${parentPictureData[index].file.name}`;
+                // console.log(jsonExifData);
+                let exifDataObj = [];
                 const tempAsset = {
                     assetName: parentPictureData[index].file.name,
                     creatorName: hardcodedUser,
@@ -206,6 +212,18 @@ function CollectionForm() {
                     assetImage: `http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${parentPictureData[index].fileName}`,
                     exifData: [],
                 }
+                console.log(tempAsset.exifData);
+                tempAsset.exifData = "test";
+                
+                
+                
+                fetch(jsonExifData)
+                .then(response => response.json())
+                .then(data => 
+                    tempAsset.exifData = data.content
+                    );
+                // console.log(exifDataObj)
+                
                 tempAssetArray.push(tempAsset);
                 // console.log('index', index, 'file', parentPictureData[index].file.name)
             }
@@ -215,6 +233,7 @@ function CollectionForm() {
                 tempAssetArray.shift()
                 console.log('lists are same length')
                 console.log(tempAssetArray)
+                setAssetArray(tempAssetArray);
             }
             //  tempAssetObject = 
         // )
@@ -223,8 +242,15 @@ function CollectionForm() {
         
         // setTimeout(console.log(assetsFormData[0]), 10000);
     }
+
     //*
     // asset info
+    const handleAssetChange = (e) => {
+        const { name, value } = e.target;
+        console.log('name: ', name, ' value: ', value, ' current asset index: ', currentAssetIndex);
+        // setFormData({ ...formData, [name]: value });
+      };
+
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
@@ -232,22 +258,17 @@ function CollectionForm() {
             onClick={updateUploadValue}
         >
             <h2>Create a collection</h2>
-
             <button
                 className='create--coll--reset--btn'
                 onClick={resetUpload}
             >Reset Upload Items</button>
-
             {!parentPictureData ?
                 <section onClick={updateUploadValue}>
                     <FL_DragDrop onSubmit={handlePictureData} />
                 </section>
                 : <section>
 
-                </section>
-            }
-
-
+                </section>}
             <section>
                 {/* data received and collection can start to be created */}
                 {parentPictureData ?
@@ -259,7 +280,7 @@ function CollectionForm() {
 
                         <div className="uploaded--image--scrollable">
                             {parentPictureData.map((entry, index) => (
-                                <div className="uploaded--image" key={index} onClick={() => setCurrentAsset(entry.file, index)}>
+                                <div className={currentAssetIndex === index? 'uploaded--image selected--image' : 'uploaded--image'} key={index} onClick={() => setCurrentAsset(entry.file, index)}>
                                     <img src={`http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${entry.fileName}`} alt={`Image ${entry.file.name}`} />
                                 </div>
                             ))}
@@ -285,9 +306,6 @@ function CollectionForm() {
                         {tabContent === 'COLLECTION_INFO' &&
                             <div>
                                 COLLECTION INFO
-
-
-
                                 <form onSubmit={handleInfoSubmit} className='asset--page--content--cont'>
 
                                     <div className='asset--upload--left'>
@@ -412,6 +430,11 @@ function CollectionForm() {
                         {tabContent === 'ASSET_ARRAY' &&
                             <div>
                                 ASSET ARRAY!
+                                {assetArray ? <div>
+                                    {assetArray.map((asset, index) => (
+                                        <p className={index === currentAssetIndex ? '':'hidden'}>{asset.assetName}</p>
+                                    ))}
+                                </div> : <div></div>}
                             </div>
                         }
                     </div>

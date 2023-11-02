@@ -117,6 +117,7 @@ function generateNewFilename(userId, filename, fileExtension, version) {
     return `${userId}_${filename}.${fileExtension}`;
   }
 }
+
 app.get('/getimage', (req, res) => {
   const userId = req.query.userId;
   const filename = req.query.filename;
@@ -134,7 +135,27 @@ app.get('/getimage', (req, res) => {
     res.status(404).send('File not found.');
   }
 });
+app.get('/getimageData', (req, res) => {
+  const userId = req.query.userId;
+  const filename = req.query.filename;
 
+  if (!userId || !filename) {
+    return res.status(400).send('Invalid request. Provide both userId and filename.');
+  }
+
+  const userDirectory = `uploaded_files/${userId}/`;
+  const splitName = filename.split('.');
+  const jsonFileName = splitName[0] + '_' + splitName[1] + '_data.json';
+  const imagePath = path.join(__dirname, userDirectory, jsonFileName); // Construct an absolute path
+
+  
+  // console.log('JSON file: ' + splitName[0] + '_' + splitName[1] + '_data.json' );
+  if (fs.existsSync(imagePath)) {
+    res.sendFile(imagePath);
+  } else {
+    res.status(404).send('File not found.');
+  }
+});
 
 
 app.listen(port, () => {

@@ -256,20 +256,32 @@
     align-items: center;
     justify-content: center;
     overflow: hidden;
+    box-sizing: border-box;
     border-radius: 10px;
     min-height: 200px;
     min-width: 300px;
     position: relative;
-    border: #000000 solid 2px;
+    border: #000000 solid 4px;
     transition: 0.7ms;
     flex-basis: 300px;
     margin-top: 15px;
     margin-bottom: 15px;
+    transition: all ease 1ms;
+    
   }
   .uploaded--image:hover{
-    border: var(--tertiary) solid 2px;
-    transition: 0.2ms;
+    border: var(--tertiary) solid 4px;
+    transition: all ease 1ms;
   } 
+
+  .selected--image{
+    border: var(--primary) solid 4px !important;
+    transition: all ease 1ms;
+  }
+  .selected--image:hover{
+    border: var(--primary) solid 4px !important;
+    transition: all ease 1ms;
+  }
 /* target first element with class ".circle" */
 :nth-child(1 of .uploaded--image) {
    margin-left: 10px;
@@ -286,14 +298,14 @@
     left: 0;
     width: 100%;
     /* filter:blur(2px); */
-    transform: scale(1.0);
-    transition: transform ease 0.7ms;
+    transform: scale(1.01);
+    transition: all ease 0.3s;
   }
 
   .uploaded--image:hover img {
     /* filter:blur(0px); */
-    transform: scale(1.1);
-    transition: transform ease 0.2ms;
+    transform: scale(1.03);
+    transition: all ease 0.3s;
   }
 .image--check--cont{
     width: 50px; height: 50px;
@@ -410,4 +422,7 @@
 }
 .collection--form--title button{
     margin-top: 20px;
+}
+.hidden{
+    opacity: 0;
 }
