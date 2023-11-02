@@ -19,7 +19,7 @@ import {
   SignUp,
   Subscribe,
   Upload,
-  AssetForm,
+  // AssetForm,
   CollectionForm,
   Landing,
   Profile,
@@ -97,7 +97,7 @@ function App() {
 
                     <Route path="/upload" element={<Upload />}></Route>
 
-                    <Route path="/upload/asset" element={<AssetForm />}></Route>
+                    {/* <Route path="/upload/asset" element={<AssetForm />}></Route> */}
                     <Route
                       path="/upload/collection"
                       element={<CollectionForm />}

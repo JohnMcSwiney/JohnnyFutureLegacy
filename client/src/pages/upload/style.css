@@ -133,6 +133,9 @@
 .button--width--713 {
     width: 713px;
 }
+.button--width--413 {
+    width: 413px;
+}
 .FL_Drag_Drop{
     display: flex;
     align-items: center;

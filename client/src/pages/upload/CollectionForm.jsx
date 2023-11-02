@@ -4,7 +4,9 @@ import FL_DragDrop from './FL_DragDrop';
 import { useToastContext } from '../../context/ToastContext';
 import { useUploadContext } from '../../context/UploadContext';
 import { useNavigate } from 'react-router-dom';
+import AssetForm_v2 from './AssetForm_v2';
 import './style.css'
+import { Asset } from '../../pages';
 
 function CollectionForm() {
     const { clearUploadData,
@@ -215,16 +217,28 @@ function CollectionForm() {
             console.log(tempAsset.exifData);
             tempAsset.exifData = "test";
 
+            // const promises = [];
+            // let completedResponses = 0;
 
-
+            // const promise = 
             fetch(jsonExifData)
-                .then(response => response.json())
-                .then(data =>
-                    tempAsset.exifData = data.content
-                );
-            // console.log(exifDataObj)
-
-            tempAssetArray.push(tempAsset);
+                .then((response) => response.json())
+                .then((data) =>{
+                    // completedResponses += 1;
+                    tempAsset.exifData = data.content;
+                })
+                .catch((error) => {
+                    tempAsset.exifData = 'none';
+                  });   
+                //   promises.push(promise);
+                tempAssetArray.push(tempAsset) 
+            // // console.log(exifDataObj)
+            // Promise.all(promises).then((tempAsset) => {
+            //     tempAssetArray.push(tempAsset)
+            // }
+                
+            // )
+            
             // console.log('index', index, 'file', parentPictureData[index].file.name)
         }
         // console.log(tempAssetArray)
@@ -248,10 +262,18 @@ function CollectionForm() {
     const handleAssetChange = (e) => {
         const { name, value } = e.target;
         console.log('name: ', name, ' value: ', value, ' current asset index: ', currentAssetIndex);
-        
+        console.log(assetArray[currentAssetIndex]);
+        if(name == 'assetName'){
+            console.log('weouthere')
+            assetArray[currentAssetIndex].assetName = value;
+            console.log(assetArray[currentAssetIndex].assetName)
+        }
         // setFormData({ ...asset, [name]: value });
     };
-
+    const handleAssetData = (assetData, index) => {
+        console.log("index: ", index, "asset Data: ", assetData)
+        
+    }
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
@@ -435,112 +457,7 @@ function CollectionForm() {
                                     {assetArray.map((asset, index) => (
 
                                         <div className={index === currentAssetIndex ? '' : 'hidden'}>
-                                            {/* <p >{asset.assetName}</p> */}
-                                            <form 
-                                            // onSubmit={handleSubmit} 
-                                            className='asset--page--content--cont'>
-                                                <div className='asset--upload--left'>
-                                                    {/* <label htmlFor="assetImage" className='left--label'>Asset Image:</label> */}
-                                                    <div className='collection--form--asset--imgcont'>
-                                                        <img
-                                                            src={asset.assetImage}
-                                                            alt="Asset Preview"
-                                                        />
-                                                    </div>
-                                                </div>
-                                                <div className='asset--upload--right'>
-                                                    <div className='FL_Input__text__1'>
-                                                        <label>Name:</label>
-                                                        <input
-                                                            type="text"
-                                                            name="assetName"
-                                                            value={asset.assetName}
-                                                            onChange={handleAssetChange}
-                                                            placeholder='Asset Name'
-                                                            required
-                                                        />
-                                                        <h4>(Required, 100 characters max)</h4>
-                                                    </div>
-                                                    <div className='FL_Input__text__1'>
-                                                        <label>Description:</label>
-                                                        <textarea
-                                                            name="assetDescription"
-                                                            value={asset.assetDescription}
-                                                            onChange={handleAssetChange}
-                                                            placeholder='Description Here'
-                                                        />
-                                                        <h4>(Not required, 500 characters max)</h4>
-                                                    </div>
-
-                                                    <div className='FL_Input__text__1'>
-                                                        <label>Tags:</label>
-                                                        <input
-                                                            type="text"
-                                                            name="informationTags"
-                                                            value={asset.informationTags}
-                                                            onChange={handleAssetChange}
-                                                            placeholder='Tag, Tag2, Tag3...'
-                                                        />
-                                                        <h4>(comma-separated)</h4>
-                                                    </div>
-
-                                                    <div className='upload--right--price-n-date--cont'>
-                                                        <div className='FL_Input__number__1'>
-                                                            <label>Price:</label>
-                                                            <div className='inner--cont'>
-                                                                <div>
-                                                                    <h3>$</h3>
-                                                                    <h4>USD</h4>
-                                                                </div>
-                                                                <input
-                                                                    type="number"
-                                                                    name="assetPriceUSD"
-                                                                    value={asset.assetPriceUSD}
-                                                                    onChange={handleAssetChange}
-                                                                    min={0}
-                                                                    required
-                                                                />
-                                                            </div>
-
-                                                        </div>
-                                                        {/* <div className='FL_Input__date__1'>
-                                                            <label>Upload Date:</label>
-                                                            <input
-                                                                type="date"
-                                                                name="uploadDate"
-                                                                value={asset.uploadDate}
-                                                                onChange={handleAssetChange}
-                                                                required
-                                                            />
-                                                        </div> */}
-                                                    </div>
-
-                                                    {/* <div className="human--made--verification--cont">
-                                                        <h5>Human Made Image Verification:</h5>
-                                                        <p>Learn more: <a>Statement Regarding AI</a></p>
-                                                        <label htmlFor="confirmation" className='checkbox--cont'>
-                                                            <input
-                                                                type="checkbox"
-                                                                id="confirmation"
-                                                                name="confirmation"
-                                                                onChange={(e) => setIsConfirmed(e.target.checked)}
-                                                            />
-                                                            <p className='human--made--description'>
-                                                                Future Legacy prides itself on hosting the highest quality authentically human made assets, by checking this box you understand that your image will be verified as human.</p>
-                                                        </label>
-                                                        <div>
-                                                            <button type="submit"
-                                                                disabled={!isConfirmed}
-                                                                className='FL_btn__1 button--width--713'
-                                                                onMouseDown={handleMouseDown}
-                                                                onMouseUp={handleMouseUp}
-                                                                style={buttonStyle}
-                                                            >Create Asset</button>
-                                                        </div>
-                                                    </div> */}
-                                                </div>
-                                            </form>
-
+                                           <AssetForm_v2 asset={asset} onSubmit={handleAssetData}/>
                                         </div>
                                     ))}
                                 </div> : <div></div>}

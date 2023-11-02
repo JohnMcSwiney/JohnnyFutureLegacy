@@ -7,7 +7,7 @@ export default function UploadPage() {
     const navigate = useNavigate();
     const redirectSingleAsset = () => {
 
-        navigate(`/upload/asset`)
+        // navigate(`/upload/asset`)
     }
     const redirectCollection = () => {
 
