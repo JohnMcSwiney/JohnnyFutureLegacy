@@ -274,9 +274,19 @@ function CollectionForm() {
         // setFormData({ ...asset, [name]: value });
     };
     const handleAssetData = (assetData, index) => {
-        console.log("index: ", index, "asset Data: ", assetData)
-        
+        console.log("index: ", index, "asset Data: ", assetData);
+        // Create a copy of the assets array
+        const updatedAssets = [...assetArray];
+        // Replace the asset at the specified index with the new assetData
+        updatedAssets[index] = assetData;
+        // Update the state with the new assets array
+        setAssetArray(updatedAssets);
     }
+
+
+    //*
+    // Submit all assets
+
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
@@ -461,6 +471,10 @@ function CollectionForm() {
 
                                         <div className={index === currentAssetIndex ? '' : 'hidden'}>
                                            <AssetForm_v2 asset={asset} onSubmit={handleAssetData}/>
+                                           <button className='upload--coll--btn' 
+                                        //    onClick={}
+                                        //    onClick={handleSubmit} disabled={disableAll} 
+                                           type="submit">Creat Collection</button>
                                         </div>
                                     ))}
                                 </div> : <div></div>}
