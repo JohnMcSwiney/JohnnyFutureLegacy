@@ -20,20 +20,14 @@ function CollectionForm() {
         setUploadStarted,
         startUploadProcess
     } = useUploadContext();
-    const [tempCountVar, setTempCountVar] = useState(0)
-    const [parentPictureData, setParentPictureData] = useState(null);
-    const [assetArray, setAssetArray] = useState(null);
-    const hardcodedUser = '650ca3a3cf7964c5cb70782c';
+    const [tempCountVar, setTempCountVar] = useState(0); //Used to start page, keeps ux smooth
+    const [parentPictureData, setParentPictureData] = useState(null); //Holds picture objects from the file upload (drag/drop input) 
+    const [assetArray, setAssetArray] = useState(null); //Holds asset objects
+    const hardcodedUser = '650ca3a3cf7964c5cb70782c'; //remove me later!
     const navigate = useNavigate();
-
-    // const [newCollectionName, setNewCollectionName] = useState('New Collection');
-    // const [newCollectionDesc, setNewCollectionDesc] = useState('Click to add Collection Description')
-    // const [newCollectionDate, setNewCollectionDate] = useState(Date);
-    // const [newCollectionAssets, setNewCollectionAssets] = useState([{}])
-    // const [newCollectionImg, setNewCollectionImg] = useState('noImg');
-
-    const [isCollInfoFormComplete, setIsCollInfoFormComplete] = useState(false);
-    const [tabContent, setTabContent] = useState('COLLECTION_INFO');//  COLLECTION_INFO / OR / ASSET_ARRAY
+    const [isCollInfoFormComplete, setIsCollInfoFormComplete] = useState(false); // Tracks if the collection info has been submitted or not
+    const [tabContent, setTabContent] = useState('COLLECTION_INFO');//  COLLECTION_INFO / OR / ASSET_ARRAY // used for the form tabs
+    const [currentAssetIndex, setCurrentAssetIndex] = useState(0); //keeps track of the current selected asset to be edited
 
     const [formDataCollection, setFormDataCollection] = useState({
         collectionName: '',
@@ -42,7 +36,8 @@ function CollectionForm() {
         collectionDescription: '',
         collectionPriceUSD: 0,
         collectionInformationTags: [],
-        collectionImage: ''
+        collectionImage: '',
+        collectionAssetArray: [{}],
     });
     const resetCollectionForm = () => {
         setFormDataCollection({
@@ -53,70 +48,36 @@ function CollectionForm() {
             collectionPriceUSD: 0,
             collectionInformationTags: [],
             collectionImage: '',
-        });
-    };
-
-    const [currentAssetIndex, setCurrentAssetIndex] = useState(0);
-    const [assetsFormData, setAssetsFormData] = useState([
-        {
-            assetName: '',
-            creatorName: hardcodedUser,
-            assetDescription: '',
-            assetPriceUSD: 0,
-            informationTags: [],
-            assetImage: '',
-            exifData: [],
-        }
-    ]);
-    const resetAssetFormData = () => {
-        setAssetsFormData({
-            assetName: '',
-            creatorName: hardcodedUser,
-            assetDescription: '',
-            assetPriceUSD: 0,
-            informationTags: [],
-            assetImage: '', // Clear the assetImage if you have it
-            exifData: [],
+            collectionAssetArray: [{}],
         });
     };
     useEffect(() => {
-        console.log('run on reload?');
-        incrementCount();
+        incrementCount(); //run on load
     }, [])
+    const incrementCount = () => { setTempCountVar(tempCountVar + 1) }
 
     useEffect(() => {
-        // console.log('onload upload data check:', uploadData,
-        //     " upload Started?:", uploadStarted,
-        //     "uploadValue:", uploadValue);
         if (uploadData !== null && uploadStarted == true && uploadValue == 'COLLECTION' && parentPictureData == null) {
-            // console.log('we have previous data');
             setParentPictureData(uploadData);
         }
-
-
     }, [tempCountVar])
 
     useEffect(() => {
         if (parentPictureData !== null && uploadData == null) {
-            // console.log("picture data received, setting global var")
-            // console.log(parentPictureData)
             setUploadData(parentPictureData);
+            updateAllAssets();
         }
     }, [parentPictureData])
 
+    //updates global variable
     const updateUploadValue = () => {
         if (uploadValue === 'COLLECTION') {
-            // console.log("upload Value:", uploadValue);
         } if (uploadValue === 'SINGLE ASSET') {
             console.log("upload Value:", uploadValue);
-            console.log("do something here!");
+            console.log("do something here!"); // redirect?
         } else {
             setUploadValue('COLLECTION');
         }
-    }
-
-    const incrementCount = () => {
-        setTempCountVar(tempCountVar + 1)
     }
 
     const handlePictureData = (pictureData) => {
@@ -125,30 +86,21 @@ function CollectionForm() {
     }
 
     const resetUpload = () => {
-        console.log('resetting upload');
         startUploadProcess("COLLECTION");
-        setParentPictureData(null)
+        setParentPictureData(null);
+        resetCollectionForm();
         // clearUploadData();
     }
 
     const setCurrentAsset = (entry, index) => {
-        // console.log('entry: ', entry)
-        if (currentAssetIndex !== index) {
-            console.log('setting asset index: ', index)
-            setCurrentAssetIndex(index);
-        }
-
+        if (currentAssetIndex !== index) { setCurrentAssetIndex(index); }
         switchContentVal('ASSET_ARRAY');
     }
     const switchContentVal = (input) => {
         if (isCollInfoFormComplete == false) {
             return;
             // show some toast here!
-        } else {
-            console.log('input val: ', input)
-
-            setTabContent(input);
-        }
+        } else { setTabContent(input); }
     }
 
 
@@ -175,118 +127,132 @@ function CollectionForm() {
     const handleCollInfoChange = (e) => {
         const { name, value } = e.target;
         setFormDataCollection({ ...formDataCollection, [name]: value });
+        // console.log(formDataCollection)
+
+        updateAllAssets();
     };
 
-    useEffect(() => {
-        // console.log(assetsFormData);
-    }, [assetsFormData]);
-    // const [exifDataObj, setExifDataObj] = useState([{}]);
+
+
     const handleInfoSubmit = async (e) => {
         e.preventDefault();
 
         //remove later!!
         setIsCollInfoFormComplete(true);//for testing only!!
         switchContentVal('ASSET_ARRAY');
-        // console.log(formDataCollection);
-        // console.log(parentPictureData);
-        // console.log(assetsFormData[0]);
-        // console.log(parentPictureData[0].file.name);
 
-        // setAssetsFormData({ ...assetsFormData[0], [name]: parentPictureData[0].file.name })
-        // setAssetsFormData({ ...assetsFormData[1], [name]: parentPictureData[1].file.name })
-        // setAssetsFormData({ ...assetsFormData[2], [name]: parentPictureData[2].file.name })
-        // setAssetsFormData({ ...assetsFormData[3], [name]: parentPictureData[3].file.name })
-        // setAssetsFormData({ ...assetsFormData[4], [name]: parentPictureData[4].file.name })
+    }
+
+    const updateAllAssets = () => {
         let tempAssetArray = [{}];
+        if (parentPictureData) {
+            if (assetArray) {
 
-        // parentPictureData.map((asset, index) =>(
-        for (let index = 0; index < parentPictureData.length; index++) {
-            // console.log(parentPictureData[index].file.name)
-            let jsonExifData = `http://localhost:5000/getimageData?userId=${hardcodedUser}&filename=${parentPictureData[index].file.name}`;
-            // console.log(jsonExifData);
-            let exifDataObj = [];
-            const tempAsset = {
-                assetName: parentPictureData[index].file.name,
-                creatorName: hardcodedUser,
-                assetDescription: '',
-                assetPriceUSD: formDataCollection.collectionPriceUSD,
-                informationTags: formDataCollection.collectionInformationTags,
-                assetImage: `http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${parentPictureData[index].fileName}`,
-                exifData: [],
+                console.log('asset objects already created, editing!');
+                for (let index = 0; index < assetArray.length; index++) {
+                    let itemPrice = 0;
+                    let itemTags = '';
+
+                    if(assetArray[index].assetPriceUSD !== formDataCollection.collectionPriceUSD){
+                        itemPrice = assetArray[index].assetPriceUSD;
+                    } else {
+                        itemPrice = formDataCollection.collectionPriceUSD;
+                    }
+
+                    if(assetArray[index].informationTags !== formDataCollection.collectionInformationTags){
+                        itemTags = assetArray[index].informationTags;
+                    } else {
+                        itemTags = formDataCollection.collectionInformationTags;
+                    }
+                    console.log("asset: ",assetArray[index].assetName, " price: ", itemPrice, " tags: ", itemTags)
+                    const tempAsset = {
+                        assetName: assetArray[index].assetName,
+                        creatorName: hardcodedUser,
+                        assetDescription: assetArray[index].assetDescription,
+                        assetPriceUSD: itemPrice,
+                        informationTags: itemTags,
+                        assetImage: assetArray[index].assetImage,
+                        exifData: assetArray[index].exifData,
+                    }
+                    tempAssetArray.push(tempAsset)
+                }
+
+            } else {
+                console.log('asset objects being created')
+                for (let index = 0; index < parentPictureData.length; index++) {
+                    let jsonExifData = `http://localhost:5000/getimageData?userId=${hardcodedUser}&filename=${parentPictureData[index].file.name}`;
+                    let exifDataObj = [];
+                    const tempAsset = {
+                        assetName: parentPictureData[index].file.name,
+                        creatorName: hardcodedUser,
+                        assetDescription: '',
+                        assetPriceUSD: formDataCollection.collectionPriceUSD,
+                        informationTags: formDataCollection.collectionInformationTags,
+                        assetImage: `http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${parentPictureData[index].fileName}`,
+                        exifData: [],
+                    }
+                    fetch(jsonExifData)
+                        .then((response) => response.json())
+                        .then((data) => {
+                            tempAsset.exifData = data.content;
+                        })
+                        .catch((error) => {
+                            tempAsset.exifData = 'none';
+                        });
+                    tempAssetArray.push(tempAsset)
+                }
+                if (tempAssetArray.length === parentPictureData.length + 1) {
+                    tempAssetArray.shift()
+                    // console.log('lists are same length')
+                    console.log(tempAssetArray)
+                    setAssetArray(tempAssetArray);
+                }
             }
-            // console.log(tempAsset.exifData);
-            // tempAsset.exifData = "test";
 
-            // const promises = [];
-            // let completedResponses = 0;
-
-            // const promise = 
-            fetch(jsonExifData)
-                .then((response) => response.json())
-                .then((data) =>{
-                    // completedResponses += 1;
-                    tempAsset.exifData = data.content;
-                    // tempAssetArray.push(tempAsset) 
-                    // console.log
-                })
-                .catch((error) => {
-                    tempAsset.exifData = 'none';
-                    // tempAssetArray.push(tempAsset) 
-                  });   
-                //   promises.push(promise);
-                
-            // // console.log(exifDataObj)
-            // Promise.all(promises).then((tempAsset) => {
-                tempAssetArray.push(tempAsset)
-            // }
-                
-            // )
-            
-            // console.log('index', index, 'file', parentPictureData[index].file.name)
         }
-        // console.log(tempAssetArray)
-        if (tempAssetArray.length === parentPictureData.length + 1) {
-            // console.log()
-            tempAssetArray.shift()
-            console.log('lists are same length')
-            console.log(tempAssetArray)
-            setAssetArray(tempAssetArray);
-        }
-        //  tempAssetObject = 
-        // )
-        // )
-
-
-        // setTimeout(console.log(assetsFormData[0]), 10000);
     }
 
     //*
     // asset info
+    useEffect(() => {
+        // console.log('asset array changed')
+    }, [assetArray]);
+
     const handleAssetChange = (e) => {
         const { name, value } = e.target;
         console.log('name: ', name, ' value: ', value, ' current asset index: ', currentAssetIndex);
         console.log(assetArray[currentAssetIndex]);
-        if(name == 'assetName'){
+        if (name == 'assetName') {
             console.log('weouthere')
             assetArray[currentAssetIndex].assetName = value;
             console.log(assetArray[currentAssetIndex].assetName)
         }
         // setFormData({ ...asset, [name]: value });
     };
-    const handleAssetData = (assetData, index) => {
+
+    const handleAssetData = (assetData) => {
+        const index = currentAssetIndex;
         console.log("index: ", index, "asset Data: ", assetData);
         // Create a copy of the assets array
         const updatedAssets = [...assetArray];
         // Replace the asset at the specified index with the new assetData
         updatedAssets[index] = assetData;
         // Update the state with the new assets array
+        console.log(updatedAssets[index])
         setAssetArray(updatedAssets);
+        console.log(assetArray.length, formDataCollection.collectionAssetArray.length);
     }
 
 
     //*
     // Submit all assets
-
+    const submitCompletedCollection = () => {
+        console.log('submitting collection!');
+        setFormDataCollection({ ...formDataCollection, 'collectionAssetArray': assetArray })
+        console.log(assetArray.length, formDataCollection.collectionAssetArray.length)
+        console.log(formDataCollection)
+        // assetArray.length === formDataCollection.collectionAssetArray.length 
+    }
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
@@ -437,30 +403,6 @@ function CollectionForm() {
                                         </div>
                                     </div>
                                 </form>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             </div>
                         }
                         {tabContent === 'ASSET_ARRAY' &&
@@ -468,19 +410,23 @@ function CollectionForm() {
                                 {/* ASSET ARRAY! */}
                                 {assetArray ? <div>
                                     {assetArray.map((asset, index) => (
+                                        <div className={index === currentAssetIndex ? '' : 'hidden'} key={index}>
+                                            <AssetForm_v2 asset={asset} onSubmit={handleAssetData} />
 
-                                        <div className={index === currentAssetIndex ? '' : 'hidden'}>
-                                           <AssetForm_v2 asset={asset} onSubmit={handleAssetData}/>
-                                           <button className='upload--coll--btn' 
-                                        //    onClick={}
-                                        //    onClick={handleSubmit} disabled={disableAll} 
-                                           type="submit">Creat Collection</button>
                                         </div>
                                     ))}
                                 </div> : <div></div>}
                             </div>
                         }
                     </div>
+                }
+            </section>
+            <section>
+                {isCollInfoFormComplete &&
+                    <button className='upload--coll--btn'
+                        onClick={submitCompletedCollection}
+                        //    onClick={handleSubmit} disabled={disableAll} 
+                        type="submit">Create Collection</button>
                 }
             </section>
         </div>
