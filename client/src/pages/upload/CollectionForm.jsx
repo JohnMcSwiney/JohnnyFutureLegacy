@@ -126,17 +126,25 @@ function CollectionForm() {
     // collection info
     const handleCollInfoChange = (e) => {
         const { name, value } = e.target;
-        setFormDataCollection({ ...formDataCollection, [name]: value });
-        // console.log(formDataCollection)
-
-        updateAllAssets();
+        switch(name){
+            case 'collectionInformationTags':
+                let tagArray = value.split(', ');
+                setFormDataCollection({ ...formDataCollection, [name]: tagArray });
+                break;
+            case 'collectionPriceUSD':
+                setFormDataCollection({ ...formDataCollection, [name]: parseFloat(value) });
+                break;
+            default :
+                setFormDataCollection({ ...formDataCollection, [name]: value });
+        }
+        console.log(formDataCollection)
+        // updateAllAssets();
     };
-
+    
 
 
     const handleInfoSubmit = async (e) => {
         e.preventDefault();
-
         //remove later!!
         setIsCollInfoFormComplete(true);//for testing only!!
         switchContentVal('ASSET_ARRAY');
@@ -426,7 +434,8 @@ function CollectionForm() {
                     <button className='upload--coll--btn'
                         onClick={submitCompletedCollection}
                         //    onClick={handleSubmit} disabled={disableAll} 
-                        type="submit">Create Collection</button>
+                        type="submit"
+                        >Create Collection</button>
                 }
             </section>
         </div>
