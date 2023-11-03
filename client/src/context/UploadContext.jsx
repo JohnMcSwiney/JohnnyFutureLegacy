@@ -14,6 +14,13 @@ const UploadContextProvider = ({ children }) => {
   const [uploadCompleted, setUploadCompleted] = useState(
     localStorage.getItem('uploadCompleted') || false
   );
+  const [FL_currentAsset, setFL_currentAsset] = useState(
+    localStorage.getItem('FL_currentAsset') || 0
+  )
+  const [isEditingSelectedAsset, setIsEditingSelectedAsset] = useState(
+    localStorage.getItem('editingSelectedAsset') || false
+  );
+  
   
   const clearUploadData = () =>{
     setUploadValue('');
@@ -32,22 +39,25 @@ const UploadContextProvider = ({ children }) => {
     console.log("start upload Upload value:",value)
     if(value == 'COLLECTION' || value == 'SINGLE ASSET'){
       setUploadValue(value);
-      localStorage.setItem('uploadValue', value);
+      // localStorage.setItem('uploadValue', value);
   
       setUploadData(null);
-      localStorage.setItem('uploadData', null);
+      // localStorage.setItem('uploadData', null);
   
       setUploadStarted(true);
-      localStorage.setItem('uploadStarted', true );
+      // localStorage.setItem('uploadStarted', true );
   
       setUploadCompleted(false);
-      localStorage.setItem('uploadCompleted', false);
+      // localStorage.setItem('uploadCompleted', false);
+      
+      setFL_currentAsset(0);
+
+      setIsEditingSelectedAsset(false)
     }
     
   }
 
   useEffect(() => {
-    
     localStorage.setItem('uploadValue', uploadValue);
   }, [uploadValue]);
 
@@ -59,6 +69,18 @@ const UploadContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('uploadCompleted', uploadCompleted);
   }, [uploadCompleted]);
+
+  useEffect(() => {
+    localStorage.setItem('uploadCompleted', uploadCompleted);
+  }, [uploadCompleted]);
+
+  useEffect(() => {
+    localStorage.setItem('FL_currentAsset', uploadCompleted);
+  }, [FL_currentAsset]);
+
+  useEffect(() => {
+    localStorage.setItem('editingSelectedAsset', isEditingSelectedAsset);
+  }, [isEditingSelectedAsset]);
 
   return (
     <UploadContext.Provider
@@ -72,7 +94,9 @@ const UploadContextProvider = ({ children }) => {
         setUploadCompleted,
         uploadStarted,
         setUploadStarted,
-        startUploadProcess
+        startUploadProcess,
+        FL_currentAsset, setFL_currentAsset,
+        isEditingSelectedAsset, setIsEditingSelectedAsset
       }}
     >
       {children}

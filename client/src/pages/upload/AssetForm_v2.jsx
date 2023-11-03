@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { useToastContext } from '../../context/ToastContext';
+import { useUploadContext } from '../../context/UploadContext';
 
 function AssetForm_v2({ asset, onSubmit }) {
   const [successMessage, setSuccessMessage] = useState('');
@@ -6,6 +8,20 @@ function AssetForm_v2({ asset, onSubmit }) {
   const [isSubmitted, setIsSubmitted] = useState(false);
   // const [isConfirmed, setIsConfirmed] = useState(false);
   const [isMouseDown, setIsMouseDown] = useState(false);
+  const { addToast } = useToastContext();
+  const { 
+    uploadStarted,
+    setUploadStarted,
+    startUploadProcess,
+    FL_currentAsset, setFL_currentAsset,
+    isEditingSelectedAsset, setIsEditingSelectedAsset
+} = useUploadContext();
+  useEffect(() => {
+    console.log('isSubmitted? ', isSubmitted)
+    if(isSubmitted === true){
+      setIsEditingSelectedAsset(false)
+    }
+  }, [isSubmitted]);
 
   const hardcodedUser = '650ca3a3cf7964c5cb70782c';
   const handleMouseDown = () => {
@@ -43,6 +59,8 @@ function AssetForm_v2({ asset, onSubmit }) {
   };
 
   const handleChange = (e) => {
+    console.log('change in asset: ', FL_currentAsset);
+    setIsEditingSelectedAsset(true);
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
@@ -61,12 +79,14 @@ function AssetForm_v2({ asset, onSubmit }) {
     if (formData.assetName.trim() === '' || formData.assetName.length > 100) {
       setErrorMessage('Invalid asset name. Please enter a valid name.');
       console.error('Invalid asset name. Please enter a valid name.');
+      addToast('Invalid asset name. Please enter a valid name.');
       return;
     }
 
     if (formData.assetDescription.length > 500) {
       setErrorMessage('Invalid asset description. Please keep it within 500 characters.');
       console.error('Invalid asset description. Please keep it within 500 characters.');
+      addToast('Invalid asset description. Please keep it within 500 characters.');
       return;
     }
 
@@ -74,6 +94,7 @@ function AssetForm_v2({ asset, onSubmit }) {
       if (tag.trim() === ', ' || tag.length > 50) {
         setErrorMessage('Invalid information tag. Please enter valid tags.');
         console.error('Invalid information tag. Please enter valid tags.');
+        addToast('Invalid information tag. Please enter valid tags.');
         return;
       }
     }
@@ -81,12 +102,14 @@ function AssetForm_v2({ asset, onSubmit }) {
     if (formData.assetImage.trim() === '') {
       setErrorMessage('Invalid image URL. Please enter a valid URL.');
       console.error('Invalid image URL. Please enter a valid URL.');
+      addToast('Invalid image URL. Please enter a valid URL.');
       return;
     }
 
     if (isNaN(formData.assetPriceUSD) || formData.assetPriceUSD <= 0) {
       setErrorMessage('Invalid price. Please enter a valid number greater than 0.');
       console.error('Invalid price. Please enter a valid number greater than 0.');
+      addToast('Invalid price. Please enter a valid number greater than 0.');
       return;
     }
 
@@ -107,7 +130,9 @@ function AssetForm_v2({ asset, onSubmit }) {
 
     // Reset the form after successful submission
     setIsSubmitted(true);
-    setSuccessMessage('Asset created successfully');
+    // addToast("Search request failed");
+    setSuccessMessage('Changes saved!');
+    
     // resetForm();
   };
 

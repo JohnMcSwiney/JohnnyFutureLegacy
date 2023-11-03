@@ -18,7 +18,9 @@ function CollectionForm() {
         setUploadCompleted,
         uploadStarted,
         setUploadStarted,
-        startUploadProcess
+        startUploadProcess,
+        FL_currentAsset, setFL_currentAsset,
+        isEditingSelectedAsset, setIsEditingSelectedAsset
     } = useUploadContext();
     const [tempCountVar, setTempCountVar] = useState(0); //Used to start page, keeps ux smooth
     const [parentPictureData, setParentPictureData] = useState(null); //Holds picture objects from the file upload (drag/drop input) 
@@ -28,6 +30,7 @@ function CollectionForm() {
     const [isCollInfoFormComplete, setIsCollInfoFormComplete] = useState(false); // Tracks if the collection info has been submitted or not
     const [tabContent, setTabContent] = useState('COLLECTION_INFO');//  COLLECTION_INFO / OR / ASSET_ARRAY // used for the form tabs
     const [currentAssetIndex, setCurrentAssetIndex] = useState(0); //keeps track of the current selected asset to be edited
+    const { addToast } = useToastContext();
 
     const [formDataCollection, setFormDataCollection] = useState({
         collectionName: '',
@@ -68,7 +71,13 @@ function CollectionForm() {
             updateAllAssets();
         }
     }, [parentPictureData])
-
+    useEffect(() => {
+        // localStorage.setItem('uploadValue', uploadValue);
+        // currentAssetIndex
+        if(currentAssetIndex !== FL_currentAsset){
+            setFL_currentAsset(currentAssetIndex)
+        } 
+      }, [currentAssetIndex]);
     //updates global variable
     const updateUploadValue = () => {
         if (uploadValue === 'COLLECTION') {
@@ -93,12 +102,21 @@ function CollectionForm() {
     }
 
     const setCurrentAsset = (entry, index) => {
-        if (currentAssetIndex !== index) { setCurrentAssetIndex(index); }
-        switchContentVal('ASSET_ARRAY');
+        if (isEditingSelectedAsset === true){
+            addToast('Save Changes to continue');
+            return;
+        }
+        if (currentAssetIndex !== index) { 
+            switchContentVal('ASSET_ARRAY');
+            setCurrentAssetIndex(index); 
+        }
+        
     }
     const switchContentVal = (input) => {
-        if (isCollInfoFormComplete == false) {
+        
+        if (isCollInfoFormComplete == false || isEditingSelectedAsset === true) {
             return;
+            
             // show some toast here!
         } else { setTabContent(input); }
     }
@@ -126,7 +144,7 @@ function CollectionForm() {
     // collection info
     const handleCollInfoChange = (e) => {
         const { name, value } = e.target;
-        switch(name){
+        switch (name) {
             case 'collectionInformationTags':
                 let tagArray = value.split(', ');
                 setFormDataCollection({ ...formDataCollection, [name]: tagArray });
@@ -134,13 +152,13 @@ function CollectionForm() {
             case 'collectionPriceUSD':
                 setFormDataCollection({ ...formDataCollection, [name]: parseFloat(value) });
                 break;
-            default :
+            default:
                 setFormDataCollection({ ...formDataCollection, [name]: value });
         }
         console.log(formDataCollection)
         // updateAllAssets();
     };
-    
+
 
 
     const handleInfoSubmit = async (e) => {
@@ -161,18 +179,19 @@ function CollectionForm() {
                     let itemPrice = 0;
                     let itemTags = '';
 
-                    if(assetArray[index].assetPriceUSD !== formDataCollection.collectionPriceUSD){
+                    if (assetArray[index].assetPriceUSD !== formDataCollection.collectionPriceUSD && assetArray[index].assetPriceUSD !== 0) {
                         itemPrice = assetArray[index].assetPriceUSD;
                     } else {
                         itemPrice = formDataCollection.collectionPriceUSD;
                     }
 
-                    if(assetArray[index].informationTags !== formDataCollection.collectionInformationTags){
+                    if (assetArray[index].informationTags !== formDataCollection.collectionInformationTags) {
+
                         itemTags = assetArray[index].informationTags;
                     } else {
                         itemTags = formDataCollection.collectionInformationTags;
                     }
-                    console.log("asset: ",assetArray[index].assetName, " price: ", itemPrice, " tags: ", itemTags)
+                    console.log("asset: ", assetArray[index].assetName, " price: ", itemPrice, " tags: ", itemTags)
                     const tempAsset = {
                         assetName: assetArray[index].assetName,
                         creatorName: hardcodedUser,
@@ -254,13 +273,19 @@ function CollectionForm() {
 
     //*
     // Submit all assets
-    const submitCompletedCollection = () => {
+    const submitCompletedCollection = async () => {
         console.log('submitting collection!');
-        setFormDataCollection({ ...formDataCollection, 'collectionAssetArray': assetArray })
+        await setFormDataCollection({ ...formDataCollection, 'collectionAssetArray': assetArray })
         console.log(assetArray.length, formDataCollection.collectionAssetArray.length)
         console.log(formDataCollection)
-        // assetArray.length === formDataCollection.collectionAssetArray.length 
+        // Compare the lengths after the update
+        if (assetArray.length === formDataCollection.collectionAssetArray.length) {
+            console.log('Lengths are equal.');
+        } else {
+            console.log('Lengths are not equal.');
+        }
     }
+
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
@@ -273,13 +298,13 @@ function CollectionForm() {
                 onClick={resetUpload}
             >Reset Upload Items</button>
             {!parentPictureData ?
-                <section onClick={updateUploadValue}>
+                <section onClick={updateUploadValue}>{/* Picture uploader */}
                     <FL_DragDrop onSubmit={handlePictureData} />
                 </section>
                 : <section>
 
                 </section>}
-            <section>
+            <section>{/* Asset list selector / display */}
                 {/* data received and collection can start to be created */}
                 {parentPictureData ?
                     <div className="image-preview--2">
@@ -305,7 +330,7 @@ function CollectionForm() {
                 }
             </section>
 
-            <section>
+            <section>{/* Form Container - Form 1: Collection Info - Form 2: Selected Asset Info */}
                 {parentPictureData &&
                     <div className="collection--form--container">
                         <div className="collection--form--title">
@@ -429,13 +454,13 @@ function CollectionForm() {
                     </div>
                 }
             </section>
-            <section>
+            <section>{/* Collection Creation Submission */}
                 {isCollInfoFormComplete &&
                     <button className='upload--coll--btn'
                         onClick={submitCompletedCollection}
                         //    onClick={handleSubmit} disabled={disableAll} 
                         type="submit"
-                        >Create Collection</button>
+                    >Create Collection</button>
                 }
             </section>
         </div>

@@ -1,10 +1,8 @@
 import React, { useState, useEffect } from "react";
 import ProgressBar from "../../components/progressbar/progressbar";
+import { useToastContext } from '../../context/ToastContext';
 
 function FL_DragDrop({ onSubmit }) {
-
-
-
   const [files, setFiles] = useState([]);
   const [uploadResponses, setUploadResponses] = useState([]); // Store responses for each file
   const [isFilled, updateIsFilled] = useState(false);
@@ -15,6 +13,7 @@ function FL_DragDrop({ onSubmit }) {
   const [disableAll, setDisableAll] = useState(false);
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [progress, setProgress] = useState(0);
+  const { addToast } = useToastContext();
 
   const handleFileChange = (e) => {
     updateDisableUpload(false);
@@ -47,6 +46,8 @@ function FL_DragDrop({ onSubmit }) {
           return data;
         })
         .catch((error) => {
+          addToast(`Error: ${error}`);
+          setTimeout((addToast(`Try reloading the page and trying again`)), 500);
           return `Error: ${error}`;
         });
       promises.push(promise);
@@ -110,6 +111,7 @@ function FL_DragDrop({ onSubmit }) {
   const handleSubmit = (e) => {
     setDisableAll(true);
     if(uploadResponses === null){
+      addToast('No files returned, reload and try again...');
       return;
     }
     if (filteredItems === null) {
@@ -181,6 +183,7 @@ function FL_DragDrop({ onSubmit }) {
                     <input type="checkbox"
                       checked={modifiedFiles[index].selected}
                       onChange={() => handleToggleSelect(index)}
+                      onClick={() => addToast('this is a bug, click the image, not the checkbox')}
                       disabled={disableAll}
                     />
                   </span>

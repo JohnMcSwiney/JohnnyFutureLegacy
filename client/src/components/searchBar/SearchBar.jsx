@@ -57,7 +57,7 @@ const SearchBar = () => {
         redirectResults();
       } else {
         console.error('Search request failed.');
-        addToast("Search request failed")
+        addToast("Search request failed");
         redirectResults();
       }
     } catch (error) {
