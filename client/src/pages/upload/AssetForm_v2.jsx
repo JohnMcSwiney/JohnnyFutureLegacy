@@ -222,7 +222,7 @@ function AssetForm_v2({ asset, onSubmit }) {
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 style={buttonStyle}
-              >Create Asset</button>
+              >Save Changes</button>
             </div>
 
             {/* <div className='FL_Input__date__1'>
