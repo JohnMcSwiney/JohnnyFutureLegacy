@@ -334,16 +334,21 @@ function CollectionForm() {
                 {parentPictureData &&
                     <div className="collection--form--container">
                         <div className="collection--form--title">
-                            <h3>Collection Creation Form</h3>
-                            <button onClick={() => switchContentVal('COLLECTION_INFO')}>Collection Info</button>
-                            <button onClick={() => switchContentVal('ASSET_ARRAY')}>Assets</button>
+                            {/* <h3>Collection Creation Form</h3> */}
+                            <button onClick={() => switchContentVal('COLLECTION_INFO')} className={tabContent === 'COLLECTION_INFO' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Collection Info</button>
+                            <button onClick={() => switchContentVal('ASSET_ARRAY')} className={tabContent === 'ASSET_ARRAY' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Assets</button>
+                            {isCollInfoFormComplete &&
+                            <button className='upload--coll--btn'
+                            onClick={submitCompletedCollection}
+                            //    onClick={handleSubmit} disabled={disableAll} 
+                            type="submit"
+                    >Create Collection</button>
+                }
                         </div>
                         {tabContent === 'COLLECTION_INFO' &&
-                            <div>
-                                COLLECTION INFO
-                                <form onSubmit={handleInfoSubmit} className='asset--page--content--cont'>
+                                <form onSubmit={handleInfoSubmit} className='collection--upload--page--content--cont'>
 
-                                    <div className='asset--upload--left'>
+                                    <div className='collection--upload--left'>
                                         <div className='FL_Input__text__1'>
                                             <label>Collection Name:</label>
                                             <input
@@ -379,7 +384,7 @@ function CollectionForm() {
                                         </div>
                                     </div>
 
-                                    <div className='asset--upload--right'>
+                                    <div className='collection--upload--right'>
                                         <div className='upload--right--price-n-date--cont'>
                                             <div className='FL_Input__number__1'>
                                                 <label>Default Asset Price:</label>
@@ -436,16 +441,15 @@ function CollectionForm() {
                                         </div>
                                     </div>
                                 </form>
-                            </div>
                         }
                         {tabContent === 'ASSET_ARRAY' &&
-                            <div>
+                            <div className='div--here'>
                                 {/* ASSET ARRAY! */}
-                                {assetArray ? <div>
+                                {assetArray ? 
+                                <div className='div--here'>
                                     {assetArray.map((asset, index) => (
-                                        <div className={index === currentAssetIndex ? '' : 'hidden'} key={index}>
+                                        <div className={index === currentAssetIndex ? 'another--div--named--here' : 'hidden'} key={index}>
                                             <AssetForm_v2 asset={asset} onSubmit={handleAssetData} />
-
                                         </div>
                                     ))}
                                 </div> : <div></div>}
@@ -455,13 +459,13 @@ function CollectionForm() {
                 }
             </section>
             <section>{/* Collection Creation Submission */}
-                {isCollInfoFormComplete &&
+                {/* {isCollInfoFormComplete &&
                     <button className='upload--coll--btn'
                         onClick={submitCompletedCollection}
                         //    onClick={handleSubmit} disabled={disableAll} 
                         type="submit"
                     >Create Collection</button>
-                }
+                } */}
             </section>
         </div>
     )

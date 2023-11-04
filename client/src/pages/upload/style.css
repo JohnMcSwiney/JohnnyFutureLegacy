@@ -32,14 +32,24 @@
     color: red;
 }
 
+.collection--upload--page--content--cont {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+    position: relative;
+    gap: 25px;
+    margin-top: 25px;
+}
 
-.asset--page--content--cont {
+.asset--upload--page--content--cont {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
     position: relative;
     gap: 15px;
+    margin-top: 20px;
 }
 
 .asset--upload--left {
@@ -47,20 +57,41 @@
     align-items: center;
     /* background-color: rebeccapurple; */
     flex-flow: column;
-
 }
-
+.collection--upload--left {
+    display: flex;
+    align-items: center;
+    /* background-color: rebeccapurple; */
+    flex-flow: column;
+    margin-top: 20px;
+}
+.collection--upload--right {
+    display: flex;
+    flex-flow: column;
+    gap: 10px;
+    margin-top: 5px
+}
+.div--here{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    min-height:400px;
+    margin-top: 20px;
+}
+.another--div--named--here{
+    margin-top: 10px;
+}
 .left--label {
     color: 000000;
     font-size: 18px;
     font-weight: 600;
     width: 693px;
 }
-
 .asset--upload--right {
     display: flex;
     flex-flow: column;
-    gap: 10px
+    gap: 10px;
 }
 
 .image--preview--cont {
@@ -133,8 +164,37 @@
 .button--width--713 {
     width: 713px;
 }
+.submit--asset--btn--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    position: relative;
+    width: 500px;
+    height: 75px;
+    gap: 1px;
+}
+.submit--asset--btn--cont .FL_btn__1{
+    margin-top:0px !important;
+}
 .button--width--413 {
     width: 413px;
+    
+    /* height: 51px; */
+    /* position: absolute; */
+    /* bottom: 0; */
+
+}
+.upload--label {
+    /* color: 000000; */
+    font-size: 18px;
+    font-weight: 600;
+    width: 503px;
+    /* position: absolute; */
+    /* top: 0; */
+    /* margin-top: 10px; */
+    height: 24px;
+    text-align: center;
 }
 .FL_Drag_Drop{
     display: flex;
@@ -145,7 +205,7 @@
     gap: 10px;
     /* background-color: yellow; */
     position: relative;
-    /* margin-top: 50px; */
+    margin-top: 15px;
 }
 
 .choose__file__cont{
@@ -170,8 +230,11 @@
     font-family: var(--font--fam);
     font-size: 20px;
     font-weight: 500;
+    box-sizing: border-box;
+    border: 2px solid #ffffff69;
     transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
-  }
+    /* margin-right: 20px; */
+    }
   
   .upload--coll--btn:hover{
     transform: scale(1.01); /* Increase the scale on hover */
@@ -325,11 +388,11 @@
     flex-direction: column;
     height: 100vh;
     width: 100vw;
-    margin-top: 100px;
+    margin-top: 90px;
 }
 .create--coll--page h2{
     font-size: 50px;
-    margin-bottom: 35px;
+    margin-bottom: 15px;
 }
 .create--coll--page h4{
     margin: 0;
@@ -408,25 +471,65 @@
     align-items: center;
     justify-content: center;
     flex-direction: column;
+    position: relative;
+    margin-bottom: 5px;
+    /* margin-top: 300px; */
+    z-index: 10;
+    
 }
 .collection--form--title{
     display: flex;
     align-items: center;
     justify-content: space-around;
     flex-direction: row;
-    position: relative;
-    
-    width: 600px;
-    background-color: tan;
+    position: absolute;
+    top: 0;
+    /* width: 600px; */
+    width: 100%;
+    background-color: rgb(236, 236, 236);
     height: 60px;
+    /* overflow: hidden; */
+    box-shadow: 0px 2px 4px #00000051;
+    z-index: 20;
+    padding-right: 10px;
+    transition: all ease 0.5s;
+    
 }
 .collection--form--title h3{
     position: absolute;
     top: 0;
     margin: 0;
 }
-.collection--form--title button{
-    margin-top: 20px;
+.form--title--btn{
+    /* margin-top: 20px; */
+    border: none;
+    border-bottom: #000000 2px solid;
+    color: #000000;
+    opacity: 0.5;
+    transition: all ease 0.5s;
+    width: 40%;
+    height: 60px;
+    font-size: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    margin-left: 5%;
+    margin-right: 5%;
+    background-color: rgb(236, 236, 236);
+}
+.form--title--btn:hover{
+    /* margin-top: 20px; */
+    opacity: 1;
+    transition: all ease 0.5s;
+}
+.form--title--btn--selected{
+    /* margin-top: 20px; */
+    border-bottom: var(--tertiary) 2px solid;
+    color: var(--tertiary);
+    opacity: 1;
+    
+    transition: all ease 0.5s;
 }
 .hidden{
     opacity: 0;

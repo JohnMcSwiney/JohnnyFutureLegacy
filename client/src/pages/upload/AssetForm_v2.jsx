@@ -136,13 +136,8 @@ function AssetForm_v2({ asset, onSubmit }) {
     // resetForm();
   };
 
-  return (
-    <div>
-      <div className="form-feedback">
-        {successMessage && <div className="success-message">{successMessage}</div>}
-        {errorMessage && <div className="error-message">{errorMessage}</div>}
-      </div>
-      <form onSubmit={handleSubmit} className="asset--page--content--cont">
+  return (   
+      <form onSubmit={handleSubmit} className="asset--upload--page--content--cont">
       <div className='asset--upload--left'>
         {/* <label htmlFor="assetImage" className='left--label'>Asset Image:</label> */}
           <div className='collection--form--asset--imgcont pulsate-fwd'>
@@ -240,9 +235,17 @@ function AssetForm_v2({ asset, onSubmit }) {
               </div>
 
             </div>
-            <div>
+            <div className='submit--asset--btn--cont'>
+            <label htmlFor={'submit ' + formData.assetName} className='upload--label '>
+            {/* <div className="form-feedback"> */}
+            {successMessage && <div className="success-message">{successMessage}</div>}
+            {errorMessage && <div className="error-message">{errorMessage}</div>}
+          {/* </div> */}
+
+            </label>
               <button type="submit"
                 // disabled={!isConfirmed}
+                name={'submit ' + formData.assetName}
                 className='FL_btn__1 button--width--413'
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
@@ -287,7 +290,6 @@ function AssetForm_v2({ asset, onSubmit }) {
           </div> */}
         </div>
       </form>
-    </div>
   );
 }
 
