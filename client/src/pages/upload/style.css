@@ -157,8 +157,13 @@
     font-size: 15px !important;
     color: #000000 !important;
     opacity: 1;
-    width: 617px;
-    height: 42px;
+    width: 650px;
+    height: 67px;
+    margin: 0;
+    /* background-color: aqua; */
+    display: flex;
+    align-items: center;
+    text-align: left;
 }
 
 .button--width--713 {

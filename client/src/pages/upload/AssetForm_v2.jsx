@@ -14,7 +14,8 @@ function AssetForm_v2({ asset, onSubmit }) {
     setUploadStarted,
     startUploadProcess,
     FL_currentAsset, setFL_currentAsset,
-    isEditingSelectedAsset, setIsEditingSelectedAsset
+    isEditingSelectedAsset, setIsEditingSelectedAsset,
+    FL_uploadDate, setFL_UploadDate
 } = useUploadContext();
   useEffect(() => {
     console.log('isSubmitted? ', isSubmitted)
@@ -34,10 +35,12 @@ function AssetForm_v2({ asset, onSubmit }) {
   const buttonStyle = {
     transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
   };
+  const currentDate = new Date();
   const [formData, setFormData] = useState({
     assetName: asset.assetName || '',
     creatorName: hardcodedUser,
-    uploadDate: '',
+    uploadDate: FL_uploadDate || currentDate, 
+    // currentDate, //remove later lol holy f
     assetDescription: asset.assetDescription || '',
     assetPriceUSD: asset.assetPriceUSD || 0,
     informationTags: asset.informationTags || [],
@@ -117,7 +120,7 @@ function AssetForm_v2({ asset, onSubmit }) {
     const completedAsset = {
       assetName: formData.assetName,
       creatorName: formData.creatorName,
-      uploadDate: formData.uploadDate,
+      uploadDate: FL_uploadDate,
       assetDescription: formData.assetDescription,
       assetPriceUSD: parseFloat(formData.assetPriceUSD),
       informationTags: formData.informationTags,

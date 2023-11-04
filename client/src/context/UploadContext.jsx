@@ -20,7 +20,9 @@ const UploadContextProvider = ({ children }) => {
   const [isEditingSelectedAsset, setIsEditingSelectedAsset] = useState(
     localStorage.getItem('editingSelectedAsset') || false
   );
-  
+  const [FL_uploadDate, setFL_UploadDate] = useState(
+    localStorage.getItem('FL_uploadDate') || ''
+  );
   
   const clearUploadData = () =>{
     setUploadValue('');
@@ -34,6 +36,9 @@ const UploadContextProvider = ({ children }) => {
 
     setUploadCompleted(false);
     localStorage.setItem('uploadCompleted', false);
+
+    setFL_UploadDate('');
+    localStorage.setItem('FL_uploadDate', '');
   }
   const startUploadProcess = (value) =>{
     console.log("start upload Upload value:",value)
@@ -53,6 +58,8 @@ const UploadContextProvider = ({ children }) => {
       setFL_currentAsset(0);
 
       setIsEditingSelectedAsset(false)
+
+      setFL_UploadDate('')
     }
     
   }
@@ -82,6 +89,10 @@ const UploadContextProvider = ({ children }) => {
     localStorage.setItem('editingSelectedAsset', isEditingSelectedAsset);
   }, [isEditingSelectedAsset]);
 
+useEffect(() => {
+  localStorage.setItem('FL_uploadDate', FL_uploadDate);
+}, [FL_uploadDate]);
+
   return (
     <UploadContext.Provider
       value={{
@@ -96,7 +107,8 @@ const UploadContextProvider = ({ children }) => {
         setUploadStarted,
         startUploadProcess,
         FL_currentAsset, setFL_currentAsset,
-        isEditingSelectedAsset, setIsEditingSelectedAsset
+        isEditingSelectedAsset, setIsEditingSelectedAsset,
+        FL_uploadDate, setFL_UploadDate
       }}
     >
       {children}
