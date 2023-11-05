@@ -20,7 +20,7 @@ function AssetForm_v2({ asset, onSubmit }) {
   useEffect(() => {
     console.log('isSubmitted? ', isSubmitted)
     if(isSubmitted === true){
-      setIsEditingSelectedAsset(false)
+      // setIsEditingSelectedAsset(false);
     }
   }, [isSubmitted]);
 
@@ -133,6 +133,7 @@ function AssetForm_v2({ asset, onSubmit }) {
 
     // Reset the form after successful submission
     setIsSubmitted(true);
+
     // addToast("Search request failed");
     setSuccessMessage('Changes saved!');
     
