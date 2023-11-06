@@ -28,7 +28,7 @@ function CollectionForm_v2({collectionIn, onSubmit }) {
         collectionPriceUSD:  0,
         collectionInformationTags: [],
         collectionImage:'',
-        collectionAssetArray:[{}],
+        collectionAssetArray: null,
     });
 
     useEffect(() => {

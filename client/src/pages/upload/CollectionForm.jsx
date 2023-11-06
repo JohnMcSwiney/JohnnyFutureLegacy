@@ -8,6 +8,7 @@ import AssetForm_v2 from './AssetForm_v2';
 import CollectionForm_v2 from './CollectionForm_v2';
 import './style.css'
 import { Asset } from '../../pages';
+import ConfirmationPopup from './ConfirmationPopup';
 
 function CollectionForm() {
     const { clearUploadData,
@@ -35,26 +36,30 @@ function CollectionForm() {
     const { addToast } = useToastContext();
 
     const [createdAssets, setCreatedAssets] = useState([]); // holding assets created in backend  
+    const [assetIds, setAssetIds] = useState([]) // holds asset ids, will be used in collection object
     const [isCreating, setIsCreating] = useState(false); // stops code from executing
+    const [userConfirmation, setUserConfirmation] = useState(false)
+    const [createdCollection, setCreatedCollection] = useState(null) //collection object for backend
 
-    const [createdCollection, setCreatedCollection] = useState(null)
-
+    // helps initalize the program, and allows it to run smoothly 
     useEffect(() => {
         incrementCount(); //run on load
     }, [])
     const incrementCount = () => { setTempCountVar(tempCountVar + 1) }
-
     useEffect(() => {
         if (uploadData !== null && uploadStarted == true && uploadValue == 'COLLECTION' && parentPictureData == null) {
             setParentPictureData(uploadData);
         }
     }, [tempCountVar])
 
+    // when the uploaded pictures are chosen. They're saved to a new variable
     useEffect(() => {
         if (parentPictureData !== null && uploadData == null) {
             setUploadData(parentPictureData);
         }
     }, [parentPictureData])
+
+    // called when asset is being edited
     useEffect(() => {
         // localStorage.setItem('uploadValue', uploadValue);
         // currentAssetIndex
@@ -64,18 +69,18 @@ function CollectionForm() {
     }, [currentAssetIndex]);
 
     useEffect(() => {
-        
-        if(createdCollection !== null){
-            console.log('collection data received! : ', createdCollection, ' updating assets... ');
+
+        if (createdCollection !== null) {
+            // console.log('collection data received! : ', createdCollection, ' updating assets... ');
             updateAllAssets();
             setIsCollInfoFormComplete(true);
-            
+
         }
     }, [createdCollection]);
 
     useEffect(() => {
-        if(assetArray !== null){
-            console.log('asset array changed : ', assetArray);
+        if (assetArray !== null) {
+            // console.log('asset array changed : ', assetArray);
             // setTabContent('ASSET_ARRAY');
             setIsEditingSelectedAsset(false)
         }
@@ -85,8 +90,8 @@ function CollectionForm() {
     const updateUploadValue = () => {
         if (uploadValue === 'COLLECTION') {
         } if (uploadValue === 'SINGLE ASSET') {
-            console.log("upload Value:", uploadValue);
-            console.log("do something here!"); // redirect?
+            // console.log("upload Value:", uploadValue);
+            // console.log("do something here!"); // redirect?
         } else {
             setUploadValue('COLLECTION');
         }
@@ -128,12 +133,12 @@ function CollectionForm() {
     const updateAllAssets = () => {
         let tempAssetArray = [{}];
         let assetsDone = true;
-        console.log('in upload assets');
+        // console.log('in upload assets');
         if (createdCollection && parentPictureData) {
-            console.log('1st if passed');
+            // console.log('1st if passed');
             if (assetArray) {
-                console.log('2nd if p1');
-                console.log('asset objects already created, editing!');
+                // console.log('2nd if p1');
+                // console.log('asset objects already created, editing!');
                 for (let index = 0; index < assetArray.length; index++) {
                     let itemPrice = 0;
                     let itemTags = '';
@@ -165,8 +170,8 @@ function CollectionForm() {
                 }
                 assetsDone = true;
             } else {
-                console.log('2nd if p2');
-                console.log('asset objects being created');
+                // console.log('2nd if p2');
+                // console.log('asset objects being created');
                 // console.log(FL_uploadDate)
                 for (let index = 0; index < parentPictureData.length; index++) {
                     let jsonExifData = `http://localhost:5000/getimageData?userId=${hardcodedUser}&filename=${parentPictureData[index].file.name}`;
@@ -190,10 +195,10 @@ function CollectionForm() {
                             tempAsset.exifData = 'none';
                         });
                     tempAssetArray.push(tempAsset)
-                }  
+                }
                 assetsDone = true;
             }
-            if(assetsDone === true){
+            if (assetsDone === true) {
                 if (tempAssetArray.length === parentPictureData.length + 1) {
                     tempAssetArray.shift()
                     // console.log('lists are same length')
@@ -219,108 +224,190 @@ function CollectionForm() {
     }
 
     const handleCollectionData = (collectionData) => {
-        
-        console.log('collectionSubmitted!');
-        // console.log(collectionData);
         setCreatedCollection(collectionData);
     }
+    const [isPopupVisible, setPopupVisible] = useState(false);
+    
+    useEffect(() =>{
+        if(userConfirmation === true){
+            if(assetArray && createdCollection){
+                createAssetsInServer();     
+            }
+        }
+    },[userConfirmation])
+
+    useEffect(() =>{
+        if(assetArray && assetIds && createdAssets){
+            console.log('asset use effect if 1');
+            console.log('objects: ',createdAssets.length, ' _ ', assetArray.length);
+            console.log('ids:', assetIds.length, ' _ ', assetArray.length);
+            if(createdAssets.length === assetArray.length 
+            && assetArray.length === assetIds.length 
+            && createdCollection.collectionAssetArray.length !== assetIds.length){
+                console.log('asset use effect if 2');
+                createCollectionInServer();
+            }
+        }    
+    },[assetIds,createdAssets ]);
+
+    const handleConfirm = () => {
+        setPopupVisible(false);
+        setUserConfirmation(true);
+    };
+    const handleCancel = () => {setPopupVisible(false);};
 
     //*
     // Submit all assets
     const submitCompletedCollection = async () => {
         console.log('submitting collection!');
-        // updateAllAssets();
-        // let result = await setFormDataCollection({ ...createdCollection, 'collectionAssetArray': assetArray })
-        // console.log(result)
-        // console.log(assetArray.length, createdCollection.collectionAssetArray.length)
-        // console.log(createdCollection)
-        // Compare the lengths after the update
-        if (assetArray.length === createdCollection.collectionAssetArray.length) {
-            console.log('Lengths are equal.');
-            createCollectionsInServer();
-
-
-        } else {
-            console.log('Lengths are not equal.');
-            console.log('Collection info: ', createdCollection);
-            console.log('Asset info: ', assetArray)
+        console.log('Collection info: ', createdCollection);
+        console.log('Asset info: ', assetArray);
+        if(assetArray && createdCollection){
+            setPopupVisible(true);
         }
+       
+        // if (assetArray && createdCollection.collectionAssetArray) {
+        //     console.log('Collection info: ', createdCollection);
+        //     console.log('Asset info: ', assetArray);
+        // }
+        // // updateAllAssets();
+        // // let result = await setFormDataCollection({ ...createdCollection, 'collectionAssetArray': assetArray })
+        // // console.log(result)
+        // // console.log(assetArray.length, createdCollection.collectionAssetArray.length)
+        // // console.log(createdCollection)
+        // // Compare the lengths after the update
+        // if (assetArray.length === createdCollection.collectionAssetArray.length) {
+        //     console.log('Lengths are equal.');
+        //     // createCollectionsInServer();
+        //     createAssetsInServer();
+        //     const response = await createAssetsInServer();
+        //     if (response.ok){
+        //         if(isCreating === false){
+        //             createCollectionInServer()
+        //         }
+        //     }
+        // } else {
+        //     console.log('Lengths are not equal.');
+        //     console.log('Collection info: ', createdCollection);
+        //     console.log('Asset info: ', assetArray);
+        //     createAssetsInServer();
+        // }
     }
     const createAssetsInServer = async () => {
-        setIsCreating(true);
+        
         const apiUrl = 'http://localhost:5000/api/asset/';
-        try {
-            const createdAssetsArray = [];
-
-            for (const assetObject of assetArray) {
-                const response = await fetch(apiUrl, {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(assetObject),
-                });
-
-                if (response.ok) {
-                    const createdAsset = await response.json();
-                    createdAssetsArray.push(createdAsset);
-                } else {
-                    console.error('Failed to create asset:', assetObject.assetName);
+        if(createdAssets.length !== assetArray.length && assetArray.length !== assetIds.length){
+            setIsCreating(true);
+            try {
+                const createdAssetsArray = [];
+                const createdAssetIds = [];
+    
+                for (const assetObject of assetArray) {
+                    const response = await fetch(apiUrl, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        body: JSON.stringify(assetObject),
+                    });
+    
+                    if (response.ok) {
+                        const createdAsset = await response.json();
+                        createdAssetsArray.push(createdAsset);
+                        createdAssetIds.push(createdAsset._id);
+                    } else {
+                        console.error('Failed to create asset:', assetObject.assetName);
+                    }
                 }
+                console.log(createdAssetsArray);
+                if (createdAssets.length !== assetArray.length
+                    && createdAssetIds.length === assetArray.length) {
+                    console.log('match');
+                    setCreatedAssets(createdAssetsArray);
+                    setAssetIds(createdAssetIds);
+                } else {
+                    console.log('in create assets else: ')
+                    console.log(createdAssets.length, ' _ ', assetArray.length);
+                    console.log(createdAssetIds.length, ' _ ', assetArray.length);
+                }
+            } catch (error) {
+                console.error('Error creating assets:', error);
             }
-            console.log(createdAssetsArray);
-        } catch (error) {
-            console.error('Error creating assets:', error);
+    
+            setIsCreating(false);
         }
-
-        setIsCreating(false);
+        
     };
 
-    const createCollectionsInServer = async () => {
-        setIsCreating(true);
+    const createCollectionInServer = async () => {
+        
+        // console.log('creating assets');
         const apiUrl = 'http://localhost:5000/api/collection/';
-        try {
-            const createdCollectionObject = {};
-            const assetsCreated = await createAssetsInServer();
-            // if(createdCollection.collectionAssetArray.length === 0){
-            //     createAssetsInServer();
-            //     return;
-            // }
-            console.log('assets created? ', assetsCreated)
+        if(createdAssets.length === assetArray.length && assetArray.length === assetIds.length && createdCollection){
+            setIsCreating(true);
+            try {
+                const createdCollectionObject = {
+                    collectionName: createdCollection.collectionName,
+                    creatorName: hardcodedUser,
+                    collectionDate: createdCollection.collectionDate,
+                    collectionDescription: createdCollection.collectionDescription,
+                    collectionPriceUSD:  createdCollection.collectionPriceUSD,
+                    collectionInformationTags: createdCollection.collectionInformationTags,
+                    collectionImage:createdAssets[0].assetImage,
+                    collectionAssetArray: assetIds,
+                };
+                console.log('final collection object: ', createdCollectionObject);
+                const serverResponseCollection = null;
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',
                     },
-                    body: JSON.stringify(createdCollection),
+                    body: JSON.stringify(createdCollectionObject),
                 });
-
+    
                 if (response.ok) {
                     const createdCollection = await response.json();
-                    createdCollectionObject = createdCollection;
+                    serverResponseCollection = createdCollection;
                 } else {
-                    console.error('Failed to create asset:', createdCollection.collectionName);
+                    console.error('Failed to create collection:', createdCollection.collectionName);
                 }
-            console.log(createdCollectionObject);
-        } catch (error) {
-            console.error('Error creating assets:', error);
+                // console.log(createdCollectionObject);
+            } catch (error) {
+                console.error('Error creating collection:', error);
+            }
+    
+            setIsCreating(false);
         }
-
-        setIsCreating(false);
+       
     };
-
-    return (
+    return(
         <div className='create--coll--page'
             onLoad={incrementCount}
             onReset={incrementCount}
             onClick={updateUploadValue}
         >
+            {isPopupVisible && (
+                <ConfirmationPopup
+                    message="Confirm Creation of this Collection?"
+                    onConfirm={handleConfirm}
+                    onCancel={handleCancel}
+                />
+            )}
             <h2>Create a collection</h2>
             <button
                 className='create--coll--reset--btn'
                 onClick={resetUpload}
+                disabled={userConfirmation}
             >Reset Upload Items</button>
-            {!parentPictureData ?
+            
+            {userConfirmation === true ? 
+            <div>
+                Creating  collection!
+                Don't refresh the page!
+            </div>:
+            <>
+             {!parentPictureData ?
                 <section onClick={updateUploadValue}>{/* Picture uploader */}
                     <FL_DragDrop onSubmit={handlePictureData} />
                 </section>
@@ -369,8 +456,8 @@ function CollectionForm() {
                             }
                         </div>
                         {tabContent === 'COLLECTION_INFO' &&
-                            
-                            <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData}/>
+
+                            <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} />
                         }
                         {tabContent === 'ASSET_ARRAY' &&
                             <div className='div--here'>
@@ -397,6 +484,8 @@ function CollectionForm() {
                     >Create Collection</button>
                 } */}
             </section>
+            </>}
+           
         </div>
     )
 }
