@@ -18,7 +18,7 @@ function AssetPage() {
   const { id, parentId } = useParams();
   const [assetData, setAssetData] = useState(null);
   const { currentCollection, collectionUserName, collectionUserId, collectionIsInstit, collectionUserPfp } = useMyContext();
-
+  const [longDesc, setLongDesc] = useState(false);
   useEffect(() => {
     // http://localhost:3000/profile
     const fetchAsset = async () => {
@@ -39,7 +39,12 @@ function AssetPage() {
     }
 
     fetchAsset()
-
+    if (currentCollection.collectionDescription) {
+      if (currentCollection.collectionDescription.length > 100) {
+        console.log('longass')
+        setLongDesc(true);
+      }
+    }
   }, []);
   const navigate = useNavigate()
 
@@ -47,6 +52,7 @@ function AssetPage() {
     return <div>Cannot get asset data of asset: {id}</div>;
   }
 
+  
   const handleRedirectCollection = () => {
     navigate(`/collection/${parentId}`);
   }
@@ -83,7 +89,7 @@ function AssetPage() {
         ) : (
           'Loading...'
         )}
-        {currentCollection && <h4>{currentCollection.collectionDescription}</h4>}
+        {currentCollection && longDesc === false   && <h4>{currentCollection.collectionDescription}</h4>}
       </StyledTitleContainer2>
 
       <div className='asset--content--cont'>

@@ -71,7 +71,7 @@ function Browse_Collections() {
         {collectionsData ? 
 
         
-        <div className={toggleView ? 'content--cont row' : 'content--cont grid'}>
+        <div className={toggleView ? 'content--cont row' : 'content--cont grid gap__25'}>
           {collectionsData.map((collection) => (
             <CollectionCard
               key={collection._id} // Provide a unique key for each component

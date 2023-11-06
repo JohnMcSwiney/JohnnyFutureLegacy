@@ -36,8 +36,10 @@ onClick={handleRedirect}
       >
         <img src={imgUrl} />
       </div>
-      <h2>{artifactTitle}</h2>
+
+      
       <div className='coll--card--text'>
+      <h2>{artifactTitle}</h2>
         <p>{assetDescrip}</p>
       </div>
       <button 

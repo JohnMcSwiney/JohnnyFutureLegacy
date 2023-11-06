@@ -12,6 +12,7 @@
     flex-basis: 335px;
     flex-grow: 0;
     flex-shrink: 0;
+    position: relative;
 }
 .home--coll--card--cont h2{
     padding: 0;
@@ -22,15 +23,17 @@
     margin-bottom: 10px;
 }
 .coll--card--img{
-    height: 220px;
-    width: 300px;
+    height: 230px;
+    width: 315px;
     overflow: hidden;
     border-radius: 15px;
-    position: relative;
+    /* position: relative; */
     background-color: rgba(0, 0, 0, 0.391);
     display: flex;
     align-items: center;
     justify-content: center;
+    position: absolute;
+    top: 10px;
 }
 .coll--card--img img{
     position: absolute;
@@ -55,17 +58,21 @@
   
 }
 .coll--card--text{
-    width: 300px;
-    height: 80px;
+  margin-top: 170px;
+  width: 315px;  
+    height: 130px;
     overflow: hidden;
-    /* background-color: tan; */
+    /* background-color: rgba(210, 180, 140, 0.371); */
     padding: 0;
-    margin: 0;
+    /* margin: 0; */
+    flex-direction: column;
+    position: relative;
 }
 
 .coll--card--text p{
     padding: 0;
     margin: 0;
+    /* height: 20px; */
     text-overflow: ellipsis;
     font-size: 20px;
     color: rgb(0, 0, 0);
@@ -73,9 +80,11 @@
 }
 .coll--card--btn{
     background-color: rgb(27, 27, 27);
+    position: absolute;
+     bottom: 10px;
     border: none;
     color: white;
-    width: 300px;
+    width: 315px;
     height: 50px;
     border-radius: 50px;
     font-family: var(--font--fam);

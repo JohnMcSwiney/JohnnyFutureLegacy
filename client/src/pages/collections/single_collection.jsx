@@ -21,14 +21,15 @@ import {
   ButtonGroup
 } from '../../components/Styles'
 import AssetCardProfile from '../../components/cards/asset/AssetCardProfile'
-import {useMyContext} from "../../context/FLContext";
+import { useMyContext } from "../../context/FLContext";
 
 function Single_collection() {
   const { param1 } = useParams() //collection id
-  const {currentCollection, setFetchedCollection} = useMyContext();
+  const { currentCollection, setFetchedCollection } = useMyContext();
   const [collectionObject, setCollectionObject] = useState(null);
   const [collectionUser, setCollectionUser] = useState(null);
   const [isObtained, setIsObtained] = useState(false);
+  const [longDesc, setLongDesc] = useState(false);
   // currentCollection
   useEffect(() => {
     if (param1) {
@@ -42,7 +43,7 @@ function Single_collection() {
         })
         const collectionJson = await collectionResponse.json()
         if (collectionResponse.ok) {
-          setCollectionObject(collectionJson);    
+          setCollectionObject(collectionJson);
           setFetchedCollection(collectionJson);
           // console.log(collectionJson);
         } else { }
@@ -72,13 +73,23 @@ function Single_collection() {
         }
       }
       fetchCollectionUser();
+      if (collectionObject.collectionDescription) {
+        if (collectionObject.collectionDescription.length > 100) {
+          console.log('longass')
+        }
+      }
     }
   }, [collectionObject])
 
+  const [isShown, setIsShown] = useState(false);
+
+  const toggleVisibility = () => {
+    setIsShown(!isShown);
+  };
 
   return (
     <StyledContainer>
-      <StyledTitleContainer2>
+      <div className='instit--collhomepage--title--cont'>
         <div className='instit--collhomepage--title--img'>
           {collectionUser ?
             <div className={collectionUser.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
@@ -103,30 +114,40 @@ function Single_collection() {
           :
           "Loading..."}
         {collectionObject ?
-          <h4>{collectionObject.collectionDescription}</h4>
+          <>
+            <button onClick={toggleVisibility}>
+              {isShown ? 'Hide Description' : 'Show Description'}
+            </button>
+            {isShown && (
+              <div className="description-content">
+                {collectionObject.collectionDescription}
+              </div>
+            )}
+          </>
+
           :
           "Loading..."}
-                  
-      </StyledTitleContainer2>
+
+      </div>
 
       <StyledContentContainer>
-        {collectionObject ? 
-          <div className='content-cont grid'>
+        {collectionObject ?
+          <div className='content-cont grid gap__25'>
             {collectionObject.collectionAssets.map((collectionAssets) => (
-              <ArtifactCard 
-              key={collectionAssets._id}
-              artifactId={collectionAssets._id} 
-              collectionId={collectionObject._id}
-              imgUrl={collectionAssets.assetImage}
-              artifactTitle={collectionAssets.assetName}
-              assetDescrip={collectionAssets.assetDescription}
+              <ArtifactCard
+                key={collectionAssets._id}
+                artifactId={collectionAssets._id}
+                collectionId={collectionObject._id}
+                imgUrl={collectionAssets.assetImage}
+                artifactTitle={collectionAssets.assetName}
+                assetDescrip={collectionAssets.assetDescription}
               />
             ))}
-          </div> : 
+          </div> :
           <div>
             loading...
           </div>
-          }
+        }
       </StyledContentContainer>
     </StyledContainer>
   )
