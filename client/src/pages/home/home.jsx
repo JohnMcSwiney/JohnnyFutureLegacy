@@ -50,7 +50,7 @@ export default function Home() {
         <div className='home--featured--coll--cont'>
           <p>David Guttenfelder</p>
           <button 
-          onClick={() => redirectCollection('65176dfd88050f64784502fa')}
+          onClick={() => redirectCollection('65495d841b8ebdf5a2ebcec3')}
           onMouseDown={handleMouseDown}
           onMouseUp={handleMouseUp}
           style={buttonStyle}
