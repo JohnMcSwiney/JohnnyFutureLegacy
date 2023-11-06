@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Collection = require("../models/collectionModel");
-
+const { ObjectId } = mongoose.Types;
 class CollectionController {
   // Get all collections
   async getCollections(req, res) {
@@ -149,6 +149,31 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
+  // Delete collections by IDs
+async deleteMultipleCollections(req, res) {
+  console.log('delete many')
+  try {
+    const { ids } = req.body; // Expecting an array of IDs in the request body
+
+    if (!Array.isArray(ids) || ids.length === 0) {
+      return res.status(400).json({ error: "Invalid or empty list of IDs provided" });
+    }
+
+    // Convert the provided IDs to valid ObjectId instances
+    const validIds = ids.map(id => new ObjectId(id));
+
+    const { deletedCount } = await Collection.deleteMany({ _id: { $in: validIds } });
+
+    if (deletedCount === 0) {
+      return res.status(404).json({ error: "No matching Collections found" });
+    }
+
+    res.status(204).json(); // No content
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
 }
 
 module.exports = CollectionController;

@@ -25,4 +25,7 @@ router.put('/:id/set-default-image', collectionController.setDefaultCollectionIm
 // Delete a collection by ID
 router.delete('/:id', collectionController.deleteCollection);
 
+// deleteMultipleCollections
+router.delete('/', collectionController.deleteMultipleCollections);
+
 module.exports = router;
