@@ -354,10 +354,10 @@ function CollectionForm() {
                     collectionPriceUSD:  createdCollection.collectionPriceUSD,
                     collectionInformationTags: createdCollection.collectionInformationTags,
                     collectionImage:createdAssets[0].assetImage,
-                    collectionAssetArray: assetIds,
+                    collectionAssets: assetIds,
                 };
                 console.log('final collection object: ', createdCollectionObject);
-                const serverResponseCollection = null;
+                let serverResponseCollection = null;
                 const response = await fetch(apiUrl, {
                     method: 'POST',
                     headers: {
@@ -372,7 +372,7 @@ function CollectionForm() {
                 } else {
                     console.error('Failed to create collection:', createdCollection.collectionName);
                 }
-                // console.log(createdCollectionObject);
+                console.log(serverResponseCollection);
             } catch (error) {
                 console.error('Error creating collection:', error);
             }

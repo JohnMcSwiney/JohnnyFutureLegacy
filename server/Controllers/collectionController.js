@@ -62,7 +62,8 @@ class CollectionController {
   // Create a new collection
   async createCollection(req, res) {
     try {
-      // Create a new collection instance based on the model and request body
+      
+      console.log(req.body)// Create a new collection instance based on the model and request body
       const collection = new Collection(req.body);
 
       // Save the collection to the database
