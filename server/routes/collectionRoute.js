@@ -22,6 +22,9 @@ router.put('/:id', collectionController.updateCollection);
 // Route to set the default collection image
 router.put('/:id/set-default-image', collectionController.setDefaultCollectionImage);
 
+// Route to update the colleciton owner
+router.put('/:id/updateOwner', collectionController.updateCollectionOwnerName)
+
 // Delete a collection by ID
 router.delete('/:id', collectionController.deleteCollection);
 

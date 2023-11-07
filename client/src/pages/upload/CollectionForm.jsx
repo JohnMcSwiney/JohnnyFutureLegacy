@@ -323,7 +323,7 @@ function CollectionForm() {
             try {
                 const createdCollectionObject = {
                     collectionName: createdCollection.collectionName,
-                    creatorName: hardcodedUser,
+                    ownerName: hardcodedUser,
                     collectionDate: createdCollection.collectionDate,
                     collectionDescription: createdCollection.collectionDescription,
                     collectionPriceUSD: createdCollection.collectionPriceUSD,

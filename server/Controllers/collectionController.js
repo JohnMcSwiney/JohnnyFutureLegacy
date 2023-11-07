@@ -130,6 +130,35 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
+  // Update the ownerName of a collection
+async updateCollectionOwnerName(req, res) {
+  try {
+    const { id } = req.params;
+    const { newOwnerName } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'No such Collection' });
+    }
+
+    // Find the collection by ID
+    const collection = await Collection.findById(id);
+
+    if (!collection) {
+      return res.status(404).json({ error: 'No such Collection' });
+    }
+
+    // Update the ownerName
+    collection.ownerName = newOwnerName;
+
+    // Save the updated collection
+    await collection.save();
+
+    res.status(200).json(collection);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
   // Delete a collection by ID
   async deleteCollection(req, res) {
     try {

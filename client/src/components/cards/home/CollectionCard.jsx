@@ -7,7 +7,8 @@ export default function CollectionCard({ toggleView, collectionIn, collectionImg
   const [userImg, setUserImg] = useState('');
   const [userIsInstit, setUserIsInstit] = useState(false);
   const navigate = useNavigate();
-
+  console.log()
+  console.log(collectionIn)
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -21,6 +22,7 @@ export default function CollectionCard({ toggleView, collectionIn, collectionImg
         if (userResponse.ok) {
           const userJson = await userResponse.json();
           const temp = `${userJson.firstName} ${userJson.lastName}`;
+          console.log(userJson)
           setUserName(temp);
           setUserIsInstit(userJson.isInstit);
           if (userJson.profilePictureUrl !== null && !userImg) {
@@ -28,6 +30,7 @@ export default function CollectionCard({ toggleView, collectionIn, collectionImg
           }
         } else {
           // Handle error
+          console.log('bruh');
         }
       } catch (error) {
         // Handle error

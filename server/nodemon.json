@@ -1,0 +1,18 @@
+{
+    "verbose": true,   
+    "ignore": [        
+      "node_modules",
+      "logs",
+      ".git",
+      "uploaded_files"
+    ],
+    "watch": [         
+      "src",
+      "app.js"
+    ],
+    "execMap": {      
+      "js": "node --inspect",
+      "jsx": "node --inspect"
+    },
+    "ext": "js, json"  
+  }
