@@ -1,0 +1,53 @@
+.user--card--grid{
+    display: flex;
+    height: 480px;
+    width: 700px;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    /* background-color: thistle; */
+    overflow: hidden;
+    position: relative;
+    z-index: 2;
+    background-color: rgb(255, 255, 255);
+margin: 0;
+    border-radius: 20px;
+    border: 2px solid rgba(0, 0, 0, 0.303);
+
+}
+.user--card--cont--grid{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    overflow: hidden;
+    position: relative;
+    z-index: 4;
+    /* background-color: aqua; */
+    
+}
+.user--card--collection--display{
+    display: flex;
+    flex-direction: row;
+    overflow-x: scroll;
+    height: 420px;
+    width: 700px;
+    /* position: absolute; */
+    /* bottom: 0; */
+    z-index: 6;
+    /* gap: 10px; */
+    
+}
+.user--card--title--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    /* background-color: yellow; */
+    height: 100px;
+    width: 100%;
+    gap: 25px;
+    /* position: absolute; */
+    /* top: 0; */
+    z-index: 6;
+    
+      }

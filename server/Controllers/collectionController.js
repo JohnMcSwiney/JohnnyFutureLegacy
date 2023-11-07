@@ -58,12 +58,30 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
+  // Get multiple collections by their IDs
+  async getMultiCollectionsByIds(req, res) {
+    try {
+      const { collectionIds } = req.body; // Expect an array of collection IDs in the request body
 
+      // Validate that all collection IDs are valid
+      if (!collectionIds.every((id) => mongoose.Types.ObjectId.isValid(id))) {
+        return res.status(404).json({ error: "Invalid Collection ID" });
+      }
+
+      // Find collections by their IDs and populate the 'collectionAssets' field
+      const collections = await Collection.find({
+        _id: { $in: collectionIds },
+      }).populate("collectionAssets");
+
+      res.status(200).json(collections);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
   // Create a new collection
   async createCollection(req, res) {
     try {
-      
-      console.log(req.body)// Create a new collection instance based on the model and request body
+      console.log(req.body); // Create a new collection instance based on the model and request body
       const collection = new Collection(req.body);
 
       // Save the collection to the database
@@ -131,33 +149,33 @@ class CollectionController {
     }
   }
   // Update the ownerName of a collection
-async updateCollectionOwnerName(req, res) {
-  try {
-    const { id } = req.params;
-    const { newOwnerName } = req.body;
+  async updateCollectionOwnerName(req, res) {
+    try {
+      const { id } = req.params;
+      const { newOwnerName } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'No such Collection' });
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such Collection" });
+      }
+
+      // Find the collection by ID
+      const collection = await Collection.findById(id);
+
+      if (!collection) {
+        return res.status(404).json({ error: "No such Collection" });
+      }
+
+      // Update the ownerName
+      collection.ownerName = newOwnerName;
+
+      // Save the updated collection
+      await collection.save();
+
+      res.status(200).json(collection);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-
-    // Find the collection by ID
-    const collection = await Collection.findById(id);
-
-    if (!collection) {
-      return res.status(404).json({ error: 'No such Collection' });
-    }
-
-    // Update the ownerName
-    collection.ownerName = newOwnerName;
-
-    // Save the updated collection
-    await collection.save();
-
-    res.status(200).json(collection);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-}
 
   // Delete a collection by ID
   async deleteCollection(req, res) {
@@ -180,30 +198,33 @@ async updateCollectionOwnerName(req, res) {
     }
   }
   // Delete collections by IDs
-async deleteMultipleCollections(req, res) {
-  console.log('delete many')
-  try {
-    const { ids } = req.body; // Expecting an array of IDs in the request body
+  async deleteMultipleCollections(req, res) {
+    console.log("delete many");
+    try {
+      const { ids } = req.body; // Expecting an array of IDs in the request body
 
-    if (!Array.isArray(ids) || ids.length === 0) {
-      return res.status(400).json({ error: "Invalid or empty list of IDs provided" });
+      if (!Array.isArray(ids) || ids.length === 0) {
+        return res
+          .status(400)
+          .json({ error: "Invalid or empty list of IDs provided" });
+      }
+
+      // Convert the provided IDs to valid ObjectId instances
+      const validIds = ids.map((id) => new ObjectId(id));
+
+      const { deletedCount } = await Collection.deleteMany({
+        _id: { $in: validIds },
+      });
+
+      if (deletedCount === 0) {
+        return res.status(404).json({ error: "No matching Collections found" });
+      }
+
+      res.status(204).json(); // No content
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-
-    // Convert the provided IDs to valid ObjectId instances
-    const validIds = ids.map(id => new ObjectId(id));
-
-    const { deletedCount } = await Collection.deleteMany({ _id: { $in: validIds } });
-
-    if (deletedCount === 0) {
-      return res.status(404).json({ error: "No matching Collections found" });
-    }
-
-    res.status(204).json(); // No content
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-}
-
 }
 
 module.exports = CollectionController;

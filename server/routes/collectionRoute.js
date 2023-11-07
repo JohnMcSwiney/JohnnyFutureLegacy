@@ -13,6 +13,9 @@ router.get('/search', collectionController.searchCollections);
 // Get a single collection by ID
 router.get('/:id', collectionController.getCollectionById);
 
+//get multiple collections by ids
+router.post('/getMultiCollectionsByIds',collectionController.getMultiCollectionsByIds);
+
 // Create a new collection
 router.post('/', collectionController.createCollection);
 

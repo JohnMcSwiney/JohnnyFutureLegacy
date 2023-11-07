@@ -14,6 +14,7 @@ import {
   ButtonGroup
 } from '../../components/Styles'
 import { BsViewStacked, BsGrid } from 'react-icons/bs';
+import UserCard from '../../components/cards/user/UserCard';
 
 function Browse_Collections() {
 
@@ -25,6 +26,7 @@ function Browse_Collections() {
   }, [toggleView])
 
   const [collectionsData, setCollectionsData] = useState(null);
+  const [usersData, setUsersData] = useState(null);
   useEffect(() => {
     // http://localhost:3000/profile
     const fetchCollections = async () => {
@@ -45,7 +47,36 @@ function Browse_Collections() {
     }
 
     fetchCollections()
+    const fetchUser = async () => {
+      try {
+        const userResponse = await fetch(`http://localhost:5000/api/user/`, {
+          method: 'GET',
+          headers: {
+            'Content-Type': 'application/json',
+            'Access-Control-Allow-Origin': 'true',
+          },
+        });
+        if (userResponse.ok) {
+          const userJson = await userResponse.json();
+          const temp = `${userJson.firstName} ${userJson.lastName}`;
+          console.log(userJson)
+          setUsersData(userJson)
+          // setUserName(temp);
+          // setUserIsInstit(userJson.isInstit);
+          // if (userJson.profilePictureUrl !== null && !userImg) {
+          //   setUserImg(userJson.profilePicture);
+          //   setCollectionIds(userJson.userCollections)
+          // }
+        } else {
+          // Handle error
+          console.log('bruh');
+        }
+      } catch (error) {
+        // Handle error
+      }
+    };
 
+    fetchUser();
   }, []);
 
 
@@ -68,15 +99,21 @@ function Browse_Collections() {
             {toggleView ? <BsViewStacked /> : <BsGrid />}
           </button>
         </div>
-        {collectionsData ? 
+        {usersData ? 
 
         
         <div className={toggleView ? 'content--cont row' : 'content--cont grid gap__25'}>
-          {collectionsData.map((collection) => (
-            <CollectionCard
-              key={collection._id} // Provide a unique key for each component
+          {usersData.map((user) => (
+            // <CollectionCard
+            //   key={collection._id} // Provide a unique key for each component
+            //   toggleView={toggleView}
+            //   collectionIn={collection} // Use the appropriate property from your data
+            //   // collectionImg={collection.imageUrl} // Use the appropriate property from your data
+            // />
+            <UserCard
+              key={user._id} // Provide a unique key for each component
               toggleView={toggleView}
-              collectionIn={collection} // Use the appropriate property from your data
+              userId={user._id} // Use the appropriate property from your data
               // collectionImg={collection.imageUrl} // Use the appropriate property from your data
             />
           ))} 
