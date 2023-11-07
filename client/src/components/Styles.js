@@ -112,6 +112,19 @@ export const StyledContentContainer = styled.div`
   padding-bottom: 100px;
   overflow-y: scroll;
 `;
+export const StyledSearchResultsContainer = styled.div`
+  margin: 0;
+  display: flex;
+  // position: absolute;
+  // bottom: 0;
+  flex-direction: column;
+  // background: tan;
+  height: 80%;
+  width: 100%;
+  // padding-bottom: 100px;
+  overflow-y: scroll;
+  overflow-x: hidden;
+`;
 export const Avatar = styled.div`
   width: 85px;
   height: 85px;

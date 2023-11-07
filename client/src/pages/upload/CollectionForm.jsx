@@ -369,6 +369,38 @@ function CollectionForm() {
     const buttonStyle = {
         transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
     };
+    //adds complete collection to user
+    useEffect(() => {
+        if (isComplete === true) {
+            if (collectionId !== null) {
+                updateUser();
+            }
+        }
+    }, [isComplete])
+    const updateUser = async (e) => {
+        try {
+            const response = await fetch(`/api/user/${hardcodedUser}/user-collections/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ collectionId }),
+            });
+
+            if (response.ok) {
+                const updatedUser = await response.json();
+                console.log('User updated:', updatedUser);
+            } else {
+                const errorResponse = await response.json();
+                console.error('Error:', errorResponse.error);
+            }
+        } catch (error) {
+            console.error('API call failed:', error);
+        }
+    }
+
+
+
     return (
         <div className='create--coll--page'
             onLoad={incrementCount}
@@ -395,7 +427,7 @@ function CollectionForm() {
                         <>
 
                             <button
-                                onClick={() => redirectCollection('65495d841b8ebdf5a2ebcec3')}
+                                onClick={() => redirectCollection({ collectionId })}
                                 onMouseDown={handleMouseDown}
                                 onMouseUp={handleMouseUp}
                                 style={buttonStyle}

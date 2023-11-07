@@ -1,3 +1,4 @@
+
 .home--coll--card--cont{
     background-color: var(--bg);
     border-radius: 25px;
@@ -229,6 +230,99 @@ gap: 25px;
     border-radius: 50px;
   }
 
+  .asset--card--cont{
+    display: flex;
+    height: 450px;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 15px;
+    border: 2.5px solid rgba(3, 3, 3, 0.305);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.268);
+    transition: all ease 0.25s;
+    flex-basis: content;
+  flex-shrink: 0;
+  flex-grow: 0;
+  }
+  
+  .asset--card--img{
+    /* position: absolute; */
+    /* left: 0; */
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .asset--card--img img{
+    /* position: absolute;
+    left:0; */
+    height: 450px;
+    scale: 1.01;
+  }
+  .asset--card--info--cont{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content:  center;
+    flex-direction: column;
+    border-top: 2px solid rgba(255, 255, 255, 0.151);
+    background-color: rgba(255, 255, 255, 0.31);
+    backdrop-filter: blur(9px);
+    transform: translateY(150px);
+    transition: all ease 0.25s;
+  }
+  .asset--card--text{
+    background-color: rgba(255, 255, 0, 0);
+    width: 95%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 50px;
+    max-height: 70px;
+    margin-top: 5px;
+    margin-left: 5px;
+    margin-right: 5px;
+  }
+  .asset--card--text h2{
+    /* background-color: rgba(0, 128, 128, 0.348); */
+    width: fit-content;
+    text-align: left;
+    margin: 0;
+    word-break: break-all;
+    text-overflow: ellipsis;
+    font-weight: bold;
+    text-shadow:1px 1px 4px white;
+  }
+  .asset--card--btn{
+    background-color: rgb(27, 27, 27);
+    /* position: absolute; */
+     bottom: 10px;
+    border: none;
+    color: white;
+    width: 315px;
+    height: 50px;
+    border-radius: 50px;
+    font-family: var(--font--fam);
+    font-size: 20px;
+    font-weight: 300;
+    /* margin-top: 20px; */
+    transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+    margin-bottom: 15px;
+}
 
+.asset--card--btn:hover{
+    transform: scale(1.01); /* Increase the scale on hover */
+    box-shadow: rgba(84, 84, 84, 0.845) 0px 1px 2px;
+    text-shadow: rgba(212, 210, 210, 0.533) 0px 1px 2px;
+}
+.asset--card--cont:hover .asset--card--info--cont{
+  transform: translateY(0px);
+  transition: all ease 0.25s;
+}
+.asset--card--info--cont{
+
+}
 
 

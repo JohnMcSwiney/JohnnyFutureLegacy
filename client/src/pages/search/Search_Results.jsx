@@ -15,7 +15,8 @@ import {
   StyledSubTitle,
   SearchTitle,
   StyledSubTitle2,
-  StyledContentContainer
+  StyledContentContainer,
+  StyledSearchResultsContainer
 } from '../../components/Styles'
 
 export default function Search_Results() {
@@ -37,7 +38,7 @@ export default function Search_Results() {
           <h2>Search Value Empty</h2>
         }
       </StyledTitleContainer2>
-      <StyledContentContainer>
+      <StyledSearchResultsContainer>
         {searchData.assetResults ? <SearchTitle>Asset Results:</SearchTitle> : <></>}
         {searchData.assetResults ?
           <div className='search_results--container--row--scroll'>
@@ -57,7 +58,7 @@ export default function Search_Results() {
             none...
           </div>
         }
-      </StyledContentContainer>
+      </StyledSearchResultsContainer>
     </StyledContainer>
 
   )

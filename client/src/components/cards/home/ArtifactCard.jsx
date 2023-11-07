@@ -28,8 +28,8 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
     navigate(`/asset/${artifactId}/${collectionId}`)
   }
   return (
-    <div className='home--coll--card--cont'>
-      <div className='coll--card--img'
+    <div className='asset--card--cont'>
+      <div className='asset--card--img'
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
 onClick={handleRedirect}
@@ -37,13 +37,14 @@ onClick={handleRedirect}
         <img src={imgUrl} />
       </div>
 
-      
-      <div className='coll--card--text'>
+      <div className='asset--card--info--cont'>
+      <div className='asset--card--text'>
       <h2>{artifactTitle}</h2>
-        <p>{assetDescrip}</p>
+      {/* <h2>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean m</h2> */}
+        {/* <p>{assetDescrip}</p> */}
       </div>
       <button 
-      className='coll--card--btn '
+      className='asset--card--btn '
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       style={buttonStyle}
@@ -52,5 +53,7 @@ onClick={handleRedirect}
         License Image
       </button>
     </div>
+      </div>
+      
   )
 }

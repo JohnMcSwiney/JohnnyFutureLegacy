@@ -1,12 +1,15 @@
 .search_results--container--row--scroll{
-    height: 500px;
+    height: 100%;
+
     /* background-color: rgba(255, 255, 255, 0.668); */
     display: flex;
-    flex-wrap: nowrap;
+    flex-wrap: wrap;
     overflow-x: scroll ;
+    flex-direction: row;
     width: 100%;
     gap: 10px;
     align-items: center;
     /* padding-bottom: 15px; */
-    margin-bottom: 45px;
+    justify-content: center;
+    /* margin-bottom: 45px; */
 }
