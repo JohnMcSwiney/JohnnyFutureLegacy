@@ -41,6 +41,8 @@ function CollectionForm() {
     const [userConfirmation, setUserConfirmation] = useState(false)
     const [createdCollection, setCreatedCollection] = useState(null) //collection object for backend
 
+    const [isComplete, setIsComplete] = useState(false);
+    const [collectionId, setCollectionId] = useState(null);
     // helps initalize the program, and allows it to run smoothly 
     useEffect(() => {
         incrementCount(); //run on load
@@ -227,81 +229,54 @@ function CollectionForm() {
         setCreatedCollection(collectionData);
     }
     const [isPopupVisible, setPopupVisible] = useState(false);
-    
-    useEffect(() =>{
-        if(userConfirmation === true){
-            if(assetArray && createdCollection){
-                createAssetsInServer();     
+
+    useEffect(() => {
+        if (userConfirmation === true) {
+            if (assetArray && createdCollection) {
+                createAssetsInServer();
             }
         }
-    },[userConfirmation])
+    }, [userConfirmation])
 
-    useEffect(() =>{
-        if(assetArray && assetIds && createdAssets){
+    useEffect(() => {
+        if (assetArray && assetIds && createdAssets) {
             console.log('asset use effect if 1');
-            console.log('objects: ',createdAssets.length, ' _ ', assetArray.length);
+            console.log('objects: ', createdAssets.length, ' _ ', assetArray.length);
             console.log('ids:', assetIds.length, ' _ ', assetArray.length);
-            if(createdAssets.length === assetArray.length 
-            && assetArray.length === assetIds.length 
-            && createdCollection.collectionAssetArray.length !== assetIds.length){
+            if (createdAssets.length === assetArray.length
+                && assetArray.length === assetIds.length
+                && createdCollection.collectionAssetArray.length !== assetIds.length) {
                 console.log('asset use effect if 2');
                 createCollectionInServer();
             }
-        }    
-    },[assetIds,createdAssets ]);
+        }
+    }, [assetIds, createdAssets]);
 
     const handleConfirm = () => {
         setPopupVisible(false);
         setUserConfirmation(true);
     };
-    const handleCancel = () => {setPopupVisible(false);};
+    const handleCancel = () => { setPopupVisible(false); };
 
     //*
-    // Submit all assets
     const submitCompletedCollection = async () => {
         console.log('submitting collection!');
         console.log('Collection info: ', createdCollection);
         console.log('Asset info: ', assetArray);
-        if(assetArray && createdCollection){
+        if (assetArray && createdCollection) {
             setPopupVisible(true);
         }
-       
-        // if (assetArray && createdCollection.collectionAssetArray) {
-        //     console.log('Collection info: ', createdCollection);
-        //     console.log('Asset info: ', assetArray);
-        // }
-        // // updateAllAssets();
-        // // let result = await setFormDataCollection({ ...createdCollection, 'collectionAssetArray': assetArray })
-        // // console.log(result)
-        // // console.log(assetArray.length, createdCollection.collectionAssetArray.length)
-        // // console.log(createdCollection)
-        // // Compare the lengths after the update
-        // if (assetArray.length === createdCollection.collectionAssetArray.length) {
-        //     console.log('Lengths are equal.');
-        //     // createCollectionsInServer();
-        //     createAssetsInServer();
-        //     const response = await createAssetsInServer();
-        //     if (response.ok){
-        //         if(isCreating === false){
-        //             createCollectionInServer()
-        //         }
-        //     }
-        // } else {
-        //     console.log('Lengths are not equal.');
-        //     console.log('Collection info: ', createdCollection);
-        //     console.log('Asset info: ', assetArray);
-        //     createAssetsInServer();
-        // }
+
     }
     const createAssetsInServer = async () => {
-        
+
         const apiUrl = 'http://localhost:5000/api/asset/';
-        if(createdAssets.length !== assetArray.length && assetArray.length !== assetIds.length){
+        if (createdAssets.length !== assetArray.length && assetArray.length !== assetIds.length) {
             setIsCreating(true);
             try {
                 const createdAssetsArray = [];
                 const createdAssetIds = [];
-    
+
                 for (const assetObject of assetArray) {
                     const response = await fetch(apiUrl, {
                         method: 'POST',
@@ -310,7 +285,7 @@ function CollectionForm() {
                         },
                         body: JSON.stringify(assetObject),
                     });
-    
+
                     if (response.ok) {
                         const createdAsset = await response.json();
                         createdAssetsArray.push(createdAsset);
@@ -333,17 +308,17 @@ function CollectionForm() {
             } catch (error) {
                 console.error('Error creating assets:', error);
             }
-    
+
             setIsCreating(false);
         }
-        
+
     };
 
     const createCollectionInServer = async () => {
-        
+
         // console.log('creating assets');
         const apiUrl = 'http://localhost:5000/api/collection/';
-        if(createdAssets.length === assetArray.length && assetArray.length === assetIds.length && createdCollection){
+        if (createdAssets.length === assetArray.length && assetArray.length === assetIds.length && createdCollection) {
             setIsCreating(true);
             try {
                 const createdCollectionObject = {
@@ -351,9 +326,9 @@ function CollectionForm() {
                     creatorName: hardcodedUser,
                     collectionDate: createdCollection.collectionDate,
                     collectionDescription: createdCollection.collectionDescription,
-                    collectionPriceUSD:  createdCollection.collectionPriceUSD,
+                    collectionPriceUSD: createdCollection.collectionPriceUSD,
                     collectionInformationTags: createdCollection.collectionInformationTags,
-                    collectionImage:createdAssets[0].assetImage,
+                    collectionImage: createdAssets[0].assetImage,
                     collectionAssets: assetIds,
                 };
                 console.log('final collection object: ', createdCollectionObject);
@@ -365,7 +340,7 @@ function CollectionForm() {
                     },
                     body: JSON.stringify(createdCollectionObject),
                 });
-    
+
                 if (response.ok) {
                     const createdCollection = await response.json();
                     serverResponseCollection = createdCollection;
@@ -373,15 +348,28 @@ function CollectionForm() {
                     console.error('Failed to create collection:', createdCollection.collectionName);
                 }
                 console.log(serverResponseCollection);
+                setCollectionId(serverResponseCollection._id);
+                setIsComplete(true);
             } catch (error) {
                 console.error('Error creating collection:', error);
             }
-    
+
             setIsCreating(false);
         }
-       
+
     };
-    return(
+    const redirectCollection = (collectionid) => { navigate(`/collection/${collectionid}`) };
+
+    const handleMouseDown = () => {
+        setIsMouseDown(true);
+    };
+    const handleMouseUp = () => {
+        setIsMouseDown(false);
+    };
+    const buttonStyle = {
+        transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
+    };
+    return (
         <div className='create--coll--page'
             onLoad={incrementCount}
             onReset={incrementCount}
@@ -400,92 +388,100 @@ function CollectionForm() {
                 onClick={resetUpload}
                 disabled={userConfirmation}
             >Reset Upload Items</button>
-            
-            {userConfirmation === true ? 
-            <div>
-                Creating  collection!
-                Don't refresh the page!
-            </div>:
-            <>
-             {!parentPictureData ?
-                <section onClick={updateUploadValue}>{/* Picture uploader */}
-                    <FL_DragDrop onSubmit={handlePictureData} />
-                </section>
-                : <section>
 
-                </section>}
-            <section>{/* Asset list selector / display */}
-                {/* data received and collection can start to be created */}
-                {parentPictureData ?
-                    <div className="image-preview--2">
-                        <span className="image-preview--title--2">
-                            {/* <h4 className="upload--title">4: Fill out collection information </h4> */}
-                            <p className="upload--subtitle">Images to be used in the collection</p>
-                        </span>
+            {userConfirmation === true ?
+                <div>
+                    {isComplete ?
+                        <>
 
-                        <div className="uploaded--image--scrollable">
-                            {parentPictureData.map((entry, index) => (
-                                <div className={currentAssetIndex === index ? 'uploaded--image selected--image' : 'uploaded--image'} key={index} onClick={() => setCurrentAsset(entry.file, index)}>
-                                    <img src={`http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${entry.fileName}`} alt={`Image ${entry.file.name}`} />
+                            <button
+                                onClick={() => redirectCollection('65495d841b8ebdf5a2ebcec3')}
+                                onMouseDown={handleMouseDown}
+                                onMouseUp={handleMouseUp}
+                                style={buttonStyle}
+                                className='home--coll--btn'
+                            >Visit Collection</button>
+                        </>
+                        :
+                        <>
+                            Creating  collection!
+                            Don't refresh the page!
+                        </>
+
+                    }
+
+                </div> :
+                <>
+                    {!parentPictureData ?
+                        <section onClick={updateUploadValue}>{/* Picture uploader */}
+                            <FL_DragDrop onSubmit={handlePictureData} />
+                        </section>
+                        : <section>
+
+                        </section>}
+                    <section>{/* Asset list selector / display */}
+                        {/* data received and collection can start to be created */}
+                        {parentPictureData ?
+                            <div className="image-preview--2">
+                                <span className="image-preview--title--2">
+                                    {/* <h4 className="upload--title">4: Fill out collection information </h4> */}
+                                    <p className="upload--subtitle">Images to be used in the collection</p>
+                                </span>
+
+                                <div className="uploaded--image--scrollable">
+                                    {parentPictureData.map((entry, index) => (
+                                        <div className={currentAssetIndex === index ? 'uploaded--image selected--image' : 'uploaded--image'} key={index} onClick={() => setCurrentAsset(entry.file, index)}>
+                                            <img src={`http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${entry.fileName}`} alt={`Image ${entry.file.name}`} />
+                                        </div>
+                                    ))}
                                 </div>
-                            ))}
-                        </div>
 
 
-                    </div>
-                    :
-                    <div>
+                            </div>
+                            :
+                            <div>
 
-                    </div>
-                }
-            </section>
-
-            <section>{/* Form Container - Form 1: Collection Info - Form 2: Selected Asset Info */}
-                {parentPictureData &&
-                    <div className="collection--form--container">
-                        <div className="collection--form--title">
-                            {/* <h3>Collection Creation Form</h3> */}
-                            <button onClick={() => switchContentVal('COLLECTION_INFO')} className={tabContent === 'COLLECTION_INFO' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Collection Info</button>
-                            <button onClick={() => switchContentVal('ASSET_ARRAY')} className={tabContent === 'ASSET_ARRAY' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Assets</button>
-                            {isCollInfoFormComplete &&
-                                <button className='upload--coll--btn'
-                                    onClick={submitCompletedCollection}
-                                    //    onClick={handleSubmit} disabled={disableAll} 
-                                    type="submit"
-                                >Create Collection</button>
-                            }
-                        </div>
-                        {tabContent === 'COLLECTION_INFO' &&
-
-                            <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} />
-                        }
-                        {tabContent === 'ASSET_ARRAY' &&
-                            <div className='div--here'>
-                                {/* ASSET ARRAY! */}
-                                {assetArray ?
-                                    <div className='div--here'>
-                                        {assetArray.map((asset, index) => (
-                                            <div className={index === currentAssetIndex ? 'another--div--named--here' : 'hidden'} key={index}>
-                                                <AssetForm_v2 asset={asset} onSubmit={handleAssetData} />
-                                            </div>
-                                        ))}
-                                    </div> : <div></div>}
                             </div>
                         }
-                    </div>
-                }
-            </section>
-            <section>{/* Collection Creation Submission */}
-                {/* {isCollInfoFormComplete &&
-                    <button className='upload--coll--btn'
-                        onClick={submitCompletedCollection}
-                        //    onClick={handleSubmit} disabled={disableAll} 
-                        type="submit"
-                    >Create Collection</button>
-                } */}
-            </section>
-            </>}
-           
+                    </section>
+
+                    <section>{/* Form Container - Form 1: Collection Info - Form 2: Selected Asset Info */}
+                        {parentPictureData &&
+                            <div className="collection--form--container">
+                                <div className="collection--form--title">
+                                    {/* <h3>Collection Creation Form</h3> */}
+                                    <button onClick={() => switchContentVal('COLLECTION_INFO')} className={tabContent === 'COLLECTION_INFO' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Collection Info</button>
+                                    <button onClick={() => switchContentVal('ASSET_ARRAY')} className={tabContent === 'ASSET_ARRAY' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Assets</button>
+                                    {isCollInfoFormComplete &&
+                                        <button className='upload--coll--btn'
+                                            onClick={submitCompletedCollection}
+                                            //    onClick={handleSubmit} disabled={disableAll} 
+                                            type="submit"
+                                        >Create Collection</button>
+                                    }
+                                </div>
+                                {tabContent === 'COLLECTION_INFO' &&
+
+                                    <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} />
+                                }
+                                {tabContent === 'ASSET_ARRAY' &&
+                                    <div className='div--here'>
+                                        {/* ASSET ARRAY! */}
+                                        {assetArray ?
+                                            <div className='div--here'>
+                                                {assetArray.map((asset, index) => (
+                                                    <div className={index === currentAssetIndex ? 'another--div--named--here' : 'hidden'} key={index}>
+                                                        <AssetForm_v2 asset={asset} onSubmit={handleAssetData} />
+                                                    </div>
+                                                ))}
+                                            </div> : <div></div>}
+                                    </div>
+                                }
+                            </div>
+                        }
+                    </section>
+                </>}
+
         </div>
     )
 }
