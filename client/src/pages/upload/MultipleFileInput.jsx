@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "../../components/progressbar/progressbar";
 import { useToastContext } from '../../context/ToastContext';
 
-function FL_DragDrop({ onSubmit }) {
+function MultipleFileInput({ onSubmit }) {
   const [files, setFiles] = useState([]);
   const [uploadResponses, setUploadResponses] = useState([]); // Store responses for each file
   const [isFilled, updateIsFilled] = useState(false);
@@ -239,4 +239,4 @@ function FL_DragDrop({ onSubmit }) {
   );
 }
 
-export default FL_DragDrop;
+export default MultipleFileInput;

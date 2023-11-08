@@ -1,11 +1,11 @@
 import React, { useState, useEffect, useContext } from 'react'
-import './SearchBar.css'
+// import './SearchBar.css'
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import FLContext from '../../context/FLContext'
-import { useSearchContext } from "../../context/SearchContext";
+import { useSearchContext } from "../context/SearchContext";
 import sanitizeHtml from 'sanitize-html';
-import { useToastContext } from '../../context/ToastContext';
+import { useToastContext } from '../context/ToastContext';
 
 const SearchBarHome = () => {
   const navigate = useNavigate();

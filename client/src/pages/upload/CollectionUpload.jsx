@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FileUploader } from "react-drag-drop-files";
-import FL_DragDrop from './FL_DragDrop';
+import MultipleFileInput from './MultipleFileInput';
 import { useToastContext } from '../../context/ToastContext';
 import { useUploadContext } from '../../context/UploadContext';
 import { useNavigate } from 'react-router-dom';
@@ -10,7 +10,7 @@ import './style.css'
 import { Asset } from '../../pages';
 import ConfirmationPopup from './ConfirmationPopup';
 
-function CollectionForm() {
+function CollectionUpload() {
     const { clearUploadData,
         setUploadValue,
         uploadValue,
@@ -446,7 +446,7 @@ function CollectionForm() {
                 <>
                     {!parentPictureData ?
                         <section onClick={updateUploadValue}>{/* Picture uploader */}
-                            <FL_DragDrop onSubmit={handlePictureData} />
+                            <MultipleFileInput onSubmit={handlePictureData} />
                         </section>
                         : <section>
 
@@ -518,4 +518,4 @@ function CollectionForm() {
     )
 }
 
-export default CollectionForm
+export default CollectionUpload

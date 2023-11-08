@@ -1,10 +1,10 @@
 import React,{useState} from 'react'
 // import '../../app.css';
-import './homePage.css'
+import './homePage_v2.css'
 import FL_splitter from '../../components/splitter/FL_splitter'
-import CollectionCard from '../../components/cards/home/CollectionCard'
+import CollectionCard from '../../unused/CollectionCard'
 import FL_footer from '../../components/FL_Footer/FL_footer'
-import SearchBarHome from '../../components/searchBar/SearchbarHome'
+import SearchBarHome from '../../unused/SearchbarHome'
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { useNavigate, useLocation } from 'react-router-dom';
 
@@ -27,19 +27,22 @@ export default function Home() {
   };
   return (
 
-    <div className='mar-lr FL--home--cont '>
-      <div className='FL--home--showcase--3'>
-        <div className='FL--home--search--cont'>
+    <div className='home--cont '>
+      <div className='home--showcase'>
+        {/* <div className='FL--home--search--cont'>
           <h2>What Do You Want To See Today?</h2>
           <SearchBarHome />
-        </div>
+        </div> */}
 
       </div>
-      <div className='FL--home--showcase--4--transition'>
+      
+      <FL_footer />
+    </div>
+  )
+}
+{/* <div className='FL--home--showcase--4--transition'>
         <span><AiOutlineArrowDown/>
-        {/* </span> */}
-        <p>Featured Stories</p>
-        {/* <span> */}
+
           <AiOutlineArrowDown/></span>
       </div>
       <div className='FL--home--showcase--4'>
@@ -57,8 +60,4 @@ export default function Home() {
           className='home--coll--btn'
           >Visit Collection</button>
         </div>
-      </div>
-      <FL_footer />
-    </div>
-  )
-}
+      </div> */}

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react'
-import CollectionCard from '../../components/cards/home/CollectionCard'
+import CollectionCard from '../../unused/CollectionCard'
 import './collectionStyle.css'
 import {
   StyledContainer,

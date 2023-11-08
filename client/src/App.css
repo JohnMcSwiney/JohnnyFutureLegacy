@@ -1,8 +1,30 @@
 @import url('https://fonts.googleapis.com/css2?family=Arvo:ital,wght@0,400;0,700;1,400;1,700&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Hind:wght@300;400;500;600;700&family=Playpen+Sans:wght@100;200;300;400;500;600;700;800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 :root {
-  --bg: #ffffff;
+  --bg: #2b2b2b;
+  --font: #ffffff;
+  --primary: #a30000;
+  --primary--shadow: #a300006d;
+  --secondary: #291414;
+  --secondary--shadow: #29141480;
+  --tertiary: #ff859f;
+  --tertiary--shadow: #ff85a075;
+  --highlight--1: #93a3bc;
+
+  --header--font: 'Hind', sans-serif;
+}
+/* --text: #ffffff;
+--background: #2b2b2b;
+--primary: #a30000;
+--secondary: #291414;
+--accent: #ff859f; */
+
+
+
+/* 'Didact Gothic', sans-serif; */
+/* --bg: #ffffff;
   --font: #000000;
   --primary: #48acf0;
   --primary--shadow: #48adf0a1;
@@ -10,9 +32,7 @@
   --tertiary: #cd1c10;
   --highlight--1: #93a3bc;
 
-  --font--fam: 'Poppins', sans-serif;
-}
-
+  --font--fam: 'Poppins', sans-serif; */
 /* --bg: #ccdde2; */
 h1 {
   position: relative;
@@ -26,7 +46,7 @@ h1 {
 h2 {
   position: relative;
   color: var(--font);
-  font-family: 'Arvo', serif;
+  font-family: 'Hind', sans-serif;
   margin: 1vh;
 }
 
@@ -44,7 +64,7 @@ p {
   color: var(--font);
   font-size: 24px;
   margin: 0;
-  font-family: 'Poppins', sans-serif;
+  font-family: 'Didact Gothic', sans-serif;
 }
  span{
   margin: 0;
@@ -92,7 +112,7 @@ p {
 .gradient-cont {
   width: 100%;
   /* background: rgb(193, 99, 99); */
-  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.508) 50%, rgb(255, 255, 255) 100%);
+  background: linear-gradient(0deg, rgba(255, 255, 255, 0) 0%, var(--bg));
   position: fixed;
   top: 0;
 
@@ -301,7 +321,7 @@ p {
 
 input[type="checkbox"] {
   appearance: none;
-  background-color: #fff;
+  background-color: #ffffff24;
   margin: 0;
   font: inherit;
   color: red;
@@ -376,3 +396,29 @@ transition: opacity 1s ease;
 .active {
   transform: scale(0.5); /* Decrease the scale when active */
 }
+
+/* ===== Scrollbar CSS ===== */
+/* Firefox */
+* {
+  scrollbar-width: auto;
+  scrollbar-color: var(--primary--shadow) #ffffff;
+}
+
+/* Chrome, Edge, and Safari */
+*::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+
+*::-webkit-scrollbar-track {
+  background: var(--secondary--shadow);
+  border-radius: 8px;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: var(--primary--shadow);
+  border-radius: 8px;
+  border: 2px solid var(--secondary--shadow);
+  /* width: 80%; */
+}
+

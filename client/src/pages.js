@@ -16,7 +16,7 @@ export {default as Single_collection} from "./pages/collections/single_collectio
 // export {default as CreateInstituteCollection} from "./pages/collections/institute/createInstitCollect";
 
 export {default as Home} from "./pages/home/home";
-export {default as Home_alt} from './pages/home/home_alt';
+// export {default as Home_alt} from './unused/home_alt';
 export {default as Search_Results} from './pages/search/Search_Results'
 
 export {default as Register} from "./pages/register/register";
@@ -28,11 +28,11 @@ export {default as Profile} from './pages/user/profile';
 
 export {default as User} from './pages/user/user';
 
-export {default as Subscribe} from "./pages/subscription/subscribe";
+export {default as Subscribe} from "./pages/other/subscription/subscribe";
 
 export {default as Upload} from "./pages/upload/UploadPage";
 
 
-// export {default as AssetForm} from "./pages/upload/AssetForm";
+export {default as AssetUpload} from "./pages/upload/AssetUpload";
 
-export {default as CollectionForm} from "./pages/upload/CollectionForm";
+export {default as CollectionUpload} from "./pages/upload/CollectionUpload";

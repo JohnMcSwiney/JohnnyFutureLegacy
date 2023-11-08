@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import { FileUploader } from "react-drag-drop-files";
-import FL_DragDrop from './FL_DragDrop';
-import { useToastContext } from '../../context/ToastContext';
-import { useUploadContext } from '../../context/UploadContext';
+import FL_DragDrop from '../pages/upload/MultipleFileInput';
+import { useToastContext } from '../context/ToastContext';
+import { useUploadContext } from '../context/UploadContext';
 import { useNavigate } from 'react-router-dom';
-import AssetForm_v2 from './AssetForm_v2';
+import AssetForm_v2 from '../pages/upload/AssetForm_v2';
 import './style.css'
-import { Asset } from '../../pages';
+import { Asset } from '../pages';
 
 function CollectionForm() {
     const { clearUploadData,

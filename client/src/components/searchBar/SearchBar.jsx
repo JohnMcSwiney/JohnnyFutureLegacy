@@ -69,12 +69,12 @@ const SearchBar = () => {
 
   return (
     <form
-      className={`search--cont ${isHomePage ? 'centered' : ''}`}
+      className={`search--cont ${isHomePage ? '' : ''}`}
       onSubmit={handleSearch}
     >
       <input
         type='search'
-        placeholder='What do you want to see today?'
+        placeholder='Search'
         value={q}
         className='search--input'
         /*

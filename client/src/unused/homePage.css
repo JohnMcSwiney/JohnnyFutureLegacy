@@ -11,7 +11,8 @@
 }
 
 .FL--home--showcase--3 {
-  height: 90vh; /* To show a bit of a featured story */
+  /* height: 90vh; To show a bit of a featured story */
+  height: 100vh;
   width: 100vw;
   display: flex;
   align-items: center;

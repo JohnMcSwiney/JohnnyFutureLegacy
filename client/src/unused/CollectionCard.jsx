@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
-import './style.css';
+// import './style.css';
 
 export default function CollectionCard({ toggleView, collectionIn, collectionImg }) {
   const [userName, setUserName] = useState('');

@@ -12,15 +12,15 @@ import {
   InstituteCollection,
   // CreateInstituteCollection,
   Home,
-  Home_alt,
+  // Home_alt,
   Search_Results,
   Register,
   Login,
   SignUp,
   Subscribe,
   Upload,
-  // AssetForm,
-  CollectionForm,
+  AssetUpload,
+  CollectionUpload,
   Landing,
   Profile,
   User,
@@ -61,7 +61,7 @@ function App() {
 
                   <Routes>
                     <Route path="/" element={<Home />}></Route>
-                    <Route path="/alt" element={<Home_alt />}></Route>
+                    {/* <Route path="/alt" element={<Home_alt />}></Route> */}
                     <Route path="/landing" element={<Landing />}></Route>
                     <Route path="/about" element={<About />}></Route>
 
@@ -97,10 +97,10 @@ function App() {
 
                     <Route path="/upload" element={<Upload />}></Route>
 
-                    {/* <Route path="/upload/asset" element={<AssetForm />}></Route> */}
+                    <Route path="/upload/asset" element={<AssetUpload />}></Route>
                     <Route
                       path="/upload/collection"
-                      element={<CollectionForm />}
+                      element={<CollectionUpload />}
                     ></Route>
                   </Routes>
 
