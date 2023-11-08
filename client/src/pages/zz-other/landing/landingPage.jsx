@@ -12,7 +12,7 @@ import {
   Avatar,
   StyledButton,
   ButtonGroup
-} from '../../components/Styles'
+} from '../../../components/Styles'
 // import
 
 function landingPage () {

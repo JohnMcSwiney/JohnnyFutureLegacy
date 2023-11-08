@@ -1,7 +1,7 @@
 import React from 'react'
 import './aboutPage.css'
-import TeamImg from '../../components/teamImg/TeamImg'
-import Accordion from '../../components/accordionItem/accordion'
+import TeamImg from '../../../components/teamImg/TeamImg'
+import Accordion from '../../../components/accordionItem/accordion'
 
 export default function About() {
   return (

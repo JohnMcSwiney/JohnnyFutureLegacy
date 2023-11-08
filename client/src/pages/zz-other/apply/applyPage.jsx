@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import './applyPage.css';
-import Checkbox from '../../components/checkbox/Checkbox';
+import Checkbox from '../../../components/checkbox/Checkbox';
 
 export default function ApplyPage () {
   const [name, setName] = useState('')
