@@ -13,8 +13,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 901;
+    z-index: 3001;
     /* margin-top: 200px; */
+    transform: translateX(50px);
 
 }
 .logo-cont img{

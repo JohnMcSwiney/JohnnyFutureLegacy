@@ -24,6 +24,7 @@ import {
   Landing,
   Profile,
   User,
+  
 } from "./pages";
 import { ContextProvider, useMyContext } from "./context/FLContext";
 import { SearchContextProvider } from "./context/SearchContext";
@@ -34,8 +35,12 @@ import { UploadContextProvider } from "./context/UploadContext";
 import SearchBar from "./components/searchBar/SearchBar";
 import FL_Logo from "./components/FL_Logo/FL_Logo";
 import HamburgerMenu from "./components/hamburgerMenu/HamburgerMenu";
+import SidebarMenu from "./components/sidebarMenu/SidebarMenu";
+import SideBarBtn from "./components/sidebarMenu/SideBarBtn";
 import ToastContainer from "./components/toasts/ToastContainer";
+
 function App() {
+  
   return (
     <BrowserRouter>
       <div className="FL--App--Cont">
@@ -45,11 +50,13 @@ function App() {
               <SearchContextProvider>
                 <UploadContextProvider>
                   <ToastContainer />
-                  <HamburgerMenu />
+                  {/* <HamburgerMenu /> */}
+                  <SidebarMenu/>
                   {/* <div className='FL--Search--Cont'>
           
         </div> */}
                   <div className="gradient-cont header--height">
+                    <SideBarBtn/>
                     <div className="FL--Logo--Cont header--height ">
                       <FL_Logo />
                     </div>
@@ -58,7 +65,7 @@ function App() {
                       <SearchBar />
                     </div>
                   </div>
-
+                  
                   <Routes>
                     <Route path="/" element={<Home />}></Route>
                     {/* <Route path="/alt" element={<Home_alt />}></Route> */}

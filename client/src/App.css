@@ -50,6 +50,7 @@ h2 {
   color: var(--font);
   font-family: 'Hind', sans-serif;
   margin: 1vh;
+  
 }
 
 h4 {
@@ -59,6 +60,7 @@ h4 {
   font-size: 14px;
   margin: 0.5vh;
   color: var(--font);
+  
 }
 
 p {

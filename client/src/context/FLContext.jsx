@@ -14,6 +14,7 @@ const ContextProvider = ({ children }) => {
   const [collectionUserId, setCollectionUserId] = useState('');
   const [collectionIsInstit, setCollectionIsInstit] = useState(false);
   const [collectionUserPfp, setCollectionUserPfp] = useState('');
+  const [sidebarOpen, setSidebarOpen] = useState();
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -108,7 +109,8 @@ const ContextProvider = ({ children }) => {
         collectionUserId,
         collectionIsInstit,
         collectionUserPfp,
-        clearCachedCollectionData
+        clearCachedCollectionData,
+        sidebarOpen, setSidebarOpen
       }}
     >
       {children}
