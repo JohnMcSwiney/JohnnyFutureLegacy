@@ -23,7 +23,7 @@
     /* background-color: var(--primary); */
     transition: all 0.5s;
     border-right: 1px solid rgba(255, 255, 255, 0.308); ;
-    background: linear-gradient(107deg, var(--primary) 0%, var(--primary) 44%, rgba(242,242,242,1) 47%, var(--primary) 50%, rgba(255,255,255,1) 53%, var(--primary) 56%, var(--primary) 100%);
+    background: linear-gradient(107deg, var(--tertiary) 0%, var(--tertiary) 47%, rgba(242,242,242,1) 50%, var(--tertiary) 53%, var(--tertiary) 56%, var(--tertiary) 100%);
     background-size: 400% 400%;
     animation: gradient 10s ease infinite;
 }

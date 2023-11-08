@@ -1,4 +1,4 @@
-.FL--splitter--cont{
+.splitter--cont{
     width: 100%;
     /* background-color: plum; */
     display: flex;
@@ -6,9 +6,9 @@
     justify-content: center;
     height: 25px;
 }
-.FL--home--splitter{
+.splitter{
     width: 97%;
-    background-color: black;
+    background-color: var(--font);
     height: 2px;
     border-radius: 5px;
     margin-left: 25px;

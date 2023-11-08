@@ -1,7 +1,7 @@
 import React,{useState} from 'react'
 // import '../../app.css';
 import './homePage_v2.css'
-import FL_splitter from '../../components/splitter/FL_splitter'
+import FL_splitter from '../../components/splitter/Splitter'
 import CollectionCard from '../../unused/CollectionCard'
 import FL_footer from '../../components/FL_Footer/FL_footer'
 import SearchBarHome from '../../unused/SearchbarHome'

@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react'
-import './SearchBar.css'
+// import './SearchBar.css'
+import './style.css'
 import { BiSearchAlt2 } from 'react-icons/bi';
 import { useNavigate, useLocation } from 'react-router-dom';
 // import FLContext from '../../context/FLContext'
@@ -69,22 +70,22 @@ const SearchBar = () => {
 
   return (
     <form
-      className={`search--cont ${isHomePage ? '' : ''}`}
+      className={`v2--search--cont `}
       onSubmit={handleSearch}
     >
       <input
         type='search'
-        placeholder='Search'
+        placeholder='Search Future Legacy'
         value={q}
-        className='search--input'
+        className='v2--search--input'
         /*
         // set the value of our useState q
         //  anytime the user types in the search box
         */
         onChange={(e) => setQ(sanitizeHtml(e.target.value))}
       />
-      <button type='submit' className='search--button'><BiSearchAlt2 /></button>
-      <h2 className={`${isHomePage ? 'hidden' : 'hidden'}`} >WHAT DO YOU WANT TO SEE TODAY?</h2>
+      <button type='submit' className='v2--search--button'><BiSearchAlt2 /></button>
+      {/* <h2 className={`${isHomePage ? 'hidden' : 'hidden'}`} >WHAT DO YOU WANT TO SEE TODAY?</h2> */}
     </form>
   )
 }

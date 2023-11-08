@@ -4,15 +4,17 @@
 @import url('https://fonts.googleapis.com/css2?family=Didact+Gothic&display=swap');
 :root {
   --bg: #2b2b2b;
+  --bg--shadow: rgba(78, 78, 78, 0.314);
   --font: #ffffff;
   --primary: #a30000;
   --primary--shadow: #a300006d;
   --secondary: #291414;
   --secondary--shadow: #29141480;
   --tertiary: #ff859f;
-  --tertiary--shadow: #ff85a075;
+  --tertiary--shadow: #ff85a03b;
   --highlight--1: #93a3bc;
 
+  --font--fam: 'Poppins', sans-serif; 
   --header--font: 'Hind', sans-serif;
 }
 /* --text: #ffffff;
@@ -140,7 +142,7 @@ p {
   width: 100vw;
 
   z-index: 899;
-  /* background-color: #2163ce72; */
+  background-color: #2163ce00;
   display: flex;
   align-items: center;
   justify-content: center;
