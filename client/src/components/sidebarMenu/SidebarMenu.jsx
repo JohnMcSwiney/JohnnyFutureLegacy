@@ -21,16 +21,14 @@ export default function SidebarMenu() {
     const navigate = useNavigate();
     const { userData } = useMyContext();
     const [isOpen, setIsOpen] = useState(sidebarOpen)
-    const redirectCollections = () => { navigate(`/browseCollections`); toggleMenu(); };
-    const redirectAccount = () => { navigate(`/profile`); toggleMenu(); };
-    const redirectAbout = () => { navigate(`/about`); toggleMenu(); };
-    const redirectLogin = () => { navigate(`/login`); toggleMenu(); };
-    const redirectLogout = () => { navigate(`/logout`); toggleMenu(); };
-    const redirectUpload = () => { navigate(`/upload`); toggleMenu(); };
+    const redirectCollections = () => { navigate(`/browseCollections`); };
+    const redirectAccount = () => { navigate(`/profile`); };
+    const redirectAbout = () => { navigate(`/about`); };
+    const redirectLogin = () => { navigate(`/login`); };
+    const redirectLogout = () => { navigate(`/logout`); };
+    const redirectUpload = () => { navigate(`/upload`); };
 
-    const toggleMenu = () => {
-        setSidebarOpen(!sidebarOpen)
-    }
+    
     const userImg =
         'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b'
     const userName = 'Username'

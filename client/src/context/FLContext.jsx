@@ -14,7 +14,12 @@ const ContextProvider = ({ children }) => {
   const [collectionUserId, setCollectionUserId] = useState('');
   const [collectionIsInstit, setCollectionIsInstit] = useState(false);
   const [collectionUserPfp, setCollectionUserPfp] = useState('');
-  const [sidebarOpen, setSidebarOpen] = useState();
+  const [sidebarOpen, setSidebarOpen] = useState(
+    localStorage.getItem('sideBarState') || true
+  );
+  useEffect(() => {
+    localStorage.setItem('sideBarState', sidebarOpen);
+  }, [sidebarOpen]);
   useEffect(() => {
     const fetchUser = async () => {
       try {

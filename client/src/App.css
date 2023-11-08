@@ -172,9 +172,9 @@ p {
   width: 100%;
   /* background: rgb(193, 99, 99); */
   background: linear-gradient(180deg, 
-  rgba(255, 255, 255, 0) 0%, 
-  rgba(255, 255, 255, 0.5) 50%, 
-  rgb(255, 255, 255,0.7) 100%);
+  rgba(41, 41, 41, 0) 0%, 
+
+  var(--bg) 100%);
   position: fixed;
   bottom: 0;
   height: 20px;
