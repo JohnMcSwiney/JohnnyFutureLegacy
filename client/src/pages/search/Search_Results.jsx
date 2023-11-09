@@ -46,14 +46,15 @@ export default function Search_Results() {
             
             </div>
         </div>
+        {searchData.assetResults ?
+            
+            <div className='search_results--title--bar'><h2>Asset Results:</h2><button onClick={() =>{
+             setShowAssets(!showAssets);
+            }}>{showAssets ? 'Hide Results' : 'Show Results'}</button></div>
+            : <></>}
         <SearchResultsContainer>
         
-          {searchData.assetResults ?
-            
-           <div className='search_results--title--bar'><h2>Asset Results:</h2><button onClick={() =>{
-            setShowAssets(!showAssets);
-           }}>{showAssets ? 'Hide Results' : 'Show Results'}</button></div>
-           : <></>}
+          
           {searchData.assetResults ?
             <div className={showAssets ? 'search_results--container--row--scroll' : 'hide--search_results'}
             >
