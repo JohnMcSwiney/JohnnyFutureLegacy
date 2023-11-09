@@ -40,7 +40,7 @@ import SideBarBtn from "./components/sidebarMenu/SideBarBtn";
 import ToastContainer from "./components/toasts/ToastContainer";
 
 function App() {
-  
+
   return (
     <BrowserRouter>
       <div className="FL--App--Cont">
@@ -66,7 +66,7 @@ function App() {
                     </div>
                   </div>
                   
-                  <Routes>
+                  <Routes className='app--content--cont'>
                     <Route path="/" element={<Home />}></Route>
                     {/* <Route path="/alt" element={<Home_alt />}></Route> */}
                     <Route path="/landing" element={<Landing />}></Route>

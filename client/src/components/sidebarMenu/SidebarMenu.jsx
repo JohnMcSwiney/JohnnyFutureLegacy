@@ -50,25 +50,32 @@ export default function SidebarMenu() {
 
                 </div>
                 {sidebarOpen ? (
-                    <div className='FL--menu--content'>
-                        <a onClick={redirectCollections}>Collections</a>
-                        <a onClick={redirectAccount}>My Account</a>
-                        <a onClick={redirectAbout}>About</a>
+                    <div className='sidebar--menu--content--large'>
+                        <a onClick={redirectCollections}>
+                           <span className='sidebar--menu--icon'><BsFillCollectionFill/></span>Collections</a>
+                        <a onClick={redirectAccount}><span className='sidebar--menu--icon'><MdAccountBox/></span> My Account</a>
+                        
                         {is_Signedin ?
                             <>
                                 <a onClick={redirectUpload}>
+                                <span className='sidebar--menu--icon'><IoMdCreate/></span>
                                     Upload</a>
+                                    <a onClick={redirectAbout}><span className='sidebar--menu--icon'><AiFillInfoCircle/></span>About</a>
 
                                 <a onClick={redirectLogout}>
+                                <span className='sidebar--menu--icon'><BiLogOutCircle/></span>
                                     log out </a>
                             </>
 
                             :
                             <>
                                 <a onClick={redirectUpload}>
+                                <span className='sidebar--menu--icon'><IoMdCreate/></span>
                                     Upload</a>
+                                    <a onClick={redirectAbout}><span className='sidebar--menu--icon'><AiFillInfoCircle/></span>About</a>
 
                                 <a onClick={redirectLogin}>
+                                <span className='sidebar--menu--icon'><BiLogInCircle/></span>
                                     log in</a>
                             </>
                         }
@@ -108,14 +115,14 @@ export default function SidebarMenu() {
 
 
                 {sidebarOpen && (
-                    <div className='FL--menu--bottom'>
-                        <div className='FL--menu--socials--btns'>
+                    <div className='sidebar--menu--bottom'>
+                        <div className='sidebar--menu--socials--btns'>
                             <button><FaFacebookF /></button>
                             <button><FaTwitter /></button>
                             <button><AiFillInstagram /></button>
                             <button><FaTelegramPlane /></button>
                         </div>
-                        <div className='FL--copyright'>© 2023 - Future Legacy</div>
+                        <div className='sidebar--copyright'>© 2023 - Future Legacy</div>
                     </div>
 
                 )}
