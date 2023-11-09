@@ -38,9 +38,9 @@ import HamburgerMenu from "./components/hamburgerMenu/HamburgerMenu";
 import SidebarMenu from "./components/sidebarMenu/SidebarMenu";
 import SideBarBtn from "./components/sidebarMenu/SideBarBtn";
 import ToastContainer from "./components/toasts/ToastContainer";
+import AppPageContainer from "./components/containers/AppPageContainer";
 
 function App() {
-
   return (
     <BrowserRouter>
       <div className="FL--App--Cont">
@@ -65,7 +65,7 @@ function App() {
                       <SearchBar />
                     </div>
                   </div>
-                  
+                  <AppPageContainer>
                   <Routes className='app--content--cont'>
                     <Route path="/" element={<Home />}></Route>
                     {/* <Route path="/alt" element={<Home_alt />}></Route> */}
@@ -110,6 +110,9 @@ function App() {
                       element={<CollectionUpload />}
                     ></Route>
                   </Routes>
+
+                  </AppPageContainer>
+                  
 
                   <div className="bottom--gradient-cont">
                     <h4>© Future Legacy 2023</h4>

@@ -11,6 +11,20 @@ export const colors = {
   highlight1: "#93a3bc",
 };
 
+export const StyledContainer_v2 = styled.div`
+  margin: 0;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  background: red;
+  background-size: cover;
+  background-attachment: fixed;
+  width: 100%;
+
+`;
+
 export const StyledContainer = styled.div`
   margin: 0;
   min-height: 100vh;
@@ -32,18 +46,18 @@ export const StyledTitleContainer = styled.div`
   flex-direction: column;
   // background: red;
   max-height: 20%;
-  width: 100%;
+  // width: 100%;
   margin-left: 50px;
 `;
 export const StyledTitleContainer2 = styled.div`
   margin: 0;
   display: flex;
-  // position: absolute;
-  // top: 0;
+  position: absolute;
+  top: 0;
   flex-direction: column;
-  // background: red;
+
   max-height: 20%;
-  width: 100%;
+  
   margin-left: 50px;
   margin-top: 100px;
   align-items: center;
@@ -108,22 +122,12 @@ export const StyledContentContainer = styled.div`
   flex-direction: column;
   // background: tan;
   height: 80%;
-  width: 100%;
+  // width: 100%;
   padding-bottom: 100px;
   overflow-y: scroll;
 `;
 export const StyledSearchResultsContainer = styled.div`
-  margin: 0;
-  display: flex;
-  // position: absolute;
-  // bottom: 0;
-  flex-direction: column;
-  // background: tan;
-  height: 80%;
-  width: 100%;
-  // padding-bottom: 100px;
-  overflow-y: scroll;
-  overflow-x: hidden;
+
 `;
 export const Avatar = styled.div`
   width: 85px;

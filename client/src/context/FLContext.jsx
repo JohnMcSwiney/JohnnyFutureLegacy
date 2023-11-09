@@ -17,6 +17,11 @@ const ContextProvider = ({ children }) => {
   const [sidebarOpen, setSidebarOpen] = useState(
     localStorage.getItem('sideBarState') || true
   );
+
+  // const [pageWidth, setPageWidth] = useState(
+  //   localStorage.getItem('pageWidth') || ''
+  // );
+
   useEffect(() => {
     localStorage.setItem('sideBarState', sidebarOpen);
   }, [sidebarOpen]);
@@ -101,6 +106,9 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('storedUser', JSON.stringify(userData));
   }, [userData]);
+  // useEffect(() => {
+  //   localStorage.setItem('pageWidth', pageWidth);
+  // }, [pageWidth]);
 
   return (
     <FLContext.Provider
@@ -115,7 +123,8 @@ const ContextProvider = ({ children }) => {
         collectionIsInstit,
         collectionUserPfp,
         clearCachedCollectionData,
-        sidebarOpen, setSidebarOpen
+        sidebarOpen, setSidebarOpen,
+        // pageWidth, setPageWidth
       }}
     >
       {children}

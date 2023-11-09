@@ -2,10 +2,11 @@ import React from 'react'
 import './aboutPage.css'
 import TeamImg from '../../../components/teamImg/TeamImg'
 import Accordion from '../../../components/accordionItem/accordion'
-
+import {StyledContainer_v2
+} from '../../../components/Styles'
 export default function About() {
   return (
-    <div className="about--cont">
+    <StyledContainer_v2>
     <h1> WE SIMPLY CONNECT YOUR DIGITAL WORLD </h1>
     <h2 className="about--h2 mar--2"> ABOUT US </h2>
     <div className="about--p">
@@ -83,6 +84,6 @@ export default function About() {
       name="Juliet Dervin" 
       />
     </div>
-  </div>
+  </StyledContainer_v2>
   )
 }

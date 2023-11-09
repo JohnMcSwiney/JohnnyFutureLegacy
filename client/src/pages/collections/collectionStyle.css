@@ -19,7 +19,7 @@
 }
 .view--toggle--cont{
     /* background-color: teal; */
-    width: fit-content;
+    /* width: fit-content; */
     position: absolute;
     right: 0;
     margin-right: 16.5px;
@@ -87,3 +87,10 @@
     margin: 0;
     border-radius: 20px;
 } */
+.page--container{
+    width: 100%;
+    position: absolute;
+    /* background-color: rgba(255, 228, 196, 0.342); */
+    /* margin-left: 10px; */
+    top: 0;
+}

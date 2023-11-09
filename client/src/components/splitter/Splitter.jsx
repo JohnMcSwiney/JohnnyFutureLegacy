@@ -4,7 +4,7 @@ import './style.css';
 export default function Splitter() {
   return (
     <div className='splitter--cont'>
-          <div className='home--splitter'>
+          <div className='splitter'>
 
           </div>
     </div>

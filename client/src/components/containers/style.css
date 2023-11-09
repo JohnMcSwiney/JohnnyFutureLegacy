@@ -1,0 +1,59 @@
+.app--page--container{
+    margin: 0;
+    padding: 0;
+    width: 100vw;
+    height: 100vw;
+    padding-top: 250px;
+    /* overflow-y: scroll;
+    overflow-x: hidden; */
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    transition: padding 0.1s ease;
+    box-sizing: border-box;
+
+}
+.openSidebar{
+    /* background-color: yellow; */
+    padding-left: 250px;
+}
+.closedSidebar{
+    /* background-color: rebeccapurple; */
+    padding-left: 70px;
+}
+.app--page--wrapper{
+    margin: 0;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    background-size: cover;
+    background-attachment: fixed;
+    width: inherit;
+    overflow: hidden;
+    position: relative;
+}
+
+.wrapOpenSidebar{
+    /* background-color: rgba(0, 255, 47, 0.432); */
+
+}
+.wrapClosedSidebar{
+    /* background-color: rgba(51, 153, 143, 0.192); */
+}
+.search--results--cont{
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    height: 76vh;
+    width: 100%;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    position: relative;
+    /* background-color: rgb(255, 0, 0); */
+    padding-bottom: 40px;
+    box-sizing: border-box;
+}

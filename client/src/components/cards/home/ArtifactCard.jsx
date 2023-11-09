@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import './style.css'
 
-export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDescrip}) {
+export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDescrip, cardSize}) {
   const [isActive, setIsActive] = useState(false);
   
   const tempImg =
@@ -27,14 +27,18 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
   const handleRedirect = () => {
     navigate(`/asset/${artifactId}/${collectionId}`)
   }
+  useEffect(()=>{
+    console.log(cardSize)
+  },[cardSize])
   return (
-    <div className='asset--card--cont'>
-      <div className='asset--card--img'
+    <div className={`asset--card--cont asset--card--size--${cardSize}`}>
+    <div className={`asset--card--img `}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
-onClick={handleRedirect}
+      onClick={handleRedirect}
+      
       >
-        <img src={imgUrl} />
+        <img src={imgUrl} className={`asset--card--size--${cardSize}`} />
       </div>
 
       <div className='asset--card--info--cont'>
@@ -44,7 +48,7 @@ onClick={handleRedirect}
         {/* <p>{assetDescrip}</p> */}
       </div>
       <button 
-      className='asset--card--btn '
+      className={`asset--card--btn asset--btn--size--${cardSize}`}
       onMouseDown={handleMouseDown}
       onMouseUp={handleMouseUp}
       style={buttonStyle}
