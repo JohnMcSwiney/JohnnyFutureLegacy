@@ -83,13 +83,14 @@ transform: scale(1.1);
     background: var(--bg--shadow);
     background: linear-gradient(90deg, rgba(34,193,195,0) 0%, var(--bg--shadow)50%);
     right: 0;
+    opacity: 0.7;
 
   }
   .carousel-btn-l{
     background: var(--bg--shadow);
     background: linear-gradient(-90deg, rgba(34,193,195,0) 0%, var(--bg--shadow)50%);
     left: 0;
-
+    opacity: 0.7;
   }
   
 

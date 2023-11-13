@@ -80,3 +80,33 @@
     font-size: 25px;
     font-weight: bold;
 }
+
+
+.content--title--cont{
+    width: 60%;
+    min-height: 30px;
+    max-height: 50px;
+    position: sticky;
+    top:0;
+    background-color: rgba(102, 51, 153, 0);
+
+    opacity: 0.8;
+    color:var(--font);
+    text-transform: uppercase;
+    padding-left: 15px;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--font);
+}
+.content--title--cont h1{
+    font-size: 30px;
+    font-weight: bold;
+}
+.content--title--cont h2{
+    font-size: 25px;
+    font-weight: bold;
+}
+.content--title--cont h3{
+    font-size: 20px;
+    font-weight: bold;
+}
