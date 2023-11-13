@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
 import CollectionCard_v2 from '../home/CollectionCard_v2';
-
+import CollectionCarousel from '../collection/CollectionCarousel';
 export default function UserCard({ toggleView, userId, collectionImg }) {
     const [userName, setUserName] = useState('');
     const [userImg, setUserImg] = useState('');
@@ -116,14 +116,18 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                                 <h2>{userName}</h2>
                             </div>
                             <div className="user--card--collection--display">
-                                {collections.map((collection) => (
+                               <CollectionCarousel
+                               toggleView={toggleView}
+                               collections={collections}
+                               />
+                                {/* {collections.map((collection) => (
                                     <CollectionCard_v2
                                         key={collection._id}
                                         collectionIn={collection}
                                         toggleView={toggleView}
                                     />  
                                 ))
-                                }
+                                } */}
                             </div>
 
                             {/* <div className="coll--card--img--cont">

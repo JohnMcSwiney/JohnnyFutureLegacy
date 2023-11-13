@@ -28,7 +28,7 @@ export default function ArtifactCard ({artifactId,collectionId, imgUrl, artifact
     navigate(`/asset/${artifactId}/${collectionId}`)
   }
   useEffect(()=>{
-    console.log(cardSize)
+    // console.log(cardSize)
   },[cardSize])
   return (
     <div className={`asset--card--cont asset--card--size--${cardSize}`}>
