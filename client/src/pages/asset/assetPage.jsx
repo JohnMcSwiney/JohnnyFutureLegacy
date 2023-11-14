@@ -14,6 +14,11 @@ import { useMyContext } from "../../context/FLContext";
 import { useNavigate } from 'react-router-dom';
 import { useParams } from 'react-router-dom'
 import './style.css'
+import AppContentWrapper from '../../components/containers/AppContentWrapper';
+import PageContainer from '../../components/containers/PageContainer';
+import PageTitle from '../../components/containers/PageTitle';
+import ContentTitle from '../../components/containers/ContentTitle';
+import AssetPageContentContainer from '../../components/containers/AssetContentContainer';
 function AssetPage() {
   const { id, parentId } = useParams();
   const [assetData, setAssetData] = useState(null);
@@ -62,9 +67,10 @@ function AssetPage() {
   }
 //collectionUserId
   return (
-    <div className='asset--page--cont'>
-      
-      <StyledTitleContainer2>
+    <AppContentWrapper>
+      <PageContainer>
+      <AssetPageContentContainer>
+        <section className='asset--title--cont'>
         <div className='instit--collhomepage--title--img'>
           {collectionUserName && (
             <div
@@ -83,20 +89,21 @@ function AssetPage() {
         </div>
 
         {currentCollection ? (
-          <StyledTitle size={35} onClick={handleRedirectCollection}>
-            <div>{currentCollection.collectionName}</div>
-          </StyledTitle>
+          
+            <h2>{currentCollection.collectionName}</h2>
+          
         ) : (
           'Loading...'
         )}
         {currentCollection && longDesc === false   && <h4>{currentCollection.collectionDescription}</h4>}
-      </StyledTitleContainer2>
+      </section>
 
-      <div className='asset--content--cont'>
+      
         <div className='asset--img-n-tags'>
-          <div className='asset--img--cont'>
-            <img src={assetData.assetImage} alt={assetData.assetName} className='asset--img' />
+          <div className='asset--page--img'>
+            <img src={assetData.assetImage} alt={assetData.assetName}/>
           </div>
+          
           <div className='asset--tags--cont'>
             {assetData.informationTags.map(tag => (
               <span key={tag}>{tag}</span>
@@ -135,19 +142,21 @@ function AssetPage() {
               </li>
 
             </ul>
-
+              <div className='asset--purchase--btn--cont'>
+                <p>Note: If you select 'For Personal Use’ please note that this photo can only be used for personal purposes and cannot be used commercially.</p>
+                <button className='purchase--btn'>License Asset</button>
+              </div>
+              
 
 
           </div>
 
 
         </div>
-      </div>
-
-
-
-
-    </div>
+      </AssetPageContentContainer>
+      </PageContainer>
+    </AppContentWrapper>
+    
   );
 }
 

@@ -4,6 +4,7 @@
     justify-content: center;
     width: 100%;
     flex-direction: column;
+    position: relative;
     /* background-color: yellow; */
 }
 .asset--page--cont StyledTitleContainer2{
@@ -18,12 +19,51 @@
 .asset--img-n-tags{
     display: flex;
     flex-direction: column;
-    width: 693px;
+    /* width: 693px; */
     align-items: center;
     justify-content: flex-end;
+    /* position: absolute; */
+    /* left: 0; */
 }
+.asset--page--img--cont{
+    display: flex;
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 5px;
+    /* border: 2px solid rgba(255, 255, 255, 0.585); */
+    /* box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.268); */
+    /* transition: all ease 0.25s; */
+    /* flex-basis: content; */
+    /* flex-shrink: 0; */
+    /* flex-grow: 0; */
+  
+  }
+  .asset--page--img--size{
+    
+  }
+  .asset--page--img{
+    /* position: absolute; */
+    /* left: 0; */
+    /* height: 100%; */
+    
+    /* height: 400px !important; */
+    
+    position: relative;
+    
+    
+  }
+  .asset--page--img img{
+    scale: 1.01;
+    width: 100%;
+    height: 500px ;
+    
+  }
+
+
 .asset--img--cont{
-    width: 693px;
+    width: fit-content;
     height: 500px;
     display: flex;
     overflow: hidden;
@@ -35,11 +75,11 @@
    
 }
 
-.asset--img{
+.asset--img--cont img{
     position: absolute;
     width: 100%;
     left: 0%;
-    transform: scale(1.11);
+    transform: scale(1.01);
 }
 
 .asset--tags--cont{
@@ -52,7 +92,8 @@
 }
 .asset--tags--cont span{
     font-size: 14px;
-    border:1px solid black;
+    border:1px solid var(--font);
+    color: var(--font);
     padding:  2px 15px;
     padding-bottom: 2px ;
     border-radius: 50px;
@@ -65,22 +106,25 @@
     width: 526px;
     height: 500px;
     margin-left: 25px;
+    position: relative;
 }
 .asset--author{
     margin: 0;
     font-size: 16px;
-    color: #2081E2;
+    color: var(--tertiary);
     font-weight: 400;
 }
 .asset--name{
     margin: 0;
     font-size: 22px;
     font-weight: 600;
+    color: var(--font);
 }
 .asset--description{
     margin: 0;
     font-size: 14px;
     height: 125px;
+    color: var(--font--shadow);
 }
 .asset--price--cont{
     margin: 0;
@@ -161,7 +205,7 @@
 
   .license--btns--cont label {
     padding: 5px;
-    border: 1.5px solid #000000;
+    border: 1.5px solid var(--font);
     cursor: pointer;
     z-index: 90;
   }
@@ -169,3 +213,49 @@
   .license--btns--cont label:hover {
     background: #DDD;
   }
+
+  .asset--title--cont{
+    position: absolute;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    height: 150px;
+    color: var(--font);
+    text-align: center;
+    /* background-color: tan; */
+  }
+  .asset--title--cont h2{
+    font-size: 40px ;
+    font-weight: 900;
+  }
+.asset--purchase--btn--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    bottom: 0;
+    flex-direction: column;
+}
+.asset--purchase--btn--cont p {
+    margin: 5px;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--font);
+    opacity: 0.5;
+}
+  .purchase--btn{
+    background-color: rgb(0, 0, 0);
+    position: relative;
+     /* bottom: 10px; */
+    border: none;
+    color: white;
+    width: 515px;
+    height: 50px;
+    border-radius: 50px;
+    font-family: var(--font--fam);
+    font-size: 20px;
+    font-weight: 300;
+    /* margin-top: 20px; */
+    transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+}
+ 
