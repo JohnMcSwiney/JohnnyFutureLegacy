@@ -100,6 +100,7 @@ class UserController {
         email,
         subTier,
         isInstit,
+        bio,
       } = req.body; // Add email, subTier, and isInstit fields to the request body
 
       // Add to db
@@ -111,6 +112,7 @@ class UserController {
         email, // Include email
         subTier, // Include subTier
         isInstit, // Include isInstit
+        bio,
       });
       res.status(200).json(user);
     } catch (error) {
@@ -168,6 +170,32 @@ class UserController {
     res.status(400).json({ error: error.message });
   }
 }
+// Update user's bio
+async updateBio(req, res) {
+  try {
+    const { id } = req.params;
+    const { bio } = req.body;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    const user = await Users.findByIdAndUpdate(
+      id,
+      { bio },
+      { new: true, runValidators: true }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
 // Add a collection to userCollections
 async addUserCollection(req, res) {
   try {
@@ -194,6 +222,58 @@ async addUserCollection(req, res) {
     res.status(400).json({ error: error.message });
   }
 }
+// Get user's purchases
+async getUserPurchases(req, res) {
+  try {
+    const { id } = req.params;
+
+    // Check if the provided ID is valid
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: 'Invalid User ID' });
+    }
+
+    // Find the user by ID and retrieve purchases
+    const user = await Users.findById(id).populate('purchases');
+
+    if (!user) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    const purchases = user.purchases;
+    res.status(200).json(purchases);
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+// Add a purchase to user's purchases
+async addPurchase(req, res) {
+  try {
+    const { id } = req.params;
+    const { assetId } = req.body;
+
+    // Check if the provided IDs are valid
+    if (!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(assetId)) {
+      return res.status(404).json({ error: 'Invalid User or Asset ID' });
+    }
+
+    // Find the user by ID and update purchases
+    const updatedUser = await Users.findByIdAndUpdate(
+      id,
+      { $push: { purchases: assetId } },
+      { new: true }
+    );
+
+    if (!updatedUser) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    res.status(200).json(updatedUser);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
+  }
+}
+
   // Delete a user by ID
   async deleteUser(req, res) {
     try {

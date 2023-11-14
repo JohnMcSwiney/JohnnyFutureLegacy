@@ -25,6 +25,10 @@ const userSchema = new Schema({
   profilePicture: {
     type: String, // Store the URL of the profile picture
   },
+  bio: {
+    type: String,
+    default: "", // Default value can be an empty string or null, depending on your preference
+  },
   subTier: {
     type: Number,
     required: true,

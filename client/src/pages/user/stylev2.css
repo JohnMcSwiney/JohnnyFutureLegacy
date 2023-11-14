@@ -1,0 +1,187 @@
+.profile--v2--cont{
+    /* background-color: blue; */
+    display: flex;
+    flex-direction: row;
+    height: 90vh;
+    padding-left: 1%;
+    width: 100%;
+    
+}
+.left--profile--v2--cont{
+    /* background-color: rebeccapurple; */
+    background-color: var(--secondary--shadow);
+    min-width: 200px;
+    /* width: 20%; */
+    /* max-width: 420px; */
+    margin-right: 1%;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    border-radius: 5px;
+}
+.left--profile--v2--info--cont{
+    display: flex;
+    /* background-color: teal; */
+    flex-direction:column;
+    width: 100%;
+    align-items: center;
+}
+.profile--v2--avatar--name{
+    width: 100%;
+    /* background-color: thistle; */
+    /* height: 120px; */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-top: 50px;
+    flex-direction: column;
+}
+.profile--v2--avatar--img-n-edit{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+
+}
+.profile--v2--avatar--cont{
+    height: 100px;
+    width: 100px;
+    background-color: gray;
+    border-radius: 50%;
+    border: 2px solid var(--font);
+    box-sizing: border-box;
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    z-index: 10;
+}
+.profile--v2--avatar--cont img{
+    position: absolute;
+    width: 100%;
+    scale: 1.1;
+}
+.profile--v2--edit--btn{
+    border-radius: 50px;
+    
+    box-sizing: border-box;
+    position: absolute;
+    bottom: 0;
+    transform: translateY(5px) ;
+    background-color: var(--bg);
+    /* background-color: yellow; */
+    color:  var(--font);
+    padding: 2.5px 10px ;
+    font-size: 12.5px;
+    /* opacity: 0.5; */
+    backdrop-filter: blur(0.4);
+    border: 1px solid var(--font);
+    z-index: 15;
+    font-size: 15px;
+}
+.profile--v2--wallet--btn{
+    border-radius: 50px;
+    border: 1.5px solid var(--font);
+    box-sizing: border-box;
+    /* transform: translateY(5px) ; */
+    background-color: var(--bg--shadow);
+    color: var(--font);
+    padding: 2.5px 5px ;
+    font-size: 12.5px;
+}
+.left--profile--v2--text--cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    text-align: center;
+    color: var(--font);
+
+}
+.left--profile--v2--text--cont h4{
+    text-align: center;
+}
+.profile--v2--socials--cont{
+display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+    justify-content: center;
+}
+.profile--v2--socials--btn{
+   border-radius: 50px;
+    border: 1.5px solid var(--font);
+    box-sizing: border-box;
+    /* transform: translateY(5px) ; */
+    background-color: var(--bg--shadow);
+    color: var(--font);
+    padding: 2.5px 5px ;
+    font-size: 12.5px;
+    width: 29px;
+    height: 29px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 15px;
+    
+}
+.profile--v2--bio--cont{
+    
+    
+}
+.profile--v2--bio--cont h3{
+
+}
+.profile--v2--bio--cont p{
+
+    }
+
+.right--profile--v2--cont{
+    /* background-color: yellow; */
+    /* width: 100%; */
+    width: 86%;
+    display: flex;
+    flex-direction: column;
+}
+.right--profile--v2--inner--box{
+
+}
+.right--profile--v2--inner--box h3{
+
+}
+.profile--v2--horiz--scroll{
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: scroll;
+    height: 375px;
+    /* background-color: tan; */
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: space-between;
+
+}
+.profile--v2--horiz--scroll--purchase{
+    display: flex;
+    width: 100%;
+    overflow: hidden;
+    overflow-x: scroll;
+    height: 270px;
+    /* background-color: tan;  */
+    flex-direction: row;
+    /* flex-wrap: wrap; */
+    align-items: center;
+    justify-content: space-between;
+
+}
+.collection--holder{
+
+}
+.right--profile--v2--content--cont--row{
+
+}
+.right--profile--v2--content--cont--row--2{
+
+}

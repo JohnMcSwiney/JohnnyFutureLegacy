@@ -5,10 +5,13 @@
     flex-flow: row !important;
     position: relative;
     margin-left:30px;
+    
+    
 }
 .left--profile--cont{
     position: absolute;
-    background-color: rgba(128, 128, 128, 0.2);
+    /* background-color: rgba(128, 128, 128, 0.2); */
+    
     height: 80%;
     bottom: 0;
     left: 0;

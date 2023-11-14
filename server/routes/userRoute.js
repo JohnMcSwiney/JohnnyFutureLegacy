@@ -25,12 +25,20 @@ router.post('/', userController.createUser);
 // Route for updating a user's profile picture URL
 router.post('/:id/profile-picture', userController.updateProfilePicture);
 
+// Update user's bio
+router.put('/:id/bio', userController.updateBio);
+
 // Route for updating the isInstit field
 router.put('/:id/isInstit', userController.updateIsInstit);
 
 // Route for adding a collection to userCollections
 router.post('/:id/user-collections', userController.addUserCollection);
 
+// Get user's purchase
+router.get('/:id/purchase', userController.getUserPurchases);
+
+// Add purchase to user
+router.post('/:id/purchase', userController.addPurchase);
 
 // Delete a user by ID
 router.delete('/:id', userController.deleteUser);

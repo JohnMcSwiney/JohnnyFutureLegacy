@@ -110,3 +110,10 @@
     font-size: 20px;
     font-weight: bold;
 }
+.page--container{
+    width: 100%;
+    position: absolute;
+    /* background-color: rgba(255, 228, 196, 0.342); */
+    /* margin-left: 10px; */
+    top: 0;
+}

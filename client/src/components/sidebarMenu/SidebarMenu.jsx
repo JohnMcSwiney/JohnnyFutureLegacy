@@ -54,7 +54,7 @@ export default function SidebarMenu() {
                     <div className='sidebar--menu--content--large'>
                         <a onClick={redirectCollections}>
                            <span className='sidebar--menu--icon'><BsFillCollectionFill/></span>Collections</a>
-                        <a onClick={redirectAccount}><span className='sidebar--menu--icon'><MdAccountBox/></span> My Account</a>
+                        <a onClick={redirectAccount}><span className='sidebar--menu--icon'><MdAccountBox/></span> Profile</a>
                         
                         {is_Signedin ?
                             <>
