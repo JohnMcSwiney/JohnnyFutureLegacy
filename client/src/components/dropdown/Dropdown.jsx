@@ -3,6 +3,7 @@ import './style.css';
 
 const Dropdown = ({ options, onOptionSelected }) => {
   const [isDropdownOpen, setDropdownOpen] = useState(true); // Initially open
+  const [isDropdownDisabled, setDropdownDisabled] = useState(false);
 
   const toggleDropdown = () => {
     if (isDropdownOpen) {
@@ -13,13 +14,14 @@ const Dropdown = ({ options, onOptionSelected }) => {
   const handleOptionClick = (option) => {
     // Pass the selected option back to the parent component
     onOptionSelected(option);
-    // Close the dropdown and prevent it from being opened again
+    // Close the dropdown and disable it
     setDropdownOpen(false);
+    setDropdownDisabled(true);
   };
 
   return (
     <div className="dropdown">
-      <button onClick={toggleDropdown} disabled={!isDropdownOpen}>
+      <button onClick={toggleDropdown} disabled={isDropdownDisabled}>
         Dropdown
       </button>
       {isDropdownOpen && (

@@ -640,4 +640,59 @@
   }
   
 
-  
+  .featured--radios{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    margin-left: 30px ;
+    gap: 2px;
+    /* background-color: var(--secondary); */
+  }
+  .featured--radios label{
+    /* border: 1px solid var(--font); */
+    background-color: var(--secondary--shadow);
+
+
+  }
+  .collection--radio{
+    color: var(--secondary);
+    background-color: var(--primary--shadow);
+  }
+
+  /* Add these styles to your CSS file or use a style tag in your component */
+
+/* Add these styles to your CSS file or use a style tag in your component */
+
+.radio-label {
+    display: block;
+    position: relative;
+    padding-left: 30px; /* Adjust the padding to your preference */
+    margin-bottom: 10px;
+    cursor: pointer;
+    font-size: 16px; /* Adjust the font size to your preference */
+}
+
+.radio-custom {
+    position: absolute;
+    top: 0;
+    left: 20px;
+    height: 20px; /* Adjust the height and width to your preference */
+    width: 20px;
+    background-color: var(--secondary--shadow); /* Background color when not checked */
+    border: 4px solid var(--secondary); /* Border color */
+    border-radius: 50%; /* Make it circular */
+    transition: background-color 0.3s, border-color 0.3s; /* Add transition for smooth animation */
+    box-sizing: border-box;
+}
+
+.radio-label input {
+    opacity: 0; /* Hide the default radio button */
+}
+
+/* Change the background color and border color when checked */
+.radio-label input:checked + .radio-custom {
+    background-color: var(--primary--shadow); /* Color when checked */
+    border-color: var(--primary); /* Border color when checked */
+}
+
+
