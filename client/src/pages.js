@@ -32,7 +32,8 @@ export {default as Subscribe} from "./pages/zz-other/subscription/subscribe";
 
 export {default as Upload} from "./pages/upload/UploadPage";
 
-
 export {default as AssetUpload} from "./pages/upload/AssetUpload";
 
 export {default as CollectionUpload} from "./pages/upload/CollectionUpload";
+
+export{default as CreateFeatured} from './pages/upload/CreateFeatured';

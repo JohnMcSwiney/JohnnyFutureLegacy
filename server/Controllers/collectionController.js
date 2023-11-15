@@ -225,6 +225,61 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
+  // Add a featured collection to a specific collection by ID
+  async addFeaturedCollection(req, res) {
+    try {
+      const { id } = req.params;
+      const { featuredId } = req.body;
+
+      if (!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(featuredId)) {
+        return res.status(400).json({ error: 'Invalid ID format' });
+      }
+
+      const isFeaturedValid = await Collection.findById(featuredId);
+      if (!isFeaturedValid) {
+        return res.status(404).json({ error: 'No such Featured Collection' });
+      }
+
+      const updatedCollection = await Collection.findByIdAndUpdate(
+        id,
+        { featuredId },
+        { new: true }
+      ).populate('collectionAssets').populate('featuredId');
+
+      if (!updatedCollection) {
+        return res.status(404).json({ error: 'No such Collection' });
+      }
+
+      res.json(updatedCollection);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  // Remove the featured collection from a specific collection by ID
+  async removeFeaturedCollection(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(400).json({ error: 'Invalid ID format' });
+      }
+
+      const updatedCollection = await Collection.findByIdAndUpdate(
+        id,
+        { featuredId: null },
+        { new: true }
+      ).populate('collectionAssets').populate('featuredId');
+
+      if (!updatedCollection) {
+        return res.status(404).json({ error: 'No such Collection' });
+      }
+
+      res.json(updatedCollection);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
 module.exports = CollectionController;

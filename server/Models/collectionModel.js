@@ -21,6 +21,9 @@ const collectionSchema = new Schema({
     }],
     collectionImage: {
         type: String, // Store the URL or reference to the collection image
+    },
+    featuredId : {
+        type: mongoose.Schema.Types.ObjectId, ref: 'FeaturedCollection'
     }
 });
 

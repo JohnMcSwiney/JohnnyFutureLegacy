@@ -22,7 +22,8 @@ import {
 } from '../../components/Styles'
 import AssetCardProfile from '../../components/cards/asset/AssetCardProfile'
 import { useMyContext } from "../../context/FLContext";
-
+import AppContentWrapper from '../../components/containers/AppContentWrapper';
+import PageContainer from '../../components/containers/PageContainer';
 function Single_collection() {
   const { param1 } = useParams() //collection id
   const { currentCollection, setFetchedCollection } = useMyContext();
@@ -30,6 +31,7 @@ function Single_collection() {
   const [collectionUser, setCollectionUser] = useState(null);
   const [isObtained, setIsObtained] = useState(false);
   const [longDesc, setLongDesc] = useState(false);
+  const [componentSize, setComponentSize] = useState(3);
   // currentCollection
   useEffect(() => {
     if (param1) {
@@ -88,7 +90,8 @@ function Single_collection() {
   };
 
   return (
-    <StyledContainer>
+    <AppContentWrapper>
+      <PageContainer>
       <div className='instit--collhomepage--title--cont'>
         <div className='instit--collhomepage--title--img'>
           {collectionUser ?
@@ -141,6 +144,7 @@ function Single_collection() {
                 imgUrl={collectionAssets.assetImage}
                 artifactTitle={collectionAssets.assetName}
                 assetDescrip={collectionAssets.assetDescription}
+                cardSize={componentSize}
               />
             ))}
           </div> :
@@ -149,7 +153,8 @@ function Single_collection() {
           </div>
         }
       </StyledContentContainer>
-    </StyledContainer>
+    </PageContainer>
+    </AppContentWrapper>
   )
 }
 

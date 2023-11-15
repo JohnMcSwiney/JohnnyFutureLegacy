@@ -21,7 +21,7 @@ export default function Search_Results() {
   const [showCollections, setShowCollections] = useState(true);
   const [showUsers, setShowUsers] = useState(true);
   const { searchValue, setSearchValue, searchData } = useSearchContext();
-  const [componentSize, setComponentSize] = useState(1)
+  const [componentSize, setComponentSize] = useState(3)
 
   // console.log(searchData.assetResults)
   useEffect(() =>{

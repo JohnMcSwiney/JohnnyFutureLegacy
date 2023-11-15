@@ -8,6 +8,9 @@ import SearchBarHome from '../../unused/SearchbarHome'
 import { AiOutlineArrowDown } from 'react-icons/ai';
 import { useNavigate, useLocation } from 'react-router-dom';
 
+import AppContentWrapper from '../../components/containers/AppContentWrapper';
+import PageContainer from '../../components/containers/PageContainer';
+
 export default function Home() {
   // https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2Fimage%2028.png?alt=media&token=a86ebad3-fef1-4279-8361-f15639e62331
   // Temp assets
@@ -25,19 +28,17 @@ export default function Home() {
   const buttonStyle = {
     transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
   };
+  
   return (
+    <AppContentWrapper>
+      <PageContainer>
+        <section className='home--cont'>
+        Home
+        </section>
+        
+      </PageContainer>
+    </AppContentWrapper>
 
-    <div className='home--cont '>
-      <div className='home--showcase'>
-        {/* <div className='FL--home--search--cont'>
-          <h2>What Do You Want To See Today?</h2>
-          <SearchBarHome />
-        </div> */}
-
-      </div>
-      
-      <FL_footer />
-    </div>
   )
 }
 {/* <div className='FL--home--showcase--4--transition'>

@@ -34,4 +34,11 @@ router.delete('/:id', collectionController.deleteCollection);
 // deleteMultipleCollections
 router.delete('/', collectionController.deleteMultipleCollections);
 
+// Add a featured collection to a specific collection by ID
+router.post('/:id/add-featured', collectionController.addFeaturedCollection);
+
+// Remove the featured collection from a specific collection by ID
+router.post('/:id/remove-featured', collectionController.removeFeaturedCollection);
+
+
 module.exports = router;
