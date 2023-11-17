@@ -22,7 +22,7 @@ function FeaturedCollectionsCont() {
           }
 
           const obtainedFeaturedCollections = await response.json();
-          console.log('Got Featured:', obtainedFeaturedCollections);
+          // console.log('Got Featured:', obtainedFeaturedCollections);
           setFeaturedCollections(obtainedFeaturedCollections);
       } catch (error) {
           console.error('Error:', error.message);
