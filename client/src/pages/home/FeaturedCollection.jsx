@@ -7,6 +7,7 @@ function FeaturedCollection({ featuredIn }) {
   const [youtubeUrl, setYoutubeUrl] = useState("https://youtu.be/w7x_lWJNnNg?si=MOEOddYRa1LgLs01");
   const [collectionObject, setCollectionObject] = useState(null);
   const [hasImg, setHasImg] = useState(false);
+  const [userObject, setObject] = useState(null);
   useEffect(() => {
     if (featuredIn) {
       setYoutubeUrl(featuredIn.videoLink)
@@ -72,6 +73,12 @@ function FeaturedCollection({ featuredIn }) {
         allowFullScreen
       ></iframe>
       <div className='featured--info--cont'>
+        {collectionObject &&
+          <>
+            <h2>{collectionObject.collectionName}</h2>
+            <h3></h3>
+          </>
+        }
 
       </div>
     </div>
