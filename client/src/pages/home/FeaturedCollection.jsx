@@ -1,20 +1,21 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './homePage_v2.css'
+import {useNavigate} from "react-router-dom";
+
 function FeaturedCollection({ featuredIn }) {
-  // console.log(featuredIn)
-  // console.log(featuredIn)
+
   const [youtubeUrl, setYoutubeUrl] = useState("https://youtu.be/w7x_lWJNnNg?si=MOEOddYRa1LgLs01");
   const [collectionObject, setCollectionObject] = useState(null);
   const [hasImg, setHasImg] = useState(false);
-  const [userObject, setObject] = useState(null);
+  const [userObject, setUserObject] = useState(null);
   const [isHidden, setIsHidden] = useState(false);
   const [videoPlayed, setVideoPlayed] = useState(false);
-  // const youtubePlayerRef = useRef(null);
+  const [userInstit, setUserInstit] = useState(false);
+
   useEffect(() => {
     if (featuredIn) {
       setYoutubeUrl(featuredIn.videoLink)
     }
-
   }, [])
   useEffect(() => {
     if (featuredIn && collectionObject === null) {
@@ -44,8 +45,34 @@ function FeaturedCollection({ featuredIn }) {
       getCollection();
     }
   }, [youtubeUrl])
+  useEffect(() => {
+    if (collectionObject) {
+      const getUser = async () => {
+        try {
+          const response = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+          });
 
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
 
+          const obtainedUser = await response.json();
+          setUserObject(obtainedUser);
+          setUserInstit(obtainedUser.isInstit);
+          // console.log('Got collection:', obtainedCollection);
+          setHasImg(true)
+          // setFeaturedCollections(obtainedFeaturedCollections);
+        } catch (error) {
+          console.error('Error:', error.message);
+        }
+      };
+      getUser();
+    }
+  }, [collectionObject])
   // Function to extract the video ID from the YouTube URL //GPT go this for me <3
   const getYouTubeVideoId = (url) => {
     const match = url.match(/(?:youtube\.com\/(?:[^/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/);
@@ -55,18 +82,15 @@ function FeaturedCollection({ featuredIn }) {
   // Get the video ID
   const videoId = getYouTubeVideoId(youtubeUrl);
   useEffect(() => {
-    
+
     if (isHovered) {
       // console.log('hovering');
       hideImgWithDelay()
     } else {
       // console.log('not hovering');
       showImgWithDelay();
-
     }
-    
   }, [isHovered])
-
   // Function to show the element after a delay
   const hideImgWithDelay = () => {
     setTimeout(() => {
@@ -78,35 +102,26 @@ function FeaturedCollection({ featuredIn }) {
       setIsHidden(false);
     }, 300); // 3 seconds delay
   };
-  const handleClick = () => {
-    console.log('click');
-    // setTimeout(() => {
-      setVideoPlayed(true);
-      setHasImg(false);
-    // }, 300);
-  };
 
-  
+  const navigate = useNavigate();
+ const redirectFeatured = () => { navigate(`/collection/${collectionObject._id}`); };
+
 
   return (
-    <div className={`featured--component--cont ${isHovered  ? 'Hov' : 'noHov'}`}
+    <div className={`featured--component--cont ${isHovered ? 'Hov' : 'noHov'}`}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-
     >
       <div >
         {hasImg &&
           <div
             className={`featured--coll--img ${isHidden && videoPlayed !== true ? 'hidden' : ''}`}
-          // className={`featured--coll--img ${isHovered ? 'hidden' : ''}`}
           >
             <img src={collectionObject.collectionImage} />
           </div>
         }
       </div>
 
-
-      {/* <YouTubePlayer videoId={videoId} /> */}
       <iframe
         className='featured--youtube--video'
         width="358"
@@ -119,11 +134,24 @@ function FeaturedCollection({ featuredIn }) {
 
       ></iframe>
       <div className='featured--info--cont'>
-        {collectionObject &&
-          <div >
-            <h2>{collectionObject.collectionName}</h2>
-            <h3></h3>
-          </div >
+        {collectionObject && userObject &&
+          <div className='featured--info'>
+
+
+
+            <div className='featured--title' onClick={redirectFeatured}>
+              <h2>{collectionObject.collectionName}</h2>
+            </div >
+            <div className='featured--user'>
+              <div className={`featured--avatar--cont ${userInstit ? 'feat--instit' : 'feat--notIns'}`}>
+                <img src={userObject.profilePicture} />
+
+              </div>
+              <h3>{userObject.firstName} {userObject.lastName}</h3>
+            </div>
+
+          </div>
+
         }
 
       </div>
