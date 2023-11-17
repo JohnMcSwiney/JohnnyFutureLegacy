@@ -40,7 +40,74 @@ class FeaturedCollectionController {
     }
   }
 
-  // Other controller methods for updating, deleting, and managing featured collections can be added as needed.
+  // Delete a featured collection by connectedCollectionId
+  async deleteFeaturedCollectionByConnectedId(req, res) {
+    try {
+      const { connectedCollectionId } = req.params;
+
+      const deletedCollection = await FeaturedCollection.findOneAndDelete({ connectedCollectionId });
+
+      if (!deletedCollection) {
+        return res.status(404).json({ error: 'No such Featured Collection' });
+      }
+
+      res.status(204).json(); // No content
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  // Delete a featured collection by ID
+  async deleteFeaturedCollectionById(req, res) {
+    try {
+      const { id } = req.params;
+
+      const deletedCollection = await FeaturedCollection.findByIdAndDelete(id);
+
+      if (!deletedCollection) {
+        return res.status(404).json({ error: 'No such Featured Collection' });
+      }
+
+      res.status(204).json(); // No content
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+  // Update a featured collection by ID
+  async updateFeaturedCollectionById(req, res) {
+    try {
+      const { id } = req.params;
+      const {
+        userId,
+        connectedCollectionId,
+        videoLink,
+        startDate,
+        endDate,
+        importance,
+      } = req.body;
+
+      const updatedCollection = await FeaturedCollection.findByIdAndUpdate(
+        id,
+        {
+          userId,
+          connectedCollectionId,
+          videoLink,
+          startDate,
+          endDate,
+          importance,
+        },
+        { new: true }
+      );
+
+      if (!updatedCollection) {
+        return res.status(404).json({ error: 'No such Featured Collection' });
+      }
+
+      res.status(200).json(updatedCollection);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
 }
 
 module.exports = FeaturedCollectionController;

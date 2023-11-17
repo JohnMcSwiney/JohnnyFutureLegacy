@@ -98,28 +98,33 @@ function CreateFeatured() {
         
     },[featuredId])
     const updateCollection = async () => {
+        console.log(collectionToFeature._id);
+        console.log(featuredId);
+    
         try {
-            const response = await fetch(`http://localhost:5000/api/collection/${collectionToFeature._id}/add-featured`, {
+            const response = await fetch(`http://localhost:5000/api/collection/${collectionToFeature._id}/add-featured/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
                     featuredId,
-                  }),
+                }),
             });
-
+    
             if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
+                const errorText = await response.text();
+                throw new Error(`HTTP error! Status: ${response.status}, ${errorText}`);
             }
-
+    
             const updatedCollection = await response.json();
             console.log('updated collection:', updatedCollection);
             // setFeaturedCollId(createdFeaturedCollection._id)
         } catch (error) {
             console.error('Error:', error.message);
-        } 
-    }
+        }
+    };
+    
     return (
         <AppContentWrapper>
             <PageContainer>

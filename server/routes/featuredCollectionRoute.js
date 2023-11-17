@@ -10,6 +10,13 @@ router.post('/', featuredCollectionController.createFeaturedCollection);
 // Get all featured collections
 router.get('/', featuredCollectionController.getFeaturedCollections);
 
-// Add additional routes for updating, deleting, and managing featured collections as needed
+router.delete('/delete/:id', featuredCollectionController.deleteFeaturedCollectionByConnectedId);
+
+// Delete a featured collection by ID
+router.delete('/delete/:id', featuredCollectionController.deleteFeaturedCollectionById);
+
+// Update a featured collection by ID
+router.put('/update/:id', featuredCollectionController.updateFeaturedCollectionById);
+
 
 module.exports = router;

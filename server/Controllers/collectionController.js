@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Collection = require("../models/collectionModel");
+const FeaturedCollection = require('../models/featuredCollectionModel')
 const { ObjectId } = mongoose.Types;
 class CollectionController {
   // Get all collections
@@ -227,6 +228,7 @@ class CollectionController {
   }
   // Add a featured collection to a specific collection by ID
   async addFeaturedCollection(req, res) {
+    console.log('in featured collection adding')
     try {
       const { id } = req.params;
       const { featuredId } = req.body;
@@ -235,9 +237,11 @@ class CollectionController {
         return res.status(400).json({ error: 'Invalid ID format' });
       }
 
-      const isFeaturedValid = await Collection.findById(featuredId);
+      const isFeaturedValid = await FeaturedCollection.findById(featuredId);
       if (!isFeaturedValid) {
         return res.status(404).json({ error: 'No such Featured Collection' });
+      } else {
+        console.log('found featured')
       }
 
       const updatedCollection = await Collection.findByIdAndUpdate(

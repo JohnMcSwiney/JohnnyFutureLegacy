@@ -1,4 +1,4 @@
-import React,{useState} from 'react'
+import React,{useState, useEffect} from 'react'
 // import '../../app.css';
 import './homePage_v2.css'
 import FL_splitter from '../../components/splitter/Splitter'
@@ -10,6 +10,8 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import PageContainer from '../../components/containers/PageContainer';
+
+import FeaturedCollectionsCont from './FeaturedCollectionsCont';
 
 export default function Home() {
   // https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2Fimage%2028.png?alt=media&token=a86ebad3-fef1-4279-8361-f15639e62331
@@ -28,12 +30,13 @@ export default function Home() {
   const buttonStyle = {
     transform: isMouseDown ? 'scale(0.98)' : 'scale(1)',
   };
-  
+ 
   return (
     <AppContentWrapper>
       <PageContainer>
         <section className='home--cont'>
         Home
+        <FeaturedCollectionsCont/>
         </section>
         
       </PageContainer>
