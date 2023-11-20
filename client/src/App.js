@@ -89,7 +89,7 @@ function App() {
                       element={<Browse_Collections />}
                     ></Route>
                     <Route
-                      path="/collection/:param1"
+                      path="/collection/:param1/:featuredId?"
                       element={<Single_collection />}
                     ></Route>
 

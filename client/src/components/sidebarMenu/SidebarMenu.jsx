@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { RxHamburgerMenu, RxCross2 } from 'react-icons/rx'
 import { AiFillInstagram, AiFillInfoCircle } from 'react-icons/ai'
 import { FaFacebookF, FaTwitter, FaTelegramPlane } from 'react-icons/fa'
@@ -28,16 +28,36 @@ export default function SidebarMenu() {
     const redirectLogin = () => { navigate(`/login`); };
     const redirectLogout = () => { navigate(`/logout`); };
     const redirectUpload = () => { navigate(`/upload`); };
-
+    const [tempCountVar, setTempCountVar] = useState(0);
     
     const userImg =
         'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b'
     const userName = 'Username'
     const is_Signedin = false;
     const currentUser = false;
+    useEffect(()=>{
+        console.log(sidebarOpen)
+    },[sidebarOpen])
+    useEffect(()=>{
+        intializeSidebar();
+    },[])
+    const intializeSidebar = () => {
+        setTempCountVar(tempCountVar + 1)
+        
+        if(sidebarOpen === 'false'){
+            console.log('bool is string')
+            console.log('sidebarVar: ', sidebarOpen)
+        }
+        if(sidebarOpen === 'true'){
+            console.log('bool is string')
+            console.log('sidebarVar: ', sidebarOpen)
+        }
+    }
     return (
 
-        <div className={`${sidebarOpen ? 'sidebar--menu open' : 'sidebar--menu small'}`}>
+        <div className={`${sidebarOpen ? 'sidebar--menu open' : 'sidebar--menu small'}`} 
+        // onClick={}
+        >
 
             <div className='menu-items'>
                 <div className='user--info--cont'>

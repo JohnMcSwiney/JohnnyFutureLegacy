@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import './homePage_v2.css'
 import {useNavigate} from "react-router-dom";
 
-function FeaturedCollection({ featuredIn }) {
+function FeaturedCollectionCard({ featuredIn }) {
 
   const [youtubeUrl, setYoutubeUrl] = useState("https://youtu.be/w7x_lWJNnNg?si=MOEOddYRa1LgLs01");
   const [collectionObject, setCollectionObject] = useState(null);
@@ -159,4 +159,4 @@ function FeaturedCollection({ featuredIn }) {
   )
 }
 
-export default FeaturedCollection
+export default FeaturedCollectionCard

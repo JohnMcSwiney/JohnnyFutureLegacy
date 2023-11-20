@@ -106,9 +106,21 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('storedUser', JSON.stringify(userData));
   }, [userData]);
-  // useEffect(() => {
-  //   localStorage.setItem('pageWidth', pageWidth);
-  // }, [pageWidth]);
+
+  useEffect(() => {
+    
+    if(sidebarOpen === 'false'){
+      // console.log('bool is string')
+      // console.log('sidebarVar: ', sidebarOpen)
+      setSidebarOpen(false)
+  }
+  if(sidebarOpen === 'true'){
+      // console.log('bool is string')
+      // console.log('sidebarVar: ', sidebarOpen)
+      setSidebarOpen(true)
+  }
+    localStorage.setItem('sideBarState', sidebarOpen);
+  }, [sidebarOpen]);
 
   return (
     <FLContext.Provider

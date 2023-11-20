@@ -1,6 +1,6 @@
 import React,{useEffect, useState} from 'react'
 import './homePage_v2.css'
-import FeaturedCollection from './FeaturedCollection';
+import FeaturedCollectionCard from './FeaturedCollectionCard';
 
 function FeaturedCollectionsCont() {
   const [featuredCollections, setFeaturedCollections] = useState(null);
@@ -35,7 +35,7 @@ function FeaturedCollectionsCont() {
       {featuredCollections && (
         <div className='featured--coll--cont--map'>
         {featuredCollections.map((featuredColl, index) => (
-          <FeaturedCollection featuredIn={featuredColl} key={index}/>
+          <FeaturedCollectionCard featuredIn={featuredColl} key={index}/>
         ))}  
         </div>
       )}
