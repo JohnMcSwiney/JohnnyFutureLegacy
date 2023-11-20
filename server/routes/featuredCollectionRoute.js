@@ -10,6 +10,9 @@ router.post('/', featuredCollectionController.createFeaturedCollection);
 // Get all featured collections
 router.get('/', featuredCollectionController.getFeaturedCollections);
 
+// Get featured collection by ID
+router.get('/:id', featuredCollectionController.getFeaturedCollectionById)
+
 router.delete('/delete/:id', featuredCollectionController.deleteFeaturedCollectionByConnectedId);
 
 // Delete a featured collection by ID

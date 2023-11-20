@@ -1,0 +1,47 @@
+.collection--page--container{
+    /* height: 90vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-y: scroll;
+    overflow-x: hidden;
+    background-color: blueviolet;
+    flex-direction: column;
+    width: 100%;    
+    position: relative; */
+
+
+    /* background-color: blueviolet; */
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: fit-content;
+    /* height: 100vw; */
+    /* padding-top: 250px; */
+    /* overflow: hidden; */
+    display: flex;
+    /* align-items: center; */
+    align-items: center;
+    justify-content: flex-start;
+    position: relative;
+    transition: padding 0.1s ease;
+    box-sizing: border-box;
+    flex-direction: column;
+    /* overflow-y: scroll; */
+}
+
+.test{
+    width: 100%;
+}
+.t-1{
+height: 700px;
+background-color: orange;
+}
+.t-2{
+height: 300px;
+background-color: orangered;
+}
+.t-3{
+height: 5000px;
+background-color: red;
+}

@@ -104,7 +104,7 @@ function FeaturedCollectionCard({ featuredIn }) {
   };
 
   const navigate = useNavigate();
- const redirectFeatured = () => { navigate(`/collection/${collectionObject._id}`); };
+ const redirectFeatured = () => { navigate(`/collection/${collectionObject._id}/${featuredIn._id}`); };
 
 
   return (

@@ -115,8 +115,10 @@
     position: absolute;
     /* background-color: rgba(255, 228, 196, 0.342); */
     /* margin-left: 10px; */
+    /* height: 90vh; */
     top: 0;
     color: var(--font);
+    /* overflow-y: scroll; */
 }
 .asset--content--container{
     width: 100%;

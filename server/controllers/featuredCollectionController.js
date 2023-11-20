@@ -1,5 +1,6 @@
 const FeaturedCollection = require('../models/featuredCollectionModel');
-
+const mongoose = require("mongoose");
+const { ObjectId } = mongoose.Types;
 class FeaturedCollectionController {
   // Create a new featured collection
   async createFeaturedCollection(req, res) {
@@ -35,6 +36,32 @@ class FeaturedCollectionController {
     try {
       const featuredCollections = await FeaturedCollection.find().sort({ importance: 1 });
       res.status(200).json(featuredCollections);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+
+  // Get a single featured collection by ID
+  async getFeaturedCollectionById(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such Collection" });
+      }
+
+      const featured = await FeaturedCollection.findById(id)
+      // .populate(
+      //   "collectionAssets"
+      // )
+      ; // Populate the 'collectionAssets' field; //might include later
+
+
+      if (!featured) {
+        return res.status(404).json({ error: "No such Featured Collection" });
+      }
+
+      res.status(200).json(featured);
     } catch (error) {
       res.status(500).json({ error: error.message });
     }
