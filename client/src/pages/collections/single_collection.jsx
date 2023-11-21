@@ -27,6 +27,7 @@ import { useMyContext } from "../../context/FLContext";
 import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import CollectionPageContainer from '../../components/containers/CollectionPageContainer';
 
+import { useNavigate } from 'react-router-dom';
 
 function Single_collection() {
   const { param1, featuredId } = useParams() //collection id
@@ -38,8 +39,15 @@ function Single_collection() {
   const [longDesc, setLongDesc] = useState(false);
   const [componentSize, setComponentSize] = useState(3);
   const [idInUrl, setIdInUrl] = useState(false);
-  
+  const navigate = useNavigate()
+  const handleRedirectAssetOwner = () => {
+    if(collectionUser){
+      navigate(`/user/${collectionUser.id}`);
+    }
+    
+  }
   useEffect(() => {
+    // checks to see if been routed with a featuredId // if there page is told to not search collection for featured id
     if (featuredId) {
       setIdInUrl(true);
       const fetchFeatured = async () => {
@@ -82,10 +90,13 @@ function Single_collection() {
   }, []);
 
   useEffect(() => {
+    // called when collection is filled // checks to see if a featured id is in url
     if (collectionObject !== null) {
-      if(idInUrl === false){
+      if (idInUrl === false) {
         console.log('no featured in url');
-        if(collectionObject.featuredId !== null ){
+        // if there isn't an id the collection itself is checked
+        if (collectionObject.featuredId !== null) {
+          // featured gets added and page continues loading
           console.log('collection has featured');
           const fetchFeatured = async () => {
             const featuredResponse = await fetch(`http://localhost:5000/api/featured/${collectionObject.featuredId}`, {
@@ -101,8 +112,9 @@ function Single_collection() {
             } else { }
           }
           fetchFeatured();
-          
+
         }
+        // if there isn't a featured id in object or the url the page loads as a regular collection
       }
       const fetchCollectionUser = async () => {
         // console.log("user");
@@ -187,11 +199,11 @@ function Single_collection() {
           {featuredObject ?
             <section className='featured--video--container'>
               {collectionObject && collectionUser &&
-                <FeaturedVideoCardLg 
-                featuredIn={featuredObject} 
-                userObject={collectionUser} 
-                collectionName={collectionObject.collectionName} 
-                onButtonClick={scrollToContent}
+                <FeaturedVideoCardLg
+                  featuredIn={featuredObject}
+                  userObject={collectionUser}
+                  collectionName={collectionObject.collectionName}
+                  onButtonClick={scrollToContent}
                 />
               }
             </section> :

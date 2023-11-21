@@ -377,6 +377,7 @@
   /* height: 32px; */
   margin: 0;
   /* background-color: aqua; */
+  cursor: default;
 }
 .featured--user--lg{
   position: absolute;
@@ -389,6 +390,7 @@
   align-self: start;
   gap: 10px;
   margin-left: 15px;
+  cursor: pointer;
 }
 .featured--user--lg h3{
   margin: 0;
