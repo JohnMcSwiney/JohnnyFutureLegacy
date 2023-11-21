@@ -35,7 +35,7 @@ export default function Home() {
     <AppContentWrapper>
       <PageContainer>
         <section className='home--cont'>
-        Home
+
         <FeaturedCollectionsCont/>
         </section>
         

@@ -4,9 +4,13 @@
   overflow-x: hidden;
   width: 100%;
   height: 4000px;
+  position: absolute;
+  top: 0;
+  /* position: relative; */
   /* margin-left: 25px; */
   /* margin-right: 25px; */
   background-color: black;
+  padding-top: 125px;
 }
 
 .featured--cont {
