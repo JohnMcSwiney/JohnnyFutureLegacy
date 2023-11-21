@@ -15,6 +15,7 @@ import UserImgCont from '../EndUserImgCont/UserImgCont'
 
 import { useMyContext } from "../../context/FLContext";
 import AppPageContainer from '../containers/AppPageContainer';
+import { Tooltip } from 'react-tooltip'
 //RxHamburgerMenu
 export default function SidebarMenu() {
 
@@ -28,21 +29,26 @@ export default function SidebarMenu() {
     const redirectLogin = () => { navigate(`/login`); };
     const redirectLogout = () => { navigate(`/logout`); };
     const redirectUpload = () => { navigate(`/upload`); };
-    
+
     const userImg =
         'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b'
     const userName = 'Username'
     const is_Signedin = false;
     const currentUser = false;
 
-   
+
     return (
 
-        <div className={`${sidebarOpen ? 'sidebar--menu open' : 'sidebar--menu small'}`} 
+        <div className={`${sidebarOpen ? 'sidebar--menu open' : 'sidebar--menu small'}`}
         // onClick={}
         >
 
             <div className='menu-items'>
+                <Tooltip id="tip_open_collections" />
+                <Tooltip id="tip_open_profile" />
+                <Tooltip id="tip_open_upload" />
+                <Tooltip id="tip_open_about" />
+                <Tooltip id="tip_open_logout" />
                 <div className='user--info--cont'>
                     <UserImgCont imgUrl={userImg} />
                     {sidebarOpen && (
@@ -55,31 +61,84 @@ export default function SidebarMenu() {
                 </div>
                 {sidebarOpen ? (
                     <div className='sidebar--menu--content--large'>
-                        <a onClick={redirectCollections}>
-                           <span className='sidebar--menu--icon'><BsFillCollectionFill/></span>Collections</a>
-                        <a onClick={redirectAccount}><span className='sidebar--menu--icon'><MdAccountBox/></span> Profile</a>
-                        
+
+
+
+
                         {is_Signedin ?
                             <>
-                                <a onClick={redirectUpload}>
-                                <span className='sidebar--menu--icon'><IoMdCreate/></span>
-                                    Upload</a>
-                                    <a onClick={redirectAbout}><span className='sidebar--menu--icon'><AiFillInfoCircle/></span>About</a>
+                                <a onClick={redirectCollections}
+                                    data-tooltip-id="tip_open_collections"
+                                    data-tooltip-content={`Browse Collections`}
+                                    data-tooltip-place="right"
+                                >
 
-                                <a onClick={redirectLogout}>
-                                <span className='sidebar--menu--icon'><BiLogOutCircle/></span>
+                                    <span className='sidebar--menu--icon'><BsFillCollectionFill /></span>Collections
+                                </a>
+                                <a onClick={redirectAccount}
+                                    data-tooltip-id="tip_open_profile"
+                                    data-tooltip-content={`Your Profile`}
+                                    data-tooltip-place="right"
+                                >
+                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a>
+
+                                <a onClick={redirectUpload}
+                                    data-tooltip-id="tip_open_upload"
+                                    data-tooltip-content={`Upload Content`}
+                                    data-tooltip-place="right">
+                                    <span className='sidebar--menu--icon'><IoMdCreate /></span>
+                                    Upload</a>
+
+                                <a onClick={redirectAbout}
+                                    data-tooltip-id="tip_open_about"
+                                    data-tooltip-content={`Our Story`}
+                                    data-tooltip-place="right">
+                                    <span className='sidebar--menu--icon'><AiFillInfoCircle /></span>About</a>
+
+                                <a onClick={redirectLogout}
+                                    data-tooltip-id="tip_open_logout"
+                                    data-tooltip-content={`Logout`}
+                                    data-tooltip-place="right">
+                                    <span className='sidebar--menu--icon'><BiLogOutCircle /></span>
                                     log out </a>
                             </>
 
                             :
                             <>
-                                <a onClick={redirectUpload}>
-                                <span className='sidebar--menu--icon'><IoMdCreate/></span>
-                                    Upload</a>
-                                    <a onClick={redirectAbout}><span className='sidebar--menu--icon'><AiFillInfoCircle/></span>About</a>
+                                <a onClick={redirectCollections}
+                                    data-tooltip-id="tip_open_collections"
+                                    data-tooltip-content={`Browse Collections`}
+                                    data-tooltip-place="right"
+                                >
 
-                                <a onClick={redirectLogin}>
-                                <span className='sidebar--menu--icon'><BiLogInCircle/></span>
+                                    <span className='sidebar--menu--icon'><BsFillCollectionFill /></span>Collections
+                                </a>
+                                <a onClick={redirectAccount}
+                                    data-tooltip-id="tip_open_profile"
+                                    data-tooltip-content={`Your Profile`}
+                                    data-tooltip-place="right"
+                                >
+                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a>
+
+                                <a onClick={redirectUpload}
+                                    data-tooltip-id="tip_open_upload"
+                                    data-tooltip-content={`Upload Content`}
+                                    data-tooltip-place="right">
+
+                                    <span className='sidebar--menu--icon'><IoMdCreate /></span>
+                                    Upload</a>
+                                <a onClick={redirectAbout}
+                                    data-tooltip-id="tip_open_about"
+                                    data-tooltip-content={`Our Story`}
+                                    data-tooltip-place="right">
+
+                                    <span className='sidebar--menu--icon'><AiFillInfoCircle /></span>About</a>
+
+                                <a onClick={redirectLogin}
+                                    data-tooltip-id="tip_open_logout"
+                                    data-tooltip-content={`Login`}
+                                    data-tooltip-place="right">
+                                    <span className='sidebar--menu--icon'><BiLogInCircle /></span>
                                     log in</a>
                             </>
                         }
@@ -89,31 +148,59 @@ export default function SidebarMenu() {
                     :
                     (
                         <div className='sidebar--menu--content--small'>
-                        <a onClick={redirectCollections}><BsFillCollectionFill/></a>
-                        <a onClick={redirectAccount}><MdAccountBox/></a>
-                        
-                        {is_Signedin ?
-                            <>
-                                <a onClick={redirectUpload}>
-                                    <IoMdCreate/></a>
-                                    <a onClick={redirectAbout}><AiFillInfoCircle/></a>
+                            <Tooltip id="tip_closed_collections" />
+                            <Tooltip id="tip_closed_profile" />
+                            <a onClick={redirectCollections}
+                                data-tooltip-id="tip_closed_collections"
+                                data-tooltip-content={`Browse Collections`}
+                                data-tooltip-place="right"
+                            ><BsFillCollectionFill /></a>
+                            <a onClick={redirectAccount}
+                                data-tooltip-id="tip_closed_profile"
+                                data-tooltip-content={`Your Profile`}
+                                data-tooltip-place="right"
+                            ><MdAccountBox /></a>
 
-                                <a onClick={redirectLogout}>
-                                    <BiLogOutCircle/></a>
-                            </>
+                            {is_Signedin ?
+                                <>
+                                    <a onClick={redirectUpload}
+                                        data-tooltip-id="tip_open_upload"
+                                        data-tooltip-content={`Upload Content`}
+                                        data-tooltip-place="right">
+                                        <IoMdCreate /></a>
+                                    <a onClick={redirectAbout}
+                                        data-tooltip-id="tip_open_about"
+                                        data-tooltip-content={`Our Story`}
+                                        data-tooltip-place="right"><AiFillInfoCircle /></a>
 
-                            :
-                            <>
-                                <a onClick={redirectUpload}>
-                                <IoMdCreate/></a>
-                                    <a onClick={redirectAbout}><AiFillInfoCircle/></a>
+                                    <a onClick={redirectLogout}
+                                        data-tooltip-id="tip_open_logout"
+                                        data-tooltip-content={`Logout`}
+                                        data-tooltip-place="right">
+                                        <BiLogOutCircle /></a>
+                                </>
 
-                                <a onClick={redirectLogin}>
-                                <BiLogInCircle/></a>
-                            </>
-                        }
+                                :
+                                <>
+                                    <a onClick={redirectUpload}
+                                        data-tooltip-id="tip_open_upload"
+                                        data-tooltip-content={`Upload Content`}
+                                        data-tooltip-place="right">
+                                        <IoMdCreate /></a>
+                                    <a onClick={redirectAbout}
+                                        data-tooltip-id="tip_open_about"
+                                        data-tooltip-content={`Our Story`}
+                                        data-tooltip-place="right"><AiFillInfoCircle /></a>
 
-                    </div>
+                                    <a onClick={redirectLogin}
+                                        data-tooltip-id="tip_open_logout"
+                                        data-tooltip-content={`Login`}
+                                        data-tooltip-place="right">
+                                        <BiLogInCircle /></a>
+                                </>
+                            }
+
+                        </div>
                     )}
 
 

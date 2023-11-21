@@ -18,6 +18,9 @@
     transform: translateX(50px);
 
 }
+.home--tool--tip{
+    transform: scale(0.7);
+}
 .logo-cont img{
     width: 100%;
     align-self: center;

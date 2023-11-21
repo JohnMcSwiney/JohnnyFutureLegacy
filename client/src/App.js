@@ -39,7 +39,6 @@ import SidebarMenu from "./components/sidebarMenu/SidebarMenu";
 import SideBarBtn from "./components/sidebarMenu/SideBarBtn";
 import ToastContainer from "./components/toasts/ToastContainer";
 import AppPageContainer from "./components/containers/AppPageContainer";
-
 function App() {
   return (
     <BrowserRouter>
@@ -56,6 +55,7 @@ function App() {
           
         </div> */}
                   <div className="gradient-cont header--height">
+                    
                     <SideBarBtn />
                     <div className="FL--Logo--Cont header--height ">
                       <FL_Logo />

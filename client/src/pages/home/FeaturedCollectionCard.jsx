@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react'
 import './homePage_v2.css'
-import {useNavigate} from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { Tooltip } from 'react-tooltip'
 
 function FeaturedCollectionCard({ featuredIn }) {
 
@@ -104,7 +105,7 @@ function FeaturedCollectionCard({ featuredIn }) {
   };
 
   const navigate = useNavigate();
- const redirectFeatured = () => { navigate(`/collection/${collectionObject._id}/${featuredIn._id}`); };
+  const redirectFeatured = () => { navigate(`/collection/${collectionObject._id}/${featuredIn._id}`); };
 
 
   return (
@@ -135,10 +136,15 @@ function FeaturedCollectionCard({ featuredIn }) {
       ></iframe>
       <div className='featured--info--cont'>
         {collectionObject && userObject &&
-          <div className='featured--info'>
-
-
-
+          <div
+            className='featured--info'
+            data-tooltip-id="my-tooltip"
+            data-tooltip-content={`View Collection`}
+            data-tooltip-place="bottom-start"
+            data-tooltip-float='true'
+            data-tooltip-delay-show={600}
+          >
+            <Tooltip id="my-tooltip" />
             <div className='featured--title' onClick={redirectFeatured}>
               <h2>{collectionObject.collectionName}</h2>
             </div >
