@@ -26,7 +26,7 @@ import AssetCardProfile from '../../components/cards/asset/AssetCardProfile'
 import { useMyContext } from "../../context/FLContext";
 import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import CollectionPageContainer from '../../components/containers/CollectionPageContainer';
-
+import Splitter from '../../components/splitter/Splitter';
 import { useNavigate } from 'react-router-dom';
 
 function Single_collection() {

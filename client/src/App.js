@@ -25,7 +25,6 @@ import {
   Landing,
   Profile,
   User,
-  
 } from "./pages";
 import { ContextProvider, useMyContext } from "./context/FLContext";
 import { SearchContextProvider } from "./context/SearchContext";
@@ -52,12 +51,12 @@ function App() {
                 <UploadContextProvider>
                   <ToastContainer />
                   {/* <HamburgerMenu /> */}
-                  <SidebarMenu/>
+                  <SidebarMenu />
                   {/* <div className='FL--Search--Cont'>
           
         </div> */}
                   <div className="gradient-cont header--height">
-                    <SideBarBtn/>
+                    <SideBarBtn />
                     <div className="FL--Logo--Cont header--height ">
                       <FL_Logo />
                     </div>
@@ -67,51 +66,58 @@ function App() {
                     </div>
                   </div>
                   <AppPageContainer>
-                  <Routes className='app--content--cont'>
-                    <Route path="/" element={<Home />}></Route>
-                    {/* <Route path="/alt" element={<Home_alt />}></Route> */}
-                    <Route path="/landing" element={<Landing />}></Route>
-                    <Route path="/about" element={<About />}></Route>
+                    <Routes className="app--content--cont">
+                      <Route path="/" element={<Home />}></Route>
+                      {/* <Route path="/alt" element={<Home_alt />}></Route> */}
+                      <Route path="/landing" element={<Landing />}></Route>
+                      <Route path="/about" element={<About />}></Route>
 
-                    <Route
-                      path="/search_results/:param1?"
-                      element={<Search_Results />}
-                    ></Route>
+                      <Route
+                        path="/search_results/:param1?"
+                        element={<Search_Results />}
+                      ></Route>
 
-                    <Route path="/apply" element={<Apply />}></Route>
+                      <Route path="/apply" element={<Apply />}></Route>
 
-                    <Route
-                      path="/asset/:id/:parentId?"
-                      element={<Asset />}
-                    ></Route>
-                    <Route
-                      path="/browseCollections"
-                      element={<Browse_Collections />}
-                    ></Route>
-                    <Route
-                      path="/collection/:param1/:featuredId?"
-                      element={<Single_collection />}
-                    ></Route>
+                      <Route
+                        path="/asset/:id/:parentId?"
+                        element={<Asset />}
+                      ></Route>
+                      <Route
+                        path="/browseCollections"
+                        element={<Browse_Collections />}
+                      ></Route>
+                      <Route
+                        path="/collection/:param1/:featuredId?"
+                        element={<Single_collection />}
+                      ></Route>
 
-                    <Route path="/user/:id" element={<User />}></Route>
-                    <Route path="/profile" element={<Profile />}></Route>
+                      <Route path="/user/:id" element={<User />}></Route>
+                      <Route path="/profile" element={<Profile />}></Route>
 
-                    <Route path="/apply" element={<Apply />}></Route>
+                      <Route path="/apply" element={<Apply />}></Route>
 
-                    <Route path="/register" element={<Register />}></Route>
-                    <Route path="/login" element={<Login />}></Route>
-                    <Route path="/signUp" element={<SignUp />}></Route>
-                    <Route path="/subscribe" element={<Subscribe />}></Route>
+                      <Route path="/register" element={<Register />}></Route>
+                      <Route path="/login" element={<Login />}></Route>
+                      <Route path="/signUp" element={<SignUp />}></Route>
+                      <Route path="/subscribe" element={<Subscribe />}></Route>
 
-                    <Route path="/upload" element={<Upload />}></Route>
+                      <Route path="/upload" element={<Upload />}></Route>
 
-                    <Route path="/upload/asset" element={<AssetUpload />}></Route>
-                    <Route path="/upload/collection"element={<CollectionUpload />}></Route>
-                    <Route path="/upload/featured" element={<CreateFeatured />}></Route>
-                  </Routes>
-
+                      <Route
+                        path="/upload/asset"
+                        element={<AssetUpload />}
+                      ></Route>
+                      <Route
+                        path="/upload/collection"
+                        element={<CollectionUpload />}
+                      ></Route>
+                      <Route
+                        path="/upload/featured"
+                        element={<CreateFeatured />}
+                      ></Route>
+                    </Routes>
                   </AppPageContainer>
-                  
 
                   <div className="bottom--gradient-cont">
                     <h4>© Future Legacy 2023</h4>

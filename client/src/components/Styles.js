@@ -122,7 +122,7 @@ export const StyledContentContainer = styled.div`
   flex-direction: column;
   // background: tan;
   height: 80%;
-  // width: 100%;
+  // width: inherit;
   padding-bottom: 100px;
   overflow-y: scroll;
 `;

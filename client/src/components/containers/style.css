@@ -1,3 +1,4 @@
+/* <AppPageContainer> */
 .app--page--container{
     margin: 0;
     padding: 0;
@@ -23,6 +24,9 @@
     /* background-color: rebeccapurple; */
     padding-left: 70px;
 }
+/* </AppPageContainer> */
+
+/* <AppContentWrapper> */
 .app--page--wrapper{
     margin: 0;
     height: 100vh;
@@ -35,15 +39,48 @@
     width: inherit;
     overflow: hidden;
     position: relative;
+    transform: translateY(-125px);
 }
+/* </AppContentWrapper> */
 
+/* <PageContainer> */
+.page--container{
+    width: 100%;
+    position: absolute;
+    background-color: rgba(255, 228, 196, 0.342);
+    /* margin-left: 10px; */
+    height: 90vh;
+    top: 0;
+    color: var(--font);
+    padding-top: 125px;  
+    /* overflow-y: scroll; */
+}
+/* </PageContainer> */
+
+/* <CollectionPageContainer> */
+.collection--page--container--component{
+    width: 100%;
+    position: absolute;
+    /* background-color: rgba(255, 228, 196, 0.342); */
+    /* margin-left: 10px; */
+    height: 90vh;
+    top: 0;
+    color: var(--font);
+    overflow-y: scroll;
+    padding-top: 125px;
+      
+  }
 .wrapOpenSidebar{
     /* background-color: rgba(0, 255, 47, 0.432); */
 
 }
 .wrapClosedSidebar{
     /* background-color: rgba(51, 153, 143, 0.192); */
+    
 }
+/* </CollectionPageContainer> */
+
+
 .search--results--cont{
     margin: 0;
     display: flex;
@@ -110,16 +147,8 @@
     font-size: 20px;
     font-weight: bold;
 }
-.page--container{
-    width: 100%;
-    position: absolute;
-    /* background-color: rgba(255, 228, 196, 0.342); */
-    /* margin-left: 10px; */
-    /* height: 90vh; */
-    top: 0;
-    color: var(--font);
-    /* overflow-y: scroll; */
-}
+
+
 .asset--content--container{
     width: 100%;
     /* background-color: aqua; */

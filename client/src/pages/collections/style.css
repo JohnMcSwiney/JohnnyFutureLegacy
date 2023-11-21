@@ -469,13 +469,3 @@
   height: fit-content;
   /* top: 0; */
 }
-.collection--page--container--component{
-  width: 100%;
-  position: absolute;
-  /* background-color: rgba(255, 228, 196, 0.342); */
-  /* margin-left: 10px; */
-  height: 90vh;
-  top: 0;
-  color: var(--font);
-  overflow-y: scroll;
-}
