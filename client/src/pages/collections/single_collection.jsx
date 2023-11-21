@@ -37,11 +37,11 @@ function Single_collection() {
   const [isObtained, setIsObtained] = useState(false);
   const [longDesc, setLongDesc] = useState(false);
   const [componentSize, setComponentSize] = useState(3);
-  // currentCollection
+  const [idInUrl, setIdInUrl] = useState(false);
+  
   useEffect(() => {
     if (featuredId) {
-      console.log('featured collection!');
-      console.log(featuredId)
+      setIdInUrl(true);
       const fetchFeatured = async () => {
         const featuredResponse = await fetch(`http://localhost:5000/api/featured/${featuredId}`, {
           method: 'GET',
@@ -53,12 +53,13 @@ function Single_collection() {
         const featuredJson = await featuredResponse.json()
         if (featuredResponse.ok) {
           setFeaturedObject(featuredJson);
-          // setFetchedCollection(collectionJson);
-          // console.log(collectionJson);
         } else { }
       }
       fetchFeatured();
+    } else {
+      setIdInUrl(false);
     }
+
     if (param1) {
       const fetchCollections = async () => {
         const collectionResponse = await fetch(`http://localhost:5000/api/collection/${param1}`, {
@@ -79,9 +80,30 @@ function Single_collection() {
     }
 
   }, []);
+
   useEffect(() => {
     if (collectionObject !== null) {
-
+      if(idInUrl === false){
+        console.log('no featured in url');
+        if(collectionObject.featuredId !== null ){
+          console.log('collection has featured');
+          const fetchFeatured = async () => {
+            const featuredResponse = await fetch(`http://localhost:5000/api/featured/${collectionObject.featuredId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'true'
+              }
+            })
+            const featuredJson = await featuredResponse.json()
+            if (featuredResponse.ok) {
+              setFeaturedObject(featuredJson);
+            } else { }
+          }
+          fetchFeatured();
+          
+        }
+      }
       const fetchCollectionUser = async () => {
         // console.log("user");
         const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
