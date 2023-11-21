@@ -221,7 +221,9 @@ margin-bottom: 5px;
     flex-direction:column;
     width: 100%;
     align-items: center;
-    margin-top: 100px;
+    /* margin-top: 100px; */
+    position: relative;
+    /* background-color: beige; */
 }
 .user--avatar--name{
     width: 100%;
@@ -270,7 +272,7 @@ margin-bottom: 5px;
     font-size: 12.5px;
 }
 .top--user--text--cont{
-    margin-left: 20px;
+    /* margin-left: 20px; */
     display: flex;
     flex-direction: column;
 
@@ -282,8 +284,9 @@ margin-bottom: 5px;
     display: flex;
     align-items: center;
     gap: 10px;
-    margin-top: 25px;
+    /* margin-top: 25px; */
     justify-content: center;
+    /* background-color: yellow; */
 }
 .user--socials--btn{
     border-radius: 50px;

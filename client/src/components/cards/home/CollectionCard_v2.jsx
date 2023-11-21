@@ -17,6 +17,10 @@ export default function CollectionCard_v2({ toggleView, collectionIn, collection
     }
   };
 
+  // const [hasImg, setHasImg] = useEffect(false);
+//   useEffect(()=>{
+// console.log('collectionImg', collectionIn.collectionImage)
+//   },[])
   return (
     <div
       className={toggleView ? 'coll--card--v2--cont card--v2--row' : 'coll--card--v2--cont '}
