@@ -154,7 +154,7 @@
     /* background-color: aqua; */
     display: flex;
     flex-direction: row;
-    margin-top: 150px;
+    padding-top: 150px;
     height: 600px;
     align-items: center;
     justify-content: center;

@@ -223,6 +223,7 @@
     color: var(--font);
     text-align: center;
     /* background-color: tan; */
+    padding-top: 150px;
   }
   .asset--title--cont h2{
     font-size: 40px ;

@@ -10,6 +10,7 @@ import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import PageContainer from '../../components/containers/PageContainer';
 import SearchResultsContainer from '../../components/containers/SearchResultsContainer';
 import Splitter from '../../components/splitter/Splitter';
+import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2'
 
 export default function Search_Results() {
   // const { searchValue, setSearchValue } = useMyContext();
@@ -25,8 +26,8 @@ export default function Search_Results() {
 
   // console.log(searchData.assetResults)
   useEffect(() =>{
-    // console.log(componentSize)
-  },[componentSize])
+    console.log(searchData.collectionResults)
+  },[])
   return (
     <AppContentWrapper>
       <PageContainer>
@@ -46,8 +47,8 @@ export default function Search_Results() {
             
             </div>
         </div>
+        {/* Assets */}
         {searchData.assetResults ?
-            
             <div className='search_results--title--bar'><h2>Asset Results:</h2><button onClick={() =>{
              setShowAssets(!showAssets);
             }}>{showAssets ? 'Hide Results' : 'Show Results'}</button></div>
@@ -57,6 +58,40 @@ export default function Search_Results() {
           
           {searchData.assetResults ?
             <div className={showAssets ? 'search_results--container--row--scroll' : 'hide--search_results'}
+            >
+              <Splitter/>
+              
+              {searchData.assetResults.map((asset) => (
+                <ArtifactCard
+                  key={asset._id}
+                  artifactId={asset._id}
+                  collectionId={asset._id}
+                  imgUrl={asset.assetImage}
+                  artifactTitle={asset.assetName}
+                  assetDescrip={asset.assetDescription}
+                  cardSize={componentSize}
+                />
+              ))}
+            </div>
+            :
+            <div>
+              none...
+            </div>
+          }
+        </SearchResultsContainer>
+
+
+        {/* Collections */}
+        {searchData.collectionResults ?
+            <div className='search_results--title--bar'><h2>Collection Results:</h2><button onClick={() =>{
+              setShowCollections(!showCollections);
+            }}>{showCollections ? 'Hide Results' : 'Show Results'}</button></div>
+            : <></>}
+        <SearchResultsContainer>
+        
+          
+          {searchData.collectionResults ?
+            <div className={showCollections ? 'search_results--container--row--scroll' : 'hide--search_results'}
             >
               <Splitter/>
               

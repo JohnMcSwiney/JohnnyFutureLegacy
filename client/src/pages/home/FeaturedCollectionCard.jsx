@@ -125,8 +125,11 @@ function FeaturedCollectionCard({ featuredIn }) {
 
       <iframe
         className='featured--youtube--video'
-        width="358"
-        height="703"
+        width= '425'
+        height= '824.5'
+
+        // width="358"
+        // height="703"
         src={`https://www.youtube.com/embed/${videoId}?si=gmSGHP9k7cMgzkGa&controls=0&showinfo=0&iv_load_policy=3`}
         title="YouTube video player"
         frameBorder="0"
