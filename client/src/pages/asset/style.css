@@ -259,4 +259,122 @@
     /* margin-top: 20px; */
     transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
 }
- 
+
+
+
+.asset--popup-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: var(--bg--shadow);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 400;
+}
+
+.asset--popup {
+  background-color: var(--bg);
+  border: 2px solid var(--bg--shadow);
+  padding: 20px;
+  border-radius: 40px;
+  box-shadow: 0px 2px 8px var(--font--shadow);
+  text-align: center;
+  width: 784px;
+  height: 518px;
+  position: relative;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  flex-direction: column;
+}
+.asset--popup a{
+  order: 1;
+  color: var(--tertiary);
+}
+.asset--popup h2{
+  order: 2;
+  font-weight: bold;
+  font-size: 32px;
+  text-transform: uppercase;
+}
+.popup--text{
+  order: 3;
+  font-size: 20px;
+  text-align: left;
+  text-transform: capitalize;
+  width: 561px;
+  min-height: 150px;
+  padding-bottom: 25px;
+}
+.asset--popup--bot{
+  position: absolute;
+  bottom: 20px;
+  width: 100%;
+  left: 0;
+}
+.asset--popup--note{
+  order: 4;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  height: 35px;
+  justify-content: center;
+  overflow: hidden;
+  gap: 5px;
+  opacity: 0.7;
+  margin-bottom: 5px;
+}
+.asset--popup--note p{
+  font-size: 12px;
+  width: 510px;
+  text-align: left;
+  margin: 0;
+}
+.asset--popup--note--icon{
+  width: 30px;
+  height: 30px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  /* background-color: yellow; */
+}
+.asset--popup--btns{
+  width: 100%;
+  height: 98px;
+  order: 5;
+  margin: 5px;
+  /* position: absolute;
+  bottom: 20px;
+  left: 0; */
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  gap: 10px;
+  /* background-color: aqua; */
+}
+.popup--btn{
+  width: 516px;
+  height: 44px;
+  border: solid 2px var(--font);
+  border-radius: 50px;
+  box-sizing: border-box;
+  font-size: 18px;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* font-weight: bold; */
+}
+
+.btn--primary{
+  background-color: var(--font);
+  color: var(--bg)
+}
+.btn--secondary{
+  background-color: var(--bg);
+  color: var(--font);
+}

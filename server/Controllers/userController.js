@@ -245,12 +245,16 @@ async getUserPurchases(req, res) {
     res.status(500).json({ error: error.message });
   }
 }
-
 // Add a purchase to user's purchases
 async addPurchase(req, res) {
   try {
     const { id } = req.params;
     const { assetId } = req.body;
+
+    // Check if assetId is provided
+    if (!assetId) {
+      return res.status(400).json({ error: 'Asset ID is required in the request body' });
+    }
 
     // Check if the provided IDs are valid
     if (!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(assetId)) {
@@ -270,7 +274,8 @@ async addPurchase(req, res) {
 
     res.status(200).json(updatedUser);
   } catch (error) {
-    res.status(400).json({ error: error.message });
+    console.error('Error adding purchase:', error);
+    res.status(500).json({ error: 'Internal Server Error' });
   }
 }
 
