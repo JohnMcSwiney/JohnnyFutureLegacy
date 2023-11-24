@@ -11,6 +11,7 @@ import PageContainer from '../../components/containers/PageContainer';
 import SearchResultsContainer from '../../components/containers/SearchResultsContainer';
 import Splitter from '../../components/splitter/Splitter';
 import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2'
+import PaginatedAssetContainer from '../../components/containers/Paginated/PaginatedAssetContainer';
 
 export default function Search_Results() {
   // const { searchValue, setSearchValue } = useMyContext();
@@ -48,20 +49,27 @@ export default function Search_Results() {
             </div>
         </div>
         {/* Assets */}
-        {searchData.assetResults ?
-            <div className='search_results--title--bar'><h2>Asset Results:</h2><button onClick={() =>{
-             setShowAssets(!showAssets);
-            }}>{showAssets ? 'Hide Results' : 'Show Results'}</button></div>
-            : <></>}
-        <SearchResultsContainer>
+        <div className='search_results--title--bar pad--bot--5'>
+        {searchData.assetResults &&
+              <button onClick={() =>{setShowAssets(!showAssets);
+            }}>{showAssets ? 'Hide Asset Results' : 'Show Asset Results'}</button>
+          }
+          {searchData.collectionResults && 
+            <button onClick={() =>{
+              setShowCollections(!showCollections);
+            }}>{showCollections ? 'Hide Collection Results' : 'Show Collection Results'}</button>
+            }
+        </div>
         
-          
+            
+        <SearchResultsContainer>
           {searchData.assetResults ?
             <div className={showAssets ? 'search_results--container--row--scroll' : 'hide--search_results'}
             >
+              <div className='search_results--title--bar'><h2>Asset Results:</h2></div>
               <Splitter/>
-              
-              {searchData.assetResults.map((asset) => (
+              <PaginatedAssetContainer itemsPerPage={20} cardSize={componentSize} data={searchData.assetResults}/>
+              {/* {searchData.assetResults.map((asset) => (
                 <ArtifactCard
                   key={asset._id}
                   artifactId={asset._id}
@@ -71,31 +79,19 @@ export default function Search_Results() {
                   assetDescrip={asset.assetDescription}
                   cardSize={componentSize}
                 />
-              ))}
+              ))} */}
             </div>
             :
-            <div>
-              none...
+            <div className='search_results--title--bar'>
+              No Assets Retrieved...
             </div>
           }
-        </SearchResultsContainer>
-
-
-        {/* Collections */}
-        {searchData.collectionResults ?
-            <div className='search_results--title--bar'><h2>Collection Results:</h2><button onClick={() =>{
-              setShowCollections(!showCollections);
-            }}>{showCollections ? 'Hide Results' : 'Show Results'}</button></div>
-            : <></>}
-        <SearchResultsContainer>
-        
-          
           {searchData.collectionResults ?
             <div className={showCollections ? 'search_results--container--row--scroll' : 'hide--search_results'}
             >
               <Splitter/>
               
-              {searchData.assetResults.map((asset) => (
+              {/* {searchData.assetResults.map((asset) => (
                 <ArtifactCard
                   key={asset._id}
                   artifactId={asset._id}
@@ -105,11 +101,11 @@ export default function Search_Results() {
                   assetDescrip={asset.assetDescription}
                   cardSize={componentSize}
                 />
-              ))}
+              ))} */}
             </div>
             :
-            <div>
-              none...
+            <div className='search_results--title--bar'>
+              No Collections Retrieved...
             </div>
           }
         </SearchResultsContainer>

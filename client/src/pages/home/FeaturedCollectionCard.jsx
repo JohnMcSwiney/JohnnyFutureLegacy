@@ -3,7 +3,7 @@ import './homePage_v2.css'
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from 'react-tooltip'
 
-function FeaturedCollectionCard({ featuredIn }) {
+function FeaturedCollectionCard({ featuredIn,indexIn }) {
 
   const [youtubeUrl, setYoutubeUrl] = useState("https://youtu.be/w7x_lWJNnNg?si=MOEOddYRa1LgLs01");
   const [collectionObject, setCollectionObject] = useState(null);
@@ -141,14 +141,17 @@ function FeaturedCollectionCard({ featuredIn }) {
         {collectionObject && userObject &&
           <div
             className='featured--info'
-            data-tooltip-id="my-tooltip"
-            data-tooltip-content={`View Collection`}
-            data-tooltip-place="bottom-start"
-            data-tooltip-float='true'
-            data-tooltip-delay-show={600}
+           
           >
-            <Tooltip id="my-tooltip" />
-            <div className='featured--title' onClick={redirectFeatured}>
+            
+            <div className='featured--title' 
+             data-tooltip-id={`featured--card--${indexIn}`}
+             data-tooltip-content={`View Collection`}
+             data-tooltip-place="bottom-start"
+             data-tooltip-float='true'
+             data-tooltip-delay-show={600}
+            onClick={redirectFeatured}>
+              <Tooltip id={`featured--card--${indexIn}`} />
               <h2>{collectionObject.collectionName}</h2>
             </div >
             <div className='featured--user'>

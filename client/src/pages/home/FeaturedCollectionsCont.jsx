@@ -35,7 +35,10 @@ function FeaturedCollectionsCont() {
       {featuredCollections && (
         <div className='featured--coll--cont--map'>
         {featuredCollections.map((featuredColl, index) => (
-          <FeaturedCollectionCard featuredIn={featuredColl} key={index}/>
+          <FeaturedCollectionCard featuredIn={featuredColl} 
+          key={index} 
+          indexIn={index}
+          className={index >= 3 ? 'show-none' : ''}/>
         ))}  
         </div>
       )}

@@ -1,6 +1,7 @@
 import './style.css';
 import React, { useRef, useEffect } from 'react';
 
+import PaginatedAssetContainer from './Paginated/PaginatedAssetContainer';
 function SearchResultsContainer({ children }) {
   const elementRef = useRef(null);
 
