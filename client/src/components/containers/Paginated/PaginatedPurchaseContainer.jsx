@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PurchasedCard from '../../cards/home/PurchasedCard';
-
+import './paginatedStyle.css'
 const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState([]);
@@ -16,7 +16,7 @@ const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
     };
 
     return (
-        <div >
+        <div className='paginated--purchased--cont'>
           {/* Display your current items here */}
           {currentItems.map((collectionAssets, index) => (
             <PurchasedCard
@@ -30,9 +30,10 @@ const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
           ))}
       
           {/* Pagination */}
-          <div>
+          <div className='paginated--page--btns'>
+            <h3>Page:</h3>
             {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
-              <button key={index} onClick={() => paginate(index + 1)}>
+              <button key={index} onClick={() => paginate(index + 1)} className={currentPage === index +1 && 'currentPageBtn'}>
                 {index + 1}
               </button>
             ))}

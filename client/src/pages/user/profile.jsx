@@ -117,8 +117,8 @@ function Profile() {
 
 
           <div className='right--profile--v2--cont'>
-            <StyledContentContainer>
-            <div className='right--profile--v2--inner--box'>
+
+            <section className='right--profile--v2--inner--box'>
               
               {userData &&
                 <>
@@ -150,9 +150,7 @@ function Profile() {
                     </div>}
 
                 </>}
-            </div>
-
-            <div className='right--profile--v2--inner--box'>
+            
               
               <div className='right--profile--v2--content--cont--row--2'>
                 {userPurchases ?
@@ -161,21 +159,6 @@ function Profile() {
                 <h3>Licensed Assets:</h3>
                 </ContentTitle>
                 <PaginatedPurchaseContainer itemsPerPage={6} data={userPurchases}/>
-                  {/* <div className='profile--v2--horiz--scroll--purchase'>
-                    {userPurchases.map((collectionAssets) => (
-                      <PurchasedCard
-                        key={collectionAssets._id}
-                        artifactId={collectionAssets._id}
-                        // collectionId={collectionObject._id}
-                        imgUrl={collectionAssets.assetImage}
-                        artifactTitle={collectionAssets.assetName}
-                        assetDescrip={collectionAssets.assetDescription}
-                        cardSize={1}
-                      />
-                    ))}
-
-                    
-                  </div> */}
                 </>
                  :
                   <div>
@@ -184,8 +167,7 @@ function Profile() {
                 }
 
               </div>
-            </div>
-            </StyledContentContainer>
+            </section>
 
 
             

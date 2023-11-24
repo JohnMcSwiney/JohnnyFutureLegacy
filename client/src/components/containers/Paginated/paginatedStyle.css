@@ -1,0 +1,38 @@
+.paginated--purchased--cont{
+    padding-top: 50px;
+    display: flex;
+    align-items: flex-start;
+    flex-wrap: wrap;
+    gap: 10px;
+    position: relative;
+}
+.paginated--page--btns{
+    position: absolute;
+    top: 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 5px;
+    font-size: 20px;
+    height: 40px;
+}
+.paginated--page--btns h3{
+    opacity: 0.7;
+    font-weight: 400;
+    font-size: 15px;
+}
+.paginated--page--btns button{
+    background-color: var(--font--shadow);
+    border: none;
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+    font-weight: 800;
+    border-radius: 5px;
+
+}
+.currentPageBtn{
+    background-color: var(--primary) !important;
+    color: var(--font);
+}
