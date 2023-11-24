@@ -143,16 +143,17 @@ display: flex;
 
 .right--profile--v2--cont{
     /* background-color: yellow; */
-    /* width: 100%; */
-    width: 86%;
+    width: inherit;
+    /* width: 86%; */
     display: flex;
     flex-direction: column;
     height: 100vh;
-    
+    position: relative;
     /* margin-top: 150px; */
 }
 .right--profile--v2--inner--box{
     margin: 0;
+    width: 100%;
     /* display: flex;
     flex-direction: column;
     height: fit-content;

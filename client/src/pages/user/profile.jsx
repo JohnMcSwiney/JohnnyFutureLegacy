@@ -158,7 +158,7 @@ function Profile() {
                 <ContentTitle>
                 <h3>Licensed Assets:</h3>
                 </ContentTitle>
-                <PaginatedPurchaseContainer itemsPerPage={6} data={userPurchases}/>
+                <PaginatedPurchaseContainer itemsPerPage={8} data={userPurchases}/>
                 </>
                  :
                   <div>

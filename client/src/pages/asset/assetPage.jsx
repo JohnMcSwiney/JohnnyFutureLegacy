@@ -33,7 +33,8 @@ function AssetPage() {
     collectionUserId,
     collectionIsInstit,
     collectionUserPfp,
-    userData } = useMyContext();
+    userData,
+    setFetchedCollection } = useMyContext();
   const [longDesc, setLongDesc] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
   const [isPopup2Visible, setPopup2Visible] = useState(false);
@@ -60,14 +61,47 @@ function AssetPage() {
     }
 
     fetchAsset()
-    if (currentCollection.collectionDescription) {
-      if (currentCollection.collectionDescription.length > 100) {
-        console.log('long description, requires proper handling still')
-        setLongDesc(true);
+    if(parentId && currentCollection){
+      if(currentCollection._id !== parentId){
+        // addToast('collection conflict')
+        const fetchCollection = async () => {
+          const collectionResponse = await fetch(`http://localhost:5000/api/collection/${parentId}`, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json',
+              'Access-Control-Allow-Origin': 'true'
+            }
+          })
+          const collectionJson = await collectionResponse.json()
+          if (collectionResponse.ok) {
+            // setAssetData(assetJson)
+            setFetchedCollection(collectionJson)
+            // console.log(assetData);
+          } else {
+            // setDone(false);
+          }
+        }
+    
+        fetchCollection()
       }
     }
+    if(currentCollection){
+      if (currentCollection.collectionDescription) {
+        if (currentCollection.collectionDescription.length > 100) {
+          console.log('long description, requires proper handling still')
+          setLongDesc(true);
+        }
+      }
+    }
+    
   }, []);
   const navigate = useNavigate()
+//   useEffect(() => {
+//     if(id && parentId){
+//       addToast('asset: ', id);
+//       addToast('collection:', parentId);
+//     }
+// }, [id, parentId]);
 
   if (!assetData) {
     return <div>Cannot get asset data of asset: {id}</div>;

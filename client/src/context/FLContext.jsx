@@ -25,6 +25,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('sideBarState', sidebarOpen);
   }, [sidebarOpen]);
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -53,6 +54,7 @@ const ContextProvider = ({ children }) => {
 
     fetchUser();
   }, []);
+  
   useEffect(() => {
     const fetchUser = async () => {
       try {

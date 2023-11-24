@@ -26,7 +26,7 @@ const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
             <PurchasedCard
               key={index}
               artifactId={collectionAssets._id}
-              collectionId={null}
+              collectionId={collectionAssets.collectionId}
               imgUrl={collectionAssets.assetImage}
               artifactTitle={collectionAssets.assetName}
               assetDescrip={collectionAssets.assetDescription}
