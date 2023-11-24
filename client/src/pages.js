@@ -39,3 +39,5 @@ export {default as CollectionUpload} from "./pages/upload/CollectionUpload";
 export{default as CreateFeatured} from './pages/upload/CreateFeatured';
 
 export{default as UploadBanner} from './pages/upload/UserBannerUpload';
+
+export{default as UpdateCollectionAssets} from './pages/upload/UpdateCollectionAssets';

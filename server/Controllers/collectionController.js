@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Collection = require("../models/collectionModel");
-const FeaturedCollection = require('../models/featuredCollectionModel')
+const FeaturedCollection = require('../models/featuredCollectionModel');
+const Asset = require('../models/assetModel');
 const { ObjectId } = mongoose.Types;
 class CollectionController {
   // Get all collections
@@ -79,44 +80,64 @@ class CollectionController {
       res.status(500).json({ error: error.message });
     }
   }
-  // Create a new collection
-  async createCollection(req, res) {
-    try {
-      console.log(req.body); // Create a new collection instance based on the model and request body
-      const collection = new Collection(req.body);
+ // Create a new collection
+ async createCollection(req, res) {
+  try {
+    const { assetIds, ...collectionData } = req.body;
 
-      // Save the collection to the database
-      await collection.save();
+    // Create a new collection instance based on the model and request body
+    const collection = new Collection(collectionData);
 
-      res.status(201).json(collection);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+    // Save the collection to the database
+    await collection.save();
+
+    // Update each asset with the new collection ID
+    if (assetIds && assetIds.length > 0) {
+      await Asset.updateMany(
+        { _id: { $in: assetIds } },
+        { $set: { collectionId: collection._id } }
+      );
     }
+
+    res.status(201).json(collection);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
+}
+// Update a collection by ID
+async updateCollection(req, res) {
+  try {
+    const { id } = req.params;
 
-  // Update a collection by ID
-  async updateCollection(req, res) {
-    try {
-      const { id } = req.params;
-
-      if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such Collection" });
-      }
-
-      const collection = await Collection.findByIdAndUpdate(id, req.body, {
-        new: true,
-        runValidators: true,
-      });
-
-      if (!collection) {
-        return res.status(404).json({ error: "No such Collection" });
-      }
-
-      res.status(200).json(collection);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such Collection" });
     }
+
+    const { assetIds, ...otherUpdates } = req.body;
+
+    const collection = await Collection.findByIdAndUpdate(
+      id,
+      otherUpdates, // Update other fields of the collection
+      { new: true, runValidators: true }
+    );
+
+    if (!collection) {
+      return res.status(404).json({ error: "No such Collection" });
+    }
+
+    // Update each asset with the new collection ID
+    if (assetIds && assetIds.length > 0) {
+      await Asset.updateMany(
+        { _id: { $in: assetIds } },
+        { $set: { collectionId: collection._id } }
+      );
+    }
+
+    res.status(200).json(collection);
+  } catch (error) {
+    res.status(400).json({ error: error.message });
   }
+}
   // Set the default collection image
   async setDefaultCollectionImage(req, res) {
     try {

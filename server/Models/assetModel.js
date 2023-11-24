@@ -26,14 +26,17 @@ const assetSchema = new Schema({
     informationTags: [{
         type: String
     }],
-    assetImage:
-    {
+    assetImage: {
         type: String,
         required: true
     },
-    exifData:[{
+    exifData: [{
         type: String
-    }]
+    }],
+    collectionId: {
+        type: mongoose.Schema.Types.ObjectId,
+        ref: 'Collection'
+    }
 });
 
 const Asset = mongoose.model('Asset', assetSchema);

@@ -26,7 +26,12 @@ function PurchasedCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDe
     };
     const navigate = useNavigate();
     const handleRedirect = () => {
-      navigate(`/asset/${artifactId}/${collectionId}`)
+      if(collectionId === null){
+        navigate(`/asset/${artifactId}`)
+      } else {
+        navigate(`/asset/${artifactId}/${collectionId}`)
+      }
+      
     }
     useEffect(()=>{
       // console.log(cardSize)

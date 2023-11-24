@@ -1,11 +1,12 @@
 .upload--landing--cont {
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    margin: 0;
+    margin: 20px;
     position: relative;
     flex-direction: column;
     gap: 20px;
+    flex-wrap: wrap;
 }
 
 .upload--landing--button {

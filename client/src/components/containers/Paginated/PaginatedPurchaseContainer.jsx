@@ -5,6 +5,10 @@ const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const [currentItems, setCurrentItems] = useState([]);
 
+    useEffect(()=>{
+      console.log(data);
+    },[])
+
     useEffect(() => {
         const indexOfLastItem = currentPage * itemsPerPage;
         const indexOfFirstItem = indexOfLastItem - itemsPerPage;
@@ -22,6 +26,7 @@ const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
             <PurchasedCard
               key={index}
               artifactId={collectionAssets._id}
+              collectionId={null}
               imgUrl={collectionAssets.assetImage}
               artifactTitle={collectionAssets.assetName}
               assetDescrip={collectionAssets.assetDescription}

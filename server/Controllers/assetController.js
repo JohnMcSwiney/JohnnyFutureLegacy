@@ -194,6 +194,35 @@ class AssetController {
       res.status(500).json({ error: error.message });
     }
   }
+
+
+  //update connected collection id
+  async updateCollectionIdForAsset(req, res) {
+    try {
+      const { id } = req.params;
+  
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: 'No such Asset' });
+      }
+  
+      const { collectionId } = req.body;
+  
+      const asset = await Asset.findByIdAndUpdate(
+        id,
+        { $set: { collectionId } },
+        { new: true, runValidators: true }
+      );
+  
+      if (!asset) {
+        return res.status(404).json({ error: 'No such Asset' });
+      }
+  
+      res.status(200).json(asset);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
+    }
+  }
+
 }
 
 module.exports = AssetController;

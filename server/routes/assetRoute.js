@@ -4,21 +4,24 @@ const AssetController = require('../controllers/assetController');
 
 const assetController = new AssetController();
 
-// Get all collections
+// Get all Assets
 router.get('/', assetController.getAllAssets);
 
 router.get('/search', assetController.searchAssets);
 
-// Get a single collection by ID
+// Get a single Asset by ID
 router.get('/:id', assetController.getAssetById);
 
-// Create a new collection
+// Create a new Asset
 router.post('/', assetController.createAsset);
 
-// Update a collection by ID
+// Update a Asset by ID
 router.put('/:id', assetController.updateAssetById);
 
-// Delete a collection by ID
+// Delete a Asset by ID
 router.delete('/:id', assetController.deleteAssetById);
+
+// Update the collectionId by ID
+router.put('/:id/update-collection', assetController.updateCollectionIdForAsset);
 
 module.exports = router;
