@@ -184,3 +184,6 @@ app.use('/api/collection', collectionRoute);
 app.use('/api/asset', assetRoute);
 app.use('/api/search', searchRoute);
 app.use('/api/featured', featuredRoute);
+
+app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
+

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "../../components/progressbar/progressbar";
 import { useToastContext } from '../../context/ToastContext';
 
-function MultipleFileInput({ onSubmit }) {
+function MultipleFileInput({ onSubmit, onFileChange }) {
   const [files, setFiles] = useState([]);
   const [uploadResponses, setUploadResponses] = useState([]); // Store responses for each file
   const [isFilled, updateIsFilled] = useState(false);
@@ -19,8 +19,9 @@ function MultipleFileInput({ onSubmit }) {
     updateDisableUpload(false);
     updateIsFilled(false)
     const selectedFiles = Array.from(e.target.files); // Convert FileList to an array
-    setFiles(selectedFiles)
-    console.log(selectedFiles);
+    setFiles(selectedFiles);
+    onFileChange(selectedFiles);
+    // console.log(selectedFiles);
   };
 
 

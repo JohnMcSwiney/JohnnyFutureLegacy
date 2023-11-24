@@ -22,6 +22,7 @@ import {
   AssetUpload,
   CollectionUpload,
   CreateFeatured,
+  UploadBanner,
   Landing,
   Profile,
   User,
@@ -104,18 +105,10 @@ function App() {
 
                       <Route path="/upload" element={<Upload />}></Route>
 
-                      <Route
-                        path="/upload/asset"
-                        element={<AssetUpload />}
-                      ></Route>
-                      <Route
-                        path="/upload/collection"
-                        element={<CollectionUpload />}
-                      ></Route>
-                      <Route
-                        path="/upload/featured"
-                        element={<CreateFeatured />}
-                      ></Route>
+                      <Route path="/upload/asset"element={<AssetUpload />}></Route>
+                      <Route path="/upload/collection"element={<CollectionUpload />}></Route>
+                      <Route path="/upload/featured"element={<CreateFeatured />}></Route>
+                      <Route path="/upload/userBanner"element={<UploadBanner />}></Route>
                     </Routes>
                   </AppPageContainer>
 

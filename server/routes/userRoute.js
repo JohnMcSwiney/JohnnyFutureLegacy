@@ -1,8 +1,26 @@
 const express = require('express');
-const router = express.Router();
+const multer = require('multer'); 
+const path = require('path');
+const fs = require('fs');
 const UserController = require('../controllers/userController');
 
+const router = express.Router();
 const userController = new UserController();
+
+// Set up Multer storage for file uploads
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+      const userId = req.params.id;
+      const userFolderPath = path.join(__dirname, `../uploaded_files/${userId}/Banner`);
+      fs.mkdirSync(userFolderPath, { recursive: true });
+      cb(null, userFolderPath);
+    },
+    filename: (req, file, cb) => {
+      cb(null, file.originalname);
+    },
+  });
+  
+  const upload = multer({ storage: storage });
 
 // Get all users
 router.get('/', userController.getUsers);
@@ -42,5 +60,11 @@ router.post('/:id/purchase', userController.addPurchase);
 
 // Delete a user by ID
 router.delete('/:id', userController.deleteUser);
+
+// Get Banner Image
+router.get('/:id/banner', userController.getUserBannerImage);
+
+// Update Banner Image
+router.post('/:id/uploadBanner', upload.single('file'), userController.uploadBannerImage);
 
 module.exports = router;

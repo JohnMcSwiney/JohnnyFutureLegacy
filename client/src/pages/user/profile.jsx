@@ -19,6 +19,8 @@ import ContentTitle from '../../components/containers/ContentTitle';
 import ArtifactCard from '../../components/cards/home/ArtifactCard'
 import PurchasedCard from '../../components/cards/home/PurchasedCard';
 import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2';
+import PaginatedPurchaseContainer from '../../components/containers/Paginated/PaginatedPurchaseContainer';
+
 function Profile() {
 
   // const bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Lorem ipsum dolor sit amet consectetur adipiscing. Consectetur libero id faucibus nisl tincidunt eget nullam. Cursus sit amet dictum sit amet justo donec enim. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Nunc non blandit massa enim. Non enim praesent elementum facilisis leo vel fringilla. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Nulla posuere sollicitudin aliquam ultrices sagittis. Elit sed vulputate mi sit amet mauris commodo. Eu tincidunt tortor aliquam nulla. Justo laoreet sit amet cursus sit amet. Augue neque gravida in fermentum et sollicitudin ac orci phasellus. Blandit aliquam etiam erat velit scelerisque in dictum non consectetur. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Ipsum dolor sit amet consectetur adipiscing elit.';
@@ -56,6 +58,21 @@ function Profile() {
   return (
     <AppContentWrapper>
       <PageContainer>
+        {userData&& 
+        <div className="profile--banner">
+          <div className='banner--gradient'></div>
+          {userData.userBannerImage ? 
+            <div className="banner--img">
+              
+              <img src={`http://localhost:5000/uploaded_files/${userData._id}/Banner/${userData.userBannerImage}`} alt={`Image ${userData.userBannerImage}`} />
+            </div>
+          :
+          <div>
+
+          </div>
+          }
+        </div>
+        }
         <div className='profile--v2--cont'>
           <div className='left--profile--v2--cont'>
             <div className='left--profile--v2--info--cont'>
@@ -143,7 +160,8 @@ function Profile() {
                 <ContentTitle>
                 <h3>Licensed Assets:</h3>
                 </ContentTitle>
-                  <div className='profile--v2--horiz--scroll--purchase'>
+                <PaginatedPurchaseContainer itemsPerPage={6} data={userPurchases}/>
+                  {/* <div className='profile--v2--horiz--scroll--purchase'>
                     {userPurchases.map((collectionAssets) => (
                       <PurchasedCard
                         key={collectionAssets._id}
@@ -155,7 +173,9 @@ function Profile() {
                         cardSize={1}
                       />
                     ))}
-                  </div>
+
+                    
+                  </div> */}
                 </>
                  :
                   <div>

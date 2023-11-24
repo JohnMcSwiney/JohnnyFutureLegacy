@@ -6,7 +6,7 @@ const LicensePopup = ({ licenseType, onConfirm, onCancel }) => {
     const noteTitle = 'Please note that your licensed asset may only be used in the contexts outlined in the subscription tier you currently have, asset usage guidelines for more info (link here)';
     useEffect(()=>{
         if(licenseType){
-            console.log('we have a type var,')
+           console.log('we have a type var,')
             if(licenseType === 'edu-use'){
                 console.log('Educational Use');
                 setPopupTitle('Educational');

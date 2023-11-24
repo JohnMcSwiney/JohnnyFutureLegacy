@@ -50,6 +50,10 @@ const userSchema = new Schema({
       ref: "Collection",
     },
   ],
+  userBannerImage: {
+    type: String,
+    required: false, // This field is not required
+  },
 });
 
 const User = mongoose.model("User", userSchema);

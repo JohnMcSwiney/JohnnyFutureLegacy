@@ -30,7 +30,6 @@ class UserController {
       res.status(500).json({ error: error.message });
     }
   }
-
   // Search for users by last name
   async searchUsersByLastName(req, res) {
     try {
@@ -49,7 +48,6 @@ class UserController {
       res.status(500).json({ error: error.message });
     }
   }
-
   // Get a single user by ID
   async getUserId(req, res) {
     try {
@@ -59,8 +57,7 @@ class UserController {
         return res.status(404).json({ error: "No such User" });
       }
 
-      const user = await Users.findById(id)
-      .populate('userCollections');
+      const user = await Users.findById(id).populate("userCollections");
 
       if (!user) {
         return res.status(404).json({ error: "No such User" });
@@ -71,7 +68,6 @@ class UserController {
       res.status(500).json({ error: error.message });
     }
   }
-
   // Get user by username
   async getUserByUsername(req, res) {
     try {
@@ -88,7 +84,6 @@ class UserController {
       res.status(500).json({ error: error.message });
     }
   }
-
   // Create a new user
   async createUser(req, res) {
     try {
@@ -126,17 +121,21 @@ class UserController {
       const { profilePictureUrl } = req.body;
 
       if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: 'No such User' });
+        return res.status(404).json({ error: "No such User" });
       }
 
       // Assuming you have a User model instance and "profilePicture" field in your schema
-      const user = await Users.findByIdAndUpdate(id, { profilePicture: profilePictureUrl }, {
-        new: true,
-        runValidators: true,
-      });
+      const user = await Users.findByIdAndUpdate(
+        id,
+        { profilePicture: profilePictureUrl },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
 
       if (!user) {
-        return res.status(404).json({ error: 'No such User' });
+        return res.status(404).json({ error: "No such User" });
       }
 
       res.status(200).json(user);
@@ -144,140 +143,147 @@ class UserController {
       res.status(400).json({ error: error.message });
     }
   }
- // Update the isInstit field for a user
- async updateIsInstit(req, res) {
-  try {
-    const { id } = req.params;
-    const { isInstit } = req.body;
+  // Update the isInstit field for a user
+  async updateIsInstit(req, res) {
+    try {
+      const { id } = req.params;
+      const { isInstit } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'No such User' });
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      // Update the isInstit field for the user with the provided ID
+      const updatedUser = await Users.findByIdAndUpdate(
+        id,
+        { isInstit },
+        { new: true, runValidators: true }
+      );
+
+      if (!updatedUser) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
     }
-
-    // Update the isInstit field for the user with the provided ID
-    const updatedUser = await Users.findByIdAndUpdate(
-      id,
-      { isInstit },
-      { new: true, runValidators: true }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'No such User' });
-    }
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
   }
-}
-// Update user's bio
-async updateBio(req, res) {
-  try {
-    const { id } = req.params;
-    const { bio } = req.body;
+  // Update user's bio
+  async updateBio(req, res) {
+    try {
+      const { id } = req.params;
+      const { bio } = req.body;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'No such User' });
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      const user = await Users.findByIdAndUpdate(
+        id,
+        { bio },
+        { new: true, runValidators: true }
+      );
+
+      if (!user) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res.status(200).json(user);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
     }
-
-    const user = await Users.findByIdAndUpdate(
-      id,
-      { bio },
-      { new: true, runValidators: true }
-    );
-
-    if (!user) {
-      return res.status(404).json({ error: 'No such User' });
-    }
-
-    res.status(200).json(user);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
   }
-}
+  // Add a collection to userCollections
+  async addUserCollection(req, res) {
+    try {
+      const { id } = req.params;
+      const { collectionId } = req.body;
 
-// Add a collection to userCollections
-async addUserCollection(req, res) {
-  try {
-    const { id } = req.params;
-    const { collectionId } = req.body;
+      if (
+        !mongoose.Types.ObjectId.isValid(id) ||
+        !mongoose.Types.ObjectId.isValid(collectionId)
+      ) {
+        return res.status(404).json({ error: "Invalid User or Collection ID" });
+      }
 
-    if (!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(collectionId)) {
-      return res.status(404).json({ error: 'Invalid User or Collection ID' });
+      // Find the user by ID and update userCollections
+      const updatedUser = await Users.findByIdAndUpdate(
+        id,
+        { $push: { userCollections: collectionId } },
+        { new: true }
+      );
+
+      if (!updatedUser) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      res.status(400).json({ error: error.message });
     }
-
-    // Find the user by ID and update userCollections
-    const updatedUser = await Users.findByIdAndUpdate(
-      id,
-      { $push: { userCollections: collectionId } },
-      { new: true }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'No such User' });
-    }
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    res.status(400).json({ error: error.message });
   }
-}
-// Get user's purchases
-async getUserPurchases(req, res) {
-  try {
-    const { id } = req.params;
+  // Get user's purchases
+  async getUserPurchases(req, res) {
+    try {
+      const { id } = req.params;
 
-    // Check if the provided ID is valid
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: 'Invalid User ID' });
+      // Check if the provided ID is valid
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "Invalid User ID" });
+      }
+
+      // Find the user by ID and retrieve purchases
+      const user = await Users.findById(id).populate("purchases");
+
+      if (!user) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      const purchases = user.purchases;
+      res.status(200).json(purchases);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-
-    // Find the user by ID and retrieve purchases
-    const user = await Users.findById(id).populate('purchases');
-
-    if (!user) {
-      return res.status(404).json({ error: 'No such User' });
-    }
-
-    const purchases = user.purchases;
-    res.status(200).json(purchases);
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-}
-// Add a purchase to user's purchases
-async addPurchase(req, res) {
-  try {
-    const { id } = req.params;
-    const { assetId } = req.body;
+  // Add a purchase to user's purchases
+  async addPurchase(req, res) {
+    try {
+      const { id } = req.params;
+      const { assetId } = req.body;
 
-    // Check if assetId is provided
-    if (!assetId) {
-      return res.status(400).json({ error: 'Asset ID is required in the request body' });
+      // Check if assetId is provided
+      if (!assetId) {
+        return res
+          .status(400)
+          .json({ error: "Asset ID is required in the request body" });
+      }
+
+      // Check if the provided IDs are valid
+      if (
+        !mongoose.Types.ObjectId.isValid(id) ||
+        !mongoose.Types.ObjectId.isValid(assetId)
+      ) {
+        return res.status(404).json({ error: "Invalid User or Asset ID" });
+      }
+
+      // Find the user by ID and update purchases
+      const updatedUser = await Users.findByIdAndUpdate(
+        id,
+        { $push: { purchases: assetId } },
+        { new: true }
+      );
+
+      if (!updatedUser) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res.status(200).json(updatedUser);
+    } catch (error) {
+      console.error("Error adding purchase:", error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    // Check if the provided IDs are valid
-    if (!mongoose.Types.ObjectId.isValid(id) || !mongoose.Types.ObjectId.isValid(assetId)) {
-      return res.status(404).json({ error: 'Invalid User or Asset ID' });
-    }
-
-    // Find the user by ID and update purchases
-    const updatedUser = await Users.findByIdAndUpdate(
-      id,
-      { $push: { purchases: assetId } },
-      { new: true }
-    );
-
-    if (!updatedUser) {
-      return res.status(404).json({ error: 'No such User' });
-    }
-
-    res.status(200).json(updatedUser);
-  } catch (error) {
-    console.error('Error adding purchase:', error);
-    res.status(500).json({ error: 'Internal Server Error' });
   }
-}
 
   // Delete a user by ID
   async deleteUser(req, res) {
@@ -295,6 +301,55 @@ async addPurchase(req, res) {
       }
 
       res.status(200).json(user);
+    } catch (error) {
+      res.status(500).json({ error: error.message });
+    }
+  }
+// Add a method to handle file upload
+async uploadBannerImage(req, res) {
+  try {
+    const userId = req.params.id;
+
+    // Check if req.file is defined
+    if (!req.file) {
+      return res.status(400).json({ error: 'No file uploaded' });
+    }
+
+    const filename = req.file.originalname;
+
+    // Assuming you have a User model instance and "userBannerImage" field in your schema
+    const user = await Users.findByIdAndUpdate(userId, { userBannerImage: filename }, {
+      new: true,
+      runValidators: true,
+    });
+
+    if (!user) {
+      return res.status(404).json({ error: 'No such User' });
+    }
+
+    res.status(200).json({ message: 'File uploaded successfully', filename: filename });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
+}
+
+  // Get user's banner image
+  async getUserBannerImage(req, res) {
+    try {
+      const { id } = req.params;
+
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      const user = await Users.findById(id, "userBannerImage");
+
+      if (!user) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res.status(200).json({ userBannerImage: user.userBannerImage });
     } catch (error) {
       res.status(500).json({ error: error.message });
     }

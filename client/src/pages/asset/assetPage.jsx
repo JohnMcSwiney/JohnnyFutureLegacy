@@ -21,6 +21,9 @@ import PageTitle from '../../components/containers/PageTitle';
 import ContentTitle from '../../components/containers/ContentTitle';
 import AssetPageContentContainer from '../../components/containers/AssetContentContainer';
 import LicensePopup from './LicensePopup';
+import ProfileRedirect from './ProfileRedirect';
+
+
 
 function AssetPage() {
   const { id, parentId } = useParams();
@@ -33,9 +36,9 @@ function AssetPage() {
     userData } = useMyContext();
   const [longDesc, setLongDesc] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isPopup2Visible, setPopup2Visible] = useState(false);
   const [licenseLevel, setLicenseLevel] = useState('edu-use');
   const { addToast } = useToastContext();
-
   //fetch asset
   useEffect(() => {
     // http://localhost:3000/profile
@@ -85,13 +88,8 @@ function AssetPage() {
       addToast('you need to be logged in to license assets!')
       setPopupVisible(true);
     }
-
-
-
-
-
-
   }
+
   const handlePurchase = () => {
     if (assetData && userData) {
       console.log('confirm, purchase added!');
@@ -115,6 +113,8 @@ function AssetPage() {
           if (purchaseResponse.ok) {
             const purchaseJson = await purchaseResponse.json();
             console.log(purchaseJson);
+            addToast('Purchase Successful');
+            setPopup2Visible(true);
           } else {
             console.error('Error Purchasing:', purchaseResponse.statusText);
             // Handle the error appropriately
@@ -131,10 +131,16 @@ function AssetPage() {
     }
 
   }
-  const handleCancel = (reason) => {
+  const redirectAccount = () => { navigate(`/profile`); };
+
+  const handleRedirectProfile = () =>{
+    redirectAccount();
+  }
+  const handleCancel = () => {
     console.log('cancelled');
     setPopupVisible(false);
-    addToast('Purchase Cancelled');
+    setPopup2Visible(false);
+    // addToast('Purchase Cancelled');
   }
   return (
     <AppContentWrapper>
@@ -144,6 +150,12 @@ function AssetPage() {
             licenseType={licenseLevel}
             onConfirm={handlePurchase}
             onCancel={handleCancel}
+          />
+        )}
+        {isPopup2Visible && (
+          <ProfileRedirect 
+          onConfirm={handleRedirectProfile}
+          onCancel={handleCancel}
           />
         )}
         <AssetPageContentContainer>
