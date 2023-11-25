@@ -35,7 +35,7 @@ const PaginatedPurchaseContainer = ({ itemsPerPage, data }) => {
           ))}
       
           {/* Pagination */}
-          <div className='paginated--page--btns'>
+          <div className='paginated--page--btns paginated--btns--top'>
             <h3>Page:</h3>
             {Array.from({ length: Math.ceil(data.length / itemsPerPage) }).map((_, index) => (
               <button key={index} onClick={() => paginate(index + 1)} className={currentPage === index +1 && 'currentPageBtn'}>
