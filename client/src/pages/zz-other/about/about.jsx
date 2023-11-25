@@ -1,10 +1,16 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import './aboutPage.css'
 import TeamImg from '../../../components/teamImg/TeamImg'
 import Accordion from '../../../components/accordionItem/accordion'
 import {StyledContainer_v2
 } from '../../../components/Styles'
+
+import {useToastContext} from '../../../context/ToastContext'
 export default function About() {
+  const {addToast} = useToastContext();
+  useEffect(()=>{
+  addToast(`This page isn't working please don't try to use it <3`)
+  },[])
   return (
     <StyledContainer_v2>
     <h1> WE SIMPLY CONNECT YOUR DIGITAL WORLD </h1>

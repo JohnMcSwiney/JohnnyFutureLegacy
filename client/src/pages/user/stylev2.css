@@ -176,6 +176,26 @@ display: flex;
     justify-content: space-between;
 
 }
+.blurring--bg--title{
+    width: 60%;
+    min-height: 30px;
+    max-height: 50px;
+    position: sticky;
+    top:0;
+    background-color: var(--bg);
+
+    opacity: 1;
+    color:var(--font);
+    text-transform: uppercase;
+    padding-left: 15px;
+    margin-left: 30px;
+    margin-bottom: 15px;
+    border-bottom: 2px solid var(--font);
+    backdrop-filter: blur(10px);
+}
+.blurring--bg--title h3{
+    opacity: 0.8;
+}
 .profile--v2--horiz--scroll--purchase{
     display: flex;
     width: 100%;

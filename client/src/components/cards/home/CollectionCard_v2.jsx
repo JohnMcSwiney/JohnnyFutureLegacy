@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './style.css';
-
+import { BsFillCollectionFill } from 'react-icons/bs'
 export default function CollectionCard_v2({ toggleView, collectionIn, collectionImg }) {
   const [userName, setUserName] = useState('');
   const [userImg, setUserImg] = useState('');
@@ -32,6 +32,7 @@ export default function CollectionCard_v2({ toggleView, collectionIn, collection
           <div className="coll--card--img--cont">
           <img src={collectionIn.collectionImage} className='coll--card--img--1'/>
             <div className="coll--card--img--title--cont">
+              
               <h2>{collectionIn.collectionName}</h2>
             </div>
           </div>
@@ -42,6 +43,7 @@ export default function CollectionCard_v2({ toggleView, collectionIn, collection
             <img src={collectionIn.collectionImage}/>
             </div>
           <div className="coll--card--v2--title--cont">
+          <BsFillCollectionFill />
               <h2 className='coll--card--v2--title'>{collectionIn.collectionName}</h2>
             </div>
         </div>

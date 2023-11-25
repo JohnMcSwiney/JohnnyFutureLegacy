@@ -155,9 +155,10 @@ function Profile() {
               <div className='right--profile--v2--content--cont--row--2'>
                 {userPurchases ?
                 <>
-                <ContentTitle>
+                <div className='blurring--bg--title'>
                 <h3>Licensed Assets:</h3>
-                </ContentTitle>
+                </div>
+                
                 <PaginatedPurchaseContainer itemsPerPage={8} data={userPurchases}/>
                 </>
                  :
