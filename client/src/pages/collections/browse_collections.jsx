@@ -117,7 +117,7 @@ function Browse_Collections() {
               key={user._id} // Provide a unique key for each component
               toggleView={toggleView}
               userId={user._id} // Use the appropriate property from your data
-              // collectionImg={collection.imageUrl} // Use the appropriate property from your data
+              collectionImg={user.userBannerImage} // Use the appropriate property from your data
             />
           ))} 
 

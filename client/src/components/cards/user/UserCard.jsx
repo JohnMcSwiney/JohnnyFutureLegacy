@@ -7,12 +7,19 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
     const [userName, setUserName] = useState('');
     const [userImg, setUserImg] = useState('');
     const [userIsInstit, setUserIsInstit] = useState(false);
+    const [userBannerImg, setUserBannerImg] = useState(``);
     const [collections, setCollectionIds] = useState(null);
     const [collectionObjects, setCollectionObjects] = useState(null);
     const [displayCard, setDisplayCard] = useState(false)
     const navigate = useNavigate();
-    // console.log()
+    // console.log('collectionImg: ', collectionImg)
     // console.log(userId)
+    useEffect(() => {
+        if (collectionImg !== null && collectionImg) {
+            console.log('collectionImg: ', collectionImg)
+            setUserBannerImg(collectionImg)
+        }
+    }, [])
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -47,7 +54,7 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
     useEffect(() => {
         let tempCollectionHolder = null
         if (collections !== null) {
-            
+
             if (collections.length > 0) {
                 // console.log(userName)
                 // console.log(collections)
@@ -77,20 +84,21 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
     }, [collections])
 
     const handleRedirect = () => {
-        // if (collectionIn) {
+        if (userId) {
 
-        //   navigate(`/collection/${collectionIn._id}`);
-        // }
+          navigate(`/user/${userId}`);
+        }
     };
 
     return (
         <>
             {displayCard ? (
                 <div
-            className={toggleView ? 'coll--card--row' : 'user--card--grid'}
-            onClick={handleRedirect}
-        >
+                    className={toggleView ? 'coll--card--row' : 'user--card--grid'}
+                    onClick={handleRedirect}
+                >
                     {toggleView ? (
+                        //true row view
                         <div className="coll--card--row--cont">
                             <div className="coll--card--title--cont">
                                 <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}>
@@ -102,8 +110,14 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                                 </div>
                                 <h2>{userName}</h2>
                             </div>
+                            <div className="coll--card--img--cont">
+                                {userBannerImg &&
+                                    <img src={`http://localhost:5000/uploaded_files/${userId}/Banner/${userBannerImg}`} className='coll--card--img--1' />
+                                }
+                            </div>
                         </div>
                     ) : (
+                        //false grid view
                         <div className="user--card--cont--grid">
                             <div className="user--card--title--cont">
                                 <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}>
@@ -115,28 +129,12 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                                 </div>
                                 <h2>{userName}</h2>
                             </div>
-                            <div className="user--card--collection--display">
-                               <CollectionCarousel
-                               toggleView={toggleView}
-                               collections={collections}
-                               />
-                                {/* {collections.map((collection) => (
-                                    <CollectionCard_v2
-                                        key={collection._id}
-                                        collectionIn={collection}
-                                        toggleView={toggleView}
-                                    />  
-                                ))
-                                } */}
-                            </div>
 
-                            {/* <div className="coll--card--img--cont">
-            
-            <img src={collectionIn.collectionAssets[0].assetImage} className='coll--card--img--1'/>
-            <div className="coll--card--img--title--cont">
-              <h2>{collectionIn.collectionName}</h2>
-            </div>
-          </div> */}
+                            <div className="user--card--img--cont">
+                                {userBannerImg &&
+                                    <img src={`http://localhost:5000/uploaded_files/${userId}/Banner/${userBannerImg}`} className='coll--card--img--1' />
+                                }
+                            </div>
                         </div>
                     )}</div>
             )
