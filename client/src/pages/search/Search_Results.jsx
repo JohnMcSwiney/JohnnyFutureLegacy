@@ -12,6 +12,8 @@ import SearchResultsContainer from '../../components/containers/SearchResultsCon
 import Splitter from '../../components/splitter/Splitter';
 import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2'
 import PaginatedAssetContainer from '../../components/containers/Paginated/PaginatedAssetContainer';
+import PaginatedCollectionContainer from '../../components/containers/Paginated/PaginatedCollectionContainer';
+
 
 export default function Search_Results() {
   // const { searchValue, setSearchValue } = useMyContext();
@@ -52,12 +54,12 @@ export default function Search_Results() {
         <div className='search_results--title--bar pad--bot--5'>
         {searchData.assetResults &&
               <button onClick={() =>{setShowAssets(!showAssets);
-            }}>{showAssets ? 'Hide Asset Results' : 'Show Asset Results'}</button>
+            }}>{showAssets ? 'Hide Assets' : 'Show Assets'}</button>
           }
           {searchData.collectionResults && 
             <button onClick={() =>{
               setShowCollections(!showCollections);
-            }}>{showCollections ? 'Hide Collection Results' : 'Show Collection Results'}</button>
+            }}>{showCollections ? 'Hide Collections' : 'Show Collections'}</button>
             }
         </div>
         
@@ -89,8 +91,9 @@ export default function Search_Results() {
           {searchData.collectionResults ?
             <div className={showCollections ? 'search_results--container--row--scroll' : 'hide--search_results'}
             >
+              <div className='search_results--title--bar'><h2>Collection Results:</h2></div>
               <Splitter/>
-              
+              <PaginatedCollectionContainer itemsPerPage={4} cardSize={componentSize} data={searchData.collectionResults}/>
               {/* {searchData.assetResults.map((asset) => (
                 <ArtifactCard
                   key={asset._id}
