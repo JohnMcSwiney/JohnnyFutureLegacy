@@ -1,6 +1,7 @@
 /*GPT*/
 .accordion {
-    border: 1px solid #ccc;
+    /* border: 1px solid #ccc; */
+    border: 1px solid var(--font--shadow);
     margin-bottom: 10px;
     overflow: hidden;
     transition: height 0.3s ease;
@@ -11,7 +12,8 @@
   }
   
   .accordion-header {
-    background-color: #f1f1f1;
+    /* background-color: #f1f1f1; */
+  background-color: var(--bg);
     cursor: pointer;
     padding: 10px;
     display: flex;

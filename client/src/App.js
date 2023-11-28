@@ -6,7 +6,8 @@ import {
   About,
   Apply,
   Asset,
-  Browse_Collections,
+  // Browse_Collections,
+  Browse_Clients,
   Single_collection,
   // CreateIndividualCollection,
   InstituteCollection,
@@ -86,8 +87,8 @@ function App() {
                         element={<Asset />}
                       ></Route>
                       <Route
-                        path="/browseCollections"
-                        element={<Browse_Collections />}
+                        path="/clients"
+                        element={<Browse_Clients />}
                       ></Route>
                       <Route
                         path="/collection/:param1/:featuredId?"

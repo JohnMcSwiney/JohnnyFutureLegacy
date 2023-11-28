@@ -7,6 +7,8 @@
     flex-wrap: wrap;
     gap: 25px;
     padding-top: 25px;
+    position: relative;
+    margin-top: 100px;
 }
 .FL--footer--content--cont{
     display: flex;
@@ -15,7 +17,7 @@
     width: 100%;
     height: 200px;
     flex-wrap: wrap;
-background-color: white;
+/* background-color: white; */
 }
 
 .FL--footer--box--cont{
@@ -31,12 +33,20 @@ background-color: white;
     cursor: pointer;
 }
 .FL--footer--box--cont h3 strong{
-    color: var(--tertiary);
+    color: var(--primary);
 }
 .temp--6{
-    background-color: indigo;
+    /* background-color: indigo; */
     width: 100%;
-    height: 100px;
+    height: 20px;
+    /* position: absolute;
+    top: 0; */
+    text-align: center;
+    opacity: 0.2;
+
+}
+.temp--6 a{
+    color: var(--font);
 }
 
 
@@ -61,5 +71,6 @@ background-color: white;
  font-weight: 550;
 }
 .FL--footer--box--cont > a:hover > strong{
-    color: black
+    /* color: black */
+    color: var(--font);
    }

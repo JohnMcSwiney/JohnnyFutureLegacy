@@ -43,7 +43,7 @@ export default function FL_footer() {
             </div>
             
         </div>
-        <div className='temp--6'>6</div>
+        <div className='temp--6'>MVP Version 0.0 - Site Designed By <a target='_blank' href="https://github.com/JohnMcSwiney">John McSwiney</a> - November 2023</div>
     </div>
   )
 }

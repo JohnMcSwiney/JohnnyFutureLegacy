@@ -98,7 +98,7 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                     onClick={handleRedirect}
                 >
                     {toggleView ? (
-                        //true row view
+                        //true = row view
                         <div className="coll--card--row--cont">
                             <div className="coll--card--title--cont">
                                 <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}>
@@ -117,7 +117,7 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                             </div>
                         </div>
                     ) : (
-                        //false grid view
+                        //false = grid view
                         <div className="user--card--cont--grid">
                             <div className="user--card--title--cont">
                                 <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}>

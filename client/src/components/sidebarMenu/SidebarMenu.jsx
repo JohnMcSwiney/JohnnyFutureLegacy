@@ -16,6 +16,7 @@ import UserImgCont from '../EndUserImgCont/UserImgCont'
 import { useMyContext } from "../../context/FLContext";
 import AppPageContainer from '../containers/AppPageContainer';
 import { Tooltip } from 'react-tooltip'
+import { FaUsers } from "react-icons/fa6";
 //RxHamburgerMenu
 export default function SidebarMenu() {
 
@@ -23,7 +24,7 @@ export default function SidebarMenu() {
     const navigate = useNavigate();
     const { userData } = useMyContext();
     const [isOpen, setIsOpen] = useState(sidebarOpen)
-    const redirectCollections = () => { navigate(`/browseCollections`); };
+    const redirectClients = () => { navigate(`/clients`); };
     const redirectAccount = () => { navigate(`/profile`); };
     const redirectAbout = () => { navigate(`/about`); };
     const redirectLogin = () => { navigate(`/login`); };
@@ -44,12 +45,17 @@ export default function SidebarMenu() {
         >
 
             <div className='menu-items'>
-                <Tooltip id="tip_open_collections" />
+                <Tooltip id="tip_open_Clients" />
                 <Tooltip id="tip_open_profile" />
                 <Tooltip id="tip_open_upload" />
                 <Tooltip id="tip_open_about" />
                 <Tooltip id="tip_open_logout" />
-                <div className='user--info--cont'>
+                <div className='user--info--cont' 
+                onClick={redirectAccount}
+                data-tooltip-id="tip_open_profile"
+                data-tooltip-content={`Your Profile`}
+                data-tooltip-place="right"
+                >
                     <UserImgCont imgUrl={userImg} />
                     {sidebarOpen && (
                         <div className='sidebar--user--info'>
@@ -67,20 +73,23 @@ export default function SidebarMenu() {
 
                         {is_Signedin ?
                             <>
-                                <a onClick={redirectCollections}
-                                    data-tooltip-id="tip_open_collections"
-                                    data-tooltip-content={`Browse Collections`}
+                                <a onClick={redirectClients}
+                                    data-tooltip-id="tip_open_Clients"
+                                    data-tooltip-content={`Browse Clients`}
                                     data-tooltip-place="right"
                                 >
 
-                                    <span className='sidebar--menu--icon'><BsFillCollectionFill /></span>Collections
+                                    <span className='sidebar--menu--icon'>
+                                        {/* <BsFillCollectionFill /> */}
+                                        <FaUsers />
+                                        </span>Clients
                                 </a>
-                                <a onClick={redirectAccount}
+                                {/* <a onClick={redirectAccount}
                                     data-tooltip-id="tip_open_profile"
                                     data-tooltip-content={`Your Profile`}
                                     data-tooltip-place="right"
                                 >
-                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a>
+                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a> */}
 
                                 <a onClick={redirectUpload}
                                     data-tooltip-id="tip_open_upload"
@@ -105,20 +114,23 @@ export default function SidebarMenu() {
 
                             :
                             <>
-                                <a onClick={redirectCollections}
-                                    data-tooltip-id="tip_open_collections"
-                                    data-tooltip-content={`Browse Collections`}
+                                <a onClick={redirectClients}
+                                    data-tooltip-id="tip_open_Clients"
+                                    data-tooltip-content={`Browse Clients`}
                                     data-tooltip-place="right"
                                 >
 
-                                    <span className='sidebar--menu--icon'><BsFillCollectionFill /></span>Collections
+                                    <span className='sidebar--menu--icon'>
+                                        {/* <BsFillCollectionFill /> */}
+                                        <FaUsers />
+                                        </span>Clients
                                 </a>
-                                <a onClick={redirectAccount}
+                                {/* <a onClick={redirectAccount}
                                     data-tooltip-id="tip_open_profile"
                                     data-tooltip-content={`Your Profile`}
                                     data-tooltip-place="right"
                                 >
-                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a>
+                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a> */}
 
                                 <a onClick={redirectUpload}
                                     data-tooltip-id="tip_open_upload"
@@ -148,18 +160,21 @@ export default function SidebarMenu() {
                     :
                     (
                         <div className='sidebar--menu--content--small'>
-                            <Tooltip id="tip_closed_collections" />
+                            <Tooltip id="tip_closed_Clients" />
                             <Tooltip id="tip_closed_profile" />
-                            <a onClick={redirectCollections}
-                                data-tooltip-id="tip_closed_collections"
-                                data-tooltip-content={`Browse Collections`}
+                            <a onClick={redirectClients}
+                                data-tooltip-id="tip_closed_Clients"
+                                data-tooltip-content={`Browse Clients`}
                                 data-tooltip-place="right"
-                            ><BsFillCollectionFill /></a>
-                            <a onClick={redirectAccount}
+                            >
+                                {/* <BsFillCollectionFill /> */}
+                                <FaUsers />
+                                </a>
+                            {/* <a onClick={redirectAccount}
                                 data-tooltip-id="tip_closed_profile"
                                 data-tooltip-content={`Your Profile`}
                                 data-tooltip-place="right"
-                            ><MdAccountBox /></a>
+                            ><MdAccountBox /></a> */}
 
                             {is_Signedin ?
                                 <>
