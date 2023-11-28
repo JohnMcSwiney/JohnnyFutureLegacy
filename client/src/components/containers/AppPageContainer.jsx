@@ -10,6 +10,7 @@ function AppPageContainer({ children }) {
   return (
     <div className={sidebarOpen ? 'app--page--container openSidebar' : 'app--page--container closedSidebar'}>
       {children}
+      
     </div>
   );
 }

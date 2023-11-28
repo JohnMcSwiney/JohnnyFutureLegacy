@@ -14,7 +14,7 @@ import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2'
 import PaginatedAssetContainer from '../../components/containers/Paginated/PaginatedAssetContainer';
 import PaginatedCollectionContainer from '../../components/containers/Paginated/PaginatedCollectionContainer';
 
-
+import FL_footer from '../../components/FL_Footer/FL_footer';
 export default function Search_Results() {
   // const { searchValue, setSearchValue } = useMyContext();
   const [searchAssets, setSearchAssets] = useState(null);
@@ -105,13 +105,21 @@ export default function Search_Results() {
                   cardSize={componentSize}
                 />
               ))} */}
+              
+              
             </div>
             :
             <div className='search_results--title--bar'>
               No Collections Retrieved...
             </div>
           }
+          {searchData &&
+          <div className='search--results--footer'>
+          <FL_footer/>
+          </div>
+          }
         </SearchResultsContainer>
+        
       </PageContainer>
 
 

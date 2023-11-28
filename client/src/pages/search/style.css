@@ -88,3 +88,6 @@
     color: var(--bg);
     background-color: var(--font);
 }
+.search--results--footer{
+    width: 100%;
+}

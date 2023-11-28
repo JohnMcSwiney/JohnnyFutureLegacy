@@ -22,9 +22,9 @@ import ContentTitle from '../../components/containers/ContentTitle';
 import AssetPageContentContainer from '../../components/containers/AssetContentContainer';
 import LicensePopup from './LicensePopup';
 import ProfileRedirect from './ProfileRedirect';
-
-
-
+import FL_footer from '../../components/FL_Footer/FL_footer';
+  
+  
 function AssetPage() {
   const { id, parentId } = useParams();
   const [assetData, setAssetData] = useState(null);
@@ -179,6 +179,7 @@ function AssetPage() {
   return (
     <AppContentWrapper>
       <PageContainer>
+        <StyledContentContainer>
         {isPopupVisible && (
           <LicensePopup
             licenseType={licenseLevel}
@@ -192,9 +193,7 @@ function AssetPage() {
           onCancel={handleCancel}
           />
         )}
-        <AssetPageContentContainer>
-
-          <section className='asset--title--cont'>
+        <section className='asset--title--cont'>
             <div className='instit--collhomepage--title--img'>
               {collectionUserName && (
                 <div
@@ -221,8 +220,11 @@ function AssetPage() {
             )}
             {currentCollection && longDesc === false && <h4>{currentCollection.collectionDescription}</h4>}
           </section>
+        <AssetPageContentContainer>
 
+          
 
+          {/* left */}
           <div className='asset--img-n-tags'>
             <div className='asset--page--img'>
               <img src={assetData.assetImage} alt={assetData.assetName} />
@@ -234,6 +236,7 @@ function AssetPage() {
               ))}
             </div>
           </div>
+          {/* right */}
           <div className='asset--details--cont'>
             <a
               className="asset--author"
@@ -279,8 +282,19 @@ function AssetPage() {
 
 
           </div>
+       
+         
+         
+          
+          
         </AssetPageContentContainer>
+       
+        <FL_footer/>
+        
+</StyledContentContainer>
       </PageContainer>
+      
+      
     </AppContentWrapper>
 
   );

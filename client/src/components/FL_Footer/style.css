@@ -8,6 +8,9 @@
     gap: 25px;
     padding-top: 25px;
     position: relative;
+    /* position: absolute;
+width: 100%;
+bottom: 0; */
     margin-top: 100px;
 }
 .FL--footer--content--cont{

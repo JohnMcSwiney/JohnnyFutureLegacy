@@ -1,11 +1,11 @@
 import React,{useState, useEffect} from 'react'
 // import '../../app.css';
 import './homePage_v2.css'
-import FL_splitter from '../../components/splitter/Splitter'
-import CollectionCard from '../../unused/CollectionCard'
-import FL_footer from '../../components/FL_Footer/FL_footer'
-import SearchBarHome from '../../unused/SearchbarHome'
-import { AiOutlineArrowDown } from 'react-icons/ai';
+// import FL_splitter from '../../components/splitter/Splitter'
+// import CollectionCard from '../../unused/CollectionCard'
+// import FL_footer from '../../components/FL_Footer/FL_footer'
+// import SearchBarHome from '../../unused/SearchbarHome'
+// import { AiOutlineArrowDown } from 'react-icons/ai';
 import { useNavigate, useLocation } from 'react-router-dom';
 
 import AppContentWrapper from '../../components/containers/AppContentWrapper';
@@ -40,6 +40,7 @@ export default function Home() {
         </section>
         
       </PageContainer>
+      {/* <FL_footer/> */}
     </AppContentWrapper>
 
   )

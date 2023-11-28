@@ -28,6 +28,7 @@ import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import CollectionPageContainer from '../../components/containers/CollectionPageContainer';
 import Splitter from '../../components/splitter/Splitter';
 import { useNavigate } from 'react-router-dom';
+import FL_Footer from '../../components/FL_Footer/FL_footer';
 
 function Single_collection() {
   const { param1, featuredId } = useParams() //collection id
@@ -269,6 +270,7 @@ function Single_collection() {
             }
           </div>
         </main>
+        <FL_Footer/>
       </CollectionPageContainer>
     </AppContentWrapper>
   )
