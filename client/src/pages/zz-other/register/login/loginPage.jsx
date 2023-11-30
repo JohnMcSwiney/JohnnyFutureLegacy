@@ -1,17 +1,24 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import './style.css';
 
 import { StyledContainer, StyledTitle, StyledSubTitle, Avatar, StyledButton } from '../../../../components/Styles'
 import AppContentWrapper from '../../../../components/containers/AppContentWrapper';
 import PageContainer from '../../../../components/containers/PageContainer';
 import PageTitle from '../../../../components/containers/PageTitle';
+import { useMyContext } from '../../../../context/FLContext';
 
 export default function LoginPage() {
+  const navigate = useNavigate();
+  const redirectAccount = () => { navigate(`/profile`); };
+  
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
-
+  const {currentUserId,
+      setCurrentUserId,
+      currentUserObject,
+      setCurrentUserObject} = useMyContext();
   const handleLogin = async (e) => {
     e.preventDefault();
 
@@ -34,6 +41,9 @@ export default function LoginPage() {
         const data = await response.json();
         setError('');
         console.log(data.message);
+        console.log(data.userId);
+        setCurrentUserId(data.userId)
+        redirectAccount();
         // Handle successful login (e.g., redirect to another page)
       } else {
         const errorData = await response.json();

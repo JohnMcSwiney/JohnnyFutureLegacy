@@ -4,7 +4,8 @@ const FLContext = createContext();
 
 const ContextProvider = ({ children }) => {
   const hardcodedUser = '650ca3a3cf7964c5cb70782c';
-
+  const [currentUserId, setCurrentUserId] = useState(localStorage.getItem('FL_currentUserId') || '')
+  const [currentUserObject, setCurrentUserObject] = useState(localStorage.getItem('FL_currentUserObject') || {})
   const [searchValue, setSearchValue] = useState(localStorage.getItem('searchValue') || '');
   const [currentCollection, setCurrentCollection] = useState(
     JSON.parse(localStorage.getItem('storedCollection')) || null
@@ -25,6 +26,41 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     localStorage.setItem('sideBarState', sidebarOpen);
   }, [sidebarOpen]);
+
+  useEffect(() => {
+    localStorage.setItem('FL_currentUserId', currentUserId);
+    if (currentUserId) {
+      if (currentUserId !== '') {
+        const fetchUser = async () => {
+          try {
+            const userResponse = await fetch(`http://localhost:5000/api/user/${currentUserId}`, {
+              method: 'GET',
+              headers: {
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'true',
+              },
+            });
+
+            if (userResponse.ok) {
+              const userJson = await userResponse.json();
+              setCurrentUserObject(userJson);
+              console.log(userJson);
+            } else {
+              // Handle error
+            }
+          } catch (error) {
+            // Handle error
+          }
+        };
+
+        fetchUser();
+      }
+    }
+  }, [currentUserId])
+
+  useEffect(() => {
+    localStorage.setItem('FL_currentUserObject', currentUserObject);
+  }, [currentUserObject]);
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -54,7 +90,7 @@ const ContextProvider = ({ children }) => {
 
     fetchUser();
   }, []);
-  
+
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -92,7 +128,7 @@ const ContextProvider = ({ children }) => {
     setCurrentCollection(object);
     localStorage.setItem('storedCollection', JSON.stringify(object));
   };
-  const clearCachedCollectionData = () =>{
+  const clearCachedCollectionData = () => {
     setCurrentCollection('');
     localStorage.setItem('storedCollection', JSON.stringify(null));
     setCollectionUserName('');
@@ -110,17 +146,17 @@ const ContextProvider = ({ children }) => {
   }, [userData]);
 
   useEffect(() => {
-    
-    if(sidebarOpen === 'false'){
+
+    if (sidebarOpen === 'false') {
       // console.log('bool is string')
       // console.log('sidebarVar: ', sidebarOpen)
       setSidebarOpen(false)
-  }
-  if(sidebarOpen === 'true'){
+    }
+    if (sidebarOpen === 'true') {
       // console.log('bool is string')
       // console.log('sidebarVar: ', sidebarOpen)
       setSidebarOpen(true)
-  }
+    }
     localStorage.setItem('sideBarState', sidebarOpen);
   }, [sidebarOpen]);
 
@@ -138,6 +174,10 @@ const ContextProvider = ({ children }) => {
         collectionUserPfp,
         clearCachedCollectionData,
         sidebarOpen, setSidebarOpen,
+        currentUserId,
+        setCurrentUserId,
+        currentUserObject,
+        setCurrentUserObject
         // pageWidth, setPageWidth
       }}
     >

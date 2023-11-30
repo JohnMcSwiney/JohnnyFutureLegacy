@@ -104,7 +104,6 @@ class UserController {
 
       // Hash the password before storing it
       const hashedPassword = bcrypt.hashSync(password, salt);
-      console.log(hashedPassword)
       const user = await Users.create({
         username,
         password: hashedPassword,

@@ -12,7 +12,7 @@ const authController = {
 
       if (user && bcrypt.compareSync(password, user.password)) {
         // Successful login
-        res.status(200).json({ success: true, message: "Login successful" });
+        res.status(200).json({ success: true, message: "Login successful", userId: user._id });
       } else {
         // Invalid email or password
         res
@@ -23,7 +23,7 @@ const authController = {
       console.error(error);
       res
         .status(500)
-        .json({ success: false, message: "Internal server error" });
+        .json({ success: false, message: "Internal server error"});
     }
   },
 };
