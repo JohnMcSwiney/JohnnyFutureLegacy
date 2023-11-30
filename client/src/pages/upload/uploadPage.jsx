@@ -27,6 +27,11 @@ export default function UploadPage() {
 
         navigate(`/upload/updateCollAssets`)
     }
+    const redirectUserRegister = () => {
+
+        navigate(`/register`)
+    }
+
 
     return (
 
@@ -40,6 +45,7 @@ export default function UploadPage() {
                 <button onClick={redirectSingleAsset} className='upload--landing--button'>Upload Single Asset</button>
                 <button onClick={redirectCollection} className='upload--landing--button'>Upload Collection</button>
                 <button onClick={redirectFeaturedCreate} className='upload--landing--button'>Create Featured</button>
+                <button onClick={redirectUserRegister} className='upload--landing--button'>Register New User</button>
                 <button onClick={redirectUploadBanner} className='upload--landing--button'>Upload User Banner</button>
                 <button onClick={redirectUpdateCollectionAssets} className='upload--landing--button'>Collection: update asset ids</button>
 

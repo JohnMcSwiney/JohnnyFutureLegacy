@@ -200,6 +200,7 @@ p {
   flex-direction: column;
   font-family: (--font--fam);
   overflow: hidden;
+  padding-bottom: 5px;
 }
 
 .FL_Input__text__1 label {
@@ -217,6 +218,7 @@ p {
   border: solid 1px #16171C;
   background-color: rgba(0, 0, 0, 0.05);
   font-size: 18px;
+  color: var(--font);
 }
 
 .FL_Input__text__1 h4 {

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Users = require("../models/userModel");
+const fs = require("fs/promises");
 
 class UserController {
   // Get all Users
@@ -109,6 +110,15 @@ class UserController {
         isInstit, // Include isInstit
         bio,
       });
+
+      // Create a folder for the user's uploads using MongoDB _id
+      const userUploadsFolderPath = `uploaded_files/${user._id.toString()}`;
+      await fs.mkdir(userUploadsFolderPath);
+
+      // Create a subfolder named 'Banner' within the user's uploads folder
+      const bannerFolderPath = `${userUploadsFolderPath}/Banner`;
+      await fs.mkdir(bannerFolderPath);
+
       res.status(200).json(user);
     } catch (error) {
       res.status(400).json({ error: error.message });
@@ -305,34 +315,40 @@ class UserController {
       res.status(500).json({ error: error.message });
     }
   }
-// Add a method to handle file upload
-async uploadBannerImage(req, res) {
-  try {
-    const userId = req.params.id;
+  // Add a method to handle file upload
+  async uploadBannerImage(req, res) {
+    try {
+      const userId = req.params.id;
 
-    // Check if req.file is defined
-    if (!req.file) {
-      return res.status(400).json({ error: 'No file uploaded' });
+      // Check if req.file is defined
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
+      }
+
+      const filename = req.file.originalname;
+
+      // Assuming you have a User model instance and "userBannerImage" field in your schema
+      const user = await Users.findByIdAndUpdate(
+        userId,
+        { userBannerImage: filename },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      if (!user) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res
+        .status(200)
+        .json({ message: "File uploaded successfully", filename: filename });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    const filename = req.file.originalname;
-
-    // Assuming you have a User model instance and "userBannerImage" field in your schema
-    const user = await Users.findByIdAndUpdate(userId, { userBannerImage: filename }, {
-      new: true,
-      runValidators: true,
-    });
-
-    if (!user) {
-      return res.status(404).json({ error: 'No such User' });
-    }
-
-    res.status(200).json({ message: 'File uploaded successfully', filename: filename });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal Server Error' });
   }
-}
 
   // Get user's banner image
   async getUserBannerImage(req, res) {
