@@ -1,4 +1,11 @@
-
+.register--content--cont{
+    width: 670px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+}
 
 .instructions > svg {
     margin-right: 0.25rem;
@@ -59,7 +66,7 @@
     font-size: 20px;
     padding: 10px 15px;
     border-radius: 50px;
-    border: black 1px solid;
+    /* border: black 1px solid; */
    
 }
 .input--cont aside{
@@ -69,8 +76,59 @@
     flex-direction: column;
     overflow: hidden;
 }
+.sub--input--cont{
+    position: relative;
+    width: 250px;
+    height: 80px;
+    overflow: hidden;
+    padding-left: 5px;
+}
+.sub--input--cont label{
+    display: flex;
+    align-items: flex-start;
+    justify-content: flex-start;
+    flex-direction: column;
+    color: 000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+.sub--input--cont label input{
+    width: 100px;
+    height: 47px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 500px;
+  border: solid 1px var(--font);
+  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+  color: var(--font);
+}
+.fir--las--name--input{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-direction: row;
+    width: 663px;
 
-
+}
+.subTier--info--cont{
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 80px;
+    flex-direction: column;
+    font-size: 10px;
+}
+.subTier--info--cont p{
+    font-size: 15px;
+}
+.FL_Input_check{
+    flex-direction: row !important;
+}
+.FL_Input_check input{
+    border-radius: 5px !important;
+}
 .instructions {
     font-size: 12.5px;
     /* border-radius: 0.5rem; */

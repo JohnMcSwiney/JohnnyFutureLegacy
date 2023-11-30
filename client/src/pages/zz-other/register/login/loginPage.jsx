@@ -1,35 +1,69 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import './style.css';
-import usersData from './users.json';
-import * as Yup from 'yup';
 
-import {StyledContainer, StyledTitle, StyledSubTitle, Avatar, StyledButton} from '../../../../components/Styles'
-// import
+import { StyledContainer, StyledTitle, StyledSubTitle, Avatar, StyledButton } from '../../../../components/Styles'
+import AppContentWrapper from '../../../../components/containers/AppContentWrapper';
+import PageContainer from '../../../../components/containers/PageContainer';
+import PageTitle from '../../../../components/containers/PageTitle';
 
 export default function LoginPage() {
-  const logoUrl = 'https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_Assets%2FGroup%201253.png?alt=media&token=d96e2f7e-960b-457d-bb26-a92735380d4d';
-    // backend testing
-    const [backendData, setBackendData] = useState([{}])
-    useEffect(() => {
-      fetch("/api").then(
-        response => response.json()
-      ).then(
-        data => {
-          setBackendData(data)
-        }
-      )
-      // console.log(backendData)
-    },[])
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+
+    // Basic validation
+    if (!email || !password) {
+      setError('Please enter both email and password.');
+      return;
+    }
+
+    // Here you would typically make a request to your backend for authentication
+    // For now, let's simulate a simple authentication with a hardcoded email and password
+    if (email === 'testuser@example.com' && password === 'testpassword') {
+      // Successful login - you can redirect or set some state indicating the user is logged in
+      setError('');
+      console.log('Login successful!');
+    } else {
+      setError('Invalid email or password.');
+    }
+  };
 
 
   return (
-    <StyledContainer>
-      <StyledTitle size={95}>
-        Login
-      </StyledTitle>
-     
-    </StyledContainer>
+    <AppContentWrapper>
+      <PageContainer>
+
+        <PageTitle>
+          <h2>Login</h2>
+        </PageTitle>
+        {error && <p style={{ color: 'red' }}>{error}</p>}
+        <form onSubmit={handleLogin}>
+        <label>
+          Email:
+          <input type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+        </label>
+          <br />
+          <label>
+            Password:
+            <input type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+          </label>
+          <br />
+          <button type="submit">Login</button>
+        </form>
+      </PageContainer>
+    </AppContentWrapper>
+    // <StyledContainer>
+    //   <StyledTitle size={95}>
+
+    //   </StyledTitle>
+
+    // </StyledContainer>
+
+
     // <div>
     //    Test
     //    {(typeof backendData.users === 'undefined') ? (

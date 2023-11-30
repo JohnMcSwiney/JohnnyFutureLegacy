@@ -6,20 +6,36 @@ import './styles.css'
 import PageContainer from '../../../components/containers/PageContainer';
 import AppContentWrapper from '../../../components/containers/AppContentWrapper';
 import PageTitle from '../../../components/containers/PageTitle';
-
+import { StyledContainer_v2 } from '../../../components/Styles';
 
 function Register() {
 
     const USER_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
     const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;;
+    const EMAIL_REGEX = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 
 
     const userRef = useRef();
     const errRef = useRef();
 
-    const [user, setUser] = useState('');
-    const [validName, setValidName] = useState(false);
+    // const [username, setUsername] = useState('');
+    const [validUsername, setValidUsername] = useState(false);
     const [userFocus, setUserFocus] = useState(false);
+
+    const [firstName, setFirstName] = useState('');
+    const [validFirstName, setValidFirstName] = useState(false);
+    const [firstNameFocus, setFirstNameFocus] = useState(false);
+    const firstNameRef = useRef();
+
+    const [lastName, setLastName] = useState('');
+    const [validLastName, setValidLastName] = useState(false);
+    const [lastNameFocus, setLastNameFocus] = useState(false);
+    const lastNameRef = useRef();
+
+    const [email, setEmail] = useState('');
+    const [validEmail, setValidEmail] = useState(false);
+    const [emailFocus, setEmailFocus] = useState(false);
+    const emailRef = useRef();
 
     const [pwd, setPwd] = useState('');
     const [validPwd, setValidPwd] = useState(false);
@@ -29,21 +45,44 @@ function Register() {
     const [validMatch, setValidMatch] = useState(false);
     const [matchFocus, setMatchFocus] = useState(false);
 
+    const [subTier, setSubTier] = useState(0); // Default value set to 0
+    const [isInstit, setIsInstit] = useState(false); // Default value set to false
+    const [subTierFocus, setSubTierFocus] = useState(false);
+    const [isInstitFocus, setIsInstitFocus] = useState(false);
+
+    const subTierRef = useRef();
+    const isInstitRef = useRef();
+
     const [errMsg, setErrMsg] = useState('');
     const [success, setSuccess] = useState(false);
 
     const navigate = useNavigate();
 
     useEffect(() => {
-        userRef.current.focus()
+        emailRef.current.focus()
     }, [])
 
+    // useEffect(() => {
+    //     const result = USER_REGEX.test(username);
+    //     console.log(result);
+    //     console.log(username);
+    //     setValidUsername(result);
+    // }, [username])
+
     useEffect(() => {
-        const result = USER_REGEX.test(user);
-        console.log(result);
-        console.log(user);
-        setValidName(result);
-    }, [user])
+        const result = USER_REGEX.test(firstName);
+        setValidFirstName(result);
+    }, [firstName]);
+
+    useEffect(() => {
+        const result = USER_REGEX.test(lastName);
+        setValidLastName(result);
+    }, [lastName]);
+
+    useEffect(() => {
+        const result = EMAIL_REGEX.test(email);
+        setValidEmail(result);
+    }, [email]);
 
     useEffect(() => {
         const result = PWD_REGEX.test(pwd);
@@ -56,23 +95,66 @@ function Register() {
 
     useEffect(() => {
         setErrMsg('');
-    }, [user, pwd, matchPwd])
+    }, [
+        // username,
+         pwd, matchPwd, email, firstName, lastName]);
+
     const handleRedirectLogin = () => {
 
         navigate(`/login`)
     }
     const handleSubmit = async (e) => {
         e.preventDefault();
-        //button enabled with js hack
-        const v1 = USER_REGEX.test(user);
-        const v2 = PWD_REGEX.test(pwd);
-        if (!v1 || !v2) {
-            setErrMsg('invalid Entry');
+
+        // Validate all fields before submitting
+        // const isValidUsername = USER_REGEX.test(username);
+        const isValidPwd = PWD_REGEX.test(pwd);
+        const isValidEmail = EMAIL_REGEX.test(email);
+        const isValidFirstName = USER_REGEX.test(firstName);
+        const isValidLastName = USER_REGEX.test(lastName);
+
+
+        if (!isValidPwd || !isValidEmail || !isValidFirstName || !isValidLastName) {
+            setErrMsg('Invalid Entry');
             return;
         }
-        console.log(user, pwd);
-        setSuccess(true);
-    }
+        let password = pwd;
+        // Prepare the data to be sent to the backend
+        let username = firstName + '_' + lastName;
+        const userData = {
+            username,
+            password,
+            firstName,
+            lastName,
+            email,
+            subTier,
+            isInstit,
+
+        };
+        console.log(userData)
+        try {
+            // Assuming you have an API endpoint for user registration
+            const response = await fetch('http://localhost:5000/api/user/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(userData),
+            });
+
+            if (response.ok) {
+                // Handle success (e.g., redirect to login page)
+                setSuccess(true);
+            } else {
+                // Handle error response from the backend
+                const errorData = await response.json();
+                setErrMsg(errorData.error || 'Error during registration');
+            }
+        } catch (error) {
+            // Handle network or unexpected errors
+            setErrMsg('Error during registration');
+        }
+    };
     return (
         <AppContentWrapper>
             <PageContainer>
@@ -82,48 +164,125 @@ function Register() {
                         <a className="register--link" onClick={handleRedirectLogin}>Login</a>
                     </div>
                 ) : (
-                    <div>
+                    <div className='register--content--cont'>
                         <p ref={errRef}
                             className={errMsg ? "errMsg" : "offscreen"}
                             aria-live="assertive">
                             {errMsg}
                         </p>
-                        <PageTitle>
-                            <h1>Register</h1>
-                        </PageTitle>
+                        {/* <PageTitle>  */}
+                        <h1>Register User</h1>
+                        <p>For testing only</p>
+                        {/* </PageTitle> */}
                         <form onSubmit={handleSubmit}>
-                            <div className='input--cont'>{/* UserName */}
-                                <aside id="uidnote"
-                                    className={userFocus && user && !validName ? "instructions" : "offscreen"}>
+
+                            <section className='fir--las--name--input'>
+                                {/* First Name */}
+                                <div className='input--cont--name'>
+                                    <aside
+                                        id="firstNamenote"
+                                        className={firstNameFocus && firstName && !validFirstName ? "instructions" : "offscreen"}
+                                    >
+                                        <AiOutlineInfoCircle />
+                                        4 to 24 characters. <br />
+                                        Must begin with a letter.<br />
+                                        Letters, numbers, underscores, hyphens allowed.
+                                    </aside>
+                                    <section className='FL_Input__text__2'>
+                                        <label htmlFor="firstName">
+                                            First Name:
+                                            <span className={validFirstName ? 'valid' : 'hide'}>
+                                                <FaCheck />
+                                            </span>
+                                            <span className={validFirstName || !firstName ? 'hide' : 'invalid'}>
+                                                <FaTimes />
+                                            </span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="firstName"
+                                            ref={firstNameRef}
+                                            autoComplete='off'
+                                            onChange={(e) => setFirstName(e.target.value)}
+                                            required
+                                            aria-invalid={validFirstName ? "false" : "true"}
+                                            aria-describedby="firstNamenote"
+                                            onFocus={() => setFirstNameFocus(true)}
+                                            onBlur={() => setFirstNameFocus(false)}
+                                        />
+                                    </section>
+                                </div>
+
+                                {/* Last Name */}
+                                <div className='input--cont--name'>
+                                    <aside
+                                        id="lastNamenote"
+                                        className={lastNameFocus && lastName && !validLastName ? "instructions" : "offscreen"}
+                                    >
+                                        <AiOutlineInfoCircle />
+                                        4 to 24 characters. <br />
+                                        Must begin with a letter.<br />
+                                        Letters, numbers, underscores, hyphens allowed.
+                                    </aside>
+                                    <section className='FL_Input__text__2'>
+                                        <label htmlFor="lastName">
+                                            Last Name:
+                                            <span className={validLastName ? 'valid' : 'hide'}>
+                                                <FaCheck />
+                                            </span>
+                                            <span className={validLastName || !lastName ? 'hide' : 'invalid'}>
+                                                <FaTimes />
+                                            </span>
+                                        </label>
+                                        <input
+                                            type="text"
+                                            id="lastName"
+                                            ref={lastNameRef}
+                                            autoComplete='off'
+                                            onChange={(e) => setLastName(e.target.value)}
+                                            required
+                                            aria-invalid={validLastName ? "false" : "true"}
+                                            aria-describedby="lastNamenote"
+                                            onFocus={() => setLastNameFocus(true)}
+                                            onBlur={() => setLastNameFocus(false)}
+                                        />
+                                    </section>
+                                </div>
+
+                            </section>
+
+                            <div className='input--cont'>{/* Email */}
+                                <aside
+                                    id="emailnote"
+                                    className={emailFocus && email && !validEmail ? "instructions" : "offscreen"}
+                                >
                                     <AiOutlineInfoCircle />
-                                    4 to 24 characters. <br />
-                                    Must begin with a letter.<br />
-                                    Letters, numbers, underscores, hyphens allowed.
+                                    Enter a valid email address.
                                 </aside>
                                 <section className='FL_Input__text__1'>
-                                    <label htmlFor="username">
-                                        Username:
-                                        <span className={validName ? 'valid' : 'hide'}>
+                                    <label htmlFor="email">
+                                        Email:
+                                        <span className={validEmail ? 'valid' : 'hide'}>
                                             <FaCheck />
                                         </span>
-                                        <span className={validName || !user ? 'hide' : 'invalid'}>
+                                        <span className={validEmail || !email ? 'hide' : 'invalid'}>
                                             <FaTimes />
                                         </span>
                                     </label>
                                     <input
-                                        type="text"
-                                        id="username"
-                                        ref={userRef}
+                                        type="email"
+                                        id="email"
+                                        ref={emailRef}
                                         autoComplete='off'
-                                        onChange={(e) => setUser(e.target.value)}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         required
-                                        aria-invalid={validName ? "false" : "true"}
-                                        aria-describedby="uidnote"
-                                        onFocus={() => setUserFocus(true)}
-                                        onBlur={() => setUserFocus(false)}
+                                        aria-invalid={validEmail ? "false" : "true"}
+                                        aria-describedby="emailnote"
+                                        onFocus={() => setEmailFocus(true)}
+                                        onBlur={() => setEmailFocus(false)}
                                     />
                                 </section>
-                            </div>{/* UserName/ */}
+                            </div>{/* Email/ */}
                             <div className='input--cont'>{/* Password */}
                                 <aside id="pwdnote"
                                     className={pwdFocus && !validPwd ? "instructions" : "offscreen"}>
@@ -196,8 +355,79 @@ function Register() {
                                 </section>
 
                             </div>{/* Password Match/ */}
+
+                            {/* Sub Tier */}
+                            <section className='fir--las--name--input'>
+                                <div className='sub--input--cont'>
+                                    <aside
+                                        id="subTiernote"
+                                        className={subTierFocus ? "instructions" : "offscreen"}
+                                    >
+                                        <AiOutlineInfoCircle />
+                                        Your custom instructions for Sub Tier here.
+                                    </aside>
+                                    <label htmlFor="subTier">
+                                        Sub Tier:
+                                        <input
+                                            type="number"
+                                            id="subTier"
+                                            ref={subTierRef}
+                                            autoComplete='off'
+                                            value={subTier}
+                                            onChange={(e) => setSubTier(Number(e.target.value))}
+                                            required
+                                            aria-describedby="subTiernote"
+                                            onFocus={() => setSubTierFocus(true)}
+                                            onBlur={() => setSubTierFocus(false)}
+                                            min={0}
+                                            max={3}
+                                        />
+
+
+                                    </label>
+                                    <div className='subTier--info--cont'>
+                                        <p>0 none</p>
+                                        <p>1 educational</p>
+                                        <p>2 editorial</p>
+                                        <p>3 commercial</p>
+                                    </div>
+                                </div>
+
+                                {/* Is Institution */}
+                                <div className='input--cont'>
+                                    <aside
+                                        id="isInstitnote"
+                                        className={isInstitFocus ? "instructions" : "offscreen"}
+                                    >
+                                        <AiOutlineInfoCircle />
+                                        Your custom instructions for Is Institution here.
+                                    </aside>
+                                    <section className='FL_Input_check'>
+                                        <label htmlFor="isInstit">
+                                            Is Institution:
+                                            <input
+                                                type="checkbox"
+                                                id="isInstit"
+                                                ref={isInstitRef}
+                                                checked={isInstit}
+                                                onChange={() => setIsInstit(!isInstit)}
+                                                aria-describedby="isInstitnote"
+                                                onFocus={() => setIsInstitFocus(true)}
+                                                onBlur={() => setIsInstitFocus(false)}
+                                            />
+                                        </label>
+                                    </section>
+                                </div>
+                            </section>
+
+
                             <div>
-                                <button disabled={!validName || !validPwd || !validMatch ? true : false}>Sign Up</button>
+                                <button disabled={!validFirstName ||
+                                    !validLastName ||
+                                    !validEmail ||
+                                    !validPwd ||
+                                    !validMatch
+                                    ? true : false}>Sign Up</button>
                             </div>
                             <div>
                                 Already registered?<br />
@@ -214,3 +444,39 @@ function Register() {
 }
 
 export default Register;
+
+// unused things
+{/* UserName */ }
+{/* <div className='input--cont'>
+                                <aside id="uidnote"
+                                    className={userFocus && username && !validUsername ? "instructions" : "offscreen"}>
+                                    <AiOutlineInfoCircle />
+                                    4 to 24 characters. <br />
+                                    Must begin with a letter.<br />
+                                    Letters, numbers, underscores, hyphens allowed.
+                                </aside>
+                                <section className='FL_Input__text__1'>
+                                    <label htmlFor="username">
+                                        Username:
+                                        <span className={validUsername ? 'valid' : 'hide'}>
+                                            <FaCheck />
+                                        </span>
+                                        <span className={validUsername || !username ? 'hide' : 'invalid'}>
+                                            <FaTimes />
+                                        </span>
+                                    </label>
+                                    <input
+                                        type="text"
+                                        id="username"
+                                        ref={userRef}
+                                        autoComplete='off'
+                                        onChange={(e) => setUsername(e.target.value)}
+                                        required
+                                        aria-invalid={validUsername ? "false" : "true"}
+                                        aria-describedby="uidnote"
+                                        onFocus={() => setUserFocus(true)}
+                                        onBlur={() => setUserFocus(false)}
+                                    />
+                                </section>
+                            </div> */}
+{/* UserName/ */ }

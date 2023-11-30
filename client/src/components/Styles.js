@@ -18,7 +18,7 @@ export const StyledContainer_v2 = styled.div`
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  background: red;
+  // background: red;
   background-size: cover;
   background-attachment: fixed;
   width: 100%;

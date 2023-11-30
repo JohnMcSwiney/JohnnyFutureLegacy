@@ -215,7 +215,7 @@ p {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 500px;
-  border: solid 1px #16171C;
+  border: solid 1px var(--font);
   background-color: rgba(0, 0, 0, 0.05);
   font-size: 18px;
   color: var(--font);
@@ -247,7 +247,41 @@ p {
   padding-right: 15px ;
   /* margin-right: 30px; */
 }
+.FL_Input__text__2 {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  font-family: (--font--fam);
+  overflow: hidden;
+  padding-bottom: 5px;
+}
 
+.FL_Input__text__2 label {
+  color: 000000;
+  font-size: 18px;
+  font-weight: 600;
+}
+
+.FL_Input__text__2 input {
+  width: 285px;
+  height: 47px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius: 500px;
+  border: solid 1px var(--font);
+  background-color: rgba(0, 0, 0, 0.05);
+  font-size: 18px;
+  color: var(--font);
+}
+
+.FL_Input__text__2 h4 {
+  color: 000000;
+  font-size: 13px;
+  font-weight: 600;
+  transform: none;
+  text-transform: none;
+  margin: 0;
+}
 .FL_Input__number__1 {
   display: flex;
   align-items: flex-start;
