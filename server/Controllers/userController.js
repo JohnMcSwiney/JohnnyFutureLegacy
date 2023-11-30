@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 const Users = require("../models/userModel");
 const fs = require("fs/promises");
+const bcrypt = require("bcryptjs");
 
 class UserController {
   // Get all Users
@@ -99,10 +100,12 @@ class UserController {
         bio,
       } = req.body; // Add email, subTier, and isInstit fields to the request body
 
-      // Add to db
+      // Hash the password before storing it
+      const hashedPassword = bcrypt.hashSync(password, saltRounds);
+
       const user = await Users.create({
         username,
-        password,
+        password: hashedPassword,
         firstName,
         lastName,
         email, // Include email

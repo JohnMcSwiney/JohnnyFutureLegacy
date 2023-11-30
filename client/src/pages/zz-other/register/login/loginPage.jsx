@@ -21,14 +21,26 @@ export default function LoginPage() {
       return;
     }
 
-    // Here you would typically make a request to your backend for authentication
-    // For now, let's simulate a simple authentication with a hardcoded email and password
-    if (email === 'testuser@example.com' && password === 'testpassword') {
-      // Successful login - you can redirect or set some state indicating the user is logged in
-      setError('');
-      console.log('Login successful!');
-    } else {
-      setError('Invalid email or password.');
+    try {
+      const response = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        setError('');
+        console.log(data.message);
+        // Handle successful login (e.g., redirect to another page)
+      } else {
+        const errorData = await response.json();
+        setError(errorData.message || 'Error during login');
+      }
+    } catch (error) {
+      setError('Error during login');
     }
   };
 

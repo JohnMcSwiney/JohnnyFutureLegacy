@@ -7,6 +7,7 @@ const collectionRoute= require('./routes/collectionRoute');
 const assetRoute = require('./routes/assetRoute');
 const searchRoute = require('./routes/searchRoute');
 const featuredRoute = require('./routes/featuredCollectionRoute');
+const authRoute = require('./routes/authRoute');
 const cors = require('cors');
 const multer = require("multer");
 const path = require('path'); 
@@ -184,6 +185,6 @@ app.use('/api/collection', collectionRoute);
 app.use('/api/asset', assetRoute);
 app.use('/api/search', searchRoute);
 app.use('/api/featured', featuredRoute);
-
+app.use('/api/auth', authRoute);
 app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
 
