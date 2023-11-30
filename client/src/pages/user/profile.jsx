@@ -25,13 +25,13 @@ function Profile() {
 
   // const bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Lorem ipsum dolor sit amet consectetur adipiscing. Consectetur libero id faucibus nisl tincidunt eget nullam. Cursus sit amet dictum sit amet justo donec enim. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Nunc non blandit massa enim. Non enim praesent elementum facilisis leo vel fringilla. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Nulla posuere sollicitudin aliquam ultrices sagittis. Elit sed vulputate mi sit amet mauris commodo. Eu tincidunt tortor aliquam nulla. Justo laoreet sit amet cursus sit amet. Augue neque gravida in fermentum et sollicitudin ac orci phasellus. Blandit aliquam etiam erat velit scelerisque in dictum non consectetur. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Ipsum dolor sit amet consectetur adipiscing elit.';
 
-  const { userData } = useMyContext();
+  const { userData,currentUserId,currentUserObject,setCurrentUserObject} = useMyContext();
   const [userPurchases, setUserPurchases] = useState(null);
   const [toggleView, setToggleView] = useState(false);
   useEffect(() => {
     const fetchUserPurchases = async () => {
       try {
-        const userResponse = await fetch(`http://localhost:5000/api/user/${userData._id}/purchase`, {
+        const userResponse = await fetch(`http://localhost:5000/api/user/${currentUserId}/purchase`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -53,18 +53,18 @@ function Profile() {
     };
 
     fetchUserPurchases();
-  }, [userData]);
+  }, [currentUserId]);
 
   return (
     <AppContentWrapper>
       <PageContainer>
-        {userData&& 
+        {currentUserObject&& 
         <div className="profile--banner">
           <div className='banner--gradient'></div>
-          {userData.userBannerImage ? 
+          {currentUserObject.userBannerImage ? 
             <div className="banner--img">
               
-              <img src={`http://localhost:5000/uploaded_files/${userData._id}/Banner/${userData.userBannerImage}`} alt={`Image ${userData.userBannerImage}`} />
+              <img src={`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${currentUserObject.userBannerImage}`} alt={`Image ${currentUserObject.userBannerImage}`} />
             </div>
           :
           <div>
@@ -77,21 +77,21 @@ function Profile() {
           <div className='left--profile--v2--cont'>
             <div className='left--profile--v2--info--cont'>
               {/* top container with profile pic, edit, name, email & connect wallet btn */}
-              {userData && 
+              {currentUserObject && 
               <div className='profile--v2--avatar--name'>
 
                 <div className='profile--v2--avatar--img-n-edit'>
                 <div className='profile--v2--avatar--cont'>
                 {/* <img></img> */}
-                {userData.profilePicture && <img src={userData.profilePicture}/>}
+                {currentUserObject.profilePicture && <img src={currentUserObject.profilePicture}/>}
                 
               </div>
               <button className='profile--v2--edit--btn'>Edit</button>
                 </div>
               
               <div className='left--profile--v2--text--cont'>
-                <h3>{userData ? userData.firstName + " " + userData.lastName : 'Loading...'}</h3>
-                <h4>{userData ? userData.username : 'Loading...'}</h4>
+                <h3>{currentUserObject ? currentUserObject.firstName + " " + currentUserObject.lastName : 'Loading...'}</h3>
+                <h4>{currentUserObject ? currentUserObject.username : 'Loading...'}</h4>
                 
               </div>
               <button className='profile--v2--wallet--btn'>Connect A Wallet</button>
@@ -120,16 +120,16 @@ function Profile() {
 
             <section className='right--profile--v2--inner--box'>
               
-              {userData &&
+              {currentUserObject &&
                 <>
-                  {userData.userCollections ? 
+                  {currentUserObject.userCollections ? 
                   <>
                   <ContentTitle>
                   <h3>Created Collections:</h3>
                   </ContentTitle>
 
                   <div className='profile--v2--horiz--scroll'>
-                    {userData.userCollections.map((collection, index) => {
+                    {currentUserObject.userCollections.map((collection, index) => {
                       return (
                         <CollectionCard_v2
                           key={collection._id}
