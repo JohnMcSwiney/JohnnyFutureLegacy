@@ -1,8 +1,10 @@
+const saltRounds = parseInt(process.env.SALT_ROUNDS);
 const mongoose = require("mongoose");
 const Users = require("../models/userModel");
 const fs = require("fs/promises");
-const bcrypt = require("bcryptjs");
+const bcrypt = require("bcrypt");
 
+const salt = bcrypt.genSaltSync(saltRounds);
 class UserController {
   // Get all Users
   async getUsers(req, res) {
@@ -101,8 +103,8 @@ class UserController {
       } = req.body; // Add email, subTier, and isInstit fields to the request body
 
       // Hash the password before storing it
-      const hashedPassword = bcrypt.hashSync(password, saltRounds);
-
+      const hashedPassword = bcrypt.hashSync(password, salt);
+      console.log(hashedPassword)
       const user = await Users.create({
         username,
         password: hashedPassword,

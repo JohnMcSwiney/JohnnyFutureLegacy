@@ -1,6 +1,6 @@
 // authController.js
 const User = require("../models/userModel"); // Assuming this is your User model
-const bcrypt = require("bcryptjs"); // You may need to install this package
+const bcrypt = require("bcrypt"); // You may need to install this package
 
 // authController.js
 const authController = {
