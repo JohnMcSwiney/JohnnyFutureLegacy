@@ -1,0 +1,387 @@
+.FL_Drag_Drop{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    justify-content: space-around;
+    gap: 10px;
+    /* background-color: yellow; */
+    position: relative;
+    margin-top: 15px;
+    width: inherit;
+    /* overflow: hidden; */
+}
+.multi--upload--section--1{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin: 0;
+    justify-content: space-around;
+    gap: 10px;
+    /* background-color: yellow; */
+    position: relative;
+    margin-top: 15px;
+    width: inherit;
+    /* overflow: hidden; */
+}
+.hiding--upload--input{
+    position: absolute;
+    bottom: 0;
+    top: 0;
+    z-index: -300;
+    opacity: 0;
+    transform: translateY(5000px);
+
+}
+.image-preview--title--1{
+    position: absolute;
+    top: 0;
+    text-align: center;
+    gap: 0px;
+    width: 100vw;
+    transform: translateY(-20px);
+}
+.upload--title{
+    font-size: 23px;
+    color: var(--tertiary);
+    opacity: 1;
+    margin: 0;
+}
+.upload--subtitle{
+    font-size: 15px;
+    margin: 0;
+}
+.choose__file__cont{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 70px;
+    width: 600px;
+    background-color: #00000010;
+    border-radius: 10px;
+    position: relative;
+    margin-top: 50px;
+}
+.upload--coll--btn{
+    background-color: var(--tertiary);
+    border: none;
+    color: white;
+    width: 300px;
+    height: 50px;
+    border-radius: 50px;
+    font-family: var(--font--fam);
+    font-size: 20px;
+    font-weight: 500;
+    box-sizing: border-box;
+    border: 2px solid #ffffff69;
+    transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+    /* margin-right: 20px; */
+    position: relative;
+    }
+    .upload--coll--btn:hover{
+        transform: scale(1.01); /* Increase the scale on hover */
+        box-shadow: rgba(99, 99, 99, 0.427) 0px 1px 2px;
+        text-shadow: rgba(212, 210, 210, 0.533) 0px 1px 2px;
+      }
+
+    .response--progress--cont{
+        display: flex;
+        align-items: center;
+        width: 600px;
+        justify-content: center;
+        transition: all 1s;
+    }
+    .image--vetting--cont{
+        width: 100%;
+        overflow: hidden;
+        display: flex;
+        height:fit-content ;
+        
+    }
+
+    .image--preview {
+        /* width: 100%; */
+        width: inherit;
+        /* margin: 10px 0; */
+        position: relative;
+        
+        display: flex;
+        align-items: flex-start;
+        flex-direction: column-reverse;
+        height: 600px;
+        /* background-color: orange; */
+        /* padding-top: 30px; */
+        /* max-height: 900px; */
+        /* min */
+
+    }
+    .image-preview--title--2{
+        position: absolute;
+        top: 0;
+        left: 0;
+        text-align: center;
+        /* background-color: yellow; */
+        height: 30px;
+        gap: 0px;
+        margin-left: 10px;
+        transform: translateY(10px);
+    }
+    .image-preview--title--2 h2{
+        text-align: left;
+        color: var(--tertiary);
+    }
+    .image-preview--title--2 p{
+        text-align: left;
+        color: var(--font);
+    }
+    /* used in multiple upload component */
+.uploaded--image--scrollable{
+    display: flex;
+    overflow-x: scroll;
+    gap:5px;
+    width: fit-content;
+    position: relative;
+
+    height: 530px;
+    align-items: flex-start;
+        justify-content:center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        background-color: var(--font--shadow);
+        padding: 5px;
+        box-sizing: border-box;
+        /* background-color: yellow; */
+        /* height: fit-content; */
+        /* position: absolute; */
+        /* bottom: 0 ; */
+        /* left: 0; */
+
+}
+/* used in collection upload page proper */
+.uploaded--image--scrollable--v2{
+    display: flex;
+    overflow-y: scroll;
+    overflow-x:visible;
+    gap:10px;
+    width: fit-content;
+    position: relative;
+z-index: 10;
+    height: 250px;
+    align-items: flex-start;
+        justify-content:center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        /* background-color: yellow; */
+        padding: 5px;
+        box-sizing: border-box;
+
+}
+.upload--images--subtitle{
+    width: 100%;
+    position: absolute;
+    top: 0;
+    z-index: 11;
+    color: #00000000;
+    background: linear-gradient(0deg, 
+  rgba(41, 41, 41, 0) 0%, 
+
+  var(--bg) 100%);
+}
+.uploaded--image--scrollable--v2--gradient{
+    width: 100%;
+    position: absolute;
+    bottom: 0;
+    color: #00000000;
+    background: linear-gradient(180deg, 
+  rgba(41, 41, 41, 0) 0%, 
+
+  var(--bg) 100%);
+    z-index: 11;
+}
+  .uploaded--image{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    box-sizing: border-box;
+    border-radius: 5px;
+    
+    height: 120px;
+
+    min-width: 50px;
+    width: fit-content;
+
+    position: relative;
+    border: #000000 solid 3px;
+    transition: 0.7ms;
+    /* flex-basis: 300px; */
+    /* margin-top: 15px; */
+    /* margin-bottom: 15px; */
+    transition: all ease 1ms;
+    box-shadow: 0px 2px 4px grey;
+    
+  }
+
+  
+  .uploaded--image:hover{
+    border: var(--tertiary) solid 3px;
+    transition: all ease 1ms;
+  } 
+
+  .selected--image{
+    border: var(--primary) solid 3px !important;
+    transition: all ease 1ms;
+  }
+  .selected--image:hover{
+    border: var(--primary) solid 3px !important;
+    box-shadow: 0px 2px 4px var(--primary--shadow);
+    transition: all ease 1ms;
+    
+  }
+
+
+  .uploaded--image img{
+    /* filter:blur(2px); */
+    height: 120px;
+    transform: scale(1.01);
+    transition: all ease 0.3s;
+  }
+
+  .uploaded--image:hover img {
+    /* filter:blur(0px); */
+    transform: scale(1.03);
+    transition: all ease 0.3s;
+  }
+
+  .uploaded--image--v2--cont{
+    display: flex;
+    
+    position: relative;
+    width: fit-content;
+    overflow: hidden;
+    flex-direction: column;
+    border-radius: 5px;
+    border: 2px solid rgba(255, 255, 255, 0.585);
+    box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.268);
+    transition: all ease 0.25s;
+    flex-basis: content;
+  flex-shrink: 0;
+  flex-grow: 0;
+  height: 200px ;
+
+  }
+  
+  .uploaded--image--v2--img{
+    /* position: absolute; */
+    /* left: 0; */
+    height: 100%;
+    width: 100%;
+    position: relative;
+  }
+  .uploaded--image--v2--img img{
+    /* position: absolute;
+    left:0; */
+    height: 200px;
+    scale: 1.01;
+  }
+  .checkbox--fix--cont{
+    /* background-color: yellow; */
+    /* opacity: 0.5; */
+    opacity: 1;
+    z-index: 30;
+    width: 100%;
+    height: 100%;
+    position:absolute;
+    top: 0;
+    left: 0;
+  }
+  .checkbox--fix--cont h4{
+    transform: translate(10px, 5px);
+    color: var(--font) !important;
+    text-shadow: 0px 0px 8px var(--bg);
+    opacity: 1;
+    mix-blend-mode: screen;
+    /* tra */
+  }
+
+
+
+.image--check--cont{
+    width: 50px; height: 50px;
+    position: absolute;
+    right:0;
+    top: 0;
+    margin-top:5px;
+}
+.image-preview--title--3{
+    position: absolute;
+    top: 0;
+    text-align: center;
+    gap: 0px;
+}
+
+.upload--coll--image--names--submit{
+    align-items: center;
+    display: flex;
+    width: 100%;
+    /* background-color: tan; */
+    justify-content: center;
+    flex-direction: column;
+    gap: 5px;
+}
+.upload--coll--image--names--submit .response--scrollable{
+    margin-top: 15px;
+    height: 105px !important;
+    
+}
+
+.response--scrollable{
+    display: flex;
+    align-items: flex-start;
+    flex-direction: column;
+    width: 600px;
+    height: 60px;
+    overflow-y: scroll;
+    overflow-x: hidden
+  }
+  .response--item{
+    padding-left: 20px;
+  }
+  .upload--coll--p1--submit{
+    display: flex;
+    width: 100%;
+    background-color: rgba(128, 128, 128, 0.294);
+    /* height: 250px; */
+    overflow: hidden;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    flex-direction: row-reverse;
+    padding: 10px 3px;
+    padding-right: 20px;
+    margin-left: 10px;
+    /* padding-top: 30px; */
+    /* background-color: teal; */
+}
+.image-preview--title--3{
+    /* position: absolute; */
+    /* top: 0; */
+    position: relative;
+    width: 400px;
+    text-align: center;
+    gap: 0px;
+}
+
+.image-preview--2{
+    display: flex;
+    width: 100%;
+    background-color: rgba(210, 95, 95, 0.294);
+    height: 250px;
+    overflow: hidden;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding-top: 25px;
+
+    /* font-size: 20px; */
+}

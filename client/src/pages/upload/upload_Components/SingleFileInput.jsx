@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import ProgressBar from "../../components/progressbar/progressbar";
-import { useToastContext } from '../../context/ToastContext';
-import { useMyContext } from "../../context/FLContext";
+import ProgressBar from "../../../components/progressbar/progressbar";
+import { useToastContext } from '../../../context/ToastContext';
+import { useMyContext } from "../../../context/FLContext";
 
 function SingleFileInput({ onSubmit }) {
     const [file, setFile] = useState(null);
@@ -12,7 +12,7 @@ function SingleFileInput({ onSubmit }) {
     const [isFormVisible, setIsFormVisible] = useState(true);
     const [progress, setProgress] = useState(0);
     const { addToast } = useToastContext();
-    const { userData } = useMyContext();
+    const { currentUserObject } = useMyContext();
 
     const handleFileChange = (e) => {
         updateDisableUpload(false);
@@ -28,7 +28,7 @@ function SingleFileInput({ onSubmit }) {
             addToast('Please select a file before uploading.');
             return;
         }
-        if (!userData) {
+        if (!currentUserObject) {
             addToast('Login required');
             return;
         }
@@ -36,7 +36,7 @@ function SingleFileInput({ onSubmit }) {
         const formData = new FormData();
         formData.append('file', file);
 
-        fetch(`http://localhost:5000/api/user/${userData._id}/uploadBanner`, {
+        fetch(`http://localhost:5000/api/user/${currentUserObject._id}/uploadBanner`, {
             method: 'POST',
             body: formData,  // Use FormData for file uploads
         })
@@ -79,7 +79,7 @@ function SingleFileInput({ onSubmit }) {
 
                         <div className="uploaded--image-scrollable">
                             <div className="uploaded--image" key={file.name}>
-                                <img src={`http://localhost:5000/uploaded_files/${hardcodedUser}/Banner/${file.name}`} alt={`Image ${file.name}`} />
+                                <img src={`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${file.name}`} alt={`Image ${file.name}`} />
                             </div>
                         </div>
                     </div>

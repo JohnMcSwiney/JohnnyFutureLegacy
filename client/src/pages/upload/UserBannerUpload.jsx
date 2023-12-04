@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import SingleFileInput from './SingleFileInput';
+import SingleFileInput from './upload_Components/SingleFileInput';
 import ConfirmationPopup from './ConfirmationPopup';
 
 function UserBannerUpload() {

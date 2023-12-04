@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from "react";
-import ProgressBar from "../../components/progressbar/progressbar";
-import { useToastContext } from '../../context/ToastContext';
+import ProgressBar from "../../../components/progressbar/progressbar";
+import { useToastContext } from '../../../context/ToastContext';
+import { useMyContext } from "../../../context/FLContext";
+import './uploadCompStyle.css';
+
 
 function MultipleFileInput({ onSubmit, onFileChange }) {
   const [files, setFiles] = useState([]);
@@ -14,6 +17,8 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
   const [isFormVisible, setIsFormVisible] = useState(true);
   const [progress, setProgress] = useState(0);
   const { addToast } = useToastContext();
+  const { currentUserObject } = useMyContext();
+
 
   const handleFileChange = (e) => {
     updateDisableUpload(false);
@@ -29,12 +34,12 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
     updateDisableUpload(true);
     const promises = [];
     let completedResponses = 0;
-  
+
     files.forEach((file) => {
       const formData = new FormData();
       formData.append('file', file);
-  
-      const promise = fetch('http://localhost:5000/uploadimage?userId=650ca3a3cf7964c5cb70782c', {
+
+      const promise = fetch(`http://localhost:5000/uploadimage?userId=${currentUserObject._id}`, {
         method: 'POST',
         body: formData,
       })
@@ -53,15 +58,15 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
         });
       promises.push(promise);
     });
-  
+
     // Wait for all requests to finish
     Promise.all(promises)
       .then((responses) => {
         setUploadResponses(responses);
       });
   };
-  
-  const incrementProgress = () =>{
+
+  const incrementProgress = () => {
     let temp = progress + 10;
     setProgress(temp);
   }
@@ -107,11 +112,11 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
     setFilteredItems(completedFilteredItems);
     console.log(completedFilteredItems);
   };
- 
+
 
   const handleSubmit = (e) => {
     setDisableAll(true);
-    if(uploadResponses === null){
+    if (uploadResponses === null) {
       addToast('No files returned, reload and try again...');
       return;
     }
@@ -141,99 +146,106 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
 
   return (
     <div className="FL_Drag_Drop" style={{ display: isFormVisible ? 'flex' : 'none' }}>
-      <span className="image-preview--title--1">
-        <h4 className="upload--title">1: Choose files from system then press upload</h4>
-        <p className="upload--subtitle">If another upload happens previous images will be discarded</p>
-      </span>
-      <section className="choose__file__cont">
 
-        <input type="file" accept="image/*" onChange={handleFileChange} multiple disabled={disableAll} />
-        <button className='upload--coll--btn' onClick={handleUpload} disabled={isFilled || disableUpload || disableAll}>Upload</button>
-      
-      </section>
-      {files.length !== 0 
-      && files.length !==uploadResponses.length
-      && progress < 100 ? 
-      <section className="response--progress--cont">
-      <ProgressBar progress={progress} />
-    </section>
-    :
-    <section className="response--progress--cont">
-      </section>
-    }
-      
-
-      <section >
-
-        {isFilled === true
-          && uploadResponses.length !== 0
-          && files.length !== 0 ?
-          <div className="image-preview">
-            <span className="image-preview--title--2">
-              <h4 className="upload--title">2: Choose images to add to this new Collection:</h4>
-              <p className="upload--subtitle">Checked photos will be used, unchecked items will be discarded</p>
-            </span>
-
-            <div className="uploaded--image--scrollable">
-              {files.map((file, index) => (
-                <div className="uploaded--image" key={index}
-                  onClick={() => handleToggleSelect(index)}
-                >
-                  <img src={`http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${uploadResponses[index]}`} alt={`Image ${file.name}`} />
-                  <span className="image--check--cont">
-                    <input type="checkbox"
-                      checked={modifiedFiles[index].selected}
-                      onChange={() => handleToggleSelect(index)}
-                      onClick={() => addToast('this is a bug, click the image, not the checkbox')}
-                      disabled={disableAll}
-                    />
-                  </span>
-
-                </div>
-              ))}
-            </div>
-
-          </div>
+      <div className={
+        isFilled ?
+          "hiding--upload--input"
           :
-          <div>
-            ...
-          </div>
-        }
-      </section>
+          "multi--upload--section--1"
 
-      <section>
-        {isFilled === true
-          && uploadResponses.length !== 0
-          && files.length !== 0
-          && modifiedFiles !== null ?
-          <div className="upload--coll--p1--submit">
-            <span className="image-preview--title--3">
-              <h4 className="upload--title">3: Happy with your choices</h4>
-              <p className="upload--subtitle">Press submit to go to the next step</p>
-            </span>
-            <div className="upload--coll--image--names--submit">
-              {filteredItems !== null ?
+      }>
+        <span className="image-preview--title--1">
+          <h4 className="upload--title">1: Choose files from system then press upload</h4>
+          <p className="upload--subtitle">If another upload happens previous images will be discarded</p>
+        </span>
+        <section className="choose__file__cont">
+
+          <input type="file" accept="image/*" onChange={handleFileChange} multiple disabled={disableAll} />
+          <button className='upload--coll--btn' onClick={handleUpload} disabled={isFilled || disableUpload || disableAll}>Upload</button>
+
+        </section>
+      </div>
+      {files.length !== 0
+        && files.length !== uploadResponses.length
+        && progress < 100 ?
+        <section className="response--progress--cont">
+          <ProgressBar progress={progress} />
+        </section>
+        :
+        <section className="response--progress--cont">
+        </section>
+      }
+      {isFilled === true
+        && uploadResponses.length !== 0
+        && files.length !== 0 ?
+        <div className="image--preview">
+          <span className="image-preview--title--2">
+            <h4 className="upload--title">2: Choose images to add to this new Collection:</h4>
+            <p className="upload--subtitle">Checked photos will be used, unchecked items will be discarded</p>
+          </span>
+
+          <div className="uploaded--image--scrollable">
+            {files.map((file, index) => (
+              <div className="uploaded--image--v2--cont" key={index}
+                onClick={() => handleToggleSelect(index)}
+              >
+                <div className="uploaded--image--v2--img">
+                  <img src={`http://localhost:5000/getimage?userId=${currentUserObject._id}&filename=${uploadResponses[index]}`} alt={`Image ${file.name}`} />
+                </div>
+                <span className="image--check--cont">
+                  <input type="checkbox"
+                    checked={modifiedFiles[index].selected}
+                    onChange={() => handleToggleSelect(index)}
+                    onClick={() => addToast('this is a bug, click the image, not the checkbox')}
+                    disabled={disableAll}
+                  />
+
+                </span>
+                <div className="checkbox--fix--cont">
+                  <h4>{index + 1}</h4>
+                </div>
+              </div>
+            ))}
+          </div>
+
+        </div>
+        :
+        <div>
+          ...
+        </div>
+      }
+
+
+
+      {isFilled === true
+        && uploadResponses.length !== 0
+        && files.length !== 0
+        && modifiedFiles !== null &&
+        <section className="upload--coll--p1--submit">
+          <span className="image-preview--title--2">
+            <h4 className="upload--title">3: Happy with your choices</h4>
+            <p className="upload--subtitle">Press submit to go to the next step</p>
+          </span>
+          {/* <div className="upload--coll--image--names--submit">
+            {filteredItems !== null ?
                 <section className="response--scrollable">
                   {filteredItems.map((item, index) => (
-                    <div className="response--item" key={index}>Item {index+1}: {item.file.name}</div>
+                    <div className="response--item" key={index}>Item {index + 1}: {item.file.name}</div>
                   ))}
                 </section>
 
                 :
                 <div>...</div>
               }
-              <button className='upload--coll--btn' onClick={handleSubmit} disabled={disableAll} type="submit">Submit Pictures</button>
+           
 
 
-            </div>
+          </div> */}
+          <button className='upload--coll--btn' onClick={handleSubmit} disabled={disableAll} type="submit">Submit Pictures</button>
 
-          </div>
-          :
-          <div>
+        </section>
+      }
 
-          </div>
-        }
-      </section>
 
     </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { FileUploader } from "react-drag-drop-files";
-import MultipleFileInput from './MultipleFileInput';
+import MultipleFileInput from './upload_Components/MultipleFileInput';
 import { useToastContext } from '../../context/ToastContext';
 import { useUploadContext } from '../../context/UploadContext';
 import { useNavigate } from 'react-router-dom';
@@ -9,6 +9,12 @@ import CollectionForm_v2 from './CollectionForm_v2';
 import './style.css'
 import { Asset } from '../../pages';
 import ConfirmationPopup from './ConfirmationPopup';
+import { useMyContext } from "../../context/FLContext";
+import AppContentWrapper from '../../components/containers/AppContentWrapper';
+import PageContainer from '../../components/containers/PageContainer';
+import PageTitle from '../../components/containers/PageTitle';
+
+
 
 function CollectionUpload() {
     const { clearUploadData,
@@ -28,12 +34,13 @@ function CollectionUpload() {
     const [tempCountVar, setTempCountVar] = useState(0); //Used to start page, keeps ux smooth
     const [parentPictureData, setParentPictureData] = useState(null); //Holds picture objects from the file upload (drag/drop input) 
     const [assetArray, setAssetArray] = useState(null); //Holds asset objects
-    const hardcodedUser = '650ca3a3cf7964c5cb70782c'; //remove me later!
+    // const hardcodedUser = '650ca3a3cf7964c5cb70782c'; //remove me later!
     const navigate = useNavigate();
     const [isCollInfoFormComplete, setIsCollInfoFormComplete] = useState(false); // Tracks if the collection info has been submitted or not
     const [tabContent, setTabContent] = useState('COLLECTION_INFO');//  COLLECTION_INFO / OR / ASSET_ARRAY // used for the form tabs
     const [currentAssetIndex, setCurrentAssetIndex] = useState(0); //keeps track of the current selected asset to be edited
     const { addToast } = useToastContext();
+    const { currentUserObject } = useMyContext();
 
     const [createdAssets, setCreatedAssets] = useState([]); // holding assets created in backend  
     const [assetIds, setAssetIds] = useState([]) // holds asset ids, will be used in collection object
@@ -45,7 +52,11 @@ function CollectionUpload() {
     const [collectionId, setCollectionId] = useState(null);
     // helps initalize the program, and allows it to run smoothly 
     useEffect(() => {
-        incrementCount(); //run on load
+        if (currentUserObject) {
+            if (currentUserObject._id) {
+                incrementCount(); //run on load
+            }
+        }
     }, [])
     const incrementCount = () => { setTempCountVar(tempCountVar + 1) }
     useEffect(() => {
@@ -100,7 +111,7 @@ function CollectionUpload() {
     }
 
     const handlePictureData = (pictureData) => {
-        startUploadProcess("COLLECTION");
+
         setParentPictureData(pictureData);
     }
 
@@ -160,7 +171,7 @@ function CollectionUpload() {
                     // console.log("asset: ", assetArray[index].assetName, " price: ", itemPrice, " tags: ", itemTags)
                     const tempAsset = {
                         assetName: assetArray[index].assetName,
-                        creatorName: hardcodedUser,
+                        creatorName: currentUserObject._id,
                         uploadDate: FL_uploadDate,
                         assetDescription: assetArray[index].assetDescription,
                         assetPriceUSD: itemPrice,
@@ -176,16 +187,16 @@ function CollectionUpload() {
                 // console.log('asset objects being created');
                 // console.log(FL_uploadDate)
                 for (let index = 0; index < parentPictureData.length; index++) {
-                    let jsonExifData = `http://localhost:5000/getimageData?userId=${hardcodedUser}&filename=${parentPictureData[index].file.name}`;
+                    let jsonExifData = `http://localhost:5000/getimageData?userId=${currentUserObject._id}&filename=${parentPictureData[index].file.name}`;
                     let exifDataObj = [];
                     const tempAsset = {
                         assetName: parentPictureData[index].file.name,
-                        creatorName: hardcodedUser,
+                        creatorName: currentUserObject._id,
                         uploadDate: FL_uploadDate,
                         assetDescription: '',
                         assetPriceUSD: createdCollection.collectionPriceUSD,
                         informationTags: createdCollection.collectionInformationTags,
-                        assetImage: `http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${parentPictureData[index].fileName}`,
+                        assetImage: `http://localhost:5000/getimage?userId=${currentUserObject._id}&filename=${parentPictureData[index].fileName}`,
                         exifData: [],
                     }
                     fetch(jsonExifData)
@@ -323,7 +334,7 @@ function CollectionUpload() {
             try {
                 const createdCollectionObject = {
                     collectionName: createdCollection.collectionName,
-                    ownerName: hardcodedUser,
+                    ownerName: currentUserObject._id,
                     collectionDate: createdCollection.collectionDate,
                     collectionDescription: createdCollection.collectionDescription,
                     collectionPriceUSD: createdCollection.collectionPriceUSD,
@@ -379,7 +390,7 @@ function CollectionUpload() {
     }, [isComplete])
     const updateUser = async (e) => {
         try {
-            const response = await fetch(`/api/user/${hardcodedUser}/user-collections/`, {
+            const response = await fetch(`/api/user/${currentUserObject._id}/user-collections/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -401,120 +412,135 @@ function CollectionUpload() {
 
 
 
+
+    //                 <PageTitle>
+    // </PageTitle>
+    // 
     return (
-        <div className='create--coll--page'
+
+        <AppContentWrapper
             onLoad={incrementCount}
             onReset={incrementCount}
             onClick={updateUploadValue}
         >
-            {isPopupVisible && (
-                <ConfirmationPopup
-                    message="Confirm Creation of this Collection?"
-                    onConfirm={handleConfirm}
-                    onCancel={handleCancel}
-                />
-            )}
-            <h2>Create a collection</h2>
-            <button
-                className='create--coll--reset--btn'
-                onClick={resetUpload}
-                disabled={userConfirmation}
-            >Reset Upload Items</button>
+            <PageContainer>
 
-            {userConfirmation === true ?
-                <div>
-                    {isComplete ?
-                        <>
+                {isPopupVisible && (
+                    <ConfirmationPopup
+                        message="Confirm Creation of this Collection?"
+                        onConfirm={handleConfirm}
+                        onCancel={handleCancel}
+                    />
+                )}
+                <PageTitle>
+                    <h2 className=''>Create a collection</h2>
+                </PageTitle>
+                <button
+                    className='create--coll--reset--btn'
+                    onClick={resetUpload}
+                    disabled={userConfirmation}
+                >Reset Upload Items</button>
 
-                            <button
-                                onClick={() => redirectCollection({ collectionId })}
-                                onMouseDown={handleMouseDown}
-                                onMouseUp={handleMouseUp}
-                                style={buttonStyle}
-                                className='home--coll--btn'
-                            >Visit Collection</button>
-                        </>
-                        :
-                        <>
-                            Creating  collection!
-                            Don't refresh the page!
-                        </>
+                {userConfirmation === true ?
+                    <div>
+                        {isComplete ?
+                            <>
 
-                    }
-
-                </div> :
-                <>
-                    {!parentPictureData ?
-                        <section onClick={updateUploadValue}>{/* Picture uploader */}
-                            <MultipleFileInput onSubmit={handlePictureData} />
-                        </section>
-                        : <section>
-
-                        </section>}
-                    <section>{/* Asset list selector / display */}
-                        {/* data received and collection can start to be created */}
-                        {parentPictureData ?
-                            <div className="image-preview--2">
-                                <span className="image-preview--title--2">
-                                    {/* <h4 className="upload--title">4: Fill out collection information </h4> */}
-                                    <p className="upload--subtitle">Images to be used in the collection</p>
-                                </span>
-
-                                <div className="uploaded--image--scrollable">
-                                    {parentPictureData.map((entry, index) => (
-                                        <div className={currentAssetIndex === index ? 'uploaded--image selected--image' : 'uploaded--image'} key={index} onClick={() => setCurrentAsset(entry.file, index)}>
-                                            <img src={`http://localhost:5000/getimage?userId=${hardcodedUser}&filename=${entry.fileName}`} alt={`Image ${entry.file.name}`} />
-                                        </div>
-                                    ))}
-                                </div>
-
-
-                            </div>
+                                <button
+                                    onClick={() => redirectCollection({ collectionId })}
+                                    onMouseDown={handleMouseDown}
+                                    onMouseUp={handleMouseUp}
+                                    style={buttonStyle}
+                                    className='home--coll--btn'
+                                >Visit Collection</button>
+                            </>
                             :
-                            <div>
+                            <>
+                                Creating  collection!
+                                Don't refresh the page!
+                            </>
 
-                            </div>
                         }
-                    </section>
 
-                    <section>{/* Form Container - Form 1: Collection Info - Form 2: Selected Asset Info */}
-                        {parentPictureData &&
-                            <div className="collection--form--container">
-                                <div className="collection--form--title">
-                                    {/* <h3>Collection Creation Form</h3> */}
-                                    <button onClick={() => switchContentVal('COLLECTION_INFO')} className={tabContent === 'COLLECTION_INFO' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Collection Info</button>
-                                    <button onClick={() => switchContentVal('ASSET_ARRAY')} className={tabContent === 'ASSET_ARRAY' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Assets</button>
-                                    {isCollInfoFormComplete &&
-                                        <button className='upload--coll--btn'
-                                            onClick={submitCompletedCollection}
-                                            //    onClick={handleSubmit} disabled={disableAll} 
-                                            type="submit"
-                                        >Create Collection</button>
+                    </div> :
+                    <>
+                        {!parentPictureData ?
+                            <section onClick={updateUploadValue}>{/* Picture uploader */}
+                                <MultipleFileInput onSubmit={handlePictureData} onFileChange={() => startUploadProcess("COLLECTION")} />
+                            </section>
+                            : <section>
+
+                            </section>}
+                        <section>
+                            {/* Asset list selector / display */}
+                            {/* data received and collection can start to be created */}
+                            {parentPictureData ?
+                                <div className="image-preview--2">
+                                    <p className="upload--images--subtitle">Images to be used in the collection</p>
+
+
+                                    <div className="uploaded--image--scrollable--v2">
+                                        {parentPictureData.map((entry, index) => (
+                                            <div className={currentAssetIndex === index ? 'uploaded--image selected--image' : 'uploaded--image'} key={index} onClick={() => setCurrentAsset(entry.file, index)}>
+                                                <img src={`http://localhost:5000/getimage?userId=${currentUserObject._id}&filename=${entry.fileName}`} alt={`Image ${entry.file.name}`} />
+                                                <div className="checkbox--fix--cont">
+                                                    <h4>{index + 1}</h4>
+                                                </div>
+                                            </div>
+                                        ))}
+
+                                    </div>
+                                    <div className='uploaded--image--scrollable--v2--gradient'>
+                                        ...
+                                    </div>
+
+                                </div>
+                                :
+                                <div>
+
+                                </div>
+                            }
+                        </section>
+
+                        <section>{/* Form Container - Form 1: Collection Info - Form 2: Selected Asset Info */}
+                            {parentPictureData &&
+                                <div className="collection--form--container">
+                                    <div className="collection--form--title">
+                                        {/* <h3>Collection Creation Form</h3> */}
+                                        <button onClick={() => switchContentVal('COLLECTION_INFO')} className={tabContent === 'COLLECTION_INFO' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Collection Info</button>
+                                        <button onClick={() => switchContentVal('ASSET_ARRAY')} className={tabContent === 'ASSET_ARRAY' ? 'form--title--btn form--title--btn--selected' : 'form--title--btn'}>Assets</button>
+                                        {isCollInfoFormComplete &&
+                                            <button className='upload--coll--btn'
+                                                onClick={submitCompletedCollection}
+                                                //    onClick={handleSubmit} disabled={disableAll} 
+                                                type="submit"
+                                            >Create Collection</button>
+                                        }
+                                    </div>
+                                    {tabContent === 'COLLECTION_INFO' &&
+
+                                        <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} />
+                                    }
+                                    {tabContent === 'ASSET_ARRAY' &&
+                                        <div className='div--here'>
+                                            {/* ASSET ARRAY! */}
+                                            {assetArray ?
+                                                <div className='div--here'>
+                                                    {assetArray.map((asset, index) => (
+                                                        <div className={index === currentAssetIndex ? 'another--div--named--here' : 'hidden'} key={index}>
+                                                            <AssetForm_v2 asset={asset} onSubmit={handleAssetData} />
+                                                        </div>
+                                                    ))}
+                                                </div> : <div></div>}
+                                        </div>
                                     }
                                 </div>
-                                {tabContent === 'COLLECTION_INFO' &&
+                            }
+                        </section>
+                    </>}
 
-                                    <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} />
-                                }
-                                {tabContent === 'ASSET_ARRAY' &&
-                                    <div className='div--here'>
-                                        {/* ASSET ARRAY! */}
-                                        {assetArray ?
-                                            <div className='div--here'>
-                                                {assetArray.map((asset, index) => (
-                                                    <div className={index === currentAssetIndex ? 'another--div--named--here' : 'hidden'} key={index}>
-                                                        <AssetForm_v2 asset={asset} onSubmit={handleAssetData} />
-                                                    </div>
-                                                ))}
-                                            </div> : <div></div>}
-                                    </div>
-                                }
-                            </div>
-                        }
-                    </section>
-                </>}
-
-        </div>
+            </PageContainer>
+        </AppContentWrapper>
     )
 }
 
