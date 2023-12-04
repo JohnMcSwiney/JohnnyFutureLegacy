@@ -124,14 +124,14 @@
 }
 
 .human--made--verification--cont h5 {
-    color: #000000;
+    color:var(--font);
     font-size: 18px;
     font-weight: 600;
     margin: 0;
 }
 
 .human--made--verification--cont p {
-    color: #0000006d;
+    color:var(--font) ;
     font-size: 12px;
     /* font-weight: 600; */
     margin: 0;
@@ -153,7 +153,7 @@
 
 .human--made--description {
     font-size: 15px !important;
-    color: #000000 !important;
+    color: var(--font) !important;
     opacity: 1;
     width: 650px;
     height: 67px;
@@ -177,8 +177,9 @@
     height: 75px;
     gap: 1px;
 }
-.submit--asset--btn--cont .FL_btn__1{
+.submit--asset--btn--cont .FL_btn__2{
     margin-top:0px !important;
+
 }
 .button--width--413 {
     width: 413px;
@@ -259,7 +260,7 @@
     top: 0;
     right: 0;
     margin-right: 50px;
-    margin-top: 115px;
+    margin-top: 120px;
     background-color:  black;
     border: none;
     color: white;
@@ -270,10 +271,11 @@
     font-size: 15px;
     font-weight: 500;
     transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease;
+    z-index: 1000;
   }
   
   .create--coll--reset--btn:hover{
-    transform: scale(1.01); /* Increase the scale on hover */
+    transform: scale(1.05);
     box-shadow: rgba(255, 0, 0, 0.893) 0px 1px 6px;
     text-shadow: rgba(2, 2, 2, 0.533) 0px 1px 2px;
     color: rgba(255, 0, 0, 0.893)
@@ -282,7 +284,7 @@
 
 .collection--form--container{
     /* background-color: yellow; */
-    width: 100vw;
+    width: 100%;
     min-height:400px;
     display: flex;
     align-items: center;
@@ -303,7 +305,8 @@
     top: 0;
     /* width: 600px; */
     width: 100%;
-    background-color: rgb(236, 236, 236);
+    /* background-color: rgb(236, 236, 236); */
+    background-color: black;
     height: 60px;
     /* overflow: hidden; */
     box-shadow: 0px 2px 4px #00000051;
@@ -320,8 +323,8 @@
 .form--title--btn{
     /* margin-top: 20px; */
     border: none;
-    border-bottom: #000000 2px solid;
-    color: #000000;
+    border-bottom: #ffffff 2px solid;
+    color: #ffffff;
     opacity: 0.5;
     transition: all ease 0.5s;
     width: 40%;
@@ -333,12 +336,14 @@
     font-weight: 700;
     margin-left: 5%;
     margin-right: 5%;
-    background-color: rgb(236, 236, 236);
+    background-color: rgb(0, 0, 0);
 }
 .form--title--btn:hover{
     /* margin-top: 20px; */
     opacity: 1;
+    
     transition: all ease 0.5s;
+    
 }
 .form--title--btn--selected{
     /* margin-top: 20px; */
@@ -350,6 +355,13 @@
 }
 .hidden{
     opacity: 0;
+    position: absolute;
+    left: 0 ;
+    right: 0;
+    z-index: -400;
+    width: 1px;
+    height:1px;
+
 }
 
 

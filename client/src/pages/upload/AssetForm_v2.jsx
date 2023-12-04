@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useToastContext } from '../../context/ToastContext';
 import { useUploadContext } from '../../context/UploadContext';
 
-function AssetForm_v2({ asset, onSubmit }) {
+function AssetForm_v2({ asset, onSubmit,userIdin }) {
   const [successMessage, setSuccessMessage] = useState('');
   const [errorMessage, setErrorMessage] = useState('');
   const [isSubmitted, setIsSubmitted] = useState(false);
@@ -24,7 +24,7 @@ function AssetForm_v2({ asset, onSubmit }) {
     }
   }, [isSubmitted]);
 
-  const hardcodedUser = '650ca3a3cf7964c5cb70782c';
+  // const userIdin = '650ca3a3cf7964c5cb70782c';
   const handleMouseDown = () => {
     setIsMouseDown(true);
   };
@@ -38,7 +38,7 @@ function AssetForm_v2({ asset, onSubmit }) {
   const currentDate = new Date();
   const [formData, setFormData] = useState({
     assetName: asset.assetName || '',
-    creatorName: hardcodedUser,
+    creatorName: userIdin,
     uploadDate: FL_uploadDate || currentDate, 
     // currentDate, //remove later lol holy f
     assetDescription: asset.assetDescription || '',
@@ -51,7 +51,7 @@ function AssetForm_v2({ asset, onSubmit }) {
   const resetForm = () => {
     setFormData({
       assetName: '',
-      creatorName: hardcodedUser,
+      creatorName: userIdin,
       uploadDate: '',
       assetDescription: '',
       assetPriceUSD: 0,
@@ -250,7 +250,7 @@ function AssetForm_v2({ asset, onSubmit }) {
               <button type="submit"
                 // disabled={!isConfirmed}
                 name={'submit ' + formData.assetName}
-                className='FL_btn__1 button--width--413'
+                className='FL_btn__2 button--width--413'
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 style={buttonStyle}

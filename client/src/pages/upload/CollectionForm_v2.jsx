@@ -3,7 +3,7 @@ import { useToastContext } from '../../context/ToastContext';
 import { useUploadContext } from '../../context/UploadContext';
 
 
-function CollectionForm_v2({collectionIn, onSubmit }) {
+function CollectionForm_v2({collectionIn, onSubmit, userIdin }) {
     var collection = collectionIn
     const [successMessage, setSuccessMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -19,10 +19,10 @@ function CollectionForm_v2({collectionIn, onSubmit }) {
         isEditingSelectedAsset, setIsEditingSelectedAsset,
         FL_uploadDate, setFL_UploadDate
     } = useUploadContext();
-    const hardcodedUser = '650ca3a3cf7964c5cb70782c';
+    // const userIdin = '650ca3a3cf7964c5cb70782c';
     const [formDataCollection, setFormDataCollection] = useState({
         collectionName: '',
-        creatorName: hardcodedUser,
+        creatorName: userIdin,
         collectionDate: FL_uploadDate || '' ,
         collectionDescription: '',
         collectionPriceUSD:  0,
@@ -55,7 +55,7 @@ function CollectionForm_v2({collectionIn, onSubmit }) {
     
     
     // collectionName: collection.collectionName ||'',
-    //     creatorName: hardcodedUser,
+    //     creatorName: userIdin,
     //     collectionDate: FL_uploadDate || '' ,
     //     collectionDescription: collection.collectionDescription || '',
     //     collectionPriceUSD: collection.collectionPriceUSD || 0,
@@ -65,7 +65,7 @@ function CollectionForm_v2({collectionIn, onSubmit }) {
     const resetCollectionForm = () => {
         setFormDataCollection({
             collectionName: '',
-            creatorName: hardcodedUser,
+            creatorName: userIdin,
             collectionDate: '',
             collectionDescription: '',
             collectionPriceUSD: 0,
@@ -155,7 +155,7 @@ function CollectionForm_v2({collectionIn, onSubmit }) {
 
             const collectionFormData = {
                 collectionName: formDataCollection.collectionName,
-                creatorName: hardcodedUser,
+                creatorName: userIdin,
                 collectionDate: formDataCollection.collectionDate,
                 collectionDescription: formDataCollection.collectionDescription,
                 collectionPriceUSD: parseFloat(formDataCollection.collectionPriceUSD),
@@ -264,7 +264,7 @@ function CollectionForm_v2({collectionIn, onSubmit }) {
                     <div>
                         <button type="submit"
                             disabled={!isConfirmed}
-                            className='FL_btn__1 button--width--713'
+                            className='FL_btn__2 button--width--713'
                             onMouseDown={handleMouseDown}
                             onMouseUp={handleMouseUp}
                             style={buttonStyle}

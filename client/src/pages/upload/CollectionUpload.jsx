@@ -432,9 +432,7 @@ function CollectionUpload() {
                         onCancel={handleCancel}
                     />
                 )}
-                <PageTitle>
-                    <h2 className=''>Create a collection</h2>
-                </PageTitle>
+                <h2 className='create--coll--page--title'>Create a collection</h2>
                 <button
                     className='create--coll--reset--btn'
                     onClick={resetUpload}
@@ -445,19 +443,25 @@ function CollectionUpload() {
                     <div>
                         {isComplete ?
                             <>
-
-                                <button
-                                    onClick={() => redirectCollection({ collectionId })}
-                                    onMouseDown={handleMouseDown}
-                                    onMouseUp={handleMouseUp}
-                                    style={buttonStyle}
-                                    className='home--coll--btn'
-                                >Visit Collection</button>
+                                <h2 className='create--coll--page--title'>
+                                <br /><br />
+                                    <button
+                                        onClick={() => redirectCollection({ collectionId })}
+                                        onMouseDown={handleMouseDown}
+                                        onMouseUp={handleMouseUp}
+                                        style={buttonStyle}
+                                        className='home--coll--btn'
+                                    >Visit Collection</button>
+                                </h2>
                             </>
                             :
                             <>
-                                Creating  collection!
-                                Don't refresh the page!
+                                <h2 className='create--coll--page--title'>
+                                <br /><br />
+                                    Creating  collection!
+                                    <br />
+                                    Don't refresh the page!
+                                </h2>
                             </>
 
                         }
@@ -519,7 +523,7 @@ function CollectionUpload() {
                                     </div>
                                     {tabContent === 'COLLECTION_INFO' &&
 
-                                        <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} />
+                                        <CollectionForm_v2 collectionIn={createdCollection} onSubmit={handleCollectionData} userIdin={currentUserObject._id} />
                                     }
                                     {tabContent === 'ASSET_ARRAY' &&
                                         <div className='div--here'>

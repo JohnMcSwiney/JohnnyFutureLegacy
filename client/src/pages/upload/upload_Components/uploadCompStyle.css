@@ -7,9 +7,20 @@
     gap: 10px;
     /* background-color: yellow; */
     position: relative;
-    margin-top: 15px;
+    margin-top: 45px;
     width: inherit;
     /* overflow: hidden; */
+}
+.create--coll--page--title{
+    position: absolute;
+    top: 0;
+    left: 0;
+    padding-top: 105px; 
+    font-size: 25px;
+    font-weight: bold;
+    /* background-color: yellow; */
+    width: 100%;
+    z-index: 200;
 }
 .multi--upload--section--1{
     display: flex;
@@ -166,6 +177,7 @@
     width: fit-content;
     position: relative;
 z-index: 10;
+   
     height: 250px;
     align-items: flex-start;
         justify-content:center;
@@ -375,13 +387,13 @@ z-index: 10;
 .image-preview--2{
     display: flex;
     width: 100%;
-    background-color: rgba(210, 95, 95, 0.294);
+    background-color: var(--font--shadow);
     height: 250px;
     overflow: hidden;
     align-items: center;
     justify-content: center;
     position: relative;
     padding-top: 25px;
-
+    margin-top: 25px;
     /* font-size: 20px; */
 }

@@ -1,3 +1,34 @@
 David Guttenfelder:
     email:    David.g@futurelegacy.test
     password: P@ssword123
+
+Jeremy Hogan
+    email:    Jeremy.h@futurelegacy.test
+    password: P@ssword123
+
+
+Jon Lowenstein
+    email:    Jon.L@futurelegacy.test
+    password: P@ssword123
+
+Karen Eng
+    email:    Karen.E@futurelegacy.test
+    password: P@ssword123
+
+Randy Olson
+    email:    Randy.O@futurelegacy.test
+    password: P@ssword123
+
+Isadora Kosofsky
+    email:    Isadora.K@futurelegacy.test
+    password: P@ssword123
+
+
+/* Institutions: */
+Field Museum
+   email:    Field.Museum@futurelegacy.test
+   password: P@ssword123 
+
+Photo Society
+   email:    Photo.Society@futurelegacy.test
+   password: P@ssword123 

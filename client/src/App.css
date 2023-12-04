@@ -204,7 +204,7 @@ p {
 }
 
 .FL_Input__text__1 label {
-  color: 000000;
+  color: var(--font);
   font-size: 18px;
   font-weight: 600;
 }
@@ -222,7 +222,7 @@ p {
 }
 
 .FL_Input__text__1 h4 {
-  color: 000000;
+  color: var(--font);
   font-size: 13px;
   font-weight: 600;
   transform: none;
@@ -237,7 +237,7 @@ p {
   padding-left: 15px;
   padding-right: 15px;
   border-radius:  25px 2px 2px 25px;
-  border: solid 1px #16171C;
+  border: solid 1px var(--font);
   background-color: rgba(0, 0, 0, 0.05);
   font-family: var(--font--fam);
   padding-top: 5px;
@@ -245,6 +245,7 @@ p {
   overflow: hidden;
   overflow-y: scroll;
   padding-right: 15px ;
+  color: var(--font);
   /* margin-right: 30px; */
 }
 .FL_Input__text__2 {
@@ -275,7 +276,7 @@ p {
 }
 
 .FL_Input__text__2 h4 {
-  color: 000000;
+  color: var(--font);
   font-size: 13px;
   font-weight: 600;
   transform: none;
@@ -290,7 +291,7 @@ p {
 }
 
 .FL_Input__number__1 label {
-  color: 000000;
+  color: var(--font);
   font-size: 18px;
   font-weight: 600;
 }
@@ -298,7 +299,7 @@ p {
 .FL_Input__number__1 .inner--cont {
   display: flex;
   align-items: center;
-
+  color: var(--font);
 }
 
 .FL_Input__number__1 .inner--cont div {
@@ -315,12 +316,14 @@ p {
   margin: 0;
   font-size: 32px;
   font-weight: 400;
+  color: var(--font);
 }
 
 .FL_Input__number__1 .inner--cont div h4 {
   margin: 0;
   font-size: 15px;
   transform: none;
+  color: var(--font);
 }
 
 .FL_Input__number__1 .inner--cont input {
@@ -332,9 +335,10 @@ p {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 500px;
-  border: solid 1px #16171C;
+  border: solid 1px var(--font);
   background-color: rgba(0, 0, 0, 0.05);
   font-size: 24px;
+  color: var(--font);
 }
 
 .FL_Input__date__1 {
@@ -342,12 +346,15 @@ p {
   align-items: flex-start;
   flex-direction: column;
   font-family: (--font--fam);
+  color: var(--font);
+
 }
 
 .FL_Input__date__1 label {
   color: 000000;
   font-size: 18px;
   font-weight: 600;
+  color: var(--font);
 }
 
 .FL_Input__date__1 input {
@@ -356,8 +363,9 @@ p {
   padding-left: 15px;
   padding-right: 15px;
   border-radius: 500px;
-  border: solid 1px #16171C;
+  border: solid 1px var(--font);
   background-color: rgba(0, 0, 0, 0.05);
+  color: var(--font);
 }
 
 input[type="checkbox"] {
@@ -430,6 +438,31 @@ transition: opacity 1s ease;
 }
 
 .FL_btn__1:hover{
+  transform: scale(1.01); /* Increase the scale on hover */
+  box-shadow: rgba(84, 84, 84, 0.845) 0px 1px 2px;
+  text-shadow: rgba(212, 210, 210, 0.533) 0px 1px 2px;
+}
+.FL_btn__2{
+  background-color: var(--font);
+  border: none;
+  color: var(--bg);
+  min-width: 300px;
+  height: 50px;
+  border-radius: 50px;
+  font-family: var(--font--fam);
+  font-size: 20px;
+  font-weight: 300;
+  margin-top: 20px;
+  opacity: 1;
+  transition: box-shadow 0.3s ease, text-shadow 0.3s ease, scale 0.3s ease, opacity 0.5s ease;
+ 
+}
+.FL_btn__2:disabled{
+opacity: 0.5;
+transition: opacity 1s ease;
+}
+
+.FL_btn__2:hover{
   transform: scale(1.01); /* Increase the scale on hover */
   box-shadow: rgba(84, 84, 84, 0.845) 0px 1px 2px;
   text-shadow: rgba(212, 210, 210, 0.533) 0px 1px 2px;
