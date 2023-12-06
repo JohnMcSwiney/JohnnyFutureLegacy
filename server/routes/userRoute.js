@@ -40,8 +40,11 @@ router.get('/users/username/:username', userController.getUserByUsername);
 // Create a new user
 router.post('/', userController.createUser);
 
-// Route for updating a user's profile picture URL
-router.post('/:id/profile-picture', userController.updateProfilePicture);
+// Update Profile Picture
+router.post('/:id/uploadProfilePicture', upload.single('file'), userController.uploadProfilePicture);
+
+// Get Profile Picture
+router.get('/:id/profile-picture', userController.getUserProfilePicture);
 
 // Update user's bio
 router.put('/:id/bio', userController.updateBio);

@@ -34,6 +34,7 @@ function AssetPage() {
     collectionIsInstit,
     collectionUserPfp,
     userData,
+    currentUserId,
     setFetchedCollection } = useMyContext();
   const [longDesc, setLongDesc] = useState(false);
   const [isPopupVisible, setPopupVisible] = useState(false);
@@ -115,7 +116,7 @@ function AssetPage() {
   const handlePurchaseClick = () => {
     console.log('purchase clicked');
     //check user credentials here, will be updated later!
-    if (userData) {
+    if (currentUserId) {
       addToast('Purchase Started')
       setPopupVisible(true);
     } else {
@@ -125,7 +126,7 @@ function AssetPage() {
   }
 
   const handlePurchase = () => {
-    if (assetData && userData) {
+    if (assetData && currentUserId) {
       console.log('confirm, purchase added!');
       setPopupVisible(false);
       addToast(`Purchasing Asset: ${assetData.assetName}`);
@@ -133,7 +134,7 @@ function AssetPage() {
       const purchaseAsset = async () => {
         try {
           let assetId = assetData._id
-          let userId = userData._id
+          let userId = currentUserId
           console.log(JSON.stringify(assetId))
           const purchaseResponse = await fetch(`http://localhost:5000/api/user/${userId}/purchase`, {
             method: 'POST',

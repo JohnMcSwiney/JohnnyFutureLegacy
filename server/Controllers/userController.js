@@ -130,35 +130,63 @@ class UserController {
       res.status(400).json({ error: error.message });
     }
   }
-  // Update user's profile picture URL
-  async updateProfilePicture(req, res) {
-    try {
-      const { id } = req.params;
-      const { profilePictureUrl } = req.body;
+// Add a method to handle profile picture upload
+async uploadProfilePicture(req, res) {
+  try {
+    const userId = req.params.id;
 
-      if (!mongoose.Types.ObjectId.isValid(id)) {
-        return res.status(404).json({ error: "No such User" });
-      }
-
-      // Assuming you have a User model instance and "profilePicture" field in your schema
-      const user = await Users.findByIdAndUpdate(
-        id,
-        { profilePicture: profilePictureUrl },
-        {
-          new: true,
-          runValidators: true,
-        }
-      );
-
-      if (!user) {
-        return res.status(404).json({ error: "No such User" });
-      }
-
-      res.status(200).json(user);
-    } catch (error) {
-      res.status(400).json({ error: error.message });
+    // Check if req.file is defined
+    if (!req.file) {
+      return res.status(400).json({ error: "No file uploaded" });
     }
+
+    const profilePictureUrl = req.file.originalname;
+
+    // Assuming you have a User model instance and "profilePicture" field in your schema
+    const user = await Users.findByIdAndUpdate(
+      userId,
+      { profilePicture: profilePictureUrl },
+      {
+        new: true,
+        runValidators: true,
+      }
+    );
+
+    if (!user) {
+      return res.status(404).json({ error: "No such User" });
+    }
+
+    res
+      .status(200)
+      .json({ message: "Profile picture uploaded successfully", profilePictureUrl: profilePictureUrl });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: "Internal Server Error" });
   }
+}
+
+// Get user's profile picture
+async getUserProfilePicture(req, res) {
+  try {
+    const { id } = req.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(404).json({ error: "No such User" });
+    }
+
+    const user = await Users.findById(id, "profilePicture");
+
+    if (!user) {
+      return res.status(404).json({ error: "No such User" });
+    }
+
+    res.status(200).json({ profilePictureUrl: user.profilePicture });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
+
+
   // Update the isInstit field for a user
   async updateIsInstit(req, res) {
     try {
