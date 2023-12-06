@@ -1,8 +1,10 @@
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
 const mongoose = require("mongoose");
 const Users = require("../models/userModel");
+const Asset = require('../models/assetModel');
 const fs = require("fs/promises");
 const bcrypt = require("bcrypt");
+const path = require('path');
 
 const salt = bcrypt.genSaltSync(saltRounds);
 class UserController {
@@ -374,6 +376,50 @@ class UserController {
       res.status(500).json({ error: error.message });
     }
   }
+// Delete all assets for a specific user
+async deleteAllUserAssets(req, res) {
+  try {
+    const userId = req.params.id;
+
+    // Validate if the user exists
+    const user = await Users.findById(userId);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    // Find all assets associated with the user
+    const assets = await Asset.find({ creatorName: userId });
+
+    // Delete each asset
+    for (const asset of assets) {
+      // Delete the asset image files if they exist (adjust the path as needed)
+      const imagePath = path.join(__dirname, '..', 'uploaded_files', userId, asset.assetImage);
+
+      // Check if the file exists using the callback version of fs.access
+      fs.access(imagePath, (error) => {
+        if (!error) {
+          // File exists, so unlink it
+          fs.unlink(imagePath, (unlinkError) => {
+            if (unlinkError) {
+              console.error(`Error deleting file: ${unlinkError.message}`);
+            }
+          });
+        } else {
+          // Handle the case where the file doesn't exist or there's an error accessing it
+          console.error(`Error accessing file: ${error.message}`);
+        }
+      });
+
+      // Delete the asset document from the database
+      await Asset.findByIdAndRemove(asset._id);
+    }
+
+    res.status(200).json({ message: 'All user assets deleted successfully' });
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal server error' });
+  }
+}
 }
 
 module.exports = UserController;

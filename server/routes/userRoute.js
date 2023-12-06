@@ -67,4 +67,8 @@ router.get('/:id/banner', userController.getUserBannerImage);
 // Update Banner Image
 router.post('/:id/uploadBanner', upload.single('file'), userController.uploadBannerImage);
 
+// Create a route to delete all assets for a specific user
+router.delete('/:id/assets', userController.deleteAllUserAssets);
+
+
 module.exports = router;
