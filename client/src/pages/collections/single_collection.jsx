@@ -29,6 +29,7 @@ import CollectionPageContainer from '../../components/containers/CollectionPageC
 import Splitter from '../../components/splitter/Splitter';
 import { useNavigate } from 'react-router-dom';
 import FL_Footer from '../../components/FL_Footer/FL_footer';
+import UserProfilePicture from '../../components/profilePicture/UserProfilePicture'
 
 function Single_collection() {
   const { param1, featuredId } = useParams() //collection id

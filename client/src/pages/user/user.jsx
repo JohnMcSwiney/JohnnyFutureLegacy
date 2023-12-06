@@ -19,6 +19,10 @@ import PageTitle from '../../components/containers/PageTitle';
 import ContentTitle from '../../components/containers/ContentTitle';
 import { useParams } from 'react-router-dom';
 import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2';
+
+import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
+
+
 function User() {
 
   const bio = 'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Elementum sagittis vitae et leo duis ut. Lorem ipsum dolor sit amet consectetur adipiscing. Consectetur libero id faucibus nisl tincidunt eget nullam. Cursus sit amet dictum sit amet justo donec enim. Convallis tellus id interdum velit laoreet id donec ultrices tincidunt. Nunc non blandit massa enim. Non enim praesent elementum facilisis leo vel fringilla. Cursus eget nunc scelerisque viverra mauris in aliquam sem. Nulla posuere sollicitudin aliquam ultrices sagittis. Elit sed vulputate mi sit amet mauris commodo. Eu tincidunt tortor aliquam nulla. Justo laoreet sit amet cursus sit amet. Augue neque gravida in fermentum et sollicitudin ac orci phasellus. Blandit aliquam etiam erat velit scelerisque in dictum non consectetur. Eget est lorem ipsum dolor sit amet consectetur adipiscing elit. Ipsum dolor sit amet consectetur adipiscing elit.';
@@ -59,16 +63,23 @@ function User() {
   return (
     <AppContentWrapper>
       <PageContainer>
+        {userObject &&
+          <div className="profile--banner">
+            <div className='banner--gradient'></div>
+            {userObject.userBannerImage ?
+              <div className="banner--img">
+                <img src={`http://localhost:5000/uploaded_files/${userObject._id}/Banner/${userObject.userBannerImage}`} alt={`Image ${userObject.userBannerImage}`} />
+              </div>
+              :
+              <div>
+
+              </div>
+            }
+          </div>
+        }
         <div className='top--user--info--cont'>
-          {userObject ?
-            <div className={userObject.isInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}
-            >
-              <img className='coll--avatar' src={userObject.profilePicture} />
-            </div>
-            :
-            <div className='coll--avatar--cont instit--shape'>
-              no user
-            </div>
+          {userObject &&
+            <UserProfilePicture currentUserObject={userObject} size={1} />
           }
           <div className='top--user--text--cont'>
             {userObject ?
@@ -86,11 +97,11 @@ function User() {
               :
               "Loading..."}
 
-            <div className='user--socials--cont'>
-              <button className='user--socials--btn'><TiSocialFacebook /> </button>
-              <button className='user--socials--btn'><FaTwitter /> </button>
-              <button className='user--socials--btn'><FaTelegramPlane /> </button>
-              <button className='user--socials--btn'><AiFillInstagram /> </button>
+            <div className='profile--v2--socials--cont'>
+              <button className='profile--v2--socials--btn'><TiSocialFacebook /> </button>
+              <button className='profile--v2--socials--btn'><FaTwitter /> </button>
+              <button className='profile--v2--socials--btn'><FaTelegramPlane /> </button>
+              <button className='profile--v2--socials--btn'><AiFillInstagram /> </button>
             </div>
           </div>
         </div>
@@ -100,7 +111,7 @@ function User() {
           <ContentTitle>
             <h3>Collections:</h3>
           </ContentTitle>
-          <div className='profile--v2--horiz--scroll'>
+          <div className='profile--v2--vert--scroll'>
 
             {userObject && userObject.userCollections ? (
               userObject.userCollections.map((collection) => (

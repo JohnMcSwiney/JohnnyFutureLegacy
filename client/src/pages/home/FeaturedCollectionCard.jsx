@@ -2,6 +2,7 @@ import React, { useState, useEffect, useRef } from 'react'
 import './homePage_v2.css'
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from 'react-tooltip'
+import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
 
 function FeaturedCollectionCard({ featuredIn,indexIn }) {
 
@@ -155,10 +156,12 @@ function FeaturedCollectionCard({ featuredIn,indexIn }) {
               <h2>{collectionObject.collectionName}</h2>
             </div >
             <div className='featured--user'>
-              <div className={`featured--avatar--cont ${userInstit ? 'feat--instit' : 'feat--notIns'}`}>
+              {/* <div className={`featured--avatar--cont ${userInstit ? 'feat--instit' : 'feat--notIns'}`}>
                 <img src={userObject.profilePicture} />
 
-              </div>
+              </div> */}
+
+            <UserProfilePicture currentUserObject={userObject} size={3}/>
               <h3>{userObject.firstName} {userObject.lastName}</h3>
             </div>
 

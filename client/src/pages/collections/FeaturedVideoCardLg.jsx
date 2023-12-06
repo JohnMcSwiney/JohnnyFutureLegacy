@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import './style.css'
 import { useNavigate } from 'react-router-dom';
 import { Tooltip } from 'react-tooltip'
+import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
 
 function FeaturedVideoCardLg({ featuredIn, userObject, collectionName, onButtonClick }) {
     const [youtubeUrl, setYoutubeUrl] = useState("https://youtu.be/w7x_lWJNnNg?si=MOEOddYRa1LgLs01");
@@ -49,12 +50,16 @@ function FeaturedVideoCardLg({ featuredIn, userObject, collectionName, onButtonC
                             className='featured--user--lg'
                         >
                             <Tooltip id="my-tooltip" />
-                            <div 
+                            <div className='featured--pfp--cont'>
+                            <UserProfilePicture currentUserObject={userObject} size={3} onClick={handleRedirectAssetOwner}/>
+                                </div>
+                            
+                            {/* <div 
                             onClick={handleRedirectAssetOwner}
                             className={`featured--avatar--cont--lg ${userObject.isInstit ? 'feat--instit' : 'feat--notIns'}`}>
                                 <img src={userObject.profilePicture} />
 
-                            </div>
+                            </div> */}
                             <h3 
                             onClick={handleRedirectAssetOwner}
                             >{userObject.firstName} {userObject.lastName}</h3>

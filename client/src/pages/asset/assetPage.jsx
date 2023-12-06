@@ -23,7 +23,7 @@ import AssetPageContentContainer from '../../components/containers/AssetContentC
 import LicensePopup from './LicensePopup';
 import ProfileRedirect from './ProfileRedirect';
 import FL_footer from '../../components/FL_Footer/FL_footer';
-  
+import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
   
 function AssetPage() {
   const { id, parentId } = useParams();
@@ -197,6 +197,7 @@ function AssetPage() {
         <section className='asset--title--cont'>
             <div className='instit--collhomepage--title--img'>
               {collectionUserName && (
+                
                 <div
                   onClick={handleRedirectAssetOwner}
                   className={
@@ -214,7 +215,7 @@ function AssetPage() {
 
             {currentCollection ? (
 
-              <h2>{currentCollection.collectionName}</h2>
+              <h2 onClick={handleRedirectCollection}>{currentCollection.collectionName}</h2>
 
             ) : (
               'Loading...'
