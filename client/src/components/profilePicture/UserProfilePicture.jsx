@@ -29,7 +29,7 @@ if(!currentUserObject){
       {currentUserObject.profilePicture ? (
          <img src={`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${currentUserObject.profilePicture}`} alt={`Profile Picture`}/>
       ) : (
-        <img src='https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b'/>
+        <img src='https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b' className='default--img--cont'/>
       )}
       <div className='imgCoveringCont'>
         .

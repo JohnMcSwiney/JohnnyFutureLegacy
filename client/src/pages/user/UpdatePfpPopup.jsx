@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './stylev2.css';
+import { ImCross } from "react-icons/im";
 
 const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit }) => {
     const [file, setFile] = useState(null);
@@ -17,7 +18,7 @@ const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit })
             if (!file) {
                 return onUploadError("No file selected");
             }
-
+            // console.log(file)
             // Create FormData object to send the file
             const formData = new FormData();
             formData.append('file', file);
@@ -50,16 +51,19 @@ const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit })
     return (
         <div className='pfp--popup-container'>
             <div className='pfp--popup'>
-                <button onClick={handleClose}>X</button>
-                <div {...getRootProps()} style={dropzoneStyles}>
+                <button className='pfp--popup--cancel--btn' onClick={handleClose}><ImCross /></button>
+                <h2>Update Profile Picture</h2>
+                <div {...getRootProps()} style={dropzoneStyles} className='dragDropDiv'>
                     <input {...getInputProps()} />
-                    {isDragActive ? (
+                    
+                    {isDragActive && !file ? (
                         <p>Drop the file here...</p>
                     ) : (
-                        <p>Drag & drop a profile picture file here, or click to select one</p>
+                        <p>{file ? `${file.name}`:`Drag & drop a profile picture file here, or click to select one`}</p>
                     )}
+                    
                 </div>
-                <button onClick={handleUpload}>Upload Profile Picture</button>
+                <button className='FL_btn__2' onClick={handleUpload}>Upload Profile Picture</button>
             </div>
 
         </div>
@@ -72,6 +76,9 @@ const dropzoneStyles = {
     padding: '20px',
     textAlign: 'center',
     cursor: 'pointer',
+    width: '500px',
+    height: '200px',
+    borderRadius: '15px'
 };
 
 export default UpdatePfpPopup;

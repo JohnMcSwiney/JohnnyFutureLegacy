@@ -14,19 +14,32 @@
     height: 100px;
     width: 100px;
 }
+.pfp--size--1 img{
+height: 100px;
+}
 .pfp--size--2{
     height: 50px;
     width: 50px;
+}
+.pfp--size--2 img{
+height: 50px;
 }
 .pfp--size--3{
     height: 25px;
     width: 25px;
 }
+.pfp--size--3 img{
+    height: 25px;
+}
 .pfp--cont img{
     z-index: 10;
     position: absolute;
     width: 100%;
-    scale: 1.1;
+    scale: 1.05;
+}
+.default--img--cont{
+    scale: 1.15 !important;
+    /* transform: translateY(3px); */
 }
 
 .instit--1{
