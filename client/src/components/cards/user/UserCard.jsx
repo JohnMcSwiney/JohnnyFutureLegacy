@@ -3,23 +3,29 @@ import { useNavigate } from 'react-router-dom';
 import './style.css';
 import CollectionCard_v2 from '../home/CollectionCard_v2';
 import CollectionCarousel from '../collection/CollectionCarousel';
-export default function UserCard({ toggleView, userId, collectionImg }) {
-    const [userName, setUserName] = useState('');
-    const [userImg, setUserImg] = useState('');
-    const [userIsInstit, setUserIsInstit] = useState(false);
-    const [userBannerImg, setUserBannerImg] = useState(``);
-    const [collections, setCollectionIds] = useState(null);
+import UserProfilePicture from '../../profilePicture/UserProfilePicture';
+
+export default function UserCard({ toggleView, userId}) {
+    // const [userName, setUserName] = useState('');
+    // const [userImg, setUserImg] = useState('');
+    // const [userIsInstit, setUserIsInstit] = useState(false);
+    // const [userBannerImg, setUserBannerImg] = useState(``);
+    // const [collections, setCollectionIds] = useState(null);
     const [collectionObjects, setCollectionObjects] = useState(null);
     const [displayCard, setDisplayCard] = useState(false)
     const navigate = useNavigate();
+    const [bannerImgVar, setBannerImgVar] = useState('')
     // console.log('collectionImg: ', collectionImg)
     // console.log(userId)
-    useEffect(() => {
-        if (collectionImg !== null && collectionImg) {
-            console.log('collectionImg: ', collectionImg)
-            setUserBannerImg(collectionImg)
-        }
-    }, [])
+    
+    const [tempUserObject, setTempUserObject] = useState({
+        _id: '',
+        profilePicture: '',
+        isInstit: false,
+        userName: '',
+        userBannerImg: '',
+        collections: null
+      });
     useEffect(() => {
         const fetchUser = async () => {
             try {
@@ -33,13 +39,16 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                 if (userResponse.ok) {
                     const userJson = await userResponse.json();
                     const temp = `${userJson.firstName} ${userJson.lastName}`;
-                    // console.log(userJson)
-                    setUserName(temp);
-                    setUserIsInstit(userJson.isInstit);
-                    if (userJson.profilePictureUrl !== null && !userImg) {
-                        setUserImg(userJson.profilePicture);
-                        setCollectionIds(userJson.userCollections);
-                    }
+                    console.log(userJson)
+                    setTempUserObject({
+                        ...tempUserObject, 
+                        userName: temp,
+                        isInstit:userJson.isInstit,
+                        _id: userJson._id,
+                        collections: userJson.userCollections,
+                        profilePicture: userJson.profilePicture,
+                        userBannerImg: userJson.userBannerImage
+                      });
                 } else {
                     // Handle error
                     console.log('bruh');
@@ -50,38 +59,25 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
         };
 
         fetchUser();
-    }, [userId, userImg]);
+    }, [userId]);
+
     useEffect(() => {
         let tempCollectionHolder = null
-        if (collections !== null) {
+        if (tempUserObject.collections !== null) {
 
-            if (collections.length > 0) {
+            if (tempUserObject.collections.length > 0) {
                 // console.log(userName)
                 // console.log(collections)
                 console.log('this user has collections');
                 setDisplayCard(true)
-                // fetch('/api/collection/getMultiCollectionsByIds', {
-                //     method: 'POST',
-                //     headers: {
-                //         'Content-Type': 'application/json',
-                //     },
-                //     body: JSON.stringify({ collections }),
-                // })
-                //     .then(response => response.json())
-                //     .then(data => {
-                //         console.log(data); // Array of collections
-                //         tempCollectionHolder = data._id
-                //         console.log(tempCollectionHolder)
-                //     })
-                //     .catch(error => {
-                //         console.error('API call failed:', error);
-                //     });
+                console.log('temp user object:')
+                console.log(tempUserObject)
             } else {
                 return;
             }
         }
-
-    }, [collections])
+        console.log(tempUserObject)
+    }, [tempUserObject])
 
     const handleRedirect = () => {
         if (userId) {
@@ -90,6 +86,10 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
         }
     };
 
+    useEffect(()=>{
+        // console.log('temp user object:')
+        // console.log(tempUserObject)
+    },[tempUserObject])
     return (
         <>
             {displayCard ? (
@@ -100,41 +100,38 @@ export default function UserCard({ toggleView, userId, collectionImg }) {
                     {toggleView ? (
                         //true = row view
                         <div className="coll--card--row--cont">
+                            {tempUserObject && (
                             <div className="coll--card--title--cont">
-                                <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}>
-                                    {userImg ? (
-                                        <img className="coll--avatar" src={userImg} alt="User Avatar" />
-                                    ) : (
-                                        <div>Broken Image</div>
-                                    )}
-                                </div>
-                                <h2>{userName}</h2>
+                                <UserProfilePicture currentUserObject={tempUserObject} size={1}/>
+                                <h2>{tempUserObject.userName}</h2>
                             </div>
+                            )}
+                            {tempUserObject && (
                             <div className="coll--card--img--cont">
-                                {userBannerImg &&
-                                    <img src={`http://localhost:5000/uploaded_files/${userId}/Banner/${userBannerImg}`} className='coll--card--img--1' />
+                                {tempUserObject.userBannerImg &&
+                                    <img src={`http://localhost:5000/uploaded_files/${tempUserObject._id}/Banner/${tempUserObject.userBannerImg}`} className='coll--card--img--1' />
                                 }
                             </div>
+                            )}
                         </div>
                     ) : (
                         //false = grid view
                         <div className="user--card--cont--grid">
+                            {tempUserObject && (
                             <div className="user--card--title--cont">
-                                <div className={userIsInstit ? 'coll--avatar--cont instit--shape' : 'coll--avatar--cont indiv--shape'}>
-                                    {userImg ? (
-                                        <img className="coll--avatar" src={userImg} alt="User Avatar" />
-                                    ) : (
-                                        <div>Broken Image</div>
-                                    )}
-                                </div>
-                                <h2>{userName}</h2>
+                                <UserProfilePicture currentUserObject={tempUserObject} size={1}/>
+                                <h2>{tempUserObject.userName}</h2>
                             </div>
-
+                            )}
                             <div className="user--card--img--cont">
-                                {userBannerImg &&
-                                    <img src={`http://localhost:5000/uploaded_files/${userId}/Banner/${userBannerImg}`} className='coll--card--img--1' />
+                                {tempUserObject.userBannerImg &&
+                                    <img src={`http://localhost:5000/uploaded_files/${tempUserObject._id}/Banner/${tempUserObject.userBannerImg}`} 
+                                    // className='coll--card--img--1' 
+                                    />
                                 }
                             </div>
+
+                            
                         </div>
                     )}</div>
             )

@@ -89,7 +89,7 @@ function Profile() {
 
                     {currentUserObject &&
                       <div className='profile--v2--avatar--cont'>
-                        <UserProfilePicture currentUserObject={currentUserObject}/>
+                        <UserProfilePicture currentUserObject={currentUserObject} size={1}/>
                       </div>
                     }
 

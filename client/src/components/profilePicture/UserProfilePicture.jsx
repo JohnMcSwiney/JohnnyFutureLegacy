@@ -1,41 +1,35 @@
 import React, { useState, useEffect } from 'react';
 import './UserPfp.css'
 
-const UserProfilePicture = ({ currentUserObject }) => {
+const UserProfilePicture = ({ currentUserObject, size }) => {
   const [profilePictureUrl, setProfilePictureUrl] = useState(null);
 
-//   useEffect(() => {
-//     const fetchProfilePicture = async () => {
-//       try {
-//         const response = await fetch(`/api/user/${currentUserObject._id}/profile-picture`);
-//         if (!response.ok) {
-//           throw new Error('Failed to fetch profile picture');
-//         }
-//         const data = await response.json();
-//         setProfilePictureUrl(data.profilePictureUrl);
-//       } catch (error) {
-//         console.error(error);
-//         // Handle error
-//       }
-//     };
+const [sizeVar, setSizeVar] = useState(1);
+useEffect(()=>{
+  
+  if(!size){
+    setSizeVar(1)
+  } else {
+    setSizeVar(size)
+  }
+// size 1 is 100 * 100 < default 
+// size 2 is 50 * 50 < sidebar
+// size 3 is 25 * 25 < featured collection
 
-//     fetchProfilePicture();
-//   }, [currentUserObject]);
-// useEffect(()=>{
-//     {currentUserObject &&
-//         console.log('') 
-//         {currentUserObject._id !== null &&
-//         console.log(`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${currentUserObject.profilePicture}`)        
-//         }
-//     }
-// },[])
+if(!currentUserObject){
+  console.log('error');
+  return(
+    <div>...</div>
+  )
+}
 
+},[])
   return (
-    <div className={currentUserObject.isInstit? 'pfp--cont instit' : 'pfp--cont'}>
-      {currentUserObject ? (
+    <div className={currentUserObject.isInstit? `pfp--cont instit--${sizeVar} pfp--size--${sizeVar}` : `pfp--cont pfp--size--${sizeVar}`}>
+      {currentUserObject.profilePicture ? (
          <img src={`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${currentUserObject.profilePicture}`} alt={`Profile Picture`}/>
       ) : (
-        <p>No profile picture available</p>
+        <img src='https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2FNoPfp.png?alt=media&token=6d1b8c8e-9687-4795-8bbc-9497ca23f26b'/>
       )}
       <div className='imgCoveringCont'>
         .

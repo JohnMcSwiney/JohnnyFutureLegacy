@@ -56,7 +56,7 @@
   width: 100%;
   left: 0;
   top: 0;
-  
+  z-index: 12;
 }
 .coll--card--text{
   margin-top: 170px;

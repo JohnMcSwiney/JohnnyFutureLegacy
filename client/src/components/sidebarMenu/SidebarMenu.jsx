@@ -17,12 +17,13 @@ import { useMyContext } from "../../context/FLContext";
 import AppPageContainer from '../containers/AppPageContainer';
 import { Tooltip } from 'react-tooltip'
 import { FaUsers } from "react-icons/fa6";
+import UserProfilePicture from '../profilePicture/UserProfilePicture';
 //RxHamburgerMenu
 export default function SidebarMenu() {
 
     const { sidebarOpen, setSidebarOpen } = useMyContext();
     const navigate = useNavigate();
-    const { userData } = useMyContext();
+    const { userData, currentUserObject } = useMyContext();
     const [isOpen, setIsOpen] = useState(sidebarOpen)
     const redirectClients = () => { navigate(`/clients`); };
     const redirectAccount = () => { navigate(`/profile`); };
@@ -36,7 +37,8 @@ export default function SidebarMenu() {
     const userName = 'Username'
     const is_Signedin = false;
     const currentUser = false;
-
+    
+    
 
     return (
 
@@ -56,13 +58,20 @@ export default function SidebarMenu() {
                 data-tooltip-content={`Your Profile`}
                 data-tooltip-place="right"
                 >
-                    <UserImgCont imgUrl={userImg} />
+                    {/* <UserImgCont imgUrl={userImg} /> */}
+                    {currentUserObject && 
+                    <div className='pfp--holder--sidebar'>
+                    <UserProfilePicture currentUserObject={currentUserObject} size={2}/>
                     {sidebarOpen && (
                         <div className='sidebar--user--info'>
-                            <h3 className='sidebar--user--type'>User</h3>
-                            <h3 className='sidebar--user--name'>{userData ? userData.firstName + " " + userData.lastName : 'Log in'}</h3>
+                            <h3 className='sidebar--user--type'>Test User</h3>
+                            <h3 className='sidebar--user--name'>{currentUserObject.firstName}</h3>
                         </div>
                     )}
+                    </div>
+                    }
+                    
+                    
 
                 </div>
                 {sidebarOpen ? (
