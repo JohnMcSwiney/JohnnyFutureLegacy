@@ -90,13 +90,13 @@ function Browse_Clients() {
     <AppContentWrapper>
       <PageContainer>
         <PageTitle>
-        <h2>Clients</h2>
+        <h2>Browse Clients</h2>
         </PageTitle>
 
       <StyledContentContainer>
-        <ContentTitle>
+        {/* <ContentTitle>
           <h2>Clients</h2>
-        </ContentTitle>
+        </ContentTitle> */}
         <div className='view--toggle--cont'>
           <p>View</p>
           <button className="view--trigger--button" onClick={() => setToggleView(!toggleView)}>

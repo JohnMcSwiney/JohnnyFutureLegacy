@@ -1,34 +1,48 @@
 David Guttenfelder:
+    _id:      "6568f4d0ae5620059231af44"
     email:    David.g@futurelegacy.test
     password: P@ssword123
 
 Jeremy Hogan
+    _id:      "656e5af209c116999f3075cb"
     email:    Jeremy.h@futurelegacy.test
     password: P@ssword123
 
 
 Jon Lowenstein
+    _id:      "656e5b6f09c116999f3075d1"
     email:    Jon.L@futurelegacy.test
     password: P@ssword123
 
 Karen Eng
+    _id:      "656e5d1809c116999f3075d8"
     email:    Karen.E@futurelegacy.test
     password: P@ssword123
 
 Randy Olson
+    _id:      "656e5d3809c116999f3075de"
     email:    Randy.O@futurelegacy.test
     password: P@ssword123
 
 Isadora Kosofsky
+    _id:      "656e5d5d09c116999f3075e4"
     email:    Isadora.K@futurelegacy.test
     password: P@ssword123
 
 
 /* Institutions: */
 Field Museum
+    _id:     "656e5e8109c116999f3075eb"
    email:    Field.Museum@futurelegacy.test
    password: P@ssword123 
 
 Photo Society
+    _id:     "656e5eb009c116999f3075f1"
    email:    Photo.Society@futurelegacy.test
    password: P@ssword123 
+
+   /* Admin: */
+Admin Johnny
+    _id:      "6570dd333158a0de6dab57c3"
+    email:    Johnnymcswiney64@gmail.com
+    password: P@ssword123
