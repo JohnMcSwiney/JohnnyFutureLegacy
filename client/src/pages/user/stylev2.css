@@ -10,6 +10,19 @@
     
     
 }
+.user--v2--cont{
+    margin: 0;
+  display: flex;
+position: absolute;
+bottom: 0;
+  flex-direction: column;
+/* background: tan; */
+  height: 90%;
+  /* // width: inherit; */
+  padding-bottom: 100px;
+  
+  overflow-y: scroll;
+}
 .left--profile--v2--cont{
     /* background-color: rebeccapurple; */
     background-color: var(--secondary--shadow);
@@ -184,7 +197,7 @@ display: flex;
     /* overflow-y: scroll; */
     flex-wrap: wrap;
     height: fit-content;
-    padding-bottom: 300px;
+    /* padding-bottom: 300px; */
     align-items: center;
     justify-content: center;
 }
@@ -241,6 +254,17 @@ display: flex;
     justify-content: center;
     width: 100%;
 
+}
+.user--banner{
+    position: absolute;
+    top: 0;
+    height: 400px;
+    overflow: hidden;
+    z-index: -1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
 }
 .banner--img{
     width: inherit;

@@ -4,7 +4,8 @@ import {
   StyledContainer,
   StyledTitleContainer2,
   StyledTitle,
-  StyledContentContainer
+  StyledContentContainer,
+  StyledSearchResultsContainer
 } from '../../components/Styles';
 import { TiSocialFacebook } from 'react-icons/ti';
 import { FaTwitter, FaTelegramPlane } from 'react-icons/fa';
@@ -63,8 +64,9 @@ function User() {
   return (
     <AppContentWrapper>
       <PageContainer>
+      <div className='user--v2--cont'>
         {userObject &&
-          <div className="profile--banner">
+          <div className="user--banner">
             <div className='banner--gradient'></div>
             {userObject.userBannerImage ?
               <div className="banner--img">
@@ -107,7 +109,7 @@ function User() {
         </div>
 
 
-        <StyledContentContainer>
+        
           <ContentTitle>
             <h3>Collections:</h3>
           </ContentTitle>
@@ -127,14 +129,14 @@ function User() {
               <p>No collections available</p>
             )}
           </div>
-        </StyledContentContainer>
+        </div>
 
-        <div className='right--user--inner--box'>
-          {/* <h3>Licensed Assets:</h3>
+        {/* <div className='right--user--inner--box'>
+          <h3>Licensed Assets:</h3>
           <div className='right--User--content--cont--row--2'>
             <AssetCardUser/>
-          </div> */}
-        </div>
+          </div>
+        </div> */}
 
       </PageContainer>
     </AppContentWrapper>
