@@ -17,6 +17,8 @@ import Pitch1_Logo from './elevatorPitchParts/Pitch1_Logo';
 import Pitch2_Problem from './elevatorPitchParts/Pitch2_Problem';
 import Pitch3_Trust from './elevatorPitchParts/Pitch3_Trust';
 import Pitch4_LearnMore from './elevatorPitchParts/Pitch4_LearnMore';
+import FeaturedCollectionCarousel from './elevatorPitchParts/FeaturedCollectionCarousel';
+
 export default function Home() {
   // https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2Fimage%2028.png?alt=media&token=a86ebad3-fef1-4279-8361-f15639e62331
   // Temp assets
@@ -45,12 +47,15 @@ export default function Home() {
         <Pitch2_Problem/>
         <Pitch3_Trust/>
         <Pitch4_LearnMore/>
-        <FeaturedCollectionsCont/>
+        <br/>
+        <br/>
+        <br/>
+        <FeaturedCollectionCarousel/>
         </section>
         :
         <section className='home--cont'>
-
-        <FeaturedCollectionsCont/>
+        <FeaturedCollectionCarousel/>
+        {/* <FeaturedCollectionsCont/> */}
         </section>
       
       }
@@ -62,24 +67,4 @@ export default function Home() {
 
   )
 }
-{/* <div className='FL--home--showcase--4--transition'>
-        <span><AiOutlineArrowDown/>
 
-          <AiOutlineArrowDown/></span>
-      </div>
-      <div className='FL--home--showcase--4'>
-        <h3>Featured Collection:</h3>
-        <div className='iframe--cont'>
-          <iframe width="1120" height="630" src="https://www.youtube-nocookie.com/embed/fPXfFstDGjY?si=2TKJ3s-_mgggUF7v" title="YouTube video player" frameBorder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowFullScreen></iframe>
-        </div>
-        <div className='home--featured--coll--cont'>
-          <p>David Guttenfelder</p>
-          <button 
-          onClick={() => redirectCollection('65497827ffa86f85dc831ce1')}
-          onMouseDown={handleMouseDown}
-          onMouseUp={handleMouseUp}
-          style={buttonStyle}
-          className='home--coll--btn'
-          >Visit Collection</button>
-        </div>
-      </div> */}

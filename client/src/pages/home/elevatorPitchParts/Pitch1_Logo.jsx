@@ -45,6 +45,7 @@ setTitle(getRandomTitle(originalTitle, alternativeTitle));
         
         <Splitter/>
         <br/>
+        <br/>
         <div className='pitch--1--content'>
         <p>FUTURE <span>LEGACY</span> connects, authenticates, and distributes the world’s vital cultural assets in one searchable decentralized platform.</p>
         
@@ -56,6 +57,7 @@ setTitle(getRandomTitle(originalTitle, alternativeTitle));
         </div>
         
         </div>
+        <br/>
         <br/>
       </div>
       </div>
