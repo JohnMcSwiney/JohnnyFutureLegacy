@@ -13,6 +13,10 @@ import PageContainer from '../../components/containers/PageContainer';
 
 import FeaturedCollectionsCont from './FeaturedCollectionsCont';
 
+import Pitch1_Logo from './elevatorPitchParts/Pitch1_Logo';
+import Pitch2_Problem from './elevatorPitchParts/Pitch2_Problem';
+import Pitch3_Trust from './elevatorPitchParts/Pitch3_Trust';
+import Pitch4_LearnMore from './elevatorPitchParts/Pitch4_LearnMore';
 export default function Home() {
   // https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_TempAssets%2Fimage%2028.png?alt=media&token=a86ebad3-fef1-4279-8361-f15639e62331
   // Temp assets
@@ -23,6 +27,7 @@ export default function Home() {
     setIsMouseDown(true);
   };
   const [isActive, setIsActive] = useState(false);
+  const [showPitch, setShowPitch] = useState(true);
   const [isMouseDown, setIsMouseDown] = useState(false);
   const handleMouseUp = () => {
     setIsMouseDown(false);
@@ -34,10 +39,22 @@ export default function Home() {
   return (
     <AppContentWrapper>
       <PageContainer>
+        {showPitch ? 
+        <section className='home--cont'>
+        <Pitch1_Logo/>
+        <Pitch2_Problem/>
+        <Pitch3_Trust/>
+        <Pitch4_LearnMore/>
+        <FeaturedCollectionsCont/>
+        </section>
+        :
         <section className='home--cont'>
 
         <FeaturedCollectionsCont/>
         </section>
+      
+      }
+        
         
       </PageContainer>
       {/* <FL_footer/> */}

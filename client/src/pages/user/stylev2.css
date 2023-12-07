@@ -18,7 +18,8 @@ bottom: 0;
   flex-direction: column;
 /* background: tan; */
   height: 90%;
-  /* // width: inherit; */
+  
+  width: inherit;
   padding-bottom: 100px;
   
   overflow-y: scroll;

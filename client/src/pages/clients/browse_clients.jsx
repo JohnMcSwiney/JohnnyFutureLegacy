@@ -33,6 +33,19 @@ function Browse_Clients() {
 
   const [collectionsData, setCollectionsData] = useState(null);
   const [usersData, setUsersData] = useState(null);
+  const orderedIdsList= [
+    "6568f4d0ae5620059231af44","656e5e8109c116999f3075eb","656e5d3809c116999f3075de","656e5b6f09c116999f3075d1","656e5d5d09c116999f3075e4","656e5af209c116999f3075cb","656e5eb009c116999f3075f1","656e5d1809c116999f3075d8","6570dd333158a0de6dab57c3"
+  ] 
+  function orderList(unorderedList, orderIds) {
+    // Create a map to quickly look up items by ID
+    const itemMap = new Map(unorderedList.map(item => [item._id, item]));
+  
+    // Use the orderIds array to create the ordered list
+    const orderedList = orderIds.map(_id => itemMap.get(_id));
+  
+    // Filter out any undefined values (items not found in the original list)
+    return orderedList.filter(item => item !== undefined);
+  }
   useEffect(() => {
     // http://localhost:3000/profile
     const fetchCollections = async () => {
@@ -84,8 +97,13 @@ function Browse_Clients() {
 
     fetchUser();
   }, []);
-
-
+const [orderedList, setOrderedList] = useState([])
+useEffect(()=>{
+  if(usersData && orderedIdsList){
+    setOrderedList(orderList(usersData, orderedIdsList));
+  }
+  
+},[usersData])
   return (
     <AppContentWrapper>
       <PageContainer>
@@ -107,7 +125,7 @@ function Browse_Clients() {
 
         
         <div className={toggleView ? 'content--cont row' : 'content--cont grid gap__25'}>
-          {usersData.map((user) => (
+          {orderedList.map((user) => (
             // <CollectionCard
             //   key={collection._id} // Provide a unique key for each component
             //   toggleView={toggleView}
