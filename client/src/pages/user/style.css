@@ -225,6 +225,7 @@ margin-bottom: 5px;
     position: relative;
     /* background-color: beige; */
     margin-top: 120px;
+    justify-content: center;
 }
 .user--avatar--name{
     width: 100%;
@@ -234,6 +235,27 @@ margin-bottom: 5px;
     align-items: center;
     justify-content: center;
     padding-top: 50px;
+}
+.user--title--cont{
+    width: 100%;
+    min-height: 50px;
+    max-height: 100px;
+    position: sticky;
+    top:0;
+    /* background-color: rebeccapurple; */
+    color:var(--font);
+    text-transform: uppercase;
+    justify-content: center;
+    margin: 0px !important;
+    /* padding-left: 15px; */
+}
+.user--title--cont h2{
+    width: fit-content;
+    text-align: center;
+    /* background-color: rebeccapurple; */
+    margin: 0px auto !important;
+    font-weight: 700;
+    font-size: 40px;
 }
 .user--avatar--cont{
     height: 150px;
@@ -276,10 +298,46 @@ margin-bottom: 5px;
     /* margin-left: 20px; */
     display: flex;
     flex-direction: column;
-
+    width: 90% !important;
+    background-color: var(--secondary--shadow);
+    backdrop-filter: blur(5px);
+    margin-top: 10px;
+    border-radius: 20px;
 }
-.left--user--text--cont h4{
-    margin-bottom: 5px;
+.user--socials--cont{
+    display: flex;
+        align-items: center;
+        gap: 10px;
+        height: 29px;
+        width: fit-content;
+        margin: auto;
+        /* background-color: tan; */
+        /* margin-top: 25px; */
+        justify-content: center;
+    }
+    .user--socials--btn{
+       border-radius: 50px;
+        border: 1.5px solid var(--font);
+        box-sizing: border-box;
+        /* transform: translateY(5px) ; */
+        background-color: var(--bg--shadow);
+        color: var(--font);
+        padding: 2.5px 5px ;
+        font-size: 12.5px;
+        width: 29px;
+        height: 29px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 15px;
+    }
+
+
+.user--bio{
+    padding-top: 20px;
+    padding-left: 20px;
+    padding-right: 20px;
+    
 }
 .user--socials--cont{
     display: flex;

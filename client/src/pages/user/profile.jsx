@@ -11,7 +11,9 @@ import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2';
 import PaginatedPurchaseContainer from '../../components/containers/Paginated/PaginatedPurchaseContainer';
 
 import UpdatePfpPopup from './UpdatePfpPopup';
+import UpdateBioPopup from './UpdateBioPopup';
 import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
+
 
 function Profile() {
 
@@ -20,7 +22,8 @@ function Profile() {
   const { userData, currentUserId, currentUserObject, setCurrentUserObject } = useMyContext();
   const [userPurchases, setUserPurchases] = useState(null);
   const [toggleView, setToggleView] = useState(false);
-  const [isPopupVisible, setPopupVisible] = useState(false);
+  const [isPfpPopupVisible, setPfpPopupVisible] = useState(false);
+  const [isBioPopupVisible, setBioPopupVisible] = useState(false)
 
   const [profilePictureUrl, setProfilePictureUrl] = useState(null);
 
@@ -54,14 +57,21 @@ function Profile() {
   return (
     <AppContentWrapper>
       <PageContainer>
-        {isPopupVisible && currentUserId &&
+        {isPfpPopupVisible && currentUserId &&
           <UpdatePfpPopup
             userId={currentUserId}
-            clickToExit={() => setPopupVisible(false)}
-            onUploadSuccess={() => setPopupVisible(false)}
-            onUploadError={() => setPopupVisible(false)}
-
-
+            clickToExit={() => setPfpPopupVisible(false)}
+            onUploadSuccess={() => setPfpPopupVisible(false)}
+            onUploadError={() => setPfpPopupVisible(false)}
+          />
+        }
+        {isBioPopupVisible && currentUserId &&
+          <UpdateBioPopup
+            userId={currentUserId}
+            bioIn={currentUserObject.bio}
+            onClose={() => setBioPopupVisible(false)}
+            onUpdateSuccess={() => setBioPopupVisible(false)}
+            onUpdateError={() => setBioPopupVisible(false)}
           />
         }
         {currentUserObject &&
@@ -93,7 +103,7 @@ function Profile() {
                       </div>
                     }
 
-                    <button className='profile--v2--edit--btn' onClick={() => setPopupVisible(true)}>Edit</button>
+                    <button className='profile--v2--edit--btn' onClick={() => setPfpPopupVisible(true)}>Edit</button>
                   </div>
 
                   <div className='left--profile--v2--text--cont'>
@@ -113,10 +123,10 @@ function Profile() {
                 <button className='profile--v2--socials--btn'><AiFillInstagram /> </button>
               </div>
               {/* bio container */}
-              {/* <div className='profile--v2--bio--cont'>
-                <h3>Bio:</h3>
-                <p>{bio}</p>
-              </div> */}
+              <div className='profile--v2--bio--cont'>
+                <h3>Bio:<button className='profile--v2--wallet--btn' onClick={() => setBioPopupVisible(true)}>Edit</button></h3>
+                <p>{currentUserObject.bio}</p>
+              </div>
             </div>
 
           </div>

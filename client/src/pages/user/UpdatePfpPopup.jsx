@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, {  useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './stylev2.css';
 import { ImCross } from "react-icons/im";
 
 const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit }) => {
     const [file, setFile] = useState(null);
-
+    
     const onDrop = (acceptedFiles) => {
         // Update the state with the selected file
         setFile(acceptedFiles[0]);
@@ -49,9 +49,9 @@ const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit })
         
     }
     return (
-        <div className='pfp--popup-container'>
-            <div className='pfp--popup'>
-                <button className='pfp--popup--cancel--btn' onClick={handleClose}><ImCross /></button>
+        <div className='popup--container'>
+            <div className='popup scale-in-center'>
+                <button className='popup--cancel--btn' onClick={handleClose}><ImCross /></button>
                 <h2>Update Profile Picture</h2>
                 <div {...getRootProps()} style={dropzoneStyles} className='dragDropDiv'>
                     <input {...getInputProps()} />

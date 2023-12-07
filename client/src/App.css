@@ -230,6 +230,8 @@ p {
   margin: 0;
 }
 
+
+
 .FL_Input__text__1 textarea {
   width: 633px;
   resize:none;
@@ -247,6 +249,32 @@ p {
   padding-right: 15px ;
   color: var(--font);
   /* margin-right: 30px; */
+}
+.FL_Input__text__2 textarea {
+  width: 633px;
+  resize:none;
+  height: 300px;
+  padding-left: 15px;
+  padding-right: 15px;
+  border-radius:  25px 2px 2px 25px;
+  border: solid 1px var(--font);
+  background-color: rgba(0, 0, 0, 0.05);
+  font-family: var(--font--fam);
+  padding-top: 5px;
+  font-size: 18px;
+  overflow: hidden;
+  overflow-y: scroll;
+  padding-right: 15px ;
+  color: var(--font);
+  /* margin-right: 30px; */
+}
+.FL_Input__text__2 h4 {
+  color: var(--font);
+  font-size: 20px !important;
+  font-weight: 600;
+  transform: none;
+  text-transform: none;
+  margin: 0;
 }
 .FL_Input__text__2 {
   display: flex;

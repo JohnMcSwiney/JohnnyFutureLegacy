@@ -64,52 +64,46 @@ function User() {
   return (
     <AppContentWrapper>
       <PageContainer>
-      <div className='user--v2--cont'>
-        {userObject &&
-          <div className="user--banner">
-            <div className='banner--gradient'></div>
-            {userObject.userBannerImage ?
-              <div className="banner--img">
-                <img src={`http://localhost:5000/uploaded_files/${userObject._id}/Banner/${userObject.userBannerImage}`} alt={`Image ${userObject.userBannerImage}`} />
-              </div>
-              :
-              <div>
-
-              </div>
-            }
-          </div>
-        }
-        <div className='top--user--info--cont'>
+        <div className='user--v2--cont'>
           {userObject &&
-            <UserProfilePicture currentUserObject={userObject} size={1} />
-          }
-          <div className='top--user--text--cont'>
-            {userObject ?
-              <>
-                <PageTitle>
-                  <h2>{userObject.firstName} {userObject.lastName}</h2>
-                </PageTitle>
-                {userObject.bio !== null ?
-                  <h4>{userObject.bio}</h4>
-                  :
-                  ""}
-              </>
+            <div className="user--banner">
+              <div className='banner--gradient'></div>
+              {userObject.userBannerImage ?
+                <div className="banner--img">
+                  <img src={`http://localhost:5000/uploaded_files/${userObject._id}/Banner/${userObject.userBannerImage}`} alt={`Image ${userObject.userBannerImage}`} />
+                </div>
+                :
+                <div>
 
-
-              :
-              "Loading..."}
-
-            <div className='profile--v2--socials--cont'>
-              <button className='profile--v2--socials--btn'><TiSocialFacebook /> </button>
-              <button className='profile--v2--socials--btn'><FaTwitter /> </button>
-              <button className='profile--v2--socials--btn'><FaTelegramPlane /> </button>
-              <button className='profile--v2--socials--btn'><AiFillInstagram /> </button>
+                </div>
+              }
             </div>
-          </div>
-        </div>
+          }
+
+          {userObject &&
+            <div className='top--user--info--cont'>
+
+              <UserProfilePicture currentUserObject={userObject} size={1} />
+              <div className='top--user--text--cont'>
+                <div className='user--title--cont'>
+                  <h2>{userObject.firstName} {userObject.lastName}</h2>
+                </div>
+                <div className='user--socials--cont'>
+                  <button className='user--socials--btn'><TiSocialFacebook /> </button>
+                  <button className='user--socials--btn'><FaTwitter /> </button>
+                  <button className='user--socials--btn'><FaTelegramPlane /> </button>
+                  <button className='user--socials--btn'><AiFillInstagram /> </button>
+                </div>
+                {userObject.bio !== null &&
+                  <h4 className='user--bio'>{userObject.bio}</h4>
+
+                }
+                
+              </div>
+            </div>
+          }
 
 
-        
           <ContentTitle>
             <h3>Collections:</h3>
           </ContentTitle>
