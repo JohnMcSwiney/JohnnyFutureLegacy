@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { Tooltip } from 'react-tooltip'
 import UserProfilePicture from '../../../components/profilePicture/UserProfilePicture'
 
+
 function LargeFeaturedVideo({featuredCollection}) {
     useEffect(()=>{
         if(featuredCollection !== null){
@@ -121,7 +122,6 @@ function LargeFeaturedVideo({featuredCollection}) {
                         >Visit Collection</button>
                     </div>
                 </div>
-
             }
         </div>
 

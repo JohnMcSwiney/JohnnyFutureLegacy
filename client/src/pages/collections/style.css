@@ -338,7 +338,7 @@
 
 
 .featured--video--lg--cont{
-  width: 100%;
+  width: 80%;
   height: 800px;
   background-color: black;
   display: flex;
@@ -353,6 +353,7 @@
   align-items: center;
   flex-direction: column;
   position: relative;
+  width: inherit;
   /* background-color: orange; */
 }
 .featured--youtube--video--lg{
