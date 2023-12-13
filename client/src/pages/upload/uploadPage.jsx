@@ -5,7 +5,7 @@ import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import PageContainer from '../../components/containers/PageContainer';
 import PageTitle from '../../components/containers/PageTitle';
 
-export default function UploadPage() {
+function UploadPage() {
     const navigate = useNavigate();
     const redirectSingleAsset = () => {
 
@@ -55,3 +55,5 @@ export default function UploadPage() {
         </AppContentWrapper>
     )
 }
+
+export default UploadPage
