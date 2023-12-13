@@ -49,7 +49,7 @@ function FeaturedCollectionCarousel() {
   useEffect(() => {
     const intervalId = setInterval(() => {
       changeSlide(1);
-    }, 3000);
+    }, 4000);
 
     return () => clearInterval(intervalId); // Cleanup on component unmount
   }, [currentIndex]);
@@ -75,7 +75,7 @@ function FeaturedCollectionCarousel() {
             {featuredCollections.map((featured, index) => (
               <div
                 key={index}
-                className={`collection--carousel-item ${index === currentIndex ? 'active-item' : ''}`}
+                className={`collection--carousel-item ${index === currentIndex ? 'active-item' : 'inactive-item'}`}
               >
                 <LargeFeaturedVideo featuredCollection={featured} />
               </div>

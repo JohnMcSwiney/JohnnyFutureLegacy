@@ -337,7 +337,7 @@
 }
 
 .inactive-item {
-  opacity: 0.5 !important;
+  opacity: 0.3 !important;
   transition:
     opacity 0.5s ease-in-out;
 }

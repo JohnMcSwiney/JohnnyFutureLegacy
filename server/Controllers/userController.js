@@ -1,10 +1,10 @@
 const saltRounds = parseInt(process.env.SALT_ROUNDS);
 const mongoose = require("mongoose");
 const Users = require("../models/userModel");
-const Asset = require('../models/assetModel');
+const Asset = require("../models/assetModel");
 const fs = require("fs/promises");
 const bcrypt = require("bcrypt");
-const path = require('path');
+const path = require("path");
 
 const salt = bcrypt.genSaltSync(saltRounds);
 class UserController {
@@ -130,63 +130,64 @@ class UserController {
       res.status(400).json({ error: error.message });
     }
   }
-// Add a method to handle profile picture upload
-async uploadProfilePicture(req, res) {
-  try {
-    const userId = req.params.id;
+  // Add a method to handle profile picture upload
+  async uploadProfilePicture(req, res) {
+    try {
+      const userId = req.params.id;
 
-    // Check if req.file is defined
-    if (!req.file) {
-      return res.status(400).json({ error: "No file uploaded" });
-    }
-
-    const profilePictureUrl = req.file.originalname;
-
-    // Assuming you have a User model instance and "profilePicture" field in your schema
-    const user = await Users.findByIdAndUpdate(
-      userId,
-      { profilePicture: profilePictureUrl },
-      {
-        new: true,
-        runValidators: true,
+      // Check if req.file is defined
+      if (!req.file) {
+        return res.status(400).json({ error: "No file uploaded" });
       }
-    );
 
-    if (!user) {
-      return res.status(404).json({ error: "No such User" });
+      const profilePictureUrl = req.file.originalname;
+
+      // Assuming you have a User model instance and "profilePicture" field in your schema
+      const user = await Users.findByIdAndUpdate(
+        userId,
+        { profilePicture: profilePictureUrl },
+        {
+          new: true,
+          runValidators: true,
+        }
+      );
+
+      if (!user) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res
+        .status(200)
+        .json({
+          message: "Profile picture uploaded successfully",
+          profilePictureUrl: profilePictureUrl,
+        });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal Server Error" });
     }
-
-    res
-      .status(200)
-      .json({ message: "Profile picture uploaded successfully", profilePictureUrl: profilePictureUrl });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: "Internal Server Error" });
   }
-}
 
-// Get user's profile picture
-async getUserProfilePicture(req, res) {
-  try {
-    const { id } = req.params;
+  // Get user's profile picture
+  async getUserProfilePicture(req, res) {
+    try {
+      const { id } = req.params;
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(404).json({ error: "No such User" });
+      if (!mongoose.Types.ObjectId.isValid(id)) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      const user = await Users.findById(id, "profilePicture");
+
+      if (!user) {
+        return res.status(404).json({ error: "No such User" });
+      }
+
+      res.status(200).json({ profilePictureUrl: user.profilePicture });
+    } catch (error) {
+      res.status(500).json({ error: error.message });
     }
-
-    const user = await Users.findById(id, "profilePicture");
-
-    if (!user) {
-      return res.status(404).json({ error: "No such User" });
-    }
-
-    res.status(200).json({ profilePictureUrl: user.profilePicture });
-  } catch (error) {
-    res.status(500).json({ error: error.message });
   }
-}
-
-
   // Update the isInstit field for a user
   async updateIsInstit(req, res) {
     try {
@@ -328,7 +329,6 @@ async getUserProfilePicture(req, res) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
-
   // Delete a user by ID
   async deleteUser(req, res) {
     try {
@@ -383,7 +383,6 @@ async getUserProfilePicture(req, res) {
       res.status(500).json({ error: "Internal Server Error" });
     }
   }
-
   // Get user's banner image
   async getUserBannerImage(req, res) {
     try {
@@ -404,50 +403,56 @@ async getUserProfilePicture(req, res) {
       res.status(500).json({ error: error.message });
     }
   }
-// Delete all assets for a specific user
-async deleteAllUserAssets(req, res) {
-  try {
-    const userId = req.params.id;
+  // Delete all assets for a specific user
+  async deleteAllUserAssets(req, res) {
+    try {
+      const userId = req.params.id;
 
-    // Validate if the user exists
-    const user = await Users.findById(userId);
-    if (!user) {
-      return res.status(404).json({ error: 'User not found' });
+      // Validate if the user exists
+      const user = await Users.findById(userId);
+      if (!user) {
+        return res.status(404).json({ error: "User not found" });
+      }
+
+      // Find all assets associated with the user
+      const assets = await Asset.find({ creatorName: userId });
+
+      // Delete each asset
+      for (const asset of assets) {
+        // Delete the asset image files if they exist (adjust the path as needed)
+        const imagePath = path.join(
+          __dirname,
+          "..",
+          "uploaded_files",
+          userId,
+          asset.assetImage
+        );
+
+        // Check if the file exists using the callback version of fs.access
+        fs.access(imagePath, (error) => {
+          if (!error) {
+            // File exists, so unlink it
+            fs.unlink(imagePath, (unlinkError) => {
+              if (unlinkError) {
+                console.error(`Error deleting file: ${unlinkError.message}`);
+              }
+            });
+          } else {
+            // Handle the case where the file doesn't exist or there's an error accessing it
+            console.error(`Error accessing file: ${error.message}`);
+          }
+        });
+
+        // Delete the asset document from the database
+        await Asset.findByIdAndRemove(asset._id);
+      }
+
+      res.status(200).json({ message: "All user assets deleted successfully" });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ error: "Internal server error" });
     }
-
-    // Find all assets associated with the user
-    const assets = await Asset.find({ creatorName: userId });
-
-    // Delete each asset
-    for (const asset of assets) {
-      // Delete the asset image files if they exist (adjust the path as needed)
-      const imagePath = path.join(__dirname, '..', 'uploaded_files', userId, asset.assetImage);
-
-      // Check if the file exists using the callback version of fs.access
-      fs.access(imagePath, (error) => {
-        if (!error) {
-          // File exists, so unlink it
-          fs.unlink(imagePath, (unlinkError) => {
-            if (unlinkError) {
-              console.error(`Error deleting file: ${unlinkError.message}`);
-            }
-          });
-        } else {
-          // Handle the case where the file doesn't exist or there's an error accessing it
-          console.error(`Error accessing file: ${error.message}`);
-        }
-      });
-
-      // Delete the asset document from the database
-      await Asset.findByIdAndRemove(asset._id);
-    }
-
-    res.status(200).json({ message: 'All user assets deleted successfully' });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ error: 'Internal server error' });
   }
-}
 }
 
 module.exports = UserController;
