@@ -9,6 +9,8 @@
     "start-serv": "nodemon server.js",
     "dev": "nodemon server"
   },
+  "Cross-Origin-Embedder-Policy" : "require-corp",
+"Cross-Origin-Opener-Policy" : "same-origin",
   "keywords": [],
   "author": "",
   "license": "ISC",
