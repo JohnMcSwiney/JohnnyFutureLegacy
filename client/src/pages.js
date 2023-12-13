@@ -30,7 +30,7 @@ export {default as User} from './pages/user/user';
 
 export {default as Subscribe} from "./pages/zz-other/subscription/subscribe";
 
-export {default as Upload} from "./pages/upload/UploadPage";
+export {default as Upload} from "./pages/upload/uploadPage";
 
 export {default as AssetUpload} from "./pages/upload/AssetUpload";
 
