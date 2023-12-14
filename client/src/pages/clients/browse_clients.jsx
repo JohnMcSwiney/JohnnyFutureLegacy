@@ -21,6 +21,8 @@ import PageContainer from '../../components/containers/PageContainer';
 import PageTitle from '../../components/containers/PageTitle';
 import ContentTitle from '../../components/containers/ContentTitle';
 
+import API_BASE_URL from '../../apiConfig';
+
 import FL_footer from '../../components/FL_Footer/FL_footer';
 function Browse_Clients() {
 
@@ -49,7 +51,7 @@ function Browse_Clients() {
   useEffect(() => {
     // http://localhost:3000/profile
     const fetchCollections = async () => {
-      const collectionsResponse = await fetch(`http://localhost:5000/api/collection/`, {
+      const collectionsResponse = await fetch(`${API_BASE_URL}/api/collection/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
