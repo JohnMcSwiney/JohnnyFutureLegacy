@@ -3,6 +3,7 @@ import './homePage_v2.css'
 import { useNavigate } from "react-router-dom";
 import { Tooltip } from 'react-tooltip'
 import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
+import API_BASE_URL from '../../apiConfig';
 
 function FeaturedCollectionCard({ featuredIn,indexIn }) {
 
@@ -24,7 +25,7 @@ function FeaturedCollectionCard({ featuredIn,indexIn }) {
 
       const getCollection = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/collection/${featuredIn.connectedCollectionId}`, {
+          const response = await fetch(`${API_BASE_URL}/api/collection/${featuredIn.connectedCollectionId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -51,7 +52,7 @@ function FeaturedCollectionCard({ featuredIn,indexIn }) {
     if (collectionObject) {
       const getUser = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
+          const response = await fetch(`${API_BASE_URL}/api/user/${collectionObject.ownerName}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',

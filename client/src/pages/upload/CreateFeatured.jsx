@@ -4,7 +4,7 @@ import PageContainer from '../../components/containers/PageContainer';
 import PageTitle from '../../components/containers/PageTitle';
 import ContentTitle from '../../components/containers/ContentTitle';
 import Dropdown from '../../components/dropdown/Dropdown';
-
+import API_BASE_URL from '../../apiConfig';
 import './style.css'
 
 function CreateFeatured() {
@@ -17,7 +17,7 @@ function CreateFeatured() {
     useEffect(() => {
         // http://localhost:3000/profile
         const fetchCollections = async () => {
-            const collectionsResponse = await fetch(`http://localhost:5000/api/collection/`, {
+            const collectionsResponse = await fetch(`${API_BASE_URL}/api/collection/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -70,7 +70,7 @@ function CreateFeatured() {
         }
         console.log(featuredCollection);
         try {
-            const response = await fetch('http://localhost:5000/api/featured/', {
+            const response = await fetch(`${API_BASE_URL}/api/featured/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -102,7 +102,7 @@ function CreateFeatured() {
         console.log(featuredId);
     
         try {
-            const response = await fetch(`http://localhost:5000/api/collection/${collectionToFeature._id}/add-featured/`, {
+            const response = await fetch(`${API_BASE_URL}/api/collection/${collectionToFeature._id}/add-featured/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import ProgressBar from "../../../components/progressbar/progressbar";
 import { useToastContext } from '../../../context/ToastContext';
 import { useMyContext } from "../../../context/FLContext";
 import './uploadCompStyle.css';
+import API_BASE_URL from "../../../apiConfig";
 
 
 function MultipleFileInput({ onSubmit, onFileChange }) {
@@ -39,7 +40,7 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
       const formData = new FormData();
       formData.append('file', file);
 
-      const promise = fetch(`http://localhost:5000/uploadimage?userId=${currentUserObject._id}`, {
+      const promise = fetch(`${API_BASE_URL}/uploadimage?userId=${currentUserObject._id}`, {
         method: 'POST',
         body: formData,
       })
@@ -190,7 +191,7 @@ function MultipleFileInput({ onSubmit, onFileChange }) {
                 onClick={() => handleToggleSelect(index)}
               >
                 <div className="uploaded--image--v2--img">
-                  <img src={`http://localhost:5000/getimage?userId=${currentUserObject._id}&filename=${uploadResponses[index]}`} alt={`Image ${file.name}`} />
+                  <img src={`${API_BASE_URL}/getimage?userId=${currentUserObject._id}&filename=${uploadResponses[index]}`} alt={`Image ${file.name}`} />
                 </div>
                 <span className="image--check--cont">
                   <input type="checkbox"

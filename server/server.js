@@ -13,7 +13,7 @@ const mongoose = require('mongoose');
 require('dotenv').config();
 
 const app = express();
-const port = 5000;
+const port = 443;
 
 // Increase payload size limit for body-parser
 app.use(bodyParser.json({ limit: '50mb' }));

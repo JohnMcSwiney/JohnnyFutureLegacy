@@ -1,6 +1,7 @@
 import React,{useEffect, useState} from 'react'
 import './homePage_v2.css'
 import FeaturedCollectionCard from './FeaturedCollectionCard';
+import API_BASE_URL from '../../apiConfig';
 
 function FeaturedCollectionsCont() {
   const [featuredCollections, setFeaturedCollections] = useState(null);
@@ -10,7 +11,7 @@ function FeaturedCollectionsCont() {
 
   const getFeaturedCollection = async () => {
       try {
-          const response = await fetch('http://localhost:5000/api/featured/', {
+          const response = await fetch(`${API_BASE_URL}/api/featured/`, {
               method: 'GET',
               headers: {
                   'Content-Type': 'application/json',

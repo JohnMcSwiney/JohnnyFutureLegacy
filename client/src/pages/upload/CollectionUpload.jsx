@@ -14,6 +14,7 @@ import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import PageContainer from '../../components/containers/PageContainer';
 import PageTitle from '../../components/containers/PageTitle';
 
+import API_BASE_URL from '../../apiConfig';
 
 
 function CollectionUpload() {
@@ -187,7 +188,7 @@ function CollectionUpload() {
                 // console.log('asset objects being created');
                 // console.log(FL_uploadDate)
                 for (let index = 0; index < parentPictureData.length; index++) {
-                    let jsonExifData = `http://localhost:5000/getimageData?userId=${currentUserObject._id}&filename=${parentPictureData[index].file.name}`;
+                    let jsonExifData = `${API_BASE_URL}/getimageData?userId=${currentUserObject._id}&filename=${parentPictureData[index].file.name}`;
                     let exifDataObj = [];
                     const tempAsset = {
                         assetName: parentPictureData[index].file.name,
@@ -196,7 +197,7 @@ function CollectionUpload() {
                         assetDescription: '',
                         assetPriceUSD: createdCollection.collectionPriceUSD,
                         informationTags: createdCollection.collectionInformationTags,
-                        assetImage: `http://localhost:5000/getimage?userId=${currentUserObject._id}&filename=${parentPictureData[index].fileName}`,
+                        assetImage: `${API_BASE_URL}/getimage?userId=${currentUserObject._id}&filename=${parentPictureData[index].fileName}`,
                         exifData: [],
                     }
                     fetch(jsonExifData)
@@ -281,7 +282,7 @@ function CollectionUpload() {
     }
     const createAssetsInServer = async () => {
 
-        const apiUrl = 'http://localhost:5000/api/asset/';
+        const apiUrl = `${API_BASE_URL}/api/asset/`;
         if (createdAssets.length !== assetArray.length && assetArray.length !== assetIds.length) {
             setIsCreating(true);
             try {
@@ -328,7 +329,7 @@ function CollectionUpload() {
     const createCollectionInServer = async () => {
 
         // console.log('creating assets');
-        const apiUrl = 'http://localhost:5000/api/collection/';
+        const apiUrl = `${API_BASE_URL}/api/collection/`;
         if (createdAssets.length === assetArray.length && assetArray.length === assetIds.length && createdCollection) {
             setIsCreating(true);
             try {
@@ -390,7 +391,7 @@ function CollectionUpload() {
     }, [isComplete])
     const updateUser = async (e) => {
         try {
-            const response = await fetch(`/api/user/${currentUserObject._id}/user-collections/`, {
+            const response = await fetch(`${API_BASE_URL}/api/user/${currentUserObject._id}/user-collections/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

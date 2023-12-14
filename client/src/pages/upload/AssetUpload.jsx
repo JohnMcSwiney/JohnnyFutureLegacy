@@ -165,7 +165,7 @@ function AssetUpload() {
   
   return (
     <div>
-      asset upload, needs work or removal
+      asset upload, needs work or removal lol
     </div>
     // <div onClick={incrementCount} >
     //   <h2>Create Asset</h2>

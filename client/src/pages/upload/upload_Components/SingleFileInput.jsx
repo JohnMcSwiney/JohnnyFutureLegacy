@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import ProgressBar from "../../../components/progressbar/progressbar";
 import { useToastContext } from '../../../context/ToastContext';
 import { useMyContext } from "../../../context/FLContext";
+import API_BASE_URL from "../../../apiConfig";
 
 function SingleFileInput({ onSubmit }) {
     const [file, setFile] = useState(null);
@@ -36,7 +37,7 @@ function SingleFileInput({ onSubmit }) {
         const formData = new FormData();
         formData.append('file', file);
 
-        fetch(`http://localhost:5000/api/user/${currentUserObject._id}/uploadBanner`, {
+        fetch(`${API_BASE_URL}/api/user/${currentUserObject._id}/uploadBanner`, {
             method: 'POST',
             body: formData,  // Use FormData for file uploads
         })
@@ -79,7 +80,7 @@ function SingleFileInput({ onSubmit }) {
 
                         <div className="uploaded--image-scrollable">
                             <div className="uploaded--image" key={file.name}>
-                                <img src={`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${file.name}`} alt={`Image ${file.name}`} />
+                                <img src={`${API_BASE_URL}/uploaded_files/${currentUserObject._id}/Banner/${file.name}`} alt={`Image ${file.name}`} />
                             </div>
                         </div>
                     </div>

@@ -70,7 +70,7 @@ function Browse_Clients() {
     fetchCollections()
     const fetchUser = async () => {
       try {
-        const userResponse = await fetch(`http://localhost:5000/api/user/`, {
+        const userResponse = await fetch(`${API_BASE_URL}/api/user/`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

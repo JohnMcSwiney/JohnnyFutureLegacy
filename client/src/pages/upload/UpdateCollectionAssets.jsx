@@ -3,7 +3,7 @@ import AppContentWrapper from '../../components/containers/AppContentWrapper';
 import PageContainer from '../../components/containers/PageContainer';
 import PageTitle from '../../components/containers/PageTitle';
 import ContentTitle from '../../components/containers/ContentTitle';
-
+import API_BASE_URL from '../../apiConfig';
 import './style.css';
 
 function UpdateCollectionAssets() {
@@ -13,7 +13,7 @@ function UpdateCollectionAssets() {
 
     useEffect(() => {
         const fetchCollections = async () => {
-            const collectionsResponse = await fetch(`http://localhost:5000/api/collection/`, {
+            const collectionsResponse = await fetch(`${API_BASE_URL}/api/collection/`, {
                 method: 'GET',
                 headers: {
                     'Content-Type': 'application/json',
@@ -42,7 +42,7 @@ function UpdateCollectionAssets() {
             const assetIds = collectionToFeature.collectionAssets.map((asset) => asset._id);
             console.log('Asset IDs:', assetIds);
 
-            const response = await fetch(`http://localhost:5000/api/collection/${collectionToFeature._id}`, {
+            const response = await fetch(`${API_BASE_URL}/api/collection/${collectionToFeature._id}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

@@ -25,6 +25,7 @@ import ProfileRedirect from './ProfileRedirect';
 import FL_footer from '../../components/FL_Footer/FL_footer';
 import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
   
+import API_BASE_URL from '../../apiConfig';
 function AssetPage() {
   const { id, parentId } = useParams();
   const [assetData, setAssetData] = useState(null);
@@ -45,7 +46,7 @@ function AssetPage() {
   useEffect(() => {
     // http://localhost:3000/profile
     const fetchAsset = async () => {
-      const assetResponse = await fetch(`http://localhost:5000/api/asset/${id}`, {
+      const assetResponse = await fetch(`${API_BASE_URL}/api/asset/${id}`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -66,7 +67,7 @@ function AssetPage() {
       if(currentCollection._id !== parentId){
         // addToast('collection conflict')
         const fetchCollection = async () => {
-          const collectionResponse = await fetch(`http://localhost:5000/api/collection/${parentId}`, {
+          const collectionResponse = await fetch(`${API_BASE_URL}/api/collection/${parentId}`, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json',
@@ -136,7 +137,7 @@ function AssetPage() {
           let assetId = assetData._id
           let userId = currentUserId
           console.log(JSON.stringify(assetId))
-          const purchaseResponse = await fetch(`http://localhost:5000/api/user/${userId}/purchase`, {
+          const purchaseResponse = await fetch(`${API_BASE_URL}/api/user/${userId}/purchase`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',

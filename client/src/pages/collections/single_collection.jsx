@@ -31,6 +31,9 @@ import { useNavigate } from 'react-router-dom';
 import FL_Footer from '../../components/FL_Footer/FL_footer';
 import UserProfilePicture from '../../components/profilePicture/UserProfilePicture'
 
+import API_BASE_URL from '../../apiConfig'
+
+
 function Single_collection() {
   const { param1, featuredId } = useParams() //collection id
   const { currentCollection, setFetchedCollection } = useMyContext();
@@ -53,7 +56,7 @@ function Single_collection() {
     if (featuredId) {
       setIdInUrl(true);
       const fetchFeatured = async () => {
-        const featuredResponse = await fetch(`http://localhost:5000/api/featured/${featuredId}`, {
+        const featuredResponse = await fetch(`${API_BASE_URL}/api/featured/${featuredId}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -72,7 +75,7 @@ function Single_collection() {
 
     if (param1) {
       const fetchCollections = async () => {
-        const collectionResponse = await fetch(`http://localhost:5000/api/collection/${param1}`, {
+        const collectionResponse = await fetch(`${API_BASE_URL}/api/collection/${param1}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -101,7 +104,7 @@ function Single_collection() {
           // featured gets added and page continues loading
           console.log('collection has featured');
           const fetchFeatured = async () => {
-            const featuredResponse = await fetch(`http://localhost:5000/api/featured/${collectionObject.featuredId}`, {
+            const featuredResponse = await fetch(`${API_BASE_URL}/api/featured/${collectionObject.featuredId}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -120,7 +123,7 @@ function Single_collection() {
       }
       const fetchCollectionUser = async () => {
         // console.log("user");
-        const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${collectionObject.ownerName}`, {
+        const collectionUserResponse = await fetch(`${API_BASE_URL}/api/user/${collectionObject.ownerName}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

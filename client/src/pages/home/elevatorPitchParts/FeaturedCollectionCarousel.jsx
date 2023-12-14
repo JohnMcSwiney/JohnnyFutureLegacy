@@ -3,6 +3,8 @@ import FeaturedVideoCardLg from '../../collections/FeaturedVideoCardLg';
 import './_PitchStyle.css';
 import LargeFeaturedVideo from './LargeFeaturedVideo';
 
+import API_BASE_URL from '../../../apiConfig';
+
 function FeaturedCollectionCarousel() {
   const [featuredCollections, setFeaturedCollections] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -10,7 +12,7 @@ function FeaturedCollectionCarousel() {
 
   const getFeaturedCollection = async () => {
     try {
-      const response = await fetch('http://localhost:5000/api/featured/', {
+      const response = await fetch(`${API_BASE_URL}/api/featured/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',

@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router'
 import { Tooltip } from 'react-tooltip'
 import UserProfilePicture from '../../../components/profilePicture/UserProfilePicture'
 
+import API_BASE_URL from '../../../apiConfig'
 
 function LargeFeaturedVideo({featuredCollection}) {
     useEffect(()=>{
@@ -16,7 +17,7 @@ function LargeFeaturedVideo({featuredCollection}) {
     const [collectionName, setCollectionName] = useState(null);
     const fetchCollectionUser = async () => {
         // console.log("user");
-        const collectionUserResponse = await fetch(`http://localhost:5000/api/user/${featuredCollection.userId}`, {
+        const collectionUserResponse = await fetch(`${API_BASE_URL}/api/user/${featuredCollection.userId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
@@ -34,7 +35,7 @@ function LargeFeaturedVideo({featuredCollection}) {
     }
     const fetchCollectionName = async () => {
         try {
-          const response = await fetch(`http://localhost:5000/api/collection/${featuredCollection.connectedCollectionId}/getName`);
+          const response = await fetch(`${API_BASE_URL}/api/collection/${featuredCollection.connectedCollectionId}/getName`);
           const data = await response.json();
   
           if (response.ok) {
