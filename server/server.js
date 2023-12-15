@@ -8,8 +8,8 @@ const app = express();
 require('dotenv').config();
 
 // Read certificate and private key files
-const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'utf8');
-const certificate = fs.readFileSync(process.env.CERTIFICATE_PATH, 'utf8');
+const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'ASCII');
+const certificate = fs.readFileSync(process.env.CERTIFICATE_PATH, 'ASCII');
 
 const credentials = { key: privateKey, cert: certificate };
 
