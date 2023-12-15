@@ -13,6 +13,7 @@ const certificate = fs.readFileSync(process.env.CERTIFICATE_PATH, 'utf8');
 
 const credentials = { key: privateKey, cert: certificate };
 
+console.log(credentials);
 // Define your Express routes and middleware here
 
 // Example route
