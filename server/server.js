@@ -51,7 +51,7 @@ const storage = multer.diskStorage({
 const upload = multer({ storage: storage });
 
 app.get('/', (req, res) => {
-  res.send('Hello, HTTPS World!');
+  res.send(`Hello, you're accessing the Future Legacy Backend Server`);
 });
 
 app.post('/uploadimage', upload.single('file'), async (req, res) => {
