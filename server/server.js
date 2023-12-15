@@ -6,10 +6,11 @@ const app = express();
 
 // Load environment variables from .env file
 require('dotenv').config();
-
+// /etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/cert1.pem
+// /etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/privkey1.pem
 // Read certificate and private key files
-const privateKey = fs.readFileSync(process.env.PRIVATE_KEY_PATH, 'ASCII');
-const certificate = fs.readFileSync(process.env.CERTIFICATE_PATH, 'ASCII');
+const privateKey = fs.readFileSync('/etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/cert1.pem', 'ASCII');
+const certificate = fs.readFileSync('/etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/privkey1.pem', 'ASCII');
 
 const credentials = { key: privateKey, cert: certificate };
 
