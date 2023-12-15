@@ -1,6 +1,13 @@
 const express = require('express');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const cors = require('cors');
+const path = require('path');
 const https = require('https');
 const fs = require('fs');
+const sharp = require('sharp');
+const piexif = require('piexifjs');
+const mongoose = require('mongoose');
 
 const app = express();
 
@@ -24,7 +31,7 @@ app.get('/', (req, res) => {
 const httpsServer = https.createServer(credentials, app);
 
 // Start the server
-const PORT = 443;
+const PORT = 5000;
 const HOST = '0.0.0.0'; // Listen on all available network interfaces
 httpsServer.listen(PORT, HOST, () => {
   console.log(`Server running on https://${HOST}:${PORT}`);
