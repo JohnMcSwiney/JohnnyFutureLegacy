@@ -1,49 +1,45 @@
-const express = require('express')
-require('dotenv').config();
-const app = express()
-const port = 5000;
+const express = require('express');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+const cors = require('cors');
+const path = require('path');
+const https = require('https');
+const fs = require('fs');
+const sharp = require('sharp');
+const piexif = require('piexifjs');
 const mongoose = require('mongoose');
-const userRoute= require('./routes/userRoute')
-const collectionRoute= require('./routes/collectionRoute');
+
+require('dotenv').config();
+
+const app = express();
+const port = process.env.PORT || 443;
+
+// Increase payload size limit for body-parser
+app.use(bodyParser.json({ limit: '50mb' }));
+app.use(bodyParser.urlencoded({ extended: true, limit: '50mb' }));
+
+// Allow requests from all origins during development (be more restrictive in production)
+app.use(cors());
+
+// Your routes
+const userRoute = require('./routes/userRoute');
+const collectionRoute = require('./routes/collectionRoute');
 const assetRoute = require('./routes/assetRoute');
 const searchRoute = require('./routes/searchRoute');
 const featuredRoute = require('./routes/featuredCollectionRoute');
 const authRoute = require('./routes/authRoute');
-const cors = require('cors');
-const multer = require("multer");
-const path = require('path'); 
-const fs = require('fs');
 
-const sharp = require('sharp');   // For image processing
-const ExifParser = require('exif-parser');
-const piexif = require('piexifjs');
-
-const exifReader = require('exif-js');
-
-const exif = require('exiftool-vendored').exiftool;
-
-exif.version().then((version) => {
-  console.log(`We're running ExifTool v${version}`);
-});
-// Allow requests from all origins during development (be more restrictive in production)
-app.use(cors());
-
-app.use(express.json());
-
+// File upload configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
     cb(null, 'uploaded_files/');
   },
   filename: function (req, file, cb) {
-    // const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
-    // const splitName = file.originalname.split('.');
     cb(null, file.originalname);
   }
-  
 });
 
 const upload = multer({ storage: storage });
-
 
 app.post('/uploadimage', upload.single('file'), async (req, res) => {
   if (!req.file) {
@@ -103,23 +99,6 @@ app.post('/uploadimage', upload.single('file'), async (req, res) => {
   });
 });
 
-
-
-// Function to check if a file is an image (you can expand this function to include more checks)
-function isImageFile(file) {
-  const allowedExtensions = ['jpg', 'jpeg', 'png', 'gif', 'bmp'];
-  const fileExtension = file.originalname.split('.').pop().toLowerCase();
-  return allowedExtensions.includes(fileExtension);
-}
-
-function generateNewFilename(userId, filename, fileExtension, version) {
-  if (version > 0) {
-    return `${userId}_${filename}(${version}).${fileExtension}`;
-  } else {
-    return `${userId}_${filename}.${fileExtension}`;
-  }
-}
-
 app.get('/getimage', (req, res) => {
   const userId = req.query.userId;
   const filename = req.query.filename;
@@ -137,6 +116,7 @@ app.get('/getimage', (req, res) => {
     res.status(404).send('File not found.');
   }
 });
+
 app.get('/getimageData', (req, res) => {
   const userId = req.query.userId;
   const filename = req.query.filename;
@@ -159,13 +139,29 @@ app.get('/getimageData', (req, res) => {
   }
 });
 
+// Load SSL/TLS certificate and private key
+const privateKeyPath = process.env.PRIVATE_KEY_PATH;
+const certificatePath = process.env.CERTIFICATE_PATH;
 
-app.listen(port, () => {
-  console.log('Server started on port: ' + port + '!');
+console.log(privateKeyPath)
+console.log(certificatePath)
+
+const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
+const certificate = fs.readFileSync(certificatePath, 'utf8');
+
+const credentials = { key: privateKey, cert: certificate };
+
+console.log(privateKey)
+console.log(certificate)
+
+// Create an HTTPS server
+const httpsServer = https.createServer(credentials, app);
+
+httpsServer.listen(port, () => {
+  console.log(`Server is running on port${port}`);
 });
 
 // Connection URL
-// Title of db, pz: password 
 const url = 'mongodb+srv://FutureLegacyDB:PZj9BE7zbANQhXb@futurelegacy.yiwwjmj.mongodb.net/?retryWrites=true&w=majority';
 
 // Connect to the database
@@ -175,12 +171,9 @@ const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 db.once('open', () => {
   console.log('Connected to MongoDB using Mongoose');
-  
 });
 
-
-
-app.use(express.json())
+app.use(express.json());
 app.use('/api/user', userRoute);
 app.use('/api/collection', collectionRoute);
 app.use('/api/asset', assetRoute);
@@ -189,3 +182,7 @@ app.use('/api/featured', featuredRoute);
 app.use('/api/auth', authRoute);
 app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
 
+// Additional suggestions:
+// - Consider modularizing your code using separate files for routes, configuration, and models.
+// - Implement error handling for your routes to provide meaningful responses in case of errors.
+// - Ensure proper validation and sanitization of user inputs.
