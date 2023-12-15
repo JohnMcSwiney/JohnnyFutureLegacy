@@ -50,6 +50,10 @@ const storage = multer.diskStorage({
 
 const upload = multer({ storage: storage });
 
+app.get('/', (req, res) => {
+  res.send('Hello, HTTPS World!');
+});
+
 app.post('/uploadimage', upload.single('file'), async (req, res) => {
   if (!req.file) {
     return res.status(400).send('No file was uploaded.');
@@ -148,15 +152,7 @@ app.get('/getimageData', (req, res) => {
   }
 });
 
-// Create an HTTPS server with Express
-const httpsServer = https.createServer(credentials, app);
 
-// Start the server
-const PORT = 5000;
-const HOST = '0.0.0.0'; // Listen on all available network interfaces
-httpsServer.listen(PORT, HOST, () => {
-  console.log(`Server running on https://${HOST}:${PORT}`);
-});
 
 // Connection URL
 const url = 'mongodb+srv://FutureLegacyDB:PZj9BE7zbANQhXb@futurelegacy.yiwwjmj.mongodb.net/?retryWrites=true&w=majority';
@@ -179,3 +175,12 @@ app.use('/api/featured', featuredRoute);
 app.use('/api/auth', authRoute);
 app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
 
+// Create an HTTPS server with Express
+const httpsServer = https.createServer(credentials, app);
+
+// Start the server
+const PORT = 5000;
+const HOST = '0.0.0.0'; // Listen on all available network interfaces
+httpsServer.listen(PORT, HOST, () => {
+  console.log(`Server running on https://${HOST}:${PORT}`);
+});
