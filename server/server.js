@@ -147,6 +147,9 @@ const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
 const certificate = fs.readFileSync(certificatePath, 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
+console.log(privateKey)
+console.log(certificate)
+
 // Create an HTTPS server
 const httpsServer = https.createServer(credentials, app);
 
