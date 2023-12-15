@@ -138,9 +138,10 @@ app.get('/getimageData', (req, res) => {
     res.status(404).send('File not found.');
   }
 });
+
 // Load SSL/TLS certificate and private key
-const privateKeyPath = process.env.PRIVATE_KEY_PATH || '/path/to/private-key.pem';
-const certificatePath = process.env.CERTIFICATE_PATH || '/path/to/certificate.pem';
+const privateKeyPath = process.env.PRIVATE_KEY_PATH;
+const certificatePath = process.env.CERTIFICATE_PATH;
 
 const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
 const certificate = fs.readFileSync(certificatePath, 'utf8');
