@@ -143,6 +143,9 @@ app.get('/getimageData', (req, res) => {
 const privateKeyPath = process.env.PRIVATE_KEY_PATH;
 const certificatePath = process.env.CERTIFICATE_PATH;
 
+console.log(privateKeyPath)
+console.log(certificatePath)
+
 const privateKey = fs.readFileSync(privateKeyPath, 'utf8');
 const certificate = fs.readFileSync(certificatePath, 'utf8');
 const credentials = { key: privateKey, cert: certificate };
