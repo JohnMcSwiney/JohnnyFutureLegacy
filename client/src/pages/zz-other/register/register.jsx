@@ -7,6 +7,7 @@ import PageContainer from '../../../components/containers/PageContainer';
 import AppContentWrapper from '../../../components/containers/AppContentWrapper';
 import PageTitle from '../../../components/containers/PageTitle';
 import { StyledContainer_v2 } from '../../../components/Styles';
+import API_BASE_URL from '../../../apiConfig';
 
 function Register() {
 
@@ -134,7 +135,7 @@ function Register() {
         console.log(userData)
         try {
             // Assuming you have an API endpoint for user registration
-            const response = await fetch('http://localhost:5000/api/user/', {
+            const response = await fetch(`${API_BASE_URL}/api/user/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

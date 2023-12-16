@@ -14,6 +14,7 @@ import UpdatePfpPopup from './UpdatePfpPopup';
 import UpdateBioPopup from './UpdateBioPopup';
 import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
 
+import API_BASE_URL from '../../apiConfig';
 
 function Profile() {
 
@@ -30,7 +31,7 @@ function Profile() {
   useEffect(() => {
     const fetchUserPurchases = async () => {
       try {
-        const userResponse = await fetch(`http://localhost:5000/api/user/${currentUserId}/purchase`, {
+        const userResponse = await fetch(`${API_BASE_URL}/api/user/${currentUserId}/purchase`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -79,7 +80,7 @@ function Profile() {
             <div className='banner--gradient'></div>
             {currentUserObject.userBannerImage ?
               <div className="banner--img">
-                <img src={`http://localhost:5000/uploaded_files/${currentUserObject._id}/Banner/${currentUserObject.userBannerImage}`} alt={`Image ${currentUserObject.userBannerImage}`} />
+                <img src={`${API_BASE_URL}/uploaded_files/${currentUserObject._id}/Banner/${currentUserObject.userBannerImage}`} alt={`Image ${currentUserObject.userBannerImage}`} />
               </div>
               :
               <div>

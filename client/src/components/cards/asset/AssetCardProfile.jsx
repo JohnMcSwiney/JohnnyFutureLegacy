@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import './style.css';
 import { redirect } from 'react-router';
 import {useNavigate} from 'react-router-dom';
+import API_BASE_URL from '../../../apiConfig';
 
 function AssetCardProfile() {
   const navigate = useNavigate()
@@ -11,7 +12,7 @@ function AssetCardProfile() {
   useEffect(()=> {
     // http://localhost:3000/profile
     const fetchAsset = async () => {
-      const assetResponse = await fetch(`http://localhost:5000/api/asset`, {
+      const assetResponse = await fetch(`${API_BASE_URL}/api/asset`, {
         method: 'GET',
         headers: { 'Content-Type': 'application/json',
                   'Access-Control-Allow-Origin': 'true' }

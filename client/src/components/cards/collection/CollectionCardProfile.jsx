@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import './style.css';
 import {useNavigate} from 'react-router-dom';
+import API_BASE_URL from '../../../apiConfig';
 function CollectionCardProfile({collectionName, collectionId, collectionImg }) {
 
 const navigate = useNavigate();
@@ -13,7 +14,7 @@ const navigate = useNavigate();
     // console.log(collectionImg);
     const fetchAssetById = async () => {
       try {
-        const response = await fetch(`http://localhost:5000/api/asset/${collectionImg}`);
+        const response = await fetch(`${API_BASE_URL}/api/asset/${collectionImg}`);
         if (response.ok) {
           const assetData = await response.json();
           setCollectionAssetImgObj(assetData);

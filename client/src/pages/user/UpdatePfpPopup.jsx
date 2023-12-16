@@ -2,6 +2,7 @@ import React, {  useState } from 'react';
 import { useDropzone } from 'react-dropzone';
 import './stylev2.css';
 import { ImCross } from "react-icons/im";
+import API_BASE_URL from '../../apiConfig';
 
 const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit }) => {
     const [file, setFile] = useState(null);
@@ -24,7 +25,7 @@ const UpdatePfpPopup = ({ userId, onUploadSuccess, onUploadError, clickToExit })
             formData.append('file', file);
 
             // Make a POST request using fetch
-            const response = await fetch(`http://localhost:5000/api/user/${userId}/uploadProfilePicture`, {
+            const response = await fetch(`${API_BASE_URL}/api/user/${userId}/uploadProfilePicture`, {
                 method: 'POST',
                 body: formData,
             });

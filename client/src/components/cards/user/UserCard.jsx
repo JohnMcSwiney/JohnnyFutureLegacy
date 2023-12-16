@@ -4,7 +4,7 @@ import './style.css';
 import CollectionCard_v2 from '../home/CollectionCard_v2';
 import CollectionCarousel from '../collection/CollectionCarousel';
 import UserProfilePicture from '../../profilePicture/UserProfilePicture';
-
+import API_BASE_URL from '../../../apiConfig';
 export default function UserCard({ toggleView, userId}) {
     // const [userName, setUserName] = useState('');
     // const [userImg, setUserImg] = useState('');
@@ -29,7 +29,7 @@ export default function UserCard({ toggleView, userId}) {
     useEffect(() => {
         const fetchUser = async () => {
             try {
-                const userResponse = await fetch(`http://localhost:5000/api/user/${userId}`, {
+                const userResponse = await fetch(`${API_BASE_URL}/api/user/${userId}`, {
                     method: 'GET',
                     headers: {
                         'Content-Type': 'application/json',
@@ -109,7 +109,7 @@ export default function UserCard({ toggleView, userId}) {
                             {tempUserObject && (
                             <div className="coll--card--img--cont">
                                 {tempUserObject.userBannerImg &&
-                                    <img src={`http://localhost:5000/uploaded_files/${tempUserObject._id}/Banner/${tempUserObject.userBannerImg}`} className='coll--card--img--1' />
+                                    <img src={`${API_BASE_URL}/uploaded_files/${tempUserObject._id}/Banner/${tempUserObject.userBannerImg}`} className='coll--card--img--1' />
                                 }
                             </div>
                             )}
@@ -125,7 +125,7 @@ export default function UserCard({ toggleView, userId}) {
                             )}
                             <div className="user--card--img--cont">
                                 {tempUserObject.userBannerImg &&
-                                    <img src={`http://localhost:5000/uploaded_files/${tempUserObject._id}/Banner/${tempUserObject.userBannerImg}`} 
+                                    <img src={`${API_BASE_URL}/uploaded_files/${tempUserObject._id}/Banner/${tempUserObject.userBannerImg}`} 
                                     // className='coll--card--img--1' 
                                     />
                                 }

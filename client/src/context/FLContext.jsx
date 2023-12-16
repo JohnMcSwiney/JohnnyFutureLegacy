@@ -1,5 +1,5 @@
 import React, { createContext, useState, useContext, useEffect } from 'react';
-
+import API_BASE_URL from '../apiConfig';
 const FLContext = createContext();
 
 const ContextProvider = ({ children }) => {
@@ -33,7 +33,7 @@ const ContextProvider = ({ children }) => {
       if (currentUserId !== '') {
         const fetchUser = async () => {
           try {
-            const userResponse = await fetch(`http://localhost:5000/api/user/${currentUserId}`, {
+            const userResponse = await fetch(`${API_BASE_URL}/api/user/${currentUserId}`, {
               method: 'GET',
               headers: {
                 'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userResponse = await fetch(`http://localhost:5000/api/user/${hardcodedUser}`, {
+        const userResponse = await fetch(`${API_BASE_URL}/api/user/${hardcodedUser}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -94,7 +94,7 @@ const ContextProvider = ({ children }) => {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userResponse = await fetch(`http://localhost:5000/api/user/${currentCollection.ownerName}`, {
+        const userResponse = await fetch(`${API_BASE_URL}/api/user/${currentCollection.ownerName}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',

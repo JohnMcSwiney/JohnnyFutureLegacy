@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
 import './stylev2.css';
 import { ImCross } from "react-icons/im";
+import API_BASE_URL from '../../apiConfig';
+
 const UpdateBioPopup = ({ userId, bioIn, onUpdateSuccess, onUpdateError, onClose }) => {
   const [newBio, setNewBio] = useState(null);
   useEffect(()=>{
@@ -11,7 +13,7 @@ const UpdateBioPopup = ({ userId, bioIn, onUpdateSuccess, onUpdateError, onClose
   },[bioIn])
   const handleUpdateBio = async () => {
     try {
-      const response = await fetch(`http://localhost:5000/api/user/${userId}/bio`, {
+      const response = await fetch(`${API_BASE_URL}/api/user/${userId}/bio`, {
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',

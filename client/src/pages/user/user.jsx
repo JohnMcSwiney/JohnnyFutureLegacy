@@ -23,6 +23,7 @@ import CollectionCard_v2 from '../../components/cards/home/CollectionCard_v2';
 
 import UserProfilePicture from '../../components/profilePicture/UserProfilePicture';
 
+import API_BASE_URL from '../../apiConfig';
 
 function User() {
 
@@ -39,7 +40,7 @@ function User() {
   useEffect(() => {
     const fetchUser = async () => {
       try {
-        const userResponse = await fetch(`http://localhost:5000/api/user/${id}`, {
+        const userResponse = await fetch(`${API_BASE_URL}/api/user/${id}`, {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -70,7 +71,7 @@ function User() {
               <div className='banner--gradient'></div>
               {userObject.userBannerImage ?
                 <div className="banner--img">
-                  <img src={`http://localhost:5000/uploaded_files/${userObject._id}/Banner/${userObject.userBannerImage}`} alt={`Image ${userObject.userBannerImage}`} />
+                  <img src={`${API_BASE_URL}/uploaded_files/${userObject._id}/Banner/${userObject.userBannerImage}`} alt={`Image ${userObject.userBannerImage}`} />
                 </div>
                 :
                 <div>

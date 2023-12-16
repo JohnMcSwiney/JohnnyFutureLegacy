@@ -8,6 +8,8 @@ import PageContainer from '../../../../components/containers/PageContainer';
 import PageTitle from '../../../../components/containers/PageTitle';
 import { useMyContext } from '../../../../context/FLContext';
 
+import API_BASE_URL from '../../../../apiConfig';
+
 export default function LoginPage() {
   const navigate = useNavigate();
   const redirectAccount = () => { navigate(`/profile`); };

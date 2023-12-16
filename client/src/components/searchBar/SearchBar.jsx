@@ -7,6 +7,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { useSearchContext } from "../../context/SearchContext";
 import sanitizeHtml from 'sanitize-html';
 import { useToastContext } from '../../context/ToastContext';
+import API_BASE_URL from '../../apiConfig';
 
 const SearchBar = () => {
   const navigate = useNavigate();
@@ -40,7 +41,7 @@ const SearchBar = () => {
   const handleSearch = async (e) => {
     e.preventDefault(); // Prevent the default form submission behavior
 
-    let searchURL = 'http://localhost:5000/api/search';
+    let searchURL = `${API_BASE_URL}/api/search`;
     clearSearchData();
     setSearchValue(q);
     // console.log(q)
