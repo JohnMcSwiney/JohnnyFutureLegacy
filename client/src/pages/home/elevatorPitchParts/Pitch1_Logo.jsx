@@ -30,7 +30,7 @@ setTitle(getRandomTitle(originalTitle, alternativeTitle));
   return (
     <div className='pitch--container'>
       <div className='pitch--1--cont'>
-        <div className='pitch--logo--cont fade-in'>
+        {/* <div className='pitch--logo--cont fade-in'>
         <img src="https://firebasestorage.googleapis.com/v0/b/futurelegacy-test.appspot.com/o/FL_Assets%2FFL_logo_white.png?alt=media&token=e23d1965-e13f-4594-babb-9937afc3707e"/>
         </div>
         <br/>
@@ -42,9 +42,9 @@ setTitle(getRandomTitle(originalTitle, alternativeTitle));
         <br/>
         <br/>
         <br/>
-        
-        <Splitter/>
-        <br/>
+         */}
+        {/* <Splitter/> */}
+        {/* <br/> */}
         <br/>
         <div className='pitch--1--content'>
         <p>FUTURE <span>LEGACY</span> connects, authenticates, and distributes the world’s vital cultural assets in one searchable decentralized platform.</p>

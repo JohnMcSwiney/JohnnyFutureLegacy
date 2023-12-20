@@ -43,7 +43,7 @@ export default function Home() {
       <PageContainer>
         {showPitch ? 
         <section className='home--cont'>
-        {/* <Pitch1_Logo/> */}
+        <Pitch1_Logo/>
         <Pitch2_Problem/>
         <Pitch3_Trust/>
         <Pitch4_LearnMore/>
