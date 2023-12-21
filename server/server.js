@@ -182,6 +182,8 @@ const httpsServer = https.createServer(credentials, app);
 const PORT = 5000;
 // const HOST = '0.0.0.0'; // Listen on all available network interfaces
 const HOST = '3.140.207.175';
-httpsServer.listen(PORT, HOST, () => {
+httpsServer.listen(PORT, 
+  // HOST, 
+  () => {
   console.log(`Server running on https://${HOST}:${PORT}`);
 });
