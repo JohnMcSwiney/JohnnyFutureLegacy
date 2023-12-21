@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import {useNavigate} from 'react-router-dom';
 import './style.css'
-
+import API_BASE_URL from '../../../apiConfig';
 
 function PurchasedCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDescrip, cardSize}) {
     const [isActive, setIsActive] = useState(false);
@@ -36,6 +36,21 @@ function PurchasedCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDe
     useEffect(()=>{
       // console.log(cardSize)
     },[cardSize])
+    const [remadeName, setRemadeName] = useState('');
+    useEffect(()=>{
+    if(imgUrl){
+      if(imgUrl !== null){
+        try{
+          let temp = imgUrl.replace(/http:\/\/localhost:5000/g, '');
+          console.log(temp);
+          setRemadeName(`${API_BASE_URL}${temp}`)
+        } catch {
+          setRemadeName(`${imgUrl}`)
+        }
+        
+      }
+    }
+    },[imgUrl])
     return (
       <div className={`asset--card--cont asset--card--size--${cardSize}`}>
       <div className={`asset--card--img `}
@@ -44,7 +59,7 @@ function PurchasedCard ({artifactId,collectionId, imgUrl, artifactTitle, assetDe
         onClick={handleRedirect}
         
         >
-          <img src={imgUrl} className={`asset--card--size--${cardSize}`} />
+          <img src={remadeName} className={`asset--card--size--${cardSize}`} />
         </div>
   
         <div className='asset--card--info--cont'>
