@@ -176,14 +176,16 @@ app.use('/api/auth', authRoute);
 app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
 
 // Create an HTTPS server with Express
-const httpsServer = https.createServer(credentials, app);
-
 // Start the server
 const PORT = 5000;
-// const HOST = '0.0.0.0'; // Listen on all available network interfaces
-const HOST = '3.140.207.175';
-httpsServer.listen(PORT, 
-  // HOST, 
-  () => {
-  console.log(`Server running on https://${HOST}:${PORT}`);
-});
+// const httpsServer = 
+https.createServer(credentials, app).listen(PORT);
+
+
+// // const HOST = '0.0.0.0'; // Listen on all available network interfaces
+// const HOST = '3.140.207.175';
+// httpsServer.listen(PORT, 
+//   // HOST, 
+//   () => {
+//   console.log(`Server running on https://${HOST}:${PORT}`);
+// });
