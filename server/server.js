@@ -38,6 +38,13 @@ const searchRoute = require('./routes/searchRoute');
 const featuredRoute = require('./routes/featuredCollectionRoute');
 const authRoute = require('./routes/authRoute');
 
+// Create an HTTPS server with Express
+// Start the server
+const PORT = 5000;
+// const httpsServer = 
+https.createServer(credentials, app).listen(PORT);
+
+
 // File upload configuration
 const storage = multer.diskStorage({
   destination: function (req, file, cb) {
@@ -174,12 +181,6 @@ app.use('/api/search', searchRoute);
 app.use('/api/featured', featuredRoute);
 app.use('/api/auth', authRoute);
 app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')));
-
-// Create an HTTPS server with Express
-// Start the server
-const PORT = 5000;
-// const httpsServer = 
-https.createServer(credentials, app).listen(PORT);
 
 
 // // const HOST = '0.0.0.0'; // Listen on all available network interfaces
