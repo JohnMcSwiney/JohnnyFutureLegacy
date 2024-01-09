@@ -1,5 +1,8 @@
 # See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
 
+# App Content Hosted on NODEjs Server
+/uploaded_files/*
+
 # dependencies
 /node_modules
 
@@ -44,6 +47,8 @@ yarn-error.log*
 *.rar
 *.tar
 *.zip
+*.jpg
+*.jpeg
 
 # Logs and databases #
 ######################
