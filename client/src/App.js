@@ -39,6 +39,9 @@ import SearchBar from "./components/searchBar/SearchBar";
 import FL_Logo from "./components/FL_Logo/FL_Logo";
 import HamburgerMenu from "./components/hamburgerMenu/HamburgerMenu";
 import SidebarMenu from "./components/sidebarMenu/SidebarMenu";
+
+import NavMenu from "./components/sidebarMenu/NavMenu";
+
 import SideBarBtn from "./components/sidebarMenu/SideBarBtn";
 import ToastContainer from "./components/toasts/ToastContainer";
 import AppPageContainer from "./components/containers/AppPageContainer";
@@ -53,7 +56,8 @@ function App() {
                 <UploadContextProvider>
                   <ToastContainer />
                   {/* <HamburgerMenu /> */}
-                  <SidebarMenu />
+                  {/* <SidebarMenu /> */}
+                  <NavMenu/>
                   {/* <div className='FL--Search--Cont'>
           
         </div> */}

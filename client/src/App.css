@@ -109,7 +109,10 @@ p {
   flex-flow: column;
   position: relative;
   overflow: hidden;
+  top: 0;
+  left: 0;
   width: 100vw;
+  /* min-height: 500px; */
   height: 100vh;
   background-color: var(--bg);
 }

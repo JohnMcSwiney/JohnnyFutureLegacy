@@ -45,13 +45,13 @@ export default function SidebarMenu() {
         <div className={`${sidebarOpen ? 'sidebar--menu open' : 'sidebar--menu small'}`}
         // onClick={}
         >
-
             <div className='menu-items'>
                 <Tooltip id="tip_open_Clients" />
                 <Tooltip id="tip_open_profile" />
                 <Tooltip id="tip_open_upload" />
                 <Tooltip id="tip_open_about" />
                 <Tooltip id="tip_open_logout" />
+                
                 <div className='user--info--cont' 
                 onClick={redirectAccount}
                 data-tooltip-id="tip_open_profile"
@@ -70,36 +70,17 @@ export default function SidebarMenu() {
                     )}
                     </div>
                     }
-                    
-                    
-
                 </div>
+
                 {sidebarOpen ? (
                     <div className='sidebar--menu--content--large'>
-
-
-
-
                         {is_Signedin ?
                             <>
                                 <a onClick={redirectClients}
                                     data-tooltip-id="tip_open_Clients"
                                     data-tooltip-content={`Browse Clients`}
                                     data-tooltip-place="right"
-                                >
-
-                                    <span className='sidebar--menu--icon'>
-                                        {/* <BsFillCollectionFill /> */}
-                                        <FaUsers />
-                                        </span>Clients
-                                </a>
-                                {/* <a onClick={redirectAccount}
-                                    data-tooltip-id="tip_open_profile"
-                                    data-tooltip-content={`Your Profile`}
-                                    data-tooltip-place="right"
-                                >
-                                    <span className='sidebar--menu--icon'><MdAccountBox /></span> Profile</a> */}
-
+                                ><span className='sidebar--menu--icon'><FaUsers /></span>Clients</a>
                                 <a onClick={redirectUpload}
                                     data-tooltip-id="tip_open_upload"
                                     data-tooltip-content={`Upload Content`}

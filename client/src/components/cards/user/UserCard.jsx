@@ -39,7 +39,7 @@ export default function UserCard({ toggleView, userId}) {
                 if (userResponse.ok) {
                     const userJson = await userResponse.json();
                     const temp = `${userJson.firstName} ${userJson.lastName}`;
-                    console.log(userJson)
+                    // console.log(userJson)
                     setTempUserObject({
                         ...tempUserObject, 
                         userName: temp,
@@ -68,15 +68,15 @@ export default function UserCard({ toggleView, userId}) {
             if (tempUserObject.collections.length > 0) {
                 // console.log(userName)
                 // console.log(collections)
-                console.log('this user has collections');
+                // console.log('this user has collections');
                 setDisplayCard(true)
-                console.log('temp user object:')
-                console.log(tempUserObject)
+                // console.log('temp user object:')
+                // console.log(tempUserObject)
             } else {
                 return;
             }
         }
-        console.log(tempUserObject)
+        // console.log(tempUserObject)
     }, [tempUserObject])
 
     const handleRedirect = () => {

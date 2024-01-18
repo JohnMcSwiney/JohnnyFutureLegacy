@@ -22,10 +22,10 @@ app.use(cors());
 require('dotenv').config();
 
 // Read certificate and private key files
-const privateKey = fs.readFileSync('/etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/privkey1.pem', 'ASCII');
-const certificate = fs.readFileSync('/etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/cert1.pem', 'ASCII');
+// const privateKey = fs.readFileSync('/etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/privkey1.pem', 'ASCII');
+// const certificate = fs.readFileSync('/etc/letsencrypt/archive/futurelegacy.mcswineyprogramming.net/cert1.pem', 'ASCII');
 
-const credentials = { key: privateKey, cert: certificate };
+// const credentials = { key: privateKey, cert: certificate };
 
 // Define your Express routes and middleware here
 
@@ -179,8 +179,10 @@ app.use('/uploaded_files', express.static(path.join(__dirname, 'uploaded_files')
 // Start the server
 const PORT = 5000;
 // const httpsServer = 
-https.createServer(credentials, app).listen(PORT);
-
+// https.createServer(credentials, app).listen(PORT);
+app.listen(PORT, () => {
+  console.log(`Server running at http://localhost:${PORT}`);
+});
 
 // // const HOST = '0.0.0.0'; // Listen on all available network interfaces
 // const HOST = '3.140.207.175';
